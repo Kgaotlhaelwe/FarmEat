@@ -9,6 +9,9 @@ import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { FarmEatProvider } from '../providers/farm-eat/farm-eat';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +20,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ListPage
   ],
   imports: [
-    BrowserModule,
+    BrowserModule,HttpClientModule ,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
@@ -30,7 +33,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     StatusBar,
     SplashScreen,
     Geolocation,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    FarmEatProvider
   ]
 })
 export class AppModule {}
