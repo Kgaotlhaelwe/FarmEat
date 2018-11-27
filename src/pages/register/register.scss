@@ -1,3 +1,25 @@
 page-register {
-
+    // .content{
+    //     background-color: whitesmoke
+    // }
+    .text-input-md {
+        text-align: center;
+    }
+    .list{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+       border-radius: 25px;
+       color: #00ff00
+    }
+    .item{
+        border-radius: 25px;
+        background-color: rgb(241, 241, 241);
+        margin-top: 10px;
+        margin-bottom: 10px
+    }
+    h1{
+        color: black
+    }
+    
 }
