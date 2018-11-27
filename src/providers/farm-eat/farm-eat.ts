@@ -193,16 +193,36 @@ if (up <= 0){
       
         
         
-        var long = new String(resp.coords.long).substr(0,5);
+        var long = new String(resp.coords.longitude).substr(0,5);
         console.log(long);
         console.log(resp.coords.longitude);
         
         
         for (var x = 0; x < org.length; x++){
-          var orglat = new String(org[x].orgLat).substr(0,6);
-          var orgLong =  new String(org[x].orgLong).substr(0,5);
+          var orglat = new String(org[x].lat).substr(0,6);
+          var orgLong =  new String(org[x].lng).substr(0,5);
+          console.log('out');
+          // console.log(orglat);
+          // console.log(orgLong);
+          // console.log( radius.left);
+          // console.log(radius.right);
+          // console.log(radius.down);
+          // console.log(radius.up);
+          
+          
+          
+          
+          
+          
+          
          if ((orgLong  <= long  && orgLong  >= radius.left || orgLong  >= long  && orgLong  <= radius.right) && (orglat >= lat && orglat <= radius.down || orglat <= lat && orglat >= radius.up)){
+
+          console.log('in');
+          
+          
           this.nearByOrg.push(org[x]);
+          console.log(this.nearByOrg);
+
           }
         }
         accpt(this.nearByOrg)

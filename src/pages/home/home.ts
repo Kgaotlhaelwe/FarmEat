@@ -15,11 +15,40 @@ export class HomePage {
   map: any;
   lat: number;
   lon: number;
+  nearbyArray = new Array() ;
 
   constructor(public navCtrl: NavController, private geo: Geolocation, private farmEatDb:FarmEatProvider) {
-    this.loadMap();
-    this.nearbyFarm()
+
+    this.farmEatDb.getCurrentLocation().then((radius:any)=>{
+      this.farmEatDb.getallFarms().then((data:any)=>{
+        console.log(data);
+        console.log(radius);
+        
+        
+        this.farmEatDb.getNearByOrganizations(radius ,data).then((data:any)=>{
+        console.log(data);
+
+        this.nearbyArray =data ;
+        console.log(this.nearbyArray);
+        
+
+         })
     
+     })
+      
+    })
+    
+    this.loadMap();
+    
+
+
+   
+    
+  }
+
+
+
+  ionViewDidEnter() {
     
   }
 
@@ -49,7 +78,27 @@ export class HomePage {
 
    
       this.map = new google.maps.Map(this.mapRef.nativeElement, options);
-      this.addMarker();  
+     console.log(this.nearbyArray);
+     
+
+      for (let index = 0; index < this.nearbyArray.length; index++) {
+        let marker = new google.maps.Marker({
+          map: this.map,
+          animation: google.maps.Animation.DROP,
+          position: {lat:this.nearbyArray[index].lat,lng:this.nearbyArray[index].lng}
+        });
+
+        console.log(marker.position);
+        
+
+
+
+
+        
+        
+  }
+
+  this.addMarker();  
 
 })
   }
@@ -79,20 +128,7 @@ nearbyFarm(){
 //     })
 //   })
 
-this.farmEatDb.getCurrentLocation().then((radius:any)=>{
-  this.farmEatDb.getallFarms().then((data:any)=>{
-    console.log(data);
-    console.log(radius);
-    
-    
-    this.farmEatDb.getNearByOrganizations(radius ,data).then((data)=>{
-    console.log(data);
-              
-  })
 
- })
-  
-})
 
 }
 
