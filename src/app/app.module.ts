@@ -9,15 +9,20 @@ import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+<<<<<<< HEAD
 import { FarmEatProvider } from '../providers/farm-eat/farm-eat';
 import { HttpClientModule } from '@angular/common/http';
 
+=======
+import { RegisterPage } from '../pages/register/register';
+>>>>>>> 62087921a4d5d1ad4c2d2c4cd64bcba441cfbfc4
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    RegisterPage
   ],
   imports: [
     BrowserModule,HttpClientModule ,
@@ -27,7 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    RegisterPage
   ],
   providers: [
     StatusBar,
