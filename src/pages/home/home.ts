@@ -121,6 +121,17 @@ export class HomePage {
       var lat = this.nearbyArray[index].lat
       var lon = this.nearbyArray[index].lng
       var name =this.nearbyArray[index].name ;
+      var description = this.nearbyArray[index].description ;
+      var tel =this.nearbyArray[index].tel ;
+      var email =this.nearbyArray[index].email ;
+      var address = this.nearbyArray[index].address;
+      var facebook = this.nearbyArray[index].facebook;
+      var beeKeeping = this.nearbyArray[index].beeKeeping;
+      var liveStock = this.nearbyArray[index].liveStock;
+      var website = this.nearbyArray[index].website;
+      var aquatic = this.nearbyArray[index].aquatic;
+      var crops = this.nearbyArray[index].crops;
+      var image = this.nearbyArray[index].image; 
       console.log(name);
       
 
@@ -147,8 +158,21 @@ export class HomePage {
 
 
          let obj = {
-           name:this.nearbyArray[index ].name ,
-           description:this.nearbyArray[index].description
+          //  name:this.nearbyArray[index ].name ,
+          //  description:this.nearbyArray[index].description,
+          name: name,
+          description: description,
+          tel: tel,
+          email: email,
+          address: address,
+          facebook: facebook,
+          beeKeeping: beeKeeping,
+          liveStock: liveStock,
+          website: website,
+          aquatic: aquatic,
+          crops: crops,
+          image: image
+
          }
 
 

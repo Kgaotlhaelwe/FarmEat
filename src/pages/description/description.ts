@@ -16,8 +16,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class DescriptionPage {
 
   description = this. navParams.get("description");
-
+  name:string;
+  desc:string;
+  address:string;
+  image: string;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+      this.name = this.description.name
+      this.desc = this.description.description
+      this.address = this.description.address
+      this.image = this.description.image
   }
 
   ionViewDidLoad() {
