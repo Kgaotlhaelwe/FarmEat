@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import {FarmEatProvider} from '../../providers/farm-eat/farm-eat'
 
+import { DescriptionPage } from '../description/description';
+
 declare var google: any;
 
 @Component({
@@ -37,8 +39,14 @@ export class HomePage {
      })
       
     })
+
+    setTimeout(()=>{
+      this.loadMap();
+
+
+    }, 5000)
     
-    this.loadMap();
+  
     
 
 
@@ -79,39 +87,109 @@ export class HomePage {
    
       this.map = new google.maps.Map(this.mapRef.nativeElement, options);
      console.log(this.nearbyArray);
+
+    //  this.addMarker();  
+
+
+    let marker = new google.maps.Marker({
+      map: this.map,
+      zoom: 8 ,
+      animation: google.maps.Animation.DROP,
+      position: this.map.getCenter()
+    });
+
+
+
+    // let markerz = new google.maps.Marker({
+    //   map: this.map,
+    //   animation: google.maps.Animation.DROP,
+    //   position: {lat:-25.6319488,lng:27.082176},
+    // });
+
+
+    
      
 
       for (let index = 0; index < this.nearbyArray.length; index++) {
-        let marker = new google.maps.Marker({
-          map: this.map,
-          animation: google.maps.Animation.DROP,
-          position: {lat:this.nearbyArray[index].lat,lng:this.nearbyArray[index].lng}
-        });
-
-        console.log(marker.position);
+        console.log(this.nearbyArray);
+        
+        console.log(this.nearbyArray[index].lat);
+        console.log(this.nearbyArray[index].lng);
+        console.log(this.nearbyArray[index].name);
         
 
+      var lat = this.nearbyArray[index].lat
+      var lon = this.nearbyArray[index].lng
+      var name =this.nearbyArray[index].name ;
+      console.log(name);
+      
 
-
-
+      console.log(lat);
+      console.log(lon);
+      
+      
         
+       // console.log(lat +" "+lng);
+       let abmarker = new google.maps.Marker({
+         map: this.map,
+         icon:"" ,
         
-  }
+        //animation: google.maps.Animation.DROP,
+        position: {lat: parseFloat(this.nearbyArray[index].lat),lng:parseFloat(this.nearbyArray[index].lng)},
+        label:name
+      });
 
-  this.addMarker();  
+    
+        
+      abmarker.addListener('click' , ()=>{
+         alert(this.nearbyArray[index ].name)
+
+
+         let obj = {
+           name:this.nearbyArray[index ].name ,
+           description:this.nearbyArray[index].description
+         }
+
+         this.navCtrl.push(DescriptionPage, {description:obj})
+
+         })
+
+       
+
+
+    }
+        
+  
+
+  
 
 })
   }
 
-  addMarker(){
- 
-    let marker = new google.maps.Marker({
-      map: this.map,
-      animation: google.maps.Animation.DROP,
-      position: this.map.getCenter()
-    });
+//   addMarker(){
+
+
+
+//     // let abmarker = new google.maps.Marker({
+//     //   map: this.map,
+      
+//     //   //animation: google.maps.Animation.DROP,
+//     //   position: {lat:-25.6319488,lng:28.082176},
+//     //   label:"new one"
+//     // });
+    
+    
+//     //-25.6319488
+// // 28.082176
+
+    
+
+
+//     // marker.addListener('click' , function(){
+//     //   alert("clicked")
+//     // })
    
-}
+// }
 
 
 nearbyFarm(){

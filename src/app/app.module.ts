@@ -9,20 +9,19 @@ import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-<<<<<<< HEAD
 import { FarmEatProvider } from '../providers/farm-eat/farm-eat';
 import { HttpClientModule } from '@angular/common/http';
 
-=======
 import { RegisterPage } from '../pages/register/register';
->>>>>>> 62087921a4d5d1ad4c2d2c4cd64bcba441cfbfc4
+import {DescriptionPage} from '../pages/description/description'
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
-    RegisterPage
+    RegisterPage , DescriptionPage
+    
   ],
   imports: [
     BrowserModule,HttpClientModule ,
@@ -33,7 +32,7 @@ import { RegisterPage } from '../pages/register/register';
     MyApp,
     HomePage,
     ListPage,
-    RegisterPage
+    RegisterPage, DescriptionPage
   ],
   providers: [
     StatusBar,

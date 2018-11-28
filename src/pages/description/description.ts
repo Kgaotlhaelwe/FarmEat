@@ -15,11 +15,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class DescriptionPage {
 
+  description = this. navParams.get("description");
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DescriptionPage');
+
+    console.log(this.description);
+    
   }
 
 }

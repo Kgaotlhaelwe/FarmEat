@@ -202,12 +202,12 @@ if (up <= 0){
           var orglat = new String(org[x].lat).substr(0,6);
           var orgLong =  new String(org[x].lng).substr(0,5);
           console.log('out');
-          // console.log(orglat);
-          // console.log(orgLong);
-          // console.log( radius.left);
-          // console.log(radius.right);
-          // console.log(radius.down);
-          // console.log(radius.up);
+          console.log(orglat);
+          console.log(orgLong);
+          console.log( radius.left);
+          console.log(radius.right);
+          console.log(radius.down);
+          console.log(radius.up);
           
           
           
