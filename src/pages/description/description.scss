@@ -51,7 +51,7 @@ page-description {
         }       
 
         .address-box{
-            display: flex;
+            // display: flex;
             letter-spacing: 0.1em;
             font-family: system;
             font-display: normal;
@@ -61,12 +61,23 @@ page-description {
             padding-left: 25px;
             padding-right: 15px;
             text-align: center;
+            // justify-content: end,
+            display: grid;          
+            grid-template-columns: 1fr 1fr ;
+        }
+        .address-box > div{
+        }
+        .address-box > div:nthchild(odd){
+        }
+        .first-column{
+            width: 170%;
             
         }
         .btn{
             // clip-path: circle(40% at 50% 50%);
             // background-color: rgba(0, 0, 0, 0.288);
-            width: 50px;
+            width: 100px;
+            // position: fixed;
         
         }
         img{
@@ -101,6 +112,7 @@ page-description {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr ;
          }
+
          .btn {
             width: 50px;
             padding-right: 5px;
@@ -190,6 +202,7 @@ page-description {
             }
             h4{
                 padding-right: 5px;
+                font-size: 1em;
             }
            
        

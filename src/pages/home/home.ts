@@ -80,7 +80,7 @@ export class HomePage {
        //map options
        const options = {
         center: {lat: this.lat, lng:  this.lon},
-        zoom: 17,
+        zoom: 10,
         streetViewControl: false,
         //mapTypeId: 'satellite'
       }
