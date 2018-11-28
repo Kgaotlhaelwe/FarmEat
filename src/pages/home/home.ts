@@ -119,25 +119,9 @@ export class HomePage {
         console.log(this.nearbyArray[index].name);
         
 
-      var lat = this.nearbyArray[index].lat
-      var lon = this.nearbyArray[index].lng
-      var name =this.nearbyArray[index].name ;
-      var description = this.nearbyArray[index].description ;
-      var tel =this.nearbyArray[index].tel ;
-      var email =this.nearbyArray[index].email ;
-      var address = this.nearbyArray[index].address;
-      var facebook = this.nearbyArray[index].facebook;
-      var beeKeeping = this.nearbyArray[index].beeKeeping;
-      var liveStock = this.nearbyArray[index].liveStock;
-      var website = this.nearbyArray[index].website;
-      var aquatic = this.nearbyArray[index].aquatic;
-      var crops = this.nearbyArray[index].crops;
-      var image = this.nearbyArray[index].image; 
-      console.log(name);
+     
       
 
-      console.log(lat);
-      console.log(lon);
       
       
         
@@ -156,6 +140,22 @@ export class HomePage {
         
       abmarker.addListener('click' , ()=>{
          alert(this.nearbyArray[index ].name)
+
+        //  var lat = this.nearbyArray[index].lat
+        //  var lon = this.nearbyArray[index].lng
+         var name =this.nearbyArray[index].name ;
+         var description = this.nearbyArray[index].description ;
+         var tel =this.nearbyArray[index].tel ;
+         var email =this.nearbyArray[index].email ;
+         var address = this.nearbyArray[index].address;
+         var facebook = this.nearbyArray[index].facebook;
+         var beeKeeping = this.nearbyArray[index].beeKeeping;
+         var liveStock = this.nearbyArray[index].liveStock;
+         var website = this.nearbyArray[index].website;
+         var aquatic = this.nearbyArray[index].aquatic;
+         var crops = this.nearbyArray[index].crops;
+         var image = this.nearbyArray[index].image; 
+         console.log(name);
 
 
          let obj = {

@@ -11,7 +11,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { FarmEatProvider } from '../providers/farm-eat/farm-eat';
 import { HttpClientModule } from '@angular/common/http';
-import { Keyboard } from '@ionic-native/keyboard';
+import  {Keyboard} from '@ionic-native/keyboard';
 
 import { RegisterPage } from '../pages/register/register';
 import {DescriptionPage} from '../pages/description/description'
