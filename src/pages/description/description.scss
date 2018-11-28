@@ -1,3 +1,198 @@
 page-description {
+    .body-container{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .segment{
+        position: relative;
+        top: -10px;
 
+    }
+    .body-box{
+        text-align: center;
+    }
+  
+    .sub-title{
+        position: relative;
+     
+    }
+    .switch-seg{
+        position: relative;
+        top: -10%;
+        text-align: center;
+    }
+    .description-section{
+        position: relative;
+    }
+    .farm-facilities{
+        position: relative;
+        text-align: center;
+
+
+    }
+    .ion-card{
+        // padding: 25px;
+    }
+    .title {
+        position: absolute;
+        font-size: 2.0em;
+        width: 100%;
+        font-weight: bold;
+        font-family: system;
+        font-display: normal;
+        letter-spacing: 0.1em;
+        font-weight: bold;
+        text-align: center;
+        color: black;
+        }
+      .header-box{
+          position: relative;
+          height: auto;
+
+        }       
+
+        .address-box{
+            display: flex;
+            letter-spacing: 0.1em;
+            font-family: system;
+            font-display: normal;
+            background-color:#08AF9E;
+            color: white;
+            font-size: 15px;
+            padding-left: 25px;
+            padding-right: 15px;
+            text-align: center;
+            
+        }
+        .btn{
+            // clip-path: circle(40% at 50% 50%);
+            // background-color: rgba(0, 0, 0, 0.288);
+            width: 50px;
+        
+        }
+        img{
+            width: 50px;
+            // background-color: rgba(0, 0, 0, 0.288);
+
+        }
+        .img{
+            max-height: 200px;
+            max-width: 100%;
+            position: relative;
+            top: 15px;
+            height:auto;
+            width: 100%;
+            transform: translateX(0px);
+        }
+        .icons{
+            float: left;
+            display: flex;
+        }
+  
+        .container{
+            display: flex;          
+            // grid-template-columns: 1fr 1fr 1fr 1fr ;
+         }
+         .container > div{
+         }
+         .container > div:nthchild(odd){
+         }
+         .containers{
+             font-size: 12px;
+            display: flex;
+            // grid-template-columns: 1fr 1fr 1fr 1fr ;
+         }
+         .btn {
+            width: 50px;
+            padding-right: 5px;
+        }
+         
+         .containers > div{
+         }
+         .containers > div:nthchild(odd){
+         }
+
+         hr {
+            display: block;
+            unicode-bidi: isolate;
+            -webkit-margin-before: 0.5em;
+            -webkit-margin-after: 0.5em;
+            -webkit-margin-start: auto;
+            -webkit-margin-end: auto;
+            overflow: hidden;
+            border-style: inset;
+            border-width: 1px;
+        }
+
+
+        .imgs {
+            position: relative;
+            width: 50%;
+          }
+          
+          .images {
+            display: block;
+            width: 100%;
+          }
+          .text {
+            // color: white;
+            font-size: 
+            20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            text-align: center;
+          }
+
+          .image-container{
+              background-size: cover;
+              min-height: 200px;
+
+          }
+          .ion-card{
+            width: 115%;
+            margin-left: -8%;
+            margin-bottom: -0px !important;
+            position: relative;
+            top: -16px;
+    
+            }
+            .contact-box{
+                text-align: center;
+                line-height: 5%
+              
+            }
+            h6{
+                  color: grey;
+            }
+            .adress{
+                text-align: center;
+                font-weight: 100;
+            }
+            ion-icon{
+                font-size: 25px;
+                color: 	#08AF9E;
+                
+            }
+            .segment-md .segment-button{
+                color:#08AF9E;
+            }
+            .segment-md .segment-button.activated, 
+            .segment-md .segment-button.segment-activated{
+                color:#08AF9E;
+                border-color: #08AF9E;
+
+            }
+            .swiper-pagination-bullet-active{
+                background:#08AF9E;
+            }
+            h4{
+                padding-right: 5px;
+            }
+           
+       
+       
 }

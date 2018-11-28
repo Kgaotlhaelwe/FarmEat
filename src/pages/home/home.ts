@@ -4,6 +4,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import {FarmEatProvider} from '../../providers/farm-eat/farm-eat'
 
 import { DescriptionPage } from '../description/description';
+import { SearchPage } from '../search/search';
 
 declare var google: any;
 
@@ -79,7 +80,7 @@ export class HomePage {
        //map options
        const options = {
         center: {lat: this.lat, lng:  this.lon},
-        zoom: 17,
+        zoom: 10,
         streetViewControl: false,
         //mapTypeId: 'satellite'
       }
@@ -118,32 +119,16 @@ export class HomePage {
         console.log(this.nearbyArray[index].name);
         
 
-      var lat = this.nearbyArray[index].lat
-      var lon = this.nearbyArray[index].lng
-      var name =this.nearbyArray[index].name ;
-      var description = this.nearbyArray[index].description ;
-      var tel =this.nearbyArray[index].tel ;
-      var email =this.nearbyArray[index].email ;
-      var address = this.nearbyArray[index].address;
-      var facebook = this.nearbyArray[index].facebook;
-      var beeKeeping = this.nearbyArray[index].beeKeeping;
-      var liveStock = this.nearbyArray[index].liveStock;
-      var website = this.nearbyArray[index].website;
-      var aquatic = this.nearbyArray[index].aquatic;
-      var crops = this.nearbyArray[index].crops;
-      var image = this.nearbyArray[index].image; 
-      console.log(name);
+     
       
 
-      console.log(lat);
-      console.log(lon);
       
       
         
        // console.log(lat +" "+lng);
        let abmarker = new google.maps.Marker({
          map: this.map,
-         icon:"../../assets/imgs/498229.svg" ,
+         //icon:"../../assets/imgs/498229.svg" ,
         
         //animation: google.maps.Animation.DROP,
         position: {lat: parseFloat(this.nearbyArray[index].lat),lng:parseFloat(this.nearbyArray[index].lng)},
@@ -155,6 +140,22 @@ export class HomePage {
         
       abmarker.addListener('click' , ()=>{
          alert(this.nearbyArray[index ].name)
+
+        //  var lat = this.nearbyArray[index].lat
+        //  var lon = this.nearbyArray[index].lng
+         var name =this.nearbyArray[index].name ;
+         var description = this.nearbyArray[index].description ;
+         var tel =this.nearbyArray[index].tel ;
+         var email =this.nearbyArray[index].email ;
+         var address = this.nearbyArray[index].address;
+         var facebook = this.nearbyArray[index].facebook;
+         var beeKeeping = this.nearbyArray[index].beeKeeping;
+         var liveStock = this.nearbyArray[index].liveStock;
+         var website = this.nearbyArray[index].website;
+         var aquatic = this.nearbyArray[index].aquatic;
+         var crops = this.nearbyArray[index].crops;
+         var image = this.nearbyArray[index].image; 
+         console.log(name);
 
 
          let obj = {
@@ -236,6 +237,8 @@ nearbyFarm(){
 
 }
 
-
+search(){
+  this.navCtrl.push(SearchPage)
+}
 
 }
