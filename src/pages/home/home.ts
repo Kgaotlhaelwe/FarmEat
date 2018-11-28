@@ -132,11 +132,12 @@ export class HomePage {
        // console.log(lat +" "+lng);
        let abmarker = new google.maps.Marker({
          map: this.map,
-         icon:"" ,
+         icon:"../../assets/imgs/498229.svg" ,
         
         //animation: google.maps.Animation.DROP,
         position: {lat: parseFloat(this.nearbyArray[index].lat),lng:parseFloat(this.nearbyArray[index].lng)},
-        label:name
+        label:name ,
+        zoom:8
       });
 
     
@@ -149,6 +150,7 @@ export class HomePage {
            name:this.nearbyArray[index ].name ,
            description:this.nearbyArray[index].description
          }
+
 
          this.navCtrl.push(DescriptionPage, {description:obj})
 
