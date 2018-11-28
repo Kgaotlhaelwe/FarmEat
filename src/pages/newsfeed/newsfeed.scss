@@ -1,0 +1,17 @@
+page-newsfeed {
+    .flex{
+        //background-color: aquamarine;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end
+    }
+    ion-avatar {
+        height: 20%;
+        width: 20%;
+        border-radius: 50px
+    }
+    .flexav{
+        display: flex;
+        align-self: auto
+    }
+}

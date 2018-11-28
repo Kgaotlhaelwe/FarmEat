@@ -1,12 +1,18 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="danger">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <!-- <ion-title>Home</ion-title> -->
+    <ion-buttons end>
+        <button ion-button icon-only (click)="search()">
+            <ion-icon ios="ios-search" md="md-search"></ion-icon>
+        </button>
+      </ion-buttons>
   </ion-navbar>
 </ion-header>
-<img src="../../assets/imgs/498229.svg">
+
 <ion-content>
+
   <div #map id="map"></div>
 </ion-content>

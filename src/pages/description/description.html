@@ -1,21 +1,99 @@
-<!--
-  Generated template for the DescriptionPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>Description</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-  <img src="{{image}}" alt=""><br>
-  name: {{name}}<br>
-  address: {{address}}<br>
-  Description: {{desc}}
-</ion-content>
+<ion-content >
+    <div class="body-container">
+  
+    <div class="header-box" >
+   <div class="ion-card"  >
+      <ion-slides pager>
+  
+          <ion-slide>
+              <img src="{{image}}" alt="">
+          </ion-slide>
+        
+          <ion-slide>
+              <img  class="img" src="../../assets/imgs/small-backyard-vegetable-garden-what-will-my-garden-grow-backyard-farming-inspiration-pinterest.jpg" >  
+          </ion-slide>
+        
+          <ion-slide>
+              <img  class="img" src="../../assets/imgs/3.jpg" >
+          </ion-slide>
+        
+        </ion-slides>
+        <!-- <img  class="img" src="../../assets/imgs/small-backyard-vegetable-garden-what-will-my-garden-grow-backyard-farming-inspiration-pinterest.jpg" >   -->
+        <div class="address-box">
+          <div>
+           <h4>{{name}} </h4>
+            <!-- <ion-icon name="pin"></ion-icon>
+             Chris Hani Rd, Diepkloof, Johannesburg, 1862 -->
+            </div>
+          <div>
+            <img src="../../assets/imgs/icons8_Route_100px_2.png"  class="btn"alt="">
+          </div>
+        </div>
+  
+      </div>
+    </div>
+    <div padding>
+        <ion-segment [(ngModel)]="pet" class="segment">
+          <ion-segment-button value="kittens">
+        Review
+          </ion-segment-button>
+          <ion-segment-button value="puppies">
+            Contact Us
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+      
+      <div   [ngSwitch]="pet">  
+        <ion-list *ngSwitchCase="'kittens'">
+            <div class="body-box" >
+                <div class="description-section"  >
+                  <div class="sub-title">
+                    <h1>Farm Description</h1>
+                     {{desc}}
+                  </div>
+                  <hr>
+                  </div>
+                  <div class="farm-facilities" >
+                    <h1>What we offer</h1>
+                    <hr>
+                    <div class="container">
+                    <div><img   src="../../assets/imgs/icons8_Sprout_96px.png" alt=""  ></div>
+                    <div> <img src="../../assets/imgs/icons8_Cow_96px_1.png" alt="" ></div>
+                    <div><img src="../../assets/imgs/icons8_Bee_96px.png" alt=""></div>
+                    <div><img src="../../assets/imgs/icons8_Bee_96px.png" alt=""></div>
+                  </div>
+                  <div class="containers" >
+                    <div>Crops </div>
+                    <div>Livestock</div>
+                    <div>Beekeeping</div>
+                    <div>Aquafarming</div>
+                  </div>
+                  <hr>
+                  </div>
+                </div> 
+        </ion-list>
+        <ion-list *ngSwitchCase="'puppies'">
+            <div class="contact-box">
+                <div class="adress">
+                    <ion-icon name="md-pin" ></ion-icon>
+                    <h6> {{address}}</h6>
+                </div>
+                <div class="call" >
+                  <ion-icon name="md-call"></ion-icon>
+                  <h6>011 933 8000</h6>
+                </div>
+                <div class="email">
+                  <ion-icon name="md-mail"></ion-icon>
+                  <h6>example@gmail.com</h6>
+                </div>
+                <div class="time" >
+                  <ion-icon name="md-time"></ion-icon>
+                  <h6>open: 06:30 - close:07:30 </h6>
+                </div>
+              </div>   
+        </ion-list>
+      </div>
+    </div>
+      </ion-content>
+  

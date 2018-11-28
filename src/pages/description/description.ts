@@ -14,18 +14,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'description.html',
 })
 export class DescriptionPage {
-
+pet 
   description = this. navParams.get("description");
   name:string;
   desc:string;
   address:string;
   image: string;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.pet="kittens";
       this.name = this.description.name
       this.desc = this.description.description
       this.address = this.description.address
       this.image = this.description.image
   }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DescriptionPage');
