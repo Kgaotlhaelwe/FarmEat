@@ -4,6 +4,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import {FarmEatProvider} from '../../providers/farm-eat/farm-eat'
 
 import { DescriptionPage } from '../description/description';
+import { SearchPage } from '../search/search';
 
 declare var google: any;
 
@@ -132,7 +133,7 @@ export class HomePage {
        // console.log(lat +" "+lng);
        let abmarker = new google.maps.Marker({
          map: this.map,
-         icon:"../../assets/imgs/498229.svg" ,
+         //icon:"../../assets/imgs/498229.svg" ,
         
         //animation: google.maps.Animation.DROP,
         position: {lat: parseFloat(this.nearbyArray[index].lat),lng:parseFloat(this.nearbyArray[index].lng)},
@@ -212,6 +213,8 @@ nearbyFarm(){
 
 }
 
-
+search(){
+  this.navCtrl.push(SearchPage)
+}
 
 }

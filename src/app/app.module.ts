@@ -11,16 +11,24 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { FarmEatProvider } from '../providers/farm-eat/farm-eat';
 import { HttpClientModule } from '@angular/common/http';
+import { Keyboard } from '@ionic-native/keyboard';
 
 import { RegisterPage } from '../pages/register/register';
 import {DescriptionPage} from '../pages/description/description'
+import { SearchPage } from '../pages/search/search';
+import { NewsfeedPage } from '../pages/newsfeed/newsfeed';
+
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
-    RegisterPage , DescriptionPage
+    RegisterPage , 
+    DescriptionPage,
+    SearchPage,
+    NewsfeedPage,
+   
     
   ],
   imports: [
@@ -32,12 +40,17 @@ import {DescriptionPage} from '../pages/description/description'
     MyApp,
     HomePage,
     ListPage,
-    RegisterPage, DescriptionPage
+    RegisterPage, 
+    DescriptionPage,
+    SearchPage,
+    NewsfeedPage,
+   
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Geolocation,
+    Keyboard,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FarmEatProvider
   ]

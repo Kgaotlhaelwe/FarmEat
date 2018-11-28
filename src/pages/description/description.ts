@@ -14,11 +14,13 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'description.html',
 })
 export class DescriptionPage {
-
+pet 
   description = this. navParams.get("description");
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.pet="kittens";
   }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DescriptionPage');
