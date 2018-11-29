@@ -6,10 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { RegisterPage } from '../pages/register/register';
-<<<<<<< HEAD
-=======
 import { NewsfeedPage } from '../pages/newsfeed/newsfeed';
->>>>>>> 118b033962ab4c66eba6e3e8be683e89a4df95f9
 
 @Component({
   templateUrl: 'app.html'
@@ -17,11 +14,8 @@ import { NewsfeedPage } from '../pages/newsfeed/newsfeed';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-<<<<<<< HEAD
   rootPage: any = RegisterPage;
-=======
-  rootPage: any = HomePage
->>>>>>> 118b033962ab4c66eba6e3e8be683e89a4df95f9
+  
 
   pages: Array<{title: string, component: any}>;
 

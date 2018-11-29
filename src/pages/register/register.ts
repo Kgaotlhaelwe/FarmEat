@@ -4,7 +4,7 @@ import {user} from '../model/user';
 declare var firebase
 import {FarmEatProvider} from '../../providers/farm-eat/farm-eat'
 import { LoginPage } from '../login/login';
-import { HomePage } from '../home/home';
+import { HomePage } from '../../pages/home/home';
 import { DescriptionPage } from '../description/description';
 
 

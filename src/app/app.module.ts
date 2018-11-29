@@ -12,11 +12,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { FarmEatProvider } from '../providers/farm-eat/farm-eat';
 import { HttpClientModule } from '@angular/common/http';
-<<<<<<< HEAD
-
-import { RegisterPage } from '../pages/register/register';
 import { LoginPage } from '../pages/login/login';
-=======
 import  {Keyboard} from '@ionic-native/keyboard';
 
 import { RegisterPage } from '../pages/register/register';
@@ -24,23 +20,19 @@ import {DescriptionPage} from '../pages/description/description'
 import { SearchPage } from '../pages/search/search';
 import { NewsfeedPage } from '../pages/newsfeed/newsfeed';
 
->>>>>>> 118b033962ab4c66eba6e3e8be683e89a4df95f9
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
-<<<<<<< HEAD
-    RegisterPage, LoginPage
-=======
-    RegisterPage , 
+    RegisterPage, 
+    LoginPage,
     DescriptionPage,
     SearchPage,
     NewsfeedPage,
    
     
->>>>>>> 118b033962ab4c66eba6e3e8be683e89a4df95f9
   ],
   imports: [
     BrowserModule,HttpClientModule ,
@@ -51,25 +43,18 @@ import { NewsfeedPage } from '../pages/newsfeed/newsfeed';
     MyApp,
     HomePage,
     ListPage,
-<<<<<<< HEAD
-    RegisterPage, LoginPage
-=======
-    RegisterPage, 
+    RegisterPage, LoginPage, 
     DescriptionPage,
     SearchPage,
     NewsfeedPage,
    
->>>>>>> 118b033962ab4c66eba6e3e8be683e89a4df95f9
   ],
   providers: [
     StatusBar,
     SplashScreen,
     LaunchNavigator,
     Geolocation,
-<<<<<<< HEAD
-=======
     Keyboard,
->>>>>>> 118b033962ab4c66eba6e3e8be683e89a4df95f9
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FarmEatProvider
   ]
