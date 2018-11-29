@@ -1,41 +1,29 @@
 
 <ion-content padding>
-  <div class="body-container" >
+
+
+  <div class="body-container"  >
     <div class="header">
       <div class="logo-box" >
           <img class="img" src="../../assets/imgs/unnamed.png" alt="logo">
           <h1>Farm' eat</h1>
       </div>
-       <br> <br>
     </div>
-    <br> <br> <br>
-    
     <div>
        <div class="input-box">
-     
         <ion-item class="first-item" no-lines>
-         
             <ion-input type="text" placeholder="Email" type = 'email' [(ngModel)]='user.email'></ion-input>
           </ion-item>
           <br>
-      
           <ion-item  class="second-item" no-lines >
-           
             <ion-input type="password" placeholder="Password"  [(ngModel)]= 'user.password'></ion-input>
           </ion-item>
-    
     </div>
     <br><br>
     <div class="buttons" >
         <button ion-button full round (click)="Login(user)" color="green-lit">  <b>Sign In</b>  </button>
-  
-        
-     
       </div>
     </div>
-   
-
-
   </div>
 
 </ion-content> 
