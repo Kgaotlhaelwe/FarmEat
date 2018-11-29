@@ -4,6 +4,7 @@ import {user} from '../model/user';
 declare var firebase
 import {FarmEatProvider} from '../../providers/farm-eat/farm-eat'
 import { HomePage } from '../home/home';
+import { RegisterPage } from '../register/register';
 
 /**
  * Generated class for the LoginPage page.
@@ -62,5 +63,27 @@ export class LoginPage {
       alert.present();
 
     }
+  }
+  forgetPassword(user:user){
+    this.farmEatDb.forgetPassword(user.email).then(()=>{
+
+      const alert = this.alertCtrl.create({
+        subTitle:  "We have sent you email to recover password, Please check your Email",
+        buttons: ['OK']
+      });
+      alert.present();
+      
+    } , (error)=>{
+
+      const alert = this.alertCtrl.create({
+        subTitle:  "Please fill in the email field. ",
+        buttons: ['OK']
+      });
+      alert.present();
+
+    })
+  }
+  register(){
+    this.navCtrl.push(RegisterPage)
   }
 }
