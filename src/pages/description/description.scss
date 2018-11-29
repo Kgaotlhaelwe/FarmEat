@@ -24,14 +24,7 @@ page-description {
     .description-section{
         position: relative;
     }
-    .farm-facilities{
-        position: relative;
-       
 
-    }
-    .ion-card{
-        // padding: 25px;
-    }
     .title {
         position: absolute;
         font-size: 2.0em;
@@ -51,28 +44,36 @@ page-description {
         }       
 
         .address-box{
-            display: flex;
             letter-spacing: 0.1em;
             font-family: system;
             font-display: normal;
-            background-color:#08AF9E;
+            background-color:#087150;
             color: white;
             font-size: 15px;
             padding-left: 25px;
             padding-right: 15px;
             text-align: center;
+            display: grid;          
+            grid-template-columns: 1fr 1fr ;
+        }
+        .address-box > div{
+        }
+        .address-box > div:nthchild(odd){
+        }
+        .first-column{
+            width: 170%;
             
         }
+        .fab-button{
+            box-shadow:2px ; 
+            position: relative;
+            top: -12px;
+        }
         .btn{
-            // clip-path: circle(40% at 50% 50%);
-            // background-color: rgba(0, 0, 0, 0.288);
-            width: 50px;
-        
+            width: 100px;
         }
         img{
             width: 50px;
-            // background-color: rgba(0, 0, 0, 0.288);
-
         }
         .img{
             max-height: 200px;
@@ -89,28 +90,29 @@ page-description {
         }
   
         .container{
-            display: grid;          
-            grid-template-columns: 1fr 1fr 1fr 1fr ;
+            justify-content: center;
+            display: flex;          
+            // grid-template-columns: 1fr 1fr 1fr 1fr ;
          }
-         .container > div{
+         .crops-name{
+             display: flex;
          }
-         .container > div:nthchild(odd){
+         .livestock-name{
+             display: flex;
+
          }
-         .containers{
-             font-size: 12px;
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr ;
+         .Aquafarming{
+            display: flex;
          }
+         .beeKeeping-name{
+            display: flex;
+
+         }
+      
          .btn {
             width: 50px;
             padding-right: 5px;
         }
-         
-         .containers > div{
-         }
-         .containers > div:nthchild(odd){
-         }
-
          hr {
             display: block;
             unicode-bidi: isolate;
@@ -134,7 +136,6 @@ page-description {
             width: 100%;
           }
           .text {
-            // color: white;
             font-size: 
             20px;
             position: absolute;
@@ -190,6 +191,7 @@ page-description {
             }
             h4{
                 padding-right: 5px;
+                font-size: 1em;
             }
            
        

@@ -1,18 +1,48 @@
-<!--
-  Generated template for the LoginPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>login</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
 
 <ion-content padding>
+  <div class="body-container" >
+    <div class="header">
+      <div class="logo-box" >
+          <img class="img" src="../../assets/imgs/unnamed.png" alt="logo">
+          <h1>Farm' eat</h1>
+      </div>
+       <br> <br>
+    </div>
+    <br> <br> <br>
+    
+    <div>
+       <div class="input-box">
+     
+        <ion-item class="first-item" no-lines>
+         
+            <ion-input type="text" placeholder="Email" type = 'email' [(ngModel)]='user.email'></ion-input>
+          </ion-item>
+          <br>
+      
+          <ion-item  class="second-item" no-lines >
+           
+            <ion-input type="password" placeholder="Password" type ='passsword' [(ngModel)]= 'user.password'></ion-input>
+          </ion-item>
+    
+    </div>
+    <br><br>
+    <div class="buttons" >
+        <button ion-button full round (click)="Login(user)" color="green-lit">  <b>Sign In</b>  </button>
+  
+        
+     
+      </div>
+    </div>
+   
 
-</ion-content>
+
+  </div>
+
+</ion-content> 
+<ion-footer>
+    <button class="forget-password" color="green" ion-button full round (click)="Login()" clear>Forgot password?
+      </button>
+    <button class="sign_up" color="green" ion-button full round (click)="Login()" clear>Don't have Account?
+  </button>
+
+</ion-footer>

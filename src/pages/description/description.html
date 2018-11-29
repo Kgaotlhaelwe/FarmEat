@@ -6,29 +6,18 @@
    <div class="ion-card"  >
       <ion-slides pager>
   
-          <ion-slide>
-              <img src="{{image}}" alt="">
+          <ion-slide *ngFor="let i of image">
+              <img class="img" src="{{i}}" alt="">
           </ion-slide>
-        
-          <ion-slide>
-              <img  class="img" src="../../assets/imgs/small-backyard-vegetable-garden-what-will-my-garden-grow-backyard-farming-inspiration-pinterest.jpg" >  
-          </ion-slide>
-        
-          <ion-slide>
-              <img  class="img" src="../../assets/imgs/3.jpg" >
-          </ion-slide>
-        
         </ion-slides>
-        <!-- <img  class="img" src="../../assets/imgs/small-backyard-vegetable-garden-what-will-my-garden-grow-backyard-farming-inspiration-pinterest.jpg" >   -->
         <div class="address-box">
-          <div>
+          <div class="first-column" >
            <h4>{{name}} </h4>
-            <!-- <ion-icon name="pin"></ion-icon>
-             Chris Hani Rd, Diepkloof, Johannesburg, 1862 -->
             </div>
-          <div>
-            <img src="../../assets/imgs/icons8_Route_100px_2.png"  class="btn"alt="">
-          </div>
+          <div class="second-column" >
+             <ion-fab  mini right>
+               <button class="fab-button" ion-fab color="danger" (click)="navigate()" ><img  class="btn"src="../../assets/imgs/icons8_Route_100px_2.png"></button>
+              </ion-fab>
         </div>
   
       </div>
@@ -36,7 +25,7 @@
     <div padding>
         <ion-segment [(ngModel)]="pet" class="segment">
           <ion-segment-button value="kittens">
-        Review
+        About Us
           </ion-segment-button>
           <ion-segment-button value="puppies">
             Contact Us
@@ -57,18 +46,25 @@
                   <div class="farm-facilities" >
                     <h1>What we offer</h1>
                     <hr>
-                    <div class="container">
-                    <div><img   src="../../assets/imgs/icons8_Sprout_96px.png" alt=""  ></div>
-                    <div> <img src="../../assets/imgs/icons8_Cow_96px_1.png" alt="" ></div>
-                    <div><img src="../../assets/imgs/icons8_Bee_96px.png" alt=""></div>
-                    <div><img src="../../assets/imgs/icons8_Bee_96px.png" alt=""></div>
-                  </div>
-                  <div class="containers" >
-                    <div>Crops </div>
-                    <div>Livestock</div>
-                    <div>Beekeeping</div>
-                    <div>Aquafarming</div>
-                  </div>
+                    <div class="container" >
+                      <div class="crops" >
+                        <span *ngIf="crops == 'true'"><img   src="../../assets/imgs/icons8_Sprout_96px.png" alt=""></span>
+                        <span *ngIf="crops == 'true'" class="crops-name" >Crops</span>
+                      </div>
+                      <div class="livestock" >
+                        <span *ngIf="liveStock == 'true'" ><img src="../../assets/imgs/icons8_Cow_96px_1.png" alt=""></span>
+                        <span  *ngIf="liveStock == 'true'" class="livestock-name" >Livestock</span>
+                      </div>
+                      <div class="beeKeeping" >
+                        <span *ngIf="beeKeeping == 'true'" ><img src="../../assets/imgs/icons8_Bee_96px.png" alt=""></span>
+                        <span  *ngIf="beeKeeping == 'true'"class="beeKeeping-name" >Beekeeping</span>
+                      </div>
+                      <div class="Aquafarming" >
+                        <span *ngIf="aquatic == 'true'"><img src="../../assets/imgs/icons8_Bee_96px.png" alt=""></span>
+                        <span  *ngIf="aquatic == 'true'" class="Aquafarming" >Aquafarming</span>
+                      </div>
+                      </div>
+               
                   <hr>
                   </div>
                 </div> 
@@ -77,23 +73,24 @@
             <div class="contact-box">
                 <div class="adress">
                     <ion-icon name="md-pin" ></ion-icon>
-                    <h6> {{address}}</h6>
+                    <h6>{{address}}</h6>
                 </div>
-                <div class="call" >
+                <div class="call" (click)="call(tel)">
                   <ion-icon name="md-call"></ion-icon>
-                  <h6>011 933 8000</h6>
+                  <h6>{{tel}}</h6>
                 </div>
-                <div class="email">
+                <div class="email" (click)="sendEmail(email)">
                   <ion-icon name="md-mail"></ion-icon>
-                  <h6>example@gmail.com</h6>
+                  <h6>{{email}}</h6>
                 </div>
                 <div class="time" >
-                  <ion-icon name="md-time"></ion-icon>
-                  <h6>open: 06:30 - close:07:30 </h6>
+                  <ion-icon name="logo-facebook"></ion-icon>
+                  <h6>{{facebook}}</h6>
                 </div>
               </div>   
         </ion-list>
       </div>
+    </div>
     </div>
       </ion-content>
   

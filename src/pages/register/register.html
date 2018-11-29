@@ -26,7 +26,23 @@
   <p >Register an account </p> 
   <ion-list padding  class="list">
 
-    <ion-item class="item" >
+    <ion-item class="item">
+      <ion-input type="text" placeholder="Username" type = 'username' [(ngModel)]='user.username'></ion-input>
+    </ion-item>
+
+    <ion-item >
+      <ion-input type="text" placeholder="Email" type = 'email' [(ngModel)]='user.email'></ion-input>
+    </ion-item>
+
+    <ion-item >
+      <ion-input type="password" placeholder="Password" type ='passsword' [(ngModel)]= 'user.password'></ion-input>
+    </ion-item>
+    <br>
+    <button color="secondary" ion-button full round (click)="Register(user)">  Sign up </button>
+  </ion-list>
+  
+  <button color="light" ion-button full round (click)="Login()" clear>  <ion-icon name="arrow-back"></ion-icon> &nbsp; <b>Sign In</b>  </button>
+  <!-- <ion-item>
       <ion-input type="text" placeholder="Username"></ion-input>
     </ion-item>
 
@@ -38,6 +54,7 @@
       <ion-input type="password" placeholder="Password"></ion-input>
     </ion-item>
     <br>
+<<<<<<< HEAD
     <button class="btn" color="secondary" ion-button full round (click)="signin">  Sign up </button>
   </ion-list>
   
@@ -46,4 +63,10 @@
 
   
   
+=======
+    <button color="secondary" ion-button full round (click)="signin">  Sign up </button>
+  </ion-list> -->
+  
+  <!-- <button color="light" ion-button full round (click)="signin" clear>  <ion-icon name="arrow-back"></ion-icon> &nbsp; <b>Sign In</b>  </button> -->
+>>>>>>> f5df0eb357e178e3735aeb09ceb0cfb352725e3c
 </ion-content>
