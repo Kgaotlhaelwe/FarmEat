@@ -18,6 +18,7 @@ import { RegisterPage } from '../pages/register/register';
 import {DescriptionPage} from '../pages/description/description'
 import { SearchPage } from '../pages/search/search';
 import { NewsfeedPage } from '../pages/newsfeed/newsfeed';
+import { LoginPage } from '../pages/login/login';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { NewsfeedPage } from '../pages/newsfeed/newsfeed';
     DescriptionPage,
     SearchPage,
     NewsfeedPage,
+    LoginPage
    
     
   ],
@@ -45,6 +47,8 @@ import { NewsfeedPage } from '../pages/newsfeed/newsfeed';
     DescriptionPage,
     SearchPage,
     NewsfeedPage,
+    LoginPage
+   
    
   ],
   providers: [
