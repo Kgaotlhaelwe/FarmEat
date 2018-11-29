@@ -14,6 +14,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { FarmEatProvider } from '../providers/farm-eat/farm-eat';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginPage } from '../pages/login/login';
 import  {Keyboard} from '@ionic-native/keyboard';
 
 import { RegisterPage } from '../pages/register/register';
@@ -27,7 +28,8 @@ import { NewsfeedPage } from '../pages/newsfeed/newsfeed';
     MyApp,
     HomePage,
     ListPage,
-    RegisterPage , 
+    RegisterPage, 
+    LoginPage,
     DescriptionPage,
     SearchPage,
     NewsfeedPage,
@@ -43,7 +45,7 @@ import { NewsfeedPage } from '../pages/newsfeed/newsfeed';
     MyApp,
     HomePage,
     ListPage,
-    RegisterPage, 
+    RegisterPage, LoginPage, 
     DescriptionPage,
     SearchPage,
     NewsfeedPage,

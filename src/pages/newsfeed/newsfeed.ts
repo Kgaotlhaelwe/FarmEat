@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {FarmEatProvider} from '../../providers/farm-eat/farm-eat'
 
 /**
  * Generated class for the NewsfeedPage page.
@@ -15,7 +16,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class NewsfeedPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  newsFeedArray = new Array() ;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private farmEatDb:FarmEatProvider) {
+    this.farmEatDb.getNewsFeed().then((data:any)=>{
+      this.newsFeedArray=data ;
+
+      console.log(this.newsFeedArray);
+      
+
+
+
+    })
   }
 
   ionViewDidLoad() {

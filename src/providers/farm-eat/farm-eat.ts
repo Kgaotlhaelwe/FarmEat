@@ -14,7 +14,9 @@ declare var firebase
 export class FarmEatProvider {
 
   farmArray = new Array() ;
-  nearByOrg = new Array()
+  nearByOrg = new Array();
+  newsMessage;
+  newFeedArray = new Array();
 
   
   
@@ -30,6 +32,7 @@ export class FarmEatProvider {
 // down  position
 var downlat = new String(latitude); 
 var latIndex = downlat.indexOf( "." ); 
+var down = parseInt(downlat.substr(latIndex + 1,2)) + 6;
 var down = parseInt(downlat.substr(latIndex + 1,2)) + 12;
 if (down >= 100){
   if (downlat.substr(0,1) == "-"){
@@ -51,6 +54,7 @@ if (down >= 100){
 //up  position
 var uplat = new String(latitude); 
 var latIndex = uplat .indexOf( "." ); 
+var up= parseInt(uplat .substr(latIndex + 1,2)) - 6;
 var up= parseInt(uplat .substr(latIndex + 1,2)) - 12;
 if (up <= 0){
   if (uplat.substr(0,1) == "-"){
@@ -72,6 +76,7 @@ if (up <= 0){
   //left position
  var leftlat = new String(longitude);
  var longIndex =  leftlat.indexOf(".");
+ var left =  parseInt(leftlat.substr(longIndex + 1,2)) - 6;
  var left =  parseInt(leftlat.substr(longIndex + 1,2)) - 12;
  if (left <= 0){
    if (leftlat.substr(0,1) == "-"){
@@ -93,6 +98,7 @@ if (up <= 0){
     //right position
     var rightlat = new String(longitude);
     var longIndex =  rightlat.indexOf(".");
+    var right =  parseInt(rightlat.substr(longIndex + 1,2)) + 6;
     var right =  parseInt(rightlat.substr(longIndex + 1,2)) + 12;
     if (right >= 100){
       if (rightlat.substr(0,1) == "-"){
@@ -144,10 +150,34 @@ if (up <= 0){
       })
    }
 
+   getNewsFeed(){
+
+    return new Promise((resolve ,reject)=>{
+      firebase.database().ref('Newsfeed').on('value' , (data:any)=>{
+        var Newsfeed =data.val();
+        var keys:any =Object.keys(Newsfeed);
+        for(var i =0 ; i<keys.length;i++){
+          var  k =keys[i] ;
+          let NewsfeedObj = {
+            k:k ,
+            title: Newsfeed[k].title,
+            message: Newsfeed[k].message,
+            image:Newsfeed[k].image,
+
+          }
+          this.newFeedArray.push(NewsfeedObj);
+
+          resolve( this.newFeedArray);
+        }
+
+      })
+    })
+   }
 
   getallFarms(){
 
     return new Promise((resolve ,reject)=>{
+      firebase.database().ref('Farms').on('value',(data:any)=>{
       firebase.database().ref('UrbanFarms').on('value',(data:any)=>{
 
         var farms =data.val() ;
@@ -177,18 +207,12 @@ if (up <= 0){
           this.farmArray.push(obj) ;
           resolve(this.farmArray)
         }
-        
-        
-
-
-
+      
       })
 
-
     })
-
-  }
-
+  })
+}
 
 
   getNearByOrganizations(radius,org){
@@ -239,4 +263,81 @@ if (up <= 0){
     })
   }
 
+  
+  register(email , password , username){
+
+    return new Promise((resolve, reject)=>{
+
+      firebase.auth().createUserWithEmailAndPassword(email , password) .then(()=>{
+        var uid= firebase.auth().currentUser.uid;
+        firebase.database().ref("user/"+uid).set({
+          username:username,
+          email:email,
+ 
+        })
+
+        resolve()
+ 
+      } , (error)=>{
+        reject(error);
+      });
+ 
+ 
+ })
+ 
+ }
+
+ login(email , password){
+
+  return new Promise((resolve, reject)=>{
+    firebase.auth().signInWithEmailAndPassword(email , password).then(()=>{
+      resolve();
+    }, Error =>{
+      reject(Error)
+    }) ;
+  
+   
+})
+
+
+}
+
+signout(){
+  firebase.auth().signOut().then(function() {
+  }).catch(function(error) {
+
+  });
+}
+
+
+// newsfeed(){
+//   return new Promise((resolve, reject)=>{
+//     firebase.database().ref('newsfeed/').on('value', (data: any) => {
+ 
+//       var message = data.val();
+//        console.log(data.val());
+ 
+//        var keys: any = Object.keys(message);
+ 
+//        console.log(keys);
+ 
+//        for (var i = 0; i < keys.length; i++){
+//         var m = keys[i];
+ 
+//         let obj = {
+//           m:keys ,
+//           message:message[m].message
+ 
+//         }
+//         this.newsMessage.push(obj)
+ 
+//         resolve(this.newsMessage);
+//   }
+ 
+ 
+//   })
+ 
+//  })
+ 
+//  }
 }

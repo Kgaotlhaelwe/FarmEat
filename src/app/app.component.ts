@@ -14,7 +14,8 @@ import { NewsfeedPage } from '../pages/newsfeed/newsfeed';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage
+  rootPage: any = RegisterPage;
+  
 
   pages: Array<{title: string, component: any}>;
 
