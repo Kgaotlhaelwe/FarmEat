@@ -16,7 +16,7 @@ import { DescriptionPage } from '../pages/description/description';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage
+  rootPage: any = HomePage
 
   
 
@@ -27,8 +27,7 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage },
+      { title: 'Home', component: HomePage, },
       { title: 'News Feeds', component: NewsfeedPage }
     ];
 

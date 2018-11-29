@@ -39,7 +39,7 @@
   </div>
 
 </ion-content> 
-<ion-footer>
+<ion-footer  [hidden]="keyboard.isOpen()" >
     <button class="forget-password" color="green" ion-button full round  (click)="forgetPassword(user)" clear>Forgot Password?
       </button>
     <button class="sign_up" color="green" ion-button full round (click)="register()" clear>Don't have Account?
