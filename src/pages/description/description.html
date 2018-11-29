@@ -6,8 +6,8 @@
    <div class="ion-card"  >
       <ion-slides pager>
   
-          <ion-slide>
-              <img class="img" src="{{image}}" alt="">
+          <ion-slide *ngFor="let i of image">
+              <img class="img" src="{{i}}" alt="">
           </ion-slide>
         </ion-slides>
         <div class="address-box">
@@ -75,11 +75,11 @@
                     <ion-icon name="md-pin" ></ion-icon>
                     <h6>{{address}}</h6>
                 </div>
-                <div class="call" >
+                <div class="call" (click)="call(tel)">
                   <ion-icon name="md-call"></ion-icon>
                   <h6>{{tel}}</h6>
                 </div>
-                <div class="email">
+                <div class="email" (click)="sendEmail(email)">
                   <ion-icon name="md-mail"></ion-icon>
                   <h6>{{email}}</h6>
                 </div>

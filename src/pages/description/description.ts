@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 import { EmailValidator } from '@angular/forms';
+import { CallNumber } from '@ionic-native/call-number';
+import { SocialSharing } from '@ionic-native/social-sharing';
 /**
  * Generated class for the DescriptionPage page.
  *
@@ -30,7 +32,7 @@ pet
   website:string;
   facebook:string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private launchNavigator: LaunchNavigator) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private launchNavigator: LaunchNavigator, private callNumber: CallNumber,private socialSharing: SocialSharing) {
     this.pet="kittens";
       this.name = this.description.name
       this.desc = this.description.description
@@ -64,5 +66,24 @@ pet
     error => console.log('Error launching navigator', error)
   );
   }
+
+  call(tel){
+    this.callNumber.callNumber(tel, true)
+  .then(res => console.log('Launched dialer!', res))
+  .catch(err => console.log('Error launching dialer', err));
+  }
+
+  sendEmail(email){
+        // Share via email
+    this.socialSharing.shareViaEmail('Body', 'Subject', [email]).then(() => {
+      // Success!
+    }).catch(() => {
+      // Error!
+    });
+  }
+
+ 
+
+
 
 }
