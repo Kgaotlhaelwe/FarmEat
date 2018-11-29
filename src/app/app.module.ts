@@ -3,6 +3,8 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
+import { CallNumber } from '@ionic-native/call-number';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -51,6 +53,8 @@ import { NewsfeedPage } from '../pages/newsfeed/newsfeed';
     StatusBar,
     SplashScreen,
     LaunchNavigator,
+    CallNumber,
+    SocialSharing, 
     Geolocation,
     Keyboard,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
