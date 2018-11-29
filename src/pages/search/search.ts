@@ -19,7 +19,9 @@ import { HomePage } from '../home/home';
 export class SearchPage {
  lat  ;
  lng
- trackno = 1 ;
+
+ desLatLng
+  
 
   constructor(public platform: Platform,public navCtrl: NavController, public navParams: NavParams,private keyboard: Keyboard) {
     this.platform.ready().then(() => {
@@ -35,50 +37,64 @@ export class SearchPage {
     console.log('ionViewDidLoad SearchPage');
   }
 
-  search(address){
-    
+   search(address){
 
-    const geocoder = new google.maps.Geocoder;
     
-    geocoder.geocode({'address': address}, function(results, status) {
-         if (status === 'OK') {
-          this.desLatLng = results[0].geometry.location;
-         console.log("Des method "+this.desLatLng);
-           console.log(this.desLatLng);
-           console.log("ghffdh"+this.desLatLng);
-          this. lat = results[0].geometry.location.lat();
-          this. lng = results[0].geometry.location.lng();
-           console.log(this.lat);
-           console.log(this.lng);
-   
-          } else {
-           alert('Geocode was not successful for the following reason: ' + status);
-          }
-          
-       });
-
-      setTimeout(()=>{
+      new Promise((accpt,rej) =>{
+        const geocoder = new google.maps.Geocoder;
+      
+        geocoder.geocode({'address': address}, (results, status)=> {
+             if (status === 'OK') {
+              this.desLatLng = results[0].geometry.location;
+             console.log("Des method "+this.desLatLng);
+              console.log(this.desLatLng);
+              console.log("ghffdh"+this.desLatLng);
+              this. lat = results[0].geometry.location.lat();
+              this. lng = results[0].geometry.location.lng();
+               console.log(this.lat);
+               console.log(this.lng);
+           
+             let  trackno = 1 ;
+              
+               let coordinate= {
+                lat:this.lat ,
+                lng:this.lng ,
+               
+              }
         
+                  let obj = {
+              trackno:trackno
+            }
+        
+            console.log(coordinate);
+             
+            searchArray[0]=obj
+             console.log( searchArray);
+            setTimeout(()=>{
+              this.navCtrl.push(HomePage, {searchArea:coordinate})
+            } , 5000)
+         
+          
+              
+              
+         
+              } else {
+               alert('Geocode was not successful for the following reason: ' + status);
+              }
+              
+           });
+  
+  
+  
+      })
+    
 
-      }, 5000)
-       
-
-       let coordinate= {
-         lat:this.lat ,
-         lng:this.lng ,
-         trackNo:this.trackno
-       }
-
-    //    let obj = {
-    //      trackno:this.trackno
-    //    }
-
-    console.log(coordinate);
-     
-    //    this.navCtrl.push(HomePage, {  searchArea:coordinate})
-    //    searchArray[0]=obj
-     
   }
+
+
+
+
+
 
 
 }

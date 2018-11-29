@@ -21,11 +21,11 @@ export class HomePage {
   lon: number;
   nearbyArray = new Array() ;
 
-  
+  searchArea = this.navParams.get("searchArea");
 
   trackSearch =searchArray ;
 
-  searchArea
+
   constructor(public navCtrl: NavController,  public navParams: NavParams, private geo: Geolocation, private farmEatDb:FarmEatProvider) {
 
     this.farmEatDb.getCurrentLocation().then((radius:any)=>{
@@ -64,18 +64,12 @@ export class HomePage {
 
 
   ionViewDidEnter() {
-
-    
   console.log(this.trackSearch);
   
 
     console.log(this.trackSearch);
-if(this.trackSearch.length == 1){
-  this.searchArea = this.navParams.get("searchArea");
 
-  console.log(this.searchArea);
-}
-   
+    console.log(this.searchArea);
     
     
 
@@ -129,7 +123,7 @@ if(this.trackSearch.length == 1){
 
       console.log("second if statata");
       
-console.log(this.searchArea);
+console.log( this.searchArea);
 
        let a = this.searchArea.lat ;
       let b = this.searchArea.lng
