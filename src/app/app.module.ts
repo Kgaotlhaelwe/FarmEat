@@ -9,28 +9,36 @@ import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { FarmEatProvider } from '../providers/farm-eat/farm-eat';
+import { HttpClientModule } from '@angular/common/http';
+
+import { RegisterPage } from '../pages/register/register';
+import { LoginPage } from '../pages/login/login';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    RegisterPage, LoginPage
   ],
   imports: [
-    BrowserModule,
+    BrowserModule,HttpClientModule ,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    RegisterPage, LoginPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Geolocation,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    FarmEatProvider
   ]
 })
 export class AppModule {}
