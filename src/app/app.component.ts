@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
+import {FarmEatProvider} from '../providers/farm-eat/farm-eat';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { RegisterPage } from '../pages/register/register';
@@ -16,14 +16,27 @@ import { DescriptionPage } from '../pages/description/description';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage
+  rootPage: any 
 
   
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public farmEatDb:FarmEatProvider) {
     this.initializeApp();
+
+    //checkstate
+
+    farmEatDb.checkstate().then((data:any)=>{
+
+      if (data ==1){
+        this.rootPage = HomePage;
+     
+      }
+      else {
+        this.rootPage = LoginPage;
+      }
+     })
 
     // used for an example of ngFor and navigation
     this.pages = [

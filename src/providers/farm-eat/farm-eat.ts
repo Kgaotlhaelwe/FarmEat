@@ -17,11 +17,31 @@ export class FarmEatProvider {
   nearByOrg = new Array();
   newsMessage;
   newFeedArray = new Array();
+  condition;
 
   
   
   constructor(public http: HttpClient , private geolocation :  Geolocation) {
     console.log('Hello FarmEatProvider Provider');
+  }
+
+  checkstate(){
+    return new Promise((resolve, reject)=>{
+    firebase.auth().onAuthStateChanged((user)=>
+     {
+      if (user != null) {
+       // alert('user signed in')
+       this.condition = 1
+   
+      } else {
+   
+        this.condition = 0
+       // alert('no user signed in')
+      }
+      resolve(this.condition)
+    })
+ 
+  })
   }
 
 
