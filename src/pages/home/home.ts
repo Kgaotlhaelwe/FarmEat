@@ -28,30 +28,7 @@ export class HomePage {
 
   constructor(public navCtrl: NavController,  public navParams: NavParams, private geo: Geolocation, private farmEatDb:FarmEatProvider) {
 
-    this.farmEatDb.getCurrentLocation().then((radius:any)=>{
-      this.farmEatDb.getallFarms().then((data:any)=>{
-        console.log(data);
-        console.log(radius);
-        
-        
-        this.farmEatDb.getNearByOrganizations(radius ,data).then((data:any)=>{
-        console.log(data);
 
-        this.nearbyArray =data ;
-        console.log(this.nearbyArray);
-        
-
-         })
-    
-     })
-      
-    })
-
-    setTimeout(()=>{
-      this.loadMap();
-
-
-    }, 5000)
     
   
     
@@ -70,6 +47,78 @@ export class HomePage {
     console.log(this.trackSearch);
 
     console.log(this.searchArea);
+
+
+
+
+    if(this.trackSearch.length == 0){
+      this.farmEatDb.getCurrentLocation().then((radius:any)=>{
+        console.log(radius);
+        
+        this.farmEatDb.getallFarms().then((data:any)=>{
+          console.log(data);
+          console.log(radius);
+          
+          
+          this.farmEatDb.getNearByOrganizations(radius ,data).then((data:any)=>{
+          console.log(data);
+  
+          this.nearbyArray =data ;
+          console.log(this.nearbyArray);
+          
+  
+           })
+      
+       })
+        
+      })
+    }else if(this.trackSearch.length ==1){
+     
+     
+      console.log('innnfdaa');
+      console.log(this.searchArea);
+      
+
+      console.log( this.searchArea.lat);
+      console.log(this.searchArea.lng);
+      
+      this.farmEatDb.getSearchbyFarms(this.searchArea.lat,this.searchArea.lng).then((radius:any)=>{
+        console.log(radius);
+
+        this.farmEatDb.getallFarms().then((data:any)=>{
+          console.log(data);
+
+          
+
+          this.farmEatDb.getSearchedFarm(this.searchArea.lat,this.searchArea.lng,radius ,data).then((data)=>{
+            console.log(data);
+            
+
+          })
+
+
+
+        })
+        
+      })
+    
+        
+      
+      
+
+    
+
+
+    }
+
+   
+
+    setTimeout(()=>{
+      this.loadMap();
+
+
+    }, 5000)
+    
     
     
 
@@ -186,7 +235,7 @@ console.log( this.searchArea);
          //icon:"../../assets/imgs/498229.svg" ,
         
         //animation: google.maps.Animation.DROP,
-        position: {lat: parseFloat(this.nearbyArray[index].lat),lng:parseFloat(this.nearbyArray[index].lng)},
+        position: {lat: parseFloat(this.nearbyArray[index].lat),lng:parseFloat(this.nearbyArray[index].lng)} ,
         label:name ,
         zoom:8
       });

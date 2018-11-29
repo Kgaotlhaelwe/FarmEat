@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation';
+import { resolve } from 'path';
 
 declare var firebase
 
@@ -17,6 +18,7 @@ export class FarmEatProvider {
   nearByOrg = new Array() ;
 
   newFeedArray = new Array();
+  newSeachedFarms = new Array() ;
 
   
   
@@ -35,13 +37,19 @@ var latIndex = downlat.indexOf( "." );
 var down = parseInt(downlat.substr(latIndex + 1,2)) + 12;
 if (down >= 100){
   if (downlat.substr(0,1) == "-"){
-    var firstDigits = parseInt(downlat.substr(0,3)) - 1;
+    var firstDigits = parseInt(downlat.substr(0,3)) + 1;
   }
   else{
-    var firstDigits = parseInt(downlat.substr(0,2)) + 1;
+    var firstDigits = parseInt(downlat.substr(0,2)) - 1;
   }
   var remainder = down - 100;
-  downposition = firstDigits +  ".0" + down;
+  if (remainder >= 10){
+    downposition = firstDigits + "." + remainder;
+  }
+  else{
+    downposition = firstDigits +  ".0" + remainder;
+  }
+  
 }else{
   if (downlat.substr(0,1) == "-"){
     downposition =  downlat.substr(0,3) + "." + down ;
@@ -49,7 +57,9 @@ if (down >= 100){
   else{
     downposition = downlat.substr(0,2) + "." + down;
   }
+
 }
+
 //up  position
 var uplat = new String(latitude); 
 var latIndex = uplat .indexOf( "." ); 
@@ -61,8 +71,13 @@ if (up <= 0){
   else{
     var firstDigits = parseInt(uplat.substr(0,2)) - 1;
   }
-  var remainder = up - 100;
-  uposititon = firstDigits +  ".0" + remainder;
+  var remainder = down - 100;
+  if (remainder >= 10){
+    uposititon = firstDigits + "." + remainder;
+  }
+  else{
+    uposititon = firstDigits +  ".0" + remainder;
+  }
 }else{
   if (uplat.substr(0,1) == "-"){
     uposititon = uplat.substr(0,3) + "." + up ;
@@ -70,12 +85,13 @@ if (up <= 0){
   else{
     uposititon = uplat.substr(0,2) + "." + up ;
   }
+  
 }
   //left position
  var leftlat = new String(longitude);
  var longIndex =  leftlat.indexOf(".");
  var left =  parseInt(leftlat.substr(longIndex + 1,2)) - 12;
- if (left <= 0){
+ if (left >= 100){
    if (leftlat.substr(0,1) == "-"){
       var firstDigits =  parseInt(leftlat.substr(0,3)) - 1;
    }else{
@@ -85,11 +101,20 @@ if (up <= 0){
    leftposition= firstDigits +  ".0" + remainder;
  }else{
    if (leftlat.substr(0,1) == "-"){
-    leftposition = leftlat.substr(0,3) + "." + left;
+    var firstDigits= parseInt(leftlat.substr(0,3)) + 1;
    }
    else{
-    leftposition = leftlat.substr(0,2) + "." + left;
+    var firstDigits= parseInt(leftlat.substr(0,2)) - 1;
    }
+  
+   if (left == 0){
+    var remainder = 0;
+   }
+   else{
+    var remainder = left - 12;
+   }
+   
+   leftposition = firstDigits +  ".0" + remainder;
 
  }
     //right position
@@ -106,7 +131,17 @@ if (up <= 0){
       rightposition = firstDigits +  ".0" + remainder;
     }else{
       rightposition = rightlat.substr(0,2) + "." + right;
+      if (left == 0){
+        var remainder = 0;
+       }
+       else{
+        var remainder = left - 12;
+       }
+       
+       rightposition  = firstDigits +  ".0" + remainder;
     }
+
+
     let radius ={
       left: leftposition,
       right : rightposition,
@@ -145,6 +180,25 @@ if (up <= 0){
         });
       })
    }
+
+
+
+  
+
+
+getSearchbyFarms(lat , lng){
+  return new Promise((accpt ,rej)=>{
+  this.createPositionRadius(lat , lng).then((data:any)=>{
+    accpt(data)
+  })
+  }).catch((error)=>{
+    console.log('Error getting location', error);
+    
+  })
+}
+
+
+   
 
    getNewsFeed(){
 
@@ -224,37 +278,26 @@ if (up <= 0){
         var lat =  new String(resp.coords.latitude).substr(0,6);
         console.log(lat);
         console.log(resp.coords.latitude)
-      
-        
-        
-        var long = new String(resp.coords.longitude).substr(0,5);
+       var long = new String(resp.coords.longitude).substr(0,5);
         console.log(long);
         console.log(resp.coords.longitude);
-        
-        
         for (var x = 0; x < org.length; x++){
           var orglat = new String(org[x].lat).substr(0,6);
           var orgLong =  new String(org[x].lng).substr(0,5);
-          // console.log('out');
-          // console.log(orglat);
+        
+
+          // console.log(lat);
+          // console.log(long);
           // console.log(orgLong);
-          // console.log( radius.left);
+          // console.log(radius.left);
           // console.log(radius.right);
           // console.log(radius.down);
-          // console.log(radius.up);
+          // console.log( radius.up);
           
           
-          
-          
-          
-          
-          
-         if ((orgLong  <= long  && orgLong  >= radius.left || orgLong  >= long  && orgLong  <= radius.right) && (orglat >= lat && orglat <= radius.down || orglat <= lat && orglat >= radius.up)){
+          if ((orgLong  <= long  && orgLong  >= radius.left || orgLong  >= long  && orgLong  <= radius.right) && (orglat >= lat && orglat <= radius.down || orglat <= lat && orglat >= radius.up)){
 
-          console.log('in');
-          
-          
-          this.nearByOrg.push(org[x]);
+         this.nearByOrg.push(org[x]);
           console.log(this.nearByOrg);
 
           }
@@ -264,4 +307,55 @@ if (up <= 0){
     })
   }
 
+
+  getSearchedFarm(lat , lng , radius , org){
+    return new  Promise((accpt , rej)=>{
+      this.getSearchbyFarms(lat , lng).then((resp)=>{
+        var lt =  new String(lat).substr(0,6);
+        var long =  new String(lng).substr(0,5);
+        console.log(lt);
+       
+        console.log(radius);
+        
+        console.log(lt);
+          console.log(long);
+        for (let x = 0; x< org.length; x++) {
+
+          var orglat = new String(org[x].lat).substr(0,6);
+          var orgLong =  new String(org[x].lng).substr(0,5);
+
+          
+
+          console.log(orgLong);
+          console.log(orglat );
+          
+          
+          
+          
+          
+          
+          
+console.log('out');
+
+          if ((orgLong  <= long  && orgLong  >= radius.left || orgLong  >= long  && orgLong  <= radius.right) && (orglat >= lt && orglat <= radius.down || orglat <= lt && orglat >= radius.up)){
+console.log('in');
+
+            this.newSeachedFarms.push(org[x]);
+             console.log(this.nearByOrg);
+   
+             }
+          
+        }
+
+        accpt( this.newSeachedFarms)
+      })
+    })
+  }
+        
+
+        
+
+  
+
+  
 }
