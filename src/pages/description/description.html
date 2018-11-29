@@ -10,14 +10,14 @@
               <img class="img" src="{{image}}" alt="">
           </ion-slide>
         </ion-slides>
-        <!-- <img  class="img" src="../../assets/imgs/small-backyard-vegetable-garden-what-will-my-garden-grow-backyard-farming-inspiration-pinterest.jpg" >   -->
         <div class="address-box">
           <div class="first-column" >
            <h4>{{name}} </h4>
             </div>
-          <div>
-            <img src="../../assets/imgs/icons8_Route_100px_2.png"  class="btn"alt="" (click)="navigate()">
-          </div>
+          <div class="second-column" >
+             <ion-fab  mini right>
+               <button class="fab-button" ion-fab color="danger" (click)="navigate()" ><img  class="btn"src="../../assets/imgs/icons8_Route_100px_2.png"></button>
+              </ion-fab>
         </div>
   
       </div>
@@ -47,11 +47,24 @@
                     <h1>What we offer</h1>
                     <hr>
                     <div class="container" >
-                    <div *ngIf="crops == 'true'"><img   src="../../assets/imgs/icons8_Sprout_96px.png" alt=""  >Crops</div>
-                    <div *ngIf="liveStock == 'true'"> <img src="../../assets/imgs/icons8_Cow_96px_1.png" alt="" >Livestock</div>
-                    <div *ngIf="beeKeeping == 'true'"><img src="../../assets/imgs/icons8_Bee_96px.png" alt="">Beekeeping</div>
-                    <div *ngIf="aquatic == 'true'"><img src="../../assets/imgs/icons8_Bee_96px.png" alt="">Aquafarming</div>
-                  </div>
+                      <div class="crops" >
+                        <span *ngIf="crops == 'true'"><img   src="../../assets/imgs/icons8_Sprout_96px.png" alt=""></span>
+                        <span *ngIf="crops == 'true'" class="crops-name" >Crops</span>
+                      </div>
+                      <div class="livestock" >
+                        <span *ngIf="liveStock == 'true'" ><img src="../../assets/imgs/icons8_Cow_96px_1.png" alt=""></span>
+                        <span  *ngIf="liveStock == 'true'" class="livestock-name" >Livestock</span>
+                      </div>
+                      <div class="beeKeeping" >
+                        <span *ngIf="beeKeeping == 'true'" ><img src="../../assets/imgs/icons8_Bee_96px.png" alt=""></span>
+                        <span  *ngIf="beeKeeping == 'true'"class="beeKeeping" >Beekeeping</span>
+                      </div>
+                      <div class="Aquafarming" >
+                        <span *ngIf="aquatic == 'true'"><img src="../../assets/imgs/icons8_Bee_96px.png" alt=""></span>
+                        <span  *ngIf="aquatic == 'true'" class="Aquafarming" >Aquafarming</span>
+                      </div>
+                      </div>
+               
                   <hr>
                   </div>
                 </div> 
@@ -77,6 +90,7 @@
               </div>   
         </ion-list>
       </div>
+    </div>
     </div>
       </ion-content>
   
