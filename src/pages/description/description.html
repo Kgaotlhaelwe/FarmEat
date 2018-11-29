@@ -1,18 +1,82 @@
-<!--
-  Generated template for the DescriptionPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>description</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-
-</ion-content>
+<ion-content >
+    <div class="body-container">
+  
+    <div class="header-box" >
+   <div class="ion-card"  >
+      <ion-slides pager>
+  
+          <ion-slide>
+              <img class="img" src="{{image}}" alt="">
+          </ion-slide>
+        </ion-slides>
+        <!-- <img  class="img" src="../../assets/imgs/small-backyard-vegetable-garden-what-will-my-garden-grow-backyard-farming-inspiration-pinterest.jpg" >   -->
+        <div class="address-box">
+          <div class="first-column" >
+           <h4>{{name}} </h4>
+            </div>
+          <div>
+            <img src="../../assets/imgs/icons8_Route_100px_2.png"  class="btn"alt="" (click)="navigate()">
+          </div>
+        </div>
+  
+      </div>
+    </div>
+    <div padding>
+        <ion-segment [(ngModel)]="pet" class="segment">
+          <ion-segment-button value="kittens">
+        About Us
+          </ion-segment-button>
+          <ion-segment-button value="puppies">
+            Contact Us
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+      
+      <div   [ngSwitch]="pet">  
+        <ion-list *ngSwitchCase="'kittens'">
+            <div class="body-box" >
+                <div class="description-section"  >
+                  <div class="sub-title">
+                    <h1>Farm Description</h1>
+                     {{desc}}
+                  </div>
+                  <hr>
+                  </div>
+                  <div class="farm-facilities" >
+                    <h1>What we offer</h1>
+                    <hr>
+                    <div class="container" >
+                    <div *ngIf="crops == 'true'"><img   src="../../assets/imgs/icons8_Sprout_96px.png" alt=""  >Crops</div>
+                    <div *ngIf="liveStock == 'true'"> <img src="../../assets/imgs/icons8_Cow_96px_1.png" alt="" >Livestock</div>
+                    <div *ngIf="beeKeeping == 'true'"><img src="../../assets/imgs/icons8_Bee_96px.png" alt="">Beekeeping</div>
+                    <div *ngIf="aquatic == 'true'"><img src="../../assets/imgs/icons8_Bee_96px.png" alt="">Aquafarming</div>
+                  </div>
+                  <hr>
+                  </div>
+                </div> 
+        </ion-list>
+        <ion-list *ngSwitchCase="'puppies'">
+            <div class="contact-box">
+                <div class="adress">
+                    <ion-icon name="md-pin" ></ion-icon>
+                    <h6>{{address}}</h6>
+                </div>
+                <div class="call" >
+                  <ion-icon name="md-call"></ion-icon>
+                  <h6>{{tel}}</h6>
+                </div>
+                <div class="email">
+                  <ion-icon name="md-mail"></ion-icon>
+                  <h6>{{email}}</h6>
+                </div>
+                <div class="time" >
+                  <ion-icon name="logo-facebook"></ion-icon>
+                  <h6>{{facebook}}</h6>
+                </div>
+              </div>   
+        </ion-list>
+      </div>
+    </div>
+      </ion-content>
+  

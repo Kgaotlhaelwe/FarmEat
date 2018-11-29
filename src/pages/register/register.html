@@ -22,6 +22,7 @@
   <ion-list padding  class="list">
 
     <ion-item class="item">
+<<<<<<< HEAD
       <ion-input type="text" placeholder="Username" type = 'username' [(ngModel)]='user.username'></ion-input>
     </ion-item>
 
@@ -37,4 +38,21 @@
   </ion-list>
   
   <button color="light" ion-button full round (click)="Login()" clear>  <ion-icon name="arrow-back"></ion-icon> &nbsp; <b>Sign In</b>  </button>
+=======
+      <ion-input type="text" placeholder="Username"></ion-input>
+    </ion-item>
+
+    <ion-item >
+      <ion-input type="text" placeholder="Email"></ion-input>
+    </ion-item>
+
+    <ion-item >
+      <ion-input type="password" placeholder="Password"></ion-input>
+    </ion-item>
+    <br>
+    <button color="secondary" ion-button full round (click)="signin">  Sign up </button>
+  </ion-list>
+  
+  <button color="light" ion-button full round (click)="signin" clear>  <ion-icon name="arrow-back"></ion-icon> &nbsp; <b>Sign In</b>  </button>
+>>>>>>> 118b033962ab4c66eba6e3e8be683e89a4df95f9
 </ion-content>

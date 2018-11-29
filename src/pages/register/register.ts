@@ -8,6 +8,7 @@ import { HomePage } from '../home/home';
 import { DescriptionPage } from '../description/description';
 
 
+
 /**
  * Generated class for the RegisterPage page.
  *
@@ -23,6 +24,7 @@ import { DescriptionPage } from '../description/description';
 export class RegisterPage {
   user = {} as user ;
   constructor(public navCtrl: NavController, public navParams: NavParams , public farmEatDb:FarmEatProvider, public alertCtrl:AlertController, public loadingCtrl:LoadingController, public toastCtrl :ToastController) {
+
   }
 
   ionViewDidLoad() {

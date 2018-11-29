@@ -16,6 +16,7 @@ export class FarmEatProvider {
   farmArray = new Array() ;
   nearByOrg = new Array();
   newsMessage;
+  
 
   
   
@@ -32,6 +33,7 @@ export class FarmEatProvider {
 var downlat = new String(latitude); 
 var latIndex = downlat.indexOf( "." ); 
 var down = parseInt(downlat.substr(latIndex + 1,2)) + 6;
+var down = parseInt(downlat.substr(latIndex + 1,2)) + 12;
 if (down >= 100){
   if (downlat.substr(0,1) == "-"){
     var firstDigits = parseInt(downlat.substr(0,3)) - 1;
@@ -53,6 +55,7 @@ if (down >= 100){
 var uplat = new String(latitude); 
 var latIndex = uplat .indexOf( "." ); 
 var up= parseInt(uplat .substr(latIndex + 1,2)) - 6;
+var up= parseInt(uplat .substr(latIndex + 1,2)) - 12;
 if (up <= 0){
   if (uplat.substr(0,1) == "-"){
     var firstDigits = parseInt(uplat.substr(0,3)) + 1;
@@ -74,6 +77,7 @@ if (up <= 0){
  var leftlat = new String(longitude);
  var longIndex =  leftlat.indexOf(".");
  var left =  parseInt(leftlat.substr(longIndex + 1,2)) - 6;
+ var left =  parseInt(leftlat.substr(longIndex + 1,2)) - 12;
  if (left <= 0){
    if (leftlat.substr(0,1) == "-"){
       var firstDigits =  parseInt(leftlat.substr(0,3)) - 1;
@@ -95,6 +99,7 @@ if (up <= 0){
     var rightlat = new String(longitude);
     var longIndex =  rightlat.indexOf(".");
     var right =  parseInt(rightlat.substr(longIndex + 1,2)) + 6;
+    var right =  parseInt(rightlat.substr(longIndex + 1,2)) + 12;
     if (right >= 100){
       if (rightlat.substr(0,1) == "-"){
          var firstDigits =  parseInt(rightlat.substr(0,3)) - 1;
@@ -150,6 +155,7 @@ if (up <= 0){
 
     return new Promise((resolve ,reject)=>{
       firebase.database().ref('Farms').on('value',(data:any)=>{
+      firebase.database().ref('UrbanFarms').on('value',(data:any)=>{
 
         var farms =data.val() ;
         console.log(farms);
@@ -164,7 +170,16 @@ if (up <= 0){
             lng:farms[k].lng ,
             name: farms[k].name ,
             description:farms[k].description ,
-            type:farms[k].type 
+            type:farms[k].type ,
+            address: farms[k].address ,
+            aquatic: farms[k].aquatic ,
+            crops:farms[k].crops ,
+            tel:farms[k].tel ,
+            email: farms[k].email ,
+            image:farms[k].image ,
+            beeKeeping:farms[k].beeKeeping ,
+            liveStock:farms[k].liveStock ,
+            facebook:farms[k].facebook
           }
           this.farmArray.push(obj) ;
           resolve(this.farmArray)
@@ -180,7 +195,7 @@ if (up <= 0){
     })
 
   }
-
+}
 
 
   getNearByOrganizations(radius,org){
@@ -209,6 +224,18 @@ if (up <= 0){
           // console.log(radius.right);
           // console.log(radius.down);
           // console.log(radius.up);
+          console.log(orglat);
+          console.log(orgLong);
+          console.log( radius.left);
+          console.log(radius.right);
+          console.log(radius.down);
+          console.log(radius.up);
+          
+          
+          
+          
+          
+          
           
          if ((orgLong  <= long  && orgLong  >= radius.left || orgLong  >= long  && orgLong  <= radius.right) && (orglat >= lat && orglat <= radius.down || orglat <= lat && orglat >= radius.up)){
 
