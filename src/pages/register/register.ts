@@ -46,7 +46,7 @@ export class RegisterPage {
       });
       alert.present();
      
-      this.navCtrl.push(HomePage)
+      this.navCtrl.setRoot(HomePage)
     } , (error)=>{
  
  
