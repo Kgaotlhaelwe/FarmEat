@@ -46,7 +46,7 @@ import { LoginPage } from '../pages/login/login';
     MyApp,
     HomePage,
     ListPage,
-    RegisterPage, LoginPage, 
+    RegisterPage, 
     DescriptionPage,
     SearchPage,
     NewsfeedPage,

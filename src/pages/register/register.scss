@@ -1,54 +1,63 @@
 page-register {
     .content{
-        background-color:  #008b8b;
-        // background-image: linear-gradient(to bottom, rgba(0, 139, 139, 0.945), rgba(22, 168, 144, 0.8)), url("../../assets/kreiter_littleleaf3_biz.jpg");
-        // background-size: cover;
-    }
-    .text-input-md {
-        text-align: center;
-    }
-    .list{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-       border-radius: 25px;
-      
-    }
-    .item{
-        //  border-radius: 25px;
-        // background-color: #fff;
-      background-color: #008b8b;
-         margin-top: 10px;
-         margin-bottom: 10px
-    }
-    h1{
-        color: white;
-        font-size: 5rem;
-        font-family: cursive
-    }
+        background-color: #087150;
+       
+  }
+  .body-container{
+    padding-top: 20%;
+  }
+  .logo-box{
+      text-align: center;
+      display: block;
+
+  }
+  .img{
      
- .text-input::-moz-placeholder {
-    color: #fff;
+      width: 120px;
+  }
+  
+  h1{
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
+     font-size: 4rem;
+     margin-top: -5%;
+     margin-bottom: 10%
+
+}
+.item{
+    text-align: center;
+    color:#28ECAC;
+    margin-top: 5%
     
-   }
-   
-   .text-input:-ms-input-placeholder {
-    color:#fff;
+}
+.first-item{
+background-color:	#0B2816; 
+border-radius: 25px;
+margin-top: 10px;
+margin-bottom: 10px
+}
+h2{
+    color: #28ECAC;
+    margin: 0%
+} 
+p{
+color: #28ECAC;
+margin: 0%
+}
+  
+.text-input:-ms-input-placeholder {
+    color:		#28ECAC;
    
    }
    
    .text-input::-webkit-input-placeholder {
-    color: #fff;
-   
+    color: 		#28ECAC;
    }
-   .img{
-    height: 30%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    
-    
-      
-   }
+   .text-input-md {
+    text-align: center;
+}
+.text-label-md {
+    text-align: center;
+}
     
 }
