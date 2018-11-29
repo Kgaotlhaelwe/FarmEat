@@ -40,7 +40,7 @@ export class LoginPage {
           content: "Logging in please wait...",
           duration: 3000
         });
-        this.navCtrl.push(HomePage)
+        this.navCtrl.setRoot(HomePage)
         loader.present();
       
       
