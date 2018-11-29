@@ -1,81 +1,63 @@
 page-register {
-//     .content{
-//         background-color:  #008b8b;
-//         // background-image: linear-gradient(to bottom, rgba(0, 139, 139, 0.945), rgba(22, 168, 144, 0.8)), url("../../assets/kreiter_littleleaf3_biz.jpg");
-//         // background-size: cover;
-//     }
-//     .text-input-md {
-//         text-align: center;
-//     }
-//     .list{
-//         display: flex;
-//         flex-direction: column;
-//         justify-content: center;
-//        border-radius: 25px;
-      
-//     }
-    .item{
-        //  border-radius: 25px;
-        // background-color: #fff;
-      background-color: white;
-         margin-top: 10px;
-         margin-bottom: 10px;
-         box-shadow: 10px 10px 20px rgb(211, 211, 211)
-    }
-    .btn{
-        box-shadow: 10px 10px 20px rgb(201, 201, 201)
-    }
-    .btnn{
-        color: rgb(94, 94, 94);
-    }
-    h1{
-        color: white;
+    .content{
+        background-color: #087150;
+       
+  }
+  .body-container{
+    padding-top: 20%;
+  }
+  .logo-box{
+      text-align: center;
+      display: block;
+
+  }
+  .img{
+     
+      width: 120px;
+  }
+  
+  h1{
+    color: white;
     text-shadow: 2px 2px 4px #000000;
-      
-         font-size: 5rem;
-        
-    }
-     h2,p{
-         color: rgb(105, 105, 105);
-     }
-     .top{
-         position: relative;
-         height: 22%;
-         width: 100%;
-         top: -8%;
-         border-radius: 100%;
-         background: red;
-     }
-     img{
-         position: absolute;
-         top:-20vh
-     }
-//  .text-input::-moz-placeholder {
-//     color: #fff;
+     font-size: 4rem;
+     margin-top: -5%;
+     margin-bottom: 10%
+
+}
+.item{
+    text-align: center;
+    color:#28ECAC;
+    margin-top: 5%
     
-//    }
+}
+.first-item{
+background-color:	#0B2816; 
+border-radius: 25px;
+margin-top: 10px;
+margin-bottom: 10px
+}
+h2{
+    color: #28ECAC;
+    margin: 0%
+} 
+p{
+color: #28ECAC;
+margin: 0%
+}
+  
+.text-input:-ms-input-placeholder {
+    color:		#28ECAC;
    
-//    .text-input:-ms-input-placeholder {
-//     color:#fff;
+   }
    
-//    }
-   
-//    .text-input::-webkit-input-placeholder {
-//     color: #fff;
-   
-//    }
-//    .img{
-//     height: 30%;
-//     display: block;
-//     margin-left: auto;
-//     margin-right: auto;
-      
-//    }
-//    .clip{
-//        background-color: white;
-//   height: 10%;
-//   width: 10%;
-//   clip-path: circle(50% at 50% 50%);
-//    }
+   .text-input::-webkit-input-placeholder {
+    color: 		#28ECAC;
+   }
+   .text-input-md {
+    text-align: center;
+}
+.text-label-md {
+    text-align: center;
+}
     
 }
