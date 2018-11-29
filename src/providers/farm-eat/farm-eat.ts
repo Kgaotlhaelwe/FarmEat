@@ -184,17 +184,11 @@ if (up <= 0){
           this.farmArray.push(obj) ;
           resolve(this.farmArray)
         }
-        
-        
-
-
-
+      
       })
 
-
     })
-
-  }
+  })
 }
 
 
