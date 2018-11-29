@@ -21,7 +21,7 @@
       
           <ion-item  class="second-item" no-lines >
            
-            <ion-input type="password" placeholder="Password" type ='passsword' [(ngModel)]= 'user.password'></ion-input>
+            <ion-input type="password" placeholder="Password"  [(ngModel)]= 'user.password'></ion-input>
           </ion-item>
     
     </div>
@@ -40,9 +40,9 @@
 
 </ion-content> 
 <ion-footer>
-    <button class="forget-password" color="green" ion-button full round (click)="Login()" clear>Forgot password?
+    <button class="forget-password" color="green" ion-button full round  (click)="forgetPassword(user)" clear>Forgot Password?
       </button>
-    <button class="sign_up" color="green" ion-button full round (click)="Login()" clear>Don't have Account?
+    <button class="sign_up" color="green" ion-button full round (click)="register()" clear>Don't have Account?
   </button>
 
 </ion-footer>
