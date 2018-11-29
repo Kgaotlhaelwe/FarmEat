@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController, LoadingController
 import {user} from '../model/user';
 declare var firebase
 import {FarmEatProvider} from '../../providers/farm-eat/farm-eat'
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the LoginPage page.
@@ -17,7 +18,7 @@ import {FarmEatProvider} from '../../providers/farm-eat/farm-eat'
   templateUrl: 'login.html',
 })
 export class LoginPage {
-
+  user = {} as user ;
   constructor(public navCtrl: NavController, public navParams: NavParams, public farmEatDb:FarmEatProvider, public alertCtrl:AlertController, public loadingCtrl:LoadingController) {
   }
 
@@ -38,6 +39,7 @@ export class LoginPage {
           content: "Logging in please wait...",
           duration: 3000
         });
+        this.navCtrl.push(HomePage)
         loader.present();
       
       
