@@ -1,10 +1,11 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import {FarmEatProvider} from '../../providers/farm-eat/farm-eat'
 
 import { DescriptionPage } from '../description/description';
 import { SearchPage } from '../search/search';
+import searchArray from '../search/search'
 
 declare var google: any;
 
@@ -20,7 +21,12 @@ export class HomePage {
   lon: number;
   nearbyArray = new Array() ;
 
-  constructor(public navCtrl: NavController, private geo: Geolocation, private farmEatDb:FarmEatProvider) {
+  
+
+  trackSearch =searchArray ;
+
+  searchArea
+  constructor(public navCtrl: NavController,  public navParams: NavParams, private geo: Geolocation, private farmEatDb:FarmEatProvider) {
 
     this.farmEatDb.getCurrentLocation().then((radius:any)=>{
       this.farmEatDb.getallFarms().then((data:any)=>{
@@ -58,6 +64,22 @@ export class HomePage {
 
 
   ionViewDidEnter() {
+
+    
+  console.log(this.trackSearch);
+  
+
+    console.log(this.trackSearch);
+if(this.trackSearch.length == 1){
+  this.searchArea = this.navParams.get("searchArea");
+
+  console.log(this.searchArea);
+}
+   
+    
+    
+
+    
     
   }
 
@@ -66,21 +88,14 @@ export class HomePage {
 
    
     this.geo.getCurrentPosition().then((position) => {
-      console.log(position);
-      
-      //current location coordinates
+      console.log(position)
       this.lat = position.coords.latitude;
       this.lon = position.coords.longitude; 
-      
-      console.log(this.lat);
-      console.log(this.lon);
-      
-      
 
        //map options
        const options = {
         center: {lat: this.lat, lng:  this.lon},
-        zoom: 17,
+        zoom: 10,
         streetViewControl: false,
         //mapTypeId: 'satellite'
       }
@@ -89,15 +104,61 @@ export class HomePage {
       this.map = new google.maps.Map(this.mapRef.nativeElement, options);
      console.log(this.nearbyArray);
 
+     console.log("in");
+     if(this.trackSearch.length == 0){
+
+      console.log("innnnnnn");
+      
+
+
+     
+
+      let marker = new google.maps.Marker({
+        map: this.map,
+        zoom: 8 ,
+        animation: google.maps.Animation.DROP,
+        position: this.map.getCenter()
+      });
+
+     console.log(marker.position);
+     console.log(marker.postion);
+     
+
+
+    }else if(this.trackSearch.length ==1){
+
+      console.log("second if statata");
+      
+console.log(this.searchArea);
+
+       let a = this.searchArea.lat ;
+      let b = this.searchArea.lng
+      console.log(a);
+      console.log(b);
+      
+      
+      
+      let marker = new google.maps.Marker({
+        map: this.map,
+        zoom: 8 ,
+       // animation: google.maps.Animation.DROP,
+        position: {lat: parseFloat(a),lng:parseFloat(b)}
+      });
+
+
+      console.log(marker.position.lat);
+      console.log(marker.position.lng);
+      
+      
+
+
+
+    }
+
     //  this.addMarker();  
 
 
-    let marker = new google.maps.Marker({
-      map: this.map,
-      zoom: 8 ,
-      animation: google.maps.Animation.DROP,
-      position: this.map.getCenter()
-    });
+   
 
 
 

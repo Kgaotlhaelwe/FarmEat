@@ -14,7 +14,9 @@ declare var firebase
 export class FarmEatProvider {
 
   farmArray = new Array() ;
-  nearByOrg = new Array()
+  nearByOrg = new Array() ;
+
+  newFeedArray = new Array();
 
   
   
@@ -144,6 +146,29 @@ if (up <= 0){
       })
    }
 
+   getNewsFeed(){
+
+    return new Promise((resolve ,reject)=>{
+      firebase.database().ref('Newsfeed').on('value' , (data:any)=>{
+        var Newsfeed =data.val();
+        var keys:any =Object.keys(Newsfeed);
+        for(var i =0 ; i<keys.length;i++){
+          var  k =keys[i] ;
+          let NewsfeedObj = {
+            k:k ,
+            title: Newsfeed[k].title,
+            message: Newsfeed[k].message,
+            image:Newsfeed[k].image,
+
+          }
+          this.newFeedArray.push(NewsfeedObj);
+
+          resolve( this.newFeedArray);
+        }
+
+      })
+    })
+   }
 
   getallFarms(){
 
@@ -210,13 +235,13 @@ if (up <= 0){
         for (var x = 0; x < org.length; x++){
           var orglat = new String(org[x].lat).substr(0,6);
           var orgLong =  new String(org[x].lng).substr(0,5);
-          console.log('out');
-          console.log(orglat);
-          console.log(orgLong);
-          console.log( radius.left);
-          console.log(radius.right);
-          console.log(radius.down);
-          console.log(radius.up);
+          // console.log('out');
+          // console.log(orglat);
+          // console.log(orgLong);
+          // console.log( radius.left);
+          // console.log(radius.right);
+          // console.log(radius.down);
+          // console.log(radius.up);
           
           
           
