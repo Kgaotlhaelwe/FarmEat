@@ -6,8 +6,8 @@
    <div class="ion-card"  >
       <ion-slides pager>
   
-          <ion-slide>
-              <img class="img" src="{{image}}" alt="">
+          <ion-slide *ngFor="let i of image">
+              <img class="img" src="{{i}}" alt="">
           </ion-slide>
         </ion-slides>
         <div class="address-box">
@@ -16,7 +16,7 @@
             </div>
           <div class="second-column" >
              <ion-fab  mini right>
-               <button class="fab-button" ion-fab color="danger" (click)="navigate()" ><img  class="btn"src="../../assets/imgs/icons8_Route_100px_2.png"></button>
+               <button class="fab-button" ion-fab color="dark-green" (click)="navigate()" ><img  class="btn"src="../../assets/imgs/icons8_Route_100px_2.png"></button>
               </ion-fab>
         </div>
   
@@ -57,7 +57,7 @@
                       </div>
                       <div class="beeKeeping" >
                         <span *ngIf="beeKeeping == 'true'" ><img src="../../assets/imgs/icons8_Bee_96px.png" alt=""></span>
-                        <span  *ngIf="beeKeeping == 'true'"class="beeKeeping" >Beekeeping</span>
+                        <span  *ngIf="beeKeeping == 'true'"class="beeKeeping-name" >Beekeeping</span>
                       </div>
                       <div class="Aquafarming" >
                         <span *ngIf="aquatic == 'true'"><img src="../../assets/imgs/icons8_Bee_96px.png" alt=""></span>
@@ -75,11 +75,11 @@
                     <ion-icon name="md-pin" ></ion-icon>
                     <h6>{{address}}</h6>
                 </div>
-                <div class="call" >
+                <div class="call" (click)="call(tel)">
                   <ion-icon name="md-call"></ion-icon>
                   <h6>{{tel}}</h6>
                 </div>
-                <div class="email">
+                <div class="email" (click)="sendEmail(email)">
                   <ion-icon name="md-mail"></ion-icon>
                   <h6>{{email}}</h6>
                 </div>
