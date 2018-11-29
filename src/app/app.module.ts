@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
+import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -49,6 +50,7 @@ import { NewsfeedPage } from '../pages/newsfeed/newsfeed';
   providers: [
     StatusBar,
     SplashScreen,
+    LaunchNavigator,
     Geolocation,
     Keyboard,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
