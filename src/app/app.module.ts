@@ -14,7 +14,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { FarmEatProvider } from '../providers/farm-eat/farm-eat';
 import { HttpClientModule } from '@angular/common/http';
-import { LoginPage } from '../pages/login/login';
 import  {Keyboard} from '@ionic-native/keyboard';
 
 import { RegisterPage } from '../pages/register/register';
@@ -22,6 +21,8 @@ import {DescriptionPage} from '../pages/description/description'
 import { SearchPage } from '../pages/search/search';
 import { NewsfeedPage } from '../pages/newsfeed/newsfeed';
 import { FarmForumPage } from '../pages/farm-forum/farm-forum'
+import { LoginPage } from '../pages/login/login';
+
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { FarmForumPage } from '../pages/farm-forum/farm-forum'
     DescriptionPage,
     SearchPage,
     NewsfeedPage,
-    FarmForumPage
+    LoginPage
+   
     
   ],
   imports: [
@@ -45,11 +47,14 @@ import { FarmForumPage } from '../pages/farm-forum/farm-forum'
     MyApp,
     HomePage,
     ListPage,
-    RegisterPage, LoginPage, 
+    RegisterPage, 
     DescriptionPage,
     SearchPage,
     NewsfeedPage,
-    FarmForumPage
+    FarmForumPage,
+    LoginPage
+   
+   
   ],
   providers: [
     StatusBar,

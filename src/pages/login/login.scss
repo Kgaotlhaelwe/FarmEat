@@ -1,3 +1,94 @@
 page-login {
+    .content{
+          background-color: #087150;
+
+         
+    }
+    .body-container{
+      padding-top: 20%;
+      
+
+        
+    }
+    .logo-box{
+        text-align: center;
+        display: block;
+        padding-bottom: 20%
+
+    }
+    .img{
+       
+        width: 120px;
+    }
+    .input-box{
+        // position: relative;
+        // top: 10px;
+
+
+    }
+ 
+    h1{
+        color: white;
+        text-shadow: 2px 2px 4px #000000;
+         font-size: 4rem;
+         margin-top: -5%;
+ 
+    }
+    .item{
+        text-align: center;
+        color:#28ECAC;
+        
+    }
+.first-item{
+    background-color:	#0B2816; 
+    border-radius: 25px;
+}
+  .second-item{
+    background-color:	#0B2816; 
+    border-radius: 25px;
+
+  }  
+  .text-input::-moz-placeholder {
+      text-align: center;
+    color: 	#28ECAC;
+    
+   }
+   .text-input-md {
+    text-align: center;
+}
+.text-label-md {
+    text-align: center;
+}
+   
+   .text-input:-ms-input-placeholder {
+    color:		#28ECAC;
+   
+   }
+   
+   .text-input::-webkit-input-placeholder {
+    color: 		#28ECAC;
+   
+   }
+   .footer-md::before, .tabs-md[tabsPlacement="bottom"] > .tabbar::before {
+    top: -2px;
+    bottom: auto;
+    background-position: left 0 top 0;
+    height: 0px;
+
+}
+.sign_up{
+    text-transform: none;
+
+}
+.forget-password{
+    text-transform: none;
+    color: #28ECAC;
+
+}
+ion-footer{
+    display: flex;
+}
+
+
 
 }

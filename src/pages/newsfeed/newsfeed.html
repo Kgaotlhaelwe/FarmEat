@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar  color="danger">
+  <ion-navbar  color="dark-green">
     <ion-title align="center">News Feed</ion-title>
   </ion-navbar>
 
@@ -14,7 +14,7 @@
 
 
 <ion-content >
-  <div class="flex">
+  <div class="flex" *ngFor="let  a of  newsFeedArray">
       <!-- <ion-avatar class="flexav">
           <img src="../../assets/kreiter_littleleaf3_biz.jpg">
         </ion-avatar> -->
@@ -26,12 +26,12 @@
           <p>November 5, 1955</p>
         </ion-item> -->
        
-        <img src="../../assets/kreiter_littleleaf3_biz.jpg">
+        <img src="{{a.image}}">
         <ion-card-header>
-            Explore Nearby
+           <h3>{{a.title}}</h3>
           </ion-card-header>
         <ion-card-content >
-          <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+          <p>{{a.message}}</p>
         </ion-card-content>
       
        

@@ -47,7 +47,7 @@ page-description {
             letter-spacing: 0.1em;
             font-family: system;
             font-display: normal;
-            background-color:#08AF9E;
+            background-color:#087150;
             color: white;
             font-size: 15px;
             padding-left: 25px;
@@ -104,7 +104,7 @@ page-description {
          .Aquafarming{
             display: flex;
          }
-         .beeKeeping{
+         .beeKeeping-name{
             display: flex;
 
          }
@@ -122,8 +122,10 @@ page-description {
             -webkit-margin-end: auto;
             overflow: hidden;
             border-style: inset;
-            border-width: 1px;
+            border-width: 1px ;
+            background-color: #087150;
         }
+       
 
 
         .imgs {
@@ -183,11 +185,11 @@ page-description {
             .segment-md .segment-button.activated, 
             .segment-md .segment-button.segment-activated{
                 color:#08AF9E;
-                border-color: #08AF9E;
+                border-color: #087150;
 
             }
             .swiper-pagination-bullet-active{
-                background:#08AF9E;
+                background:#087150;
             }
             h4{
                 padding-right: 5px;

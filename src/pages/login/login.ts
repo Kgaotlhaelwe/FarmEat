@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController,Keyboard} from 'ionic-angular';
 import {user} from '../model/user';
 declare var firebase
 import {FarmEatProvider} from '../../providers/farm-eat/farm-eat'
+import { HomePage } from '../home/home';
+import { RegisterPage } from '../register/register';
 
 /**
  * Generated class for the LoginPage page.
@@ -17,8 +19,8 @@ import {FarmEatProvider} from '../../providers/farm-eat/farm-eat'
   templateUrl: 'login.html',
 })
 export class LoginPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public farmEatDb:FarmEatProvider, public alertCtrl:AlertController, public loadingCtrl:LoadingController) {
+  user = {} as user ;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public farmEatDb:FarmEatProvider, public alertCtrl:AlertController, public loadingCtrl:LoadingController,  private keyboard: Keyboard) {
   }
 
   ionViewDidLoad() {
@@ -38,6 +40,7 @@ export class LoginPage {
           content: "Logging in please wait...",
           duration: 3000
         });
+        this.navCtrl.setRoot(HomePage)
         loader.present();
       
       
@@ -60,5 +63,27 @@ export class LoginPage {
       alert.present();
 
     }
+  }
+  forgetPassword(user:user){
+    this.farmEatDb.forgetPassword(user.email).then(()=>{
+
+      const alert = this.alertCtrl.create({
+        subTitle:  "We have sent you email to recover password, Please check your Email",
+        buttons: ['OK']
+      });
+      alert.present();
+      
+    } , (error)=>{
+
+      const alert = this.alertCtrl.create({
+        subTitle:  "Please fill in the email field. ",
+        buttons: ['OK']
+      });
+      alert.present();
+
+    })
+  }
+  register(){
+    this.navCtrl.push(RegisterPage)
   }
 }
