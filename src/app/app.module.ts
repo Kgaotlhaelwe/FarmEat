@@ -21,7 +21,7 @@ import { RegisterPage } from '../pages/register/register';
 import {DescriptionPage} from '../pages/description/description'
 import { SearchPage } from '../pages/search/search';
 import { NewsfeedPage } from '../pages/newsfeed/newsfeed';
-
+import { FarmForumPage } from '../pages/farm-forum/farm-forum'
 
 @NgModule({
   declarations: [
@@ -33,7 +33,7 @@ import { NewsfeedPage } from '../pages/newsfeed/newsfeed';
     DescriptionPage,
     SearchPage,
     NewsfeedPage,
-   
+    FarmForumPage
     
   ],
   imports: [
@@ -49,7 +49,7 @@ import { NewsfeedPage } from '../pages/newsfeed/newsfeed';
     DescriptionPage,
     SearchPage,
     NewsfeedPage,
-   
+    FarmForumPage
   ],
   providers: [
     StatusBar,

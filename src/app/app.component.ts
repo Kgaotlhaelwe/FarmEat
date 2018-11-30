@@ -7,14 +7,14 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { RegisterPage } from '../pages/register/register';
 import { NewsfeedPage } from '../pages/newsfeed/newsfeed';
-
+import { FarmForumPage } from '../pages/farm-forum/farm-forum'
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = RegisterPage;
+  rootPage: any = FarmForumPage;
   
 
   pages: Array<{title: string, component: any}>;
@@ -26,7 +26,8 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'List', component: ListPage },
-      { title: 'News Feeds', component: NewsfeedPage }
+      { title: 'News Feeds', component: NewsfeedPage },
+      { title: 'Farms Farum', component: FarmForumPage }
     ];
 
   }
