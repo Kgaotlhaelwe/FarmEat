@@ -34,7 +34,7 @@ import { LoginPage } from '../pages/login/login';
     DescriptionPage,
     SearchPage,
     NewsfeedPage,
-    LoginPage
+    LoginPage, FarmForumPage
    
     
   ],
