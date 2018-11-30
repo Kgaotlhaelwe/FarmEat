@@ -18,9 +18,9 @@ export class MyApp {
 
   rootPage: any = LoginPage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any,icon?:string}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public farmEatDb:FarmEatProvider) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public farmEatDb:FarmEatProvider ,) {
     this.initializeApp();
 
     //checkstate
@@ -38,12 +38,13 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage, },
-      { title: 'News Feeds', component: NewsfeedPage }
+      { title: 'Home', component: HomePage, icon:'home'  },
+      { title: 'News Feeds', component: NewsfeedPage, icon:'md-paper'  },
+      { title: 'Logout', component: null , icon:'md-log-out' }
     ];
 
   }
-
+  
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.

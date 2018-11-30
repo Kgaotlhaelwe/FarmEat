@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation';
-import { resolve } from 'path';
+
 
 declare var firebase
 
@@ -18,11 +18,8 @@ export class FarmEatProvider {
   nearByOrg = new Array();
   newsMessage;
   newFeedArray = new Array();
-<<<<<<< HEAD
   newSeachedFarms = new Array() ;
-=======
   condition;
->>>>>>> 4e941de29a93ea7b82bb5872949300bbc4ea295f
 
   
   
@@ -306,17 +303,6 @@ getSearchbyFarms(lat , lng){
         for (var x = 0; x < org.length; x++){
           var orglat = new String(org[x].lat).substr(0,6);
           var orgLong =  new String(org[x].lng).substr(0,5);
-<<<<<<< HEAD
-        
-
-          // console.log(lat);
-          // console.log(long);
-          // console.log(orgLong);
-          // console.log(radius.left);
-          // console.log(radius.right);
-          // console.log(radius.down);
-          // console.log( radius.up);
-=======
           console.log('out');
           console.log(orglat);
           console.log(orgLong);
@@ -324,7 +310,6 @@ getSearchbyFarms(lat , lng){
           console.log(radius.right);
           console.log(radius.down);
           console.log(radius.up);
->>>>>>> 4e941de29a93ea7b82bb5872949300bbc4ea295f
           
           
           if ((orgLong  <= long  && orgLong  >= radius.left || orgLong  >= long  && orgLong  <= radius.right) && (orglat >= lat && orglat <= radius.down || orglat <= lat && orglat >= radius.up)){
@@ -390,8 +375,6 @@ console.log('in');
   
 
   
-<<<<<<< HEAD
-=======
   register(email , password , username){
 
     return new Promise((resolve, reject)=>{
@@ -483,5 +466,4 @@ forgetPassword(email){
 //  })
  
 //  }
->>>>>>> 4e941de29a93ea7b82bb5872949300bbc4ea295f
 }

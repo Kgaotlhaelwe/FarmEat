@@ -1,14 +1,17 @@
 <ion-menu  [content]="content">
   <ion-header >
     <ion-toolbar color="dark-green">
+        
       <ion-title text-center >Farm' eat</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-content >
-    <ion-list  no-lines >
-      <button text-center menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+    
+    <ion-list  no-lines  padding >
+      <button class="color" menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
+        <ion-icon class="color"  text-center item-start [name]="p.icon"></ion-icon>
       </button>
     </ion-list>
   </ion-content>

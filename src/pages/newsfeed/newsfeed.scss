@@ -1,17 +1,24 @@
 page-newsfeed {
-    .flex{
-        //background-color: aquamarine;
-        display: flex;
-        justify-content: flex-end;
-        align-items: flex-end
+    .content{
+        background-color: whitesmoke
     }
-    ion-avatar {
-        height: 20%;
-        width: 20%;
-        border-radius: 50px
+
+    ion-card-content{
+         height: 10%;
     }
-    .flexav{
-        display: flex;
-        align-self: auto
-    }
+    // .flex{
+    //     //background-color: aquamarine;
+    //     display: flex;
+    //     justify-content: flex-end;
+    //     align-items: flex-end
+    // }
+    // ion-avatar {
+    //     height: 20%;
+    //     width: 20%;
+    //     border-radius: 50px
+    // }
+    // .flexav{
+    //     display: flex;
+    //     align-self: auto
+    // }
 }
