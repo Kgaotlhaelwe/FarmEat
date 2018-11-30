@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { RegisterPage } from '../pages/register/register';
 import { NewsfeedPage } from '../pages/newsfeed/newsfeed';
+import { FarmForumPage } from '../pages/farm-forum/farm-forum'
 import { LoginPage } from '../pages/login/login';
 import { DescriptionPage } from '../pages/description/description';
 
@@ -38,7 +39,10 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage, },
+      { title: 'Home', component: HomePage },
+      { title: 'List', component: ListPage },
+      { title: 'News Feeds', component: NewsfeedPage },
+      { title: 'Farms Farum', component: FarmForumPage }
       { title: 'News Feeds', component: NewsfeedPage }
     ];
 
