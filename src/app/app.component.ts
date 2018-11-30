@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { RegisterPage } from '../pages/register/register';
 import { NewsfeedPage } from '../pages/newsfeed/newsfeed';
+import { FarmForumPage } from '../pages/farm-forum/farm-forum'
 import { LoginPage } from '../pages/login/login';
 import { DescriptionPage } from '../pages/description/description';
 
@@ -40,7 +41,10 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: HomePage, icon:'home'  },
       { title: 'News Feeds', component: NewsfeedPage, icon:'md-paper'  },
-      { title: 'Logout', component: null , icon:'md-log-out' }
+      { title: 'Farms Farum', component: FarmForumPage,icon:'ios-people' },
+      { title: 'Logout', component: null , icon:'md-log-out' },
+     
+    
     ];
 
   }

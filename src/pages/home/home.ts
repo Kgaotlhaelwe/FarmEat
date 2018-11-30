@@ -6,53 +6,122 @@ import {FarmEatProvider} from '../../providers/farm-eat/farm-eat'
 import { DescriptionPage } from '../description/description';
 import { SearchPage } from '../search/search';
 import searchArray from '../search/search'
+import { AlertController } from 'ionic-angular';
 declare var google: any;
 @Component({
  selector: 'page-home',
  templateUrl: 'home.html'
 })
 export class HomePage {
- @ViewChild('map') mapRef: ElementRef;
- map: any;
- lat: number;
- lon: number;
- nearbyArray = new Array() ;
- searchArea = this.navParams.get("searchArea");
- trackSearch =searchArray ;
- constructor(public navCtrl: NavController, public navParams: NavParams, private geo: Geolocation, private farmEatDb:FarmEatProvider) {
-  this.farmEatDb.getCurrentLocation().then((radius:any)=>{
-   console.log(radius);
-   
-   this.farmEatDb.getallFarms().then((data:any)=>{
-    console.log(data);
-    console.log(radius);
-    
-    
-    this.farmEatDb.getNearByOrganizations(radius ,data).then((data:any)=>{
-    console.log(data);
-    this.nearbyArray =data ;
-    console.log(this.nearbyArray);
-    
-     })
-  
-   })
-   
-  })
-  setTimeout(()=>{
-   this.loadMap();
-  }, 5000)
-  
+
+
+  @ViewChild('map') mapRef: ElementRef;
+  map: any;
+  lat: number;
+  lon: number;
+  nearbyArray = new Array() ;
+
+  searchArea = this.navParams.get("searchArea");
+
+  trackSearch =searchArray ;
+  nearbySeachFarmArray = [] ;
+
+
+  constructor(public navCtrl: NavController,  public navParams: NavParams, private geo: Geolocation, private farmEatDb:FarmEatProvider,public alertCtrl: AlertController) {
+
+
+
  
-  
-  
-  
- }
+  }
+ 
+ 
  ionViewDidEnter() {
- console.log(this.trackSearch);
  
-  console.log(this.trackSearch);
-  console.log(this.searchArea);
+ if(this.trackSearch.length == 0){
+      this.farmEatDb.getCurrentLocation().then((radius:any)=>{
+        console.log(radius);
+        
+        this.farmEatDb.getallFarms().then((data:any)=>{
+          console.log(data);
+          console.log(radius);
+          
+          
+          this.farmEatDb.getNearByOrganizations(radius ,data).then((data:any)=>{
+          console.log(data);
   
+          this.nearbyArray =data ;
+          console.log(this.nearbyArray);
+          
+  
+           })
+      
+       })
+        
+      })
+    }else if(this.trackSearch.length ==1){
+     
+      
+      this.farmEatDb.getSearchbyFarms(this.searchArea.lat,this.searchArea.lng).then((radius:any)=>{
+        console.log(radius);
+
+        this.farmEatDb.getallFarms().then((data:any)=>{
+          console.log(data);
+
+          
+
+          this.farmEatDb.getSearchedFarm(this.searchArea.lat,this.searchArea.lng,radius ,data).then((data:any)=>{
+            console.log(data);
+
+            this.nearbySeachFarmArray =data ;
+            console.log(this.nearbySeachFarmArray);
+
+
+            if(this.nearbySeachFarmArray.length == 0){
+              const alert = this.alertCtrl.create({
+                title: 'Confirmation',
+                subTitle: 'Currently we dont have Farms around your Area',
+                buttons: ['OK']
+              });
+              alert.present();
+
+             
+            }else{
+
+        
+            
+          }
+
+
+
+             })
+
+
+
+        })
+        
+      })
+    
+        
+      
+      
+
+    
+
+
+    }
+
+   
+
+    setTimeout(()=>{
+      this.loadMap();
+
+
+    }, 5000)
+    
+    
+    
+
+
   
   
   
@@ -72,10 +141,9 @@ export class HomePage {
    }
   
    this.map = new google.maps.Map(this.mapRef.nativeElement, options);
-   console.log(this.nearbyArray);
-   console.log("in");
+  
    if(this.trackSearch.length == 0){
-   console.log("innnnnnn");
+  
    
   // var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/'
    let marker = new google.maps.Marker({
@@ -89,17 +157,15 @@ export class HomePage {
          url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"},
          position: this.map.getCenter()
    });
-   console.log(marker.position);
-   console.log(marker.postion);
+   
    
   }else if(this.trackSearch.length ==1){
    console.log("second if statata");
    
-console.log( this.searchArea);
+
     let a = this.searchArea.lat ;
    let b = this.searchArea.lng
-   console.log(a);
-   console.log(b);
+  
    
    
    
@@ -109,18 +175,39 @@ console.log( this.searchArea);
     // animation: google.maps.Animation.DROP,
     position: {lat: parseFloat(a),lng:parseFloat(b)}
    });
-   console.log(marker.position.lat);
-   console.log(marker.position.lng);
+
+
+
+
+   for (let index = 0; index < this.nearbySeachFarmArray.length; index++) {
+  
+        
+ 
+  let searchFarm = new google.maps.Marker({
+      map: this.map,
+      //icon:"../../assets/imgs/498229.svg" ,
+     
+     //animation: google.maps.Animation.DROP,
+     position: {lat: parseFloat(this.nearbySeachFarmArray[index].lat),lng:parseFloat(this.nearbySeachFarmArray[index].lng)} ,
+     label:name ,
+     zoom:8
+   });
+
+
+   searchFarm.addListener('click' , ()=>{
+     alert('kb')
+   })
+  
+
+
+  }  
+   
+
+
    
    
   }
-  // this.addMarker(); 
   
-  // let markerz = new google.maps.Marker({
-  //  map: this.map,
-  //  animation: google.maps.Animation.DROP,
-  //  position: {lat:-25.6319488,lng:27.082176},
-  // });
   
    
    for (let index = 0; index < this.nearbyArray.length; index++) {
@@ -189,39 +276,23 @@ console.log( this.searchArea);
  
  
 })
- }
-//  addMarker(){
-//   // let abmarker = new google.maps.Marker({
-//   //  map: this.map,
-   
-//   //  //animation: google.maps.Animation.DROP,
-//   //  position: {lat:-25.6319488,lng:28.082176},
-//   //  label:"new one"
-//   // });
-  
-  
-//   //-25.6319488
-// // 28.082176
-  
-//   // marker.addListener('click' , function(){
-//   //  alert("clicked")
-//   // })
-  
-// }
-nearbyFarm(){
-//  this.farmEatDb.getallFarms().then((data:any)=>{
-//   console.log(data);
-//   this.farmEatDb.getCurrentLocation().then((radius:any)=>{
-//    console.log(radius);
-   
-//    this.farmEatDb.getNearByOrganizations(radius ,data).then((data)=>{
-//     console.log(data);
-    
-//    })
-//   })
-//  })
+
+
+
 }
+ 
+
+
+
+
+
 search(){
  this.navCtrl.push(SearchPage)
 }
+
+
+
 }
+
+
+
