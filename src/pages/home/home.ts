@@ -6,6 +6,7 @@ import {FarmEatProvider} from '../../providers/farm-eat/farm-eat'
 import { DescriptionPage } from '../description/description';
 import { SearchPage } from '../search/search';
 import searchArray from '../search/search'
+import { AlertController } from 'ionic-angular';
 declare var google: any;
 @Component({
  selector: 'page-home',
@@ -26,7 +27,7 @@ export class HomePage {
   nearbySeachFarmArray = [] ;
 
 
-  constructor(public navCtrl: NavController,  public navParams: NavParams, private geo: Geolocation, private farmEatDb:FarmEatProvider) {
+  constructor(public navCtrl: NavController,  public navParams: NavParams, private geo: Geolocation, private farmEatDb:FarmEatProvider,public alertCtrl: AlertController) {
 
 
 
@@ -76,7 +77,12 @@ export class HomePage {
 
 
             if(this.nearbySeachFarmArray.length == 0){
-              alert("nothing")
+              const alert = this.alertCtrl.create({
+                title: 'Confirmation',
+                subTitle: 'Currently we dont have Farms around your Area',
+                buttons: ['OK']
+              });
+              alert.present();
 
              
             }else{
