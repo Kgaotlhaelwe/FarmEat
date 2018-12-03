@@ -4,9 +4,10 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <!-- <ion-title>Home</ion-title> -->
+    <ion-input placeholder="Location" [(ngModel)]="newAddress"></ion-input>
     <ion-buttons end>
-        <button ion-button icon-only >
-            <ion-icon ios="ios-search" md="md-search"></ion-icon>
+        <button ion-button icon-only (click)="search()">
+            <ion-icon ios="ios-search" md="md-search" ></ion-icon>
         </button>
       </ion-buttons>
   </ion-toolbar>
@@ -22,15 +23,15 @@
 
               <ion-item color="dark-green">
           
-                <h2>Marty McFly</h2>
-                <p>November 5, 1955</p>
+                <h2></h2>
+                <p>{{a.type}}</p>
               </ion-item>
             
               <img src="{{a.image}}" class="imgs">
               
 
               <ion-card-content color="dark-green">
-                <p>Wait a minute. Wait a minute, Doc. </p> 
+                <p>{{a.name}} </p> 
               </ion-card-content>
             </ion-card> 
          
