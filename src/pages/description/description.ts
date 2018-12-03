@@ -32,6 +32,9 @@ pet
   website:string;
   facebook:string;
 
+
+  testarray = [{lat:23.35 ,long:34.12} , {lat:56.67, long:23.89} , {lat:78.45, long:78.6}]
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private launchNavigator: LaunchNavigator, private callNumber: CallNumber,private socialSharing: SocialSharing) {
     this.pet="kittens";
       this.name = this.description.name
@@ -80,6 +83,14 @@ pet
     }).catch(() => {
       // Error!
     });
+  }
+
+
+  slideChanged() {
+    //let currentIndex = this.slides.getActiveIndex();
+    console.log('Current index is');
+
+    
   }
 
  

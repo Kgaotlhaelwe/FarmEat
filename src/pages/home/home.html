@@ -15,4 +15,14 @@
 <ion-content>
 
   <div #map id="map"></div>
+<div class="slides">
+    <ion-slides pager  (ionSlideDidChange)="slideChanged()">
+        <ion-slide *ngFor="let a of nearbyArray " >
+    
+          <img src="{{a.image}}">
+        
+        </ion-slide>
+      </ion-slides>
+</div>
+  
 </ion-content>

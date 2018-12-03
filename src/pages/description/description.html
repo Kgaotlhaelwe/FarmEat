@@ -4,9 +4,9 @@
   
     <div class="header-box" >
    <div class="ion-card"  >
-      <ion-slides pager>
+      <ion-slides pager effect="coverflow" class="cards" (ionSlideDidChange)="slideChanged()">
   
-          <ion-slide *ngFor="let i of image">
+          <ion-slide *ngFor="let i of image"  >
               <img class="img" src="{{i}}" alt="">
           </ion-slide>
         </ion-slides>

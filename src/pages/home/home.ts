@@ -7,6 +7,7 @@ import { DescriptionPage } from '../description/description';
 import { SearchPage } from '../search/search';
 import searchArray from '../search/search'
 import { AlertController } from 'ionic-angular';
+import { Slides } from 'ionic-angular';
 declare var google: any;
 @Component({
  selector: 'page-home',
@@ -25,6 +26,10 @@ export class HomePage {
 
   trackSearch =searchArray ;
   nearbySeachFarmArray = [] ;
+  @ViewChild(Slides) slides: Slides;
+
+  icon ;
+  
 
 
   constructor(public navCtrl: NavController,  public navParams: NavParams, private geo: Geolocation, private farmEatDb:FarmEatProvider,public alertCtrl: AlertController) {
@@ -112,11 +117,11 @@ export class HomePage {
 
    
 
-    setTimeout(()=>{
-      this.loadMap();
+     setTimeout(()=>{
+     this.loadMap();
 
 
-    }, 5000)
+     }, 2000)
     
     
     
@@ -136,7 +141,8 @@ export class HomePage {
     const options = {
     center: {lat: this.lat, lng: this.lon},
     zoom: 10,
-    streetViewControl: false,
+    
+    //streetViewControl: false,
     //mapTypeId: 'satellite'
    }
   
@@ -148,10 +154,12 @@ export class HomePage {
   // var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/'
    let marker = new google.maps.Marker({
     map: this.map,
-    zoom: 8 ,
+    zoom: 10,
     //icon: iconBase + 'info-i_maps.png',
    //animation: google.maps.Animation.DROP,
-    
+
+   
+   
     animation: google.maps.Animation.BOUNCE,
        icon: {
          url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"},
@@ -163,7 +171,7 @@ export class HomePage {
    console.log("second if statata");
    
 
-    let a = this.searchArea.lat ;
+    let a = this.searchArea.lat ; 
    let b = this.searchArea.lng
   
    
@@ -173,7 +181,7 @@ export class HomePage {
     map: this.map,
     zoom: 8 ,
     // animation: google.maps.Animation.DROP,
-    position: {lat: parseFloat(a),lng:parseFloat(b)}
+    position: this.map.setCenter({lat: parseFloat(a),lng:parseFloat(b)})
    });
 
 
@@ -212,21 +220,32 @@ export class HomePage {
    
    for (let index = 0; index < this.nearbyArray.length; index++) {
     console.log(this.nearbyArray);
+console.log('out');
+console.log(this.nearbyArray[index].aquatic);
+console.log(this.nearbyArray[index].beeKeeping);
+console.log(this.nearbyArray[index].crops);
+
+
+    if(this.nearbyArray[index].aquatic == "true"){
+      this.icon = '../../assets/imgs/icons8_Prawn_96px_2.png' ;
+      console.log('inaqautic');
+      
+      console.log(this.nearbyArray[index].aquatic);
+    }else if(this.nearbyArray[index].beeKeeping == "true"){
+      this.icon="../../assets/imgs/icons8_Bee_100px.png";
+      console.log('inbeekeeping');
+
+    }else if (this.nearbyArray[index].crops == "true"){
+      this.icon ="../../assets/imgs/icons8_Compost_Heap_96px_1.png" ;
+      console.log('incrop');
+
+    }
     
-    console.log(this.nearbyArray[index].lat);
-    console.log(this.nearbyArray[index].lng);
-    console.log(this.nearbyArray[index].name);
-    
-   
-   
-   
-   
-    
-    // console.log(lat +" "+lng);
-    var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/'
+  // console.log(lat +" "+lng);
+   var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/'
     let abmarker = new google.maps.Marker({
      map: this.map,
-     //icon: iconBase + 'farm_maps.png',
+    //icon: iconBase,
     
     //animation: google.maps.Animation.DROP,
     position: {lat: parseFloat(this.nearbyArray[index].lat),lng:parseFloat(this.nearbyArray[index].lng)},
@@ -281,6 +300,34 @@ export class HomePage {
 
 }
  
+
+
+slideChanged(){
+  let currentIndex = this.slides.getActiveIndex();
+  let currentLat = this.nearbyArray[currentIndex].lat
+  let currentLon = this.nearbyArray[currentIndex].lng
+
+
+  let marker = new google.maps.Marker({
+   // map: this.map,
+     //icon: iconBase + 'farm_maps.png',
+    
+   
+    position:  this.map.setCenter({lat: parseFloat( currentLat),lng:parseFloat( currentLon)}),
+    animation: google.maps.Animation.DROP,
+    label:name ,
+    zoom:20 ,
+
+
+  })
+
+
+ 
+
+
+  console.log(currentLat);
+  
+}
 
 
 
