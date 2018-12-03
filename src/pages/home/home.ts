@@ -195,7 +195,7 @@ export class HomePage {
 
 
    searchFarm.addListener('click' , ()=>{
-     alert('kb')
+     
    })
   
 
@@ -236,7 +236,7 @@ export class HomePage {
   
     
    abmarker.addListener('click' , ()=>{
-     alert(this.nearbyArray[index ].name)
+    
     // var lat = this.nearbyArray[index].lat
     // var lon = this.nearbyArray[index].lng
      var name =this.nearbyArray[index].name ;
