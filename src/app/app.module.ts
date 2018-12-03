@@ -25,7 +25,6 @@ import { LoginPage } from '../pages/login/login';
 import { AddFarmPage } from '../pages/add-farm/add-farm';
 
 
-
 @NgModule({
   declarations: [
     MyApp,
@@ -37,8 +36,8 @@ import { AddFarmPage } from '../pages/add-farm/add-farm';
     SearchPage,
     NewsfeedPage,
     LoginPage,
-    FarmForumPage,AddFarmPage
-   
+    FarmForumPage,
+    AddFarmPage
     
   ],
   imports: [

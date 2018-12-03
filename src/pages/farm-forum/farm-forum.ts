@@ -71,7 +71,7 @@ export class FarmForumPage {
        console.log(this.ques);
        this.ques = this.ques.filter((item) => {
           return (item.toLowerCase().indexOf(this.inputquest.toLowerCase()) > -1);
-           //console.log(item);
+           
         })
        // console.log(this.ques);
     }
