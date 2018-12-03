@@ -310,13 +310,13 @@ slideChanged(){
 
   let marker = new google.maps.Marker({
    // map: this.map,
-     //icon: iconBase + 'farm_maps.png',
+   //icon: iconBase + 'farm_maps.png',
     
    
     position:  this.map.setCenter({lat: parseFloat( currentLat),lng:parseFloat( currentLon)}),
     animation: google.maps.Animation.DROP,
     label:name ,
-    zoom:20 ,
+    zoom:1 ,
 
 
   })
