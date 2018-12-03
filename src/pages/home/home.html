@@ -3,6 +3,8 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
+
+  
     <!-- <ion-title>Home</ion-title> -->
     <ion-input placeholder="Location" [(ngModel)]="newAddress"></ion-input>
     <ion-buttons end>
@@ -23,15 +25,15 @@
 
               <ion-item color="dark-green">
           
-                <h2></h2>
-                <p>{{a.type}}</p>
+                <h2>{{a.name}}</h2>
+             
               </ion-item>
             
               <img src="{{a.image}}" class="imgs">
               
 
               <ion-card-content color="dark-green">
-                <p>{{a.name}} </p> 
+                <p>{{a.type}} </p> 
               </ion-card-content>
             </ion-card> 
          
