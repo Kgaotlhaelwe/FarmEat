@@ -14,9 +14,21 @@
 
 
 <ion-content padding class="content">
-   <input type="text" placeholder="search"  #searchz >
+  
 
  
 
-  <button ion-button (click)="search(searchz.value)">search</button>
+  
+
+
+
+  <ion-searchbar #searchz (ionInput)="getItems($event)"></ion-searchbar>
+<ion-list>
+  <ion-item *ngFor="let item of items" (click)="search(item)"  >
+    {{ item }}
+  </ion-item>
+</ion-list>
+
+
+<button ion-button >search</button>
 </ion-content>

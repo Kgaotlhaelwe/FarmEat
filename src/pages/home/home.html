@@ -16,14 +16,40 @@
 <ion-content>
 
   <div #map id="map"></div>
-<div class="slides">
-    <ion-slides pager  (ionSlideDidChange)="slideChanged()">
-        <ion-slide *ngFor="let a of nearbyArray " >
-    
-          <img src="{{a.image}}">
-        
-        </ion-slide>
+<!-- <div class="slides"> -->
+    <ion-slides class="slides" (ionSlideDidChange)="slideChanged()" direction="" effect="" slidesPerView="2" centeredSlides="true" >
+       <ion-slide *ngFor="let a of nearbyArray " >
+         <ion-card class="card">
+
+              <ion-item color="dark-green">
+          
+                <h2></h2>
+                <p>{{a.type}}</p>
+              </ion-item>
+            
+              <img src="{{a.image}}" class="imgs">
+              
+
+              <ion-card-content color="dark-green">
+                <p>{{a.name}} </p> 
+              </ion-card-content>
+            </ion-card> 
+         
+        </ion-slide> 
       </ion-slides>
-</div>
+<!-- </div> -->
+<!-- <ion-card class="cards">
+
+    <ion-item>
+
+      <h2>Marty McFly</h2>
+      <p>November 5, 1955</p>
+    </ion-item>
   
+    <img src="{{a.image}}" class="imgs">
+  
+    <ion-card-content>
+      <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+    </ion-card-content>
+  </ion-card>         -->
 </ion-content>

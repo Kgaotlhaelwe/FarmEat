@@ -10,6 +10,7 @@ import { NewsfeedPage } from '../pages/newsfeed/newsfeed';
 import { FarmForumPage } from '../pages/farm-forum/farm-forum'
 import { LoginPage } from '../pages/login/login';
 import { DescriptionPage } from '../pages/description/description';
+import { AddFarmPage } from '../pages/add-farm/add-farm';
 declare var firebase
 @Component({
   templateUrl: 'app.html'
@@ -42,6 +43,8 @@ export class MyApp {
       { title: 'Home', component: HomePage, icon:'home'  },
       { title: 'News Feeds', component: NewsfeedPage, icon:'md-paper'  },
       { title: 'Farms Farum', component: FarmForumPage,icon:'ios-people' },
+      { title: 'Add Farm', component: AddFarmPage,icon:'ios-add' },
+
       { title: 'Logout', component: null , icon:'md-log-out' },
      
     
@@ -50,6 +53,7 @@ export class MyApp {
       homePage: HomePage,
       newsfeedPage: NewsfeedPage,
       farmForumPage: FarmForumPage,
+      addFarmPage:AddFarmPage,
       logout: null
   
     }
