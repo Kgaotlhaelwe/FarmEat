@@ -414,10 +414,14 @@ console.log('in');
 }
 
 signout(){
-  firebase.auth().signOut().then(function() {
-  }).catch(function(error) {
+  return new Promise((resolve, reject)=>{ 
+    firebase.auth().signOut().then(function() {
+    }).catch(function(error) {
+  
+    });
+    resolve()
+  })
 
-  });
 }
 forgetPassword(email){
 

@@ -203,7 +203,7 @@ export class HomePage {
 
 
    searchFarm.addListener('click' , ()=>{
-     alert('kb')
+     
    })
   
 
@@ -255,7 +255,7 @@ console.log(this.nearbyArray[index].crops);
   
     
    abmarker.addListener('click' , ()=>{
-     alert(this.nearbyArray[index ].name)
+    
     // var lat = this.nearbyArray[index].lat
     // var lon = this.nearbyArray[index].lng
      var name =this.nearbyArray[index].name ;

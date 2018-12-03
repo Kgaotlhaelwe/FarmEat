@@ -71,7 +71,7 @@
         </ion-list>
         <ion-list *ngSwitchCase="'puppies'">
             <div class="contact-box">
-                <div class="adress">
+                <div class="adress" (click)="navigate()" >
                     <ion-icon name="md-pin" ></ion-icon>
                     <h6>{{address}}</h6>
                 </div>

@@ -10,14 +10,14 @@ import { NewsfeedPage } from '../pages/newsfeed/newsfeed';
 import { FarmForumPage } from '../pages/farm-forum/farm-forum'
 import { LoginPage } from '../pages/login/login';
 import { DescriptionPage } from '../pages/description/description';
-
+declare var firebase
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
-  rootPage: any = LoginPage;
+  pages2:any
+  rootPage: any 
 
   pages: Array<{title: string, component: any,icon?:string}>;
 
@@ -46,8 +46,15 @@ export class MyApp {
      
     
     ];
-
+    this.pages2 = {
+      homePage: HomePage,
+      newsfeedPage: NewsfeedPage,
+      farmForumPage: FarmForumPage,
+      logout: null
+  
+    }
   }
+ 
   
   initializeApp() {
     this.platform.ready().then(() => {
@@ -62,5 +69,17 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+    if(page.component){
+      this.nav.setRoot(page.component);
+    }else if(page.component == null){
+      firebase.auth().signOut()
+      this.nav.setRoot(LoginPage);
+    }
+  }
+  signOut(){
+    this.farmEatDb.signout().then(()=>{
+      this.nav.setRoot(LoginPage);
+    })
+    
   }
 }

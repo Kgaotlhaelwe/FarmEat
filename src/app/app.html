@@ -8,7 +8,7 @@
 
   <ion-content >
     
-    <ion-list  no-lines  padding >
+    <!-- <ion-list  no-lines  padding >
       <button class="color" menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
         <ion-icon class="color"  text-center item-start [name]="p.icon"></ion-icon>
@@ -16,7 +16,30 @@
     </ion-list>
   </ion-content>
 
-</ion-menu>
+</ion-menu> -->
+<div class="flex" text-center padding>
+  <h1>Menu</h1>
+<button class="options"  menuClose ion-item no-line icon-left (click)="nav.setRoot(pages2.homePage)">
+  <ion-icon color="dark-green" class="icons" name="home"></ion-icon>
+  Home
+</button>
+<button class="options"  menuClose ion-item icon-left no-line (click)="nav.setRoot(pages2.newsfeedPage)">
+  <ion-icon color="dark-green" class="icons" ios="ios-paper" md="md-paper"></ion-icon>
+  News Feed
+</button>
+<!-- <button class="options"  menuClose ion-item icon-left no-line (click)="nav.setRoot(pages2.farmForumPage)">
+  <ion-icon color="dark-green" class="icons" name="ios-people"></ion-icon>
+  Farm Forum
+</button> -->
+<button class="options"  menuClose ion-item no-line icon-left (click)="signOut()">
+    <ion-icon color="dark-green" class="icons" ios="ios-power" md="md-power"></ion-icon>
+    Logout
+</button>
+</div>
+
+</ion-content>
+</ion-menu> 
+
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
