@@ -4,7 +4,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <!-- <ion-title>Home</ion-title> -->
-    <ion-input placeholder="Location" [(ngModel)]="newAddress"></ion-input>
+    
     <ion-buttons end>
         <button ion-button icon-only (click)="search()">
             <ion-icon ios="ios-search" md="md-search" ></ion-icon>
@@ -14,7 +14,6 @@
 </ion-header>
 
 <ion-content>
-
   <div #map id="map"></div>
 
     <ion-slides class="slides" (ionSlideDidChange)="slideChanged()" direction="" effect="" slidesPerView="2" centeredSlides="true" >
