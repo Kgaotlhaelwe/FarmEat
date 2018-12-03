@@ -1,6 +1,6 @@
 
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, GESTURE_GO_BACK_SWIPE } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import {FarmEatProvider} from '../../providers/farm-eat/farm-eat'
 import { DescriptionPage } from '../description/description';
@@ -24,12 +24,17 @@ export class HomePage {
 
   searchArea = this.navParams.get("searchArea");
 
-  trackSearch =searchArray ;
+  trackSearch = [] ;
   nearbySeachFarmArray = [] ;
   @ViewChild(Slides) slides: Slides;
 
   icon ;
   
+  newAddress;
+  desLatLng;
+  newLat;
+  newLng;
+
 
 
   constructor(public navCtrl: NavController,  public navParams: NavParams, private geo: Geolocation, private farmEatDb:FarmEatProvider,public alertCtrl: AlertController) {
@@ -42,262 +47,75 @@ export class HomePage {
  
  ionViewDidEnter() {
  
- if(this.trackSearch.length == 0){
-      this.farmEatDb.getCurrentLocation().then((radius:any)=>{
-        console.log(radius);
-        
-        this.farmEatDb.getallFarms().then((data:any)=>{
-          console.log(data);
-          console.log(radius);
-          
-          
-          this.farmEatDb.getNearByOrganizations(radius ,data).then((data:any)=>{
-          console.log(data);
-  
-          this.nearbyArray =data ;
-          console.log(this.nearbyArray);
-          
-  
-           })
-      
-       })
-        
-      })
-    }else if(this.trackSearch.length ==1){
-     
-      
-      this.farmEatDb.getSearchbyFarms(this.searchArea.lat,this.searchArea.lng).then((radius:any)=>{
-        console.log(radius);
-
-        this.farmEatDb.getallFarms().then((data:any)=>{
-          console.log(data);
-
-          
-
-          this.farmEatDb.getSearchedFarm(this.searchArea.lat,this.searchArea.lng,radius ,data).then((data:any)=>{
-            console.log(data);
-
-            this.nearbySeachFarmArray =data ;
-            console.log(this.nearbySeachFarmArray);
-
-
-            if(this.nearbySeachFarmArray.length == 0){
-              const alert = this.alertCtrl.create({
-                title: 'Confirmation',
-                subTitle: 'Currently we dont have Farms around your Area',
-                buttons: ['OK']
-              });
-              alert.present();
-
-             
-            }else{
-
-        
-            
-          }
-
-
-
-             })
-
-
-
-        })
-        
-      })
-    
-        
-      
-      
-
+  if(this.trackSearch.length == 0){
+    console.log("firstload");
     
 
+    this.getCurrentLocation()
+  }else{
 
-    }
-
+    this.search() ;
+  }
    
 
-     setTimeout(()=>{
-     this.loadMap();
+}
+ loadMap(lat , lng){
 
+  if(this.trackSearch.length == 0){
 
-     }, 2000)
-    
-    
-    
-
-
-  
-  
-  
- }
- loadMap(){
-  
-  this.geo.getCurrentPosition().then((position) => {
-   console.log(position)
-   this.lat = position.coords.latitude;
-   this.lon = position.coords.longitude; 
-    //map options
     const options = {
-    center: {lat: this.lat, lng: this.lon},
-    zoom: 10,
-    
-    //streetViewControl: false,
-    //mapTypeId: 'satellite'
-   }
+      center: {lat: this.lat, lng: this.lon},
+      zoom: 10,
   
-   this.map = new google.maps.Map(this.mapRef.nativeElement, options);
-  
-   if(this.trackSearch.length == 0){
-  
-   
-  // var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/'
-   let marker = new google.maps.Marker({
-    map: this.map,
-    zoom: 10,
-    //icon: iconBase + 'info-i_maps.png',
-   //animation: google.maps.Animation.DROP,
-
-   
-   
-    animation: google.maps.Animation.BOUNCE,
-       icon: {
-         url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"},
-         position: this.map.getCenter()
-   });
-   
-   
-  }else if(this.trackSearch.length ==1){
-   console.log("second if statata");
-   
-
-    let a = this.searchArea.lat ; 
-   let b = this.searchArea.lng
-  
-   
-   
-   
-   let marker = new google.maps.Marker({
-    map: this.map,
-    zoom: 8 ,
-    // animation: google.maps.Animation.DROP,
-    position: this.map.setCenter({lat: parseFloat(a),lng:parseFloat(b)})
-   });
-
-
-
-
-   for (let index = 0; index < this.nearbySeachFarmArray.length; index++) {
-  
-        
- 
-  let searchFarm = new google.maps.Marker({
-      map: this.map,
-      //icon:"../../assets/imgs/498229.svg" ,
-     
-     //animation: google.maps.Animation.DROP,
-     position: {lat: parseFloat(this.nearbySeachFarmArray[index].lat),lng:parseFloat(this.nearbySeachFarmArray[index].lng)} ,
-     label:name ,
-     zoom:8
-   });
-
-
-   searchFarm.addListener('click' , ()=>{
-     
-   })
-  
-
-
-  }  
-   
-
-
-   
-   
-  }
-  
-  
-   
-   for (let index = 0; index < this.nearbyArray.length; index++) {
-    console.log(this.nearbyArray);
-console.log('out');
-console.log(this.nearbyArray[index].aquatic);
-console.log(this.nearbyArray[index].beeKeeping);
-console.log(this.nearbyArray[index].crops);
-
-
-    if(this.nearbyArray[index].aquatic == "true"){
-      this.icon = '../../assets/imgs/icons8_Prawn_96px_2.png' ;
-      console.log('inaqautic');
+      styles: [
+        {
+          "featureType": "administrative.land_parcel",
+          "elementType": "labels",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "road",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "road.local",
+          "elementType": "labels",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        }
+       ]
       
-      console.log(this.nearbyArray[index].aquatic);
-    }else if(this.nearbyArray[index].beeKeeping == "true"){
-      this.icon="../../assets/imgs/icons8_Bee_100px.png";
-      console.log('inbeekeeping');
-
-    }else if (this.nearbyArray[index].crops == "true"){
-      this.icon ="../../assets/imgs/icons8_Compost_Heap_96px_1.png" ;
-      console.log('incrop');
-
-    }
-    
-  // console.log(lat +" "+lng);
-   var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/'
-    let abmarker = new google.maps.Marker({
-     map: this.map,
-    //icon: iconBase,
-    
-    //animation: google.maps.Animation.DROP,
-    position: {lat: parseFloat(this.nearbyArray[index].lat),lng:parseFloat(this.nearbyArray[index].lng)},
-    label:name ,
-    zoom:8
-   });
-  
-    
-   abmarker.addListener('click' , ()=>{
-    
-    // var lat = this.nearbyArray[index].lat
-    // var lon = this.nearbyArray[index].lng
-     var name =this.nearbyArray[index].name ;
-     var description = this.nearbyArray[index].description ;
-     var tel =this.nearbyArray[index].tel ;
-     var email =this.nearbyArray[index].email ;
-     var address = this.nearbyArray[index].address;
-     var facebook = this.nearbyArray[index].facebook;
-     var beeKeeping = this.nearbyArray[index].beeKeeping;
-     var liveStock = this.nearbyArray[index].liveStock;
-     var website = this.nearbyArray[index].website;
-     var aquatic = this.nearbyArray[index].aquatic;
-     var crops = this.nearbyArray[index].crops;
-     var image = this.nearbyArray[index].image; 
-     console.log(name);
-     let obj = {
-     // name:this.nearbyArray[index ].name ,
-     // description:this.nearbyArray[index].description,
-     name: name,
-     description: description,
-     tel: tel,
-     email: email,
-     address: address,
-     facebook: facebook,
-     beeKeeping: beeKeeping,
-     liveStock: liveStock,
-     website: website,
-     aquatic: aquatic,
-     crops: crops,
-     image: image
+      //streetViewControl: false,
+      //mapTypeId: 'satellite'
      }
-     this.navCtrl.push(DescriptionPage, {description:obj})
-     })
     
-  }
-    
- 
- 
-})
+     this.map = new google.maps.Map(this.mapRef.nativeElement, options);
+
+     console.log(options);
+     
+    }
 
 
-
+    let marker = new google.maps.Marker({
+      map: this.map,
+      zoom: 10,
+      
+      animation: google.maps.Animation.BOUNCE,
+         icon: {
+           url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"},
+           position: this.map.getCenter()
+     });
 }
  
 
@@ -331,15 +149,50 @@ slideChanged(){
 
 
 
+getCurrentLocation(){
 
+  this.geo.getCurrentPosition().then((position) => {
+    console.log(position)
+    this.lat = position.coords.latitude;
+    this.lon = position.coords.longitude;
+
+    this.loadMap( this.lat, this.lon)
+
+})
+
+}
 
 search(){
- this.navCtrl.push(SearchPage)
+
+    
+  new Promise((accpt,rej) =>{
+    const geocoder = new google.maps.Geocoder;
+  
+    geocoder.geocode({'address': this.newAddress}, (results, status)=> {
+         if (status === 'OK') {
+          this.desLatLng = results[0].geometry.location;
+         
+          this.newLat = results[0].geometry.location.lat();
+          this.newLng = results[0].geometry.location.lng();
+           
+       } else {
+           alert('Geocode was not successful for the following reason: ' + status);
+          }
+          
+       });
+})
+this.trackSearch[0] = 1 ;
+
+this.loadMap( this.newLat,   this.newLng)
+
+
 }
 
 
-
 }
 
 
+var searchedArray = new Array()
+
+export  default searchArray ; 
 
