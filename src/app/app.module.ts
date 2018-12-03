@@ -22,6 +22,7 @@ import { SearchPage } from '../pages/search/search';
 import { NewsfeedPage } from '../pages/newsfeed/newsfeed';
 import { FarmForumPage } from '../pages/farm-forum/farm-forum'
 import { LoginPage } from '../pages/login/login';
+import { AddFarmPage } from '../pages/add-farm/add-farm';
 
 
 @NgModule({
@@ -34,8 +35,9 @@ import { LoginPage } from '../pages/login/login';
     DescriptionPage,
     SearchPage,
     NewsfeedPage,
-    LoginPage
-   
+    LoginPage,
+    FarmForumPage,
+    AddFarmPage
     
   ],
   imports: [
@@ -52,7 +54,8 @@ import { LoginPage } from '../pages/login/login';
     SearchPage,
     NewsfeedPage,
     FarmForumPage,
-    LoginPage
+    LoginPage,
+    AddFarmPage
    
    
   ],

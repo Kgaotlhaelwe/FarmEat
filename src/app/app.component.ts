@@ -10,6 +10,7 @@ import { NewsfeedPage } from '../pages/newsfeed/newsfeed';
 import { FarmForumPage } from '../pages/farm-forum/farm-forum'
 import { LoginPage } from '../pages/login/login';
 import { DescriptionPage } from '../pages/description/description';
+import { AddFarmPage } from '../pages/add-farm/add-farm';
 
 @Component({
   templateUrl: 'app.html'
@@ -42,8 +43,8 @@ export class MyApp {
       { title: 'Home', component: HomePage },
       { title: 'List', component: ListPage },
       { title: 'News Feeds', component: NewsfeedPage },
-      { title: 'Farms Farum', component: FarmForumPage }
-      { title: 'News Feeds', component: NewsfeedPage }
+      { title: 'Farms Farum', component: FarmForumPage },
+      { title: 'Add A Farm', component: AddFarmPage },
     ];
 
   }
