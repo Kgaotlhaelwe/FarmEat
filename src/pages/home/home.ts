@@ -272,11 +272,34 @@ export class HomePage {
 
       position: this.map.setCenter({ lat: parseFloat(currentLat), lng: parseFloat(currentLon) }),
       animation: google.maps.Animation.DROP,
-      label: name,
+      label: 'kabelo',
       zoom: 20,
     })
 
     console.log(currentLat);
+
+  }
+
+
+  moreinfo(name , image ,type , email , description, tel, address,  facebook,  beeKeeping, liveStock, website, aquatic,  crops){
+
+    let obj = {
+      // name:this.nearbyArray[index ].name ,
+      // description:this.nearbyArray[index].description,
+      name: name,
+      description: description,
+      tel: tel,
+      email: email,
+      address: address,
+     facebook: facebook,
+      beeKeeping: beeKeeping,
+      liveStock: liveStock,
+      website: website,
+      aquatic: aquatic,
+      crops: crops,
+      image: image
+    }
+    this.navCtrl.push(DescriptionPage, { description: obj })
 
   }
   search() {

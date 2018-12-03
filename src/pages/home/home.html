@@ -6,7 +6,7 @@
 
   
     <!-- <ion-title>Home</ion-title> -->
-    <ion-input placeholder="Location" [(ngModel)]="newAddress"></ion-input>
+  
     <ion-buttons end>
         <button ion-button icon-only (click)="search()">
             <ion-icon ios="ios-search" md="md-search" ></ion-icon>
@@ -21,7 +21,7 @@
 <!-- <div class="slides"> -->
     <ion-slides class="slides" (ionSlideDidChange)="slideChanged()" direction="" effect="" slidesPerView="2" centeredSlides="true" >
        <ion-slide *ngFor="let a of nearbyArray " >
-         <ion-card class="card">
+         <ion-card class="card"  (click)="moreinfo(a.name, a.image, a.type , a.email , a.description, a. tel,  a.address ,  a.facebook,a. beeKeeping, a.liveStock,  a.website,a. crops, a. aquatic)">
 
               <ion-item color="dark-green">
           
