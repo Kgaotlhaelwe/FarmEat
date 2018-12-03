@@ -13,26 +13,31 @@
 </ion-header>
 
 
-<ion-content >
+<ion-content class="content" >
   <div class="flex" *ngFor="let  a of  newsFeedArray">
-      <!-- <ion-avatar class="flexav">
-          <img src="../../assets/kreiter_littleleaf3_biz.jpg">
-        </ion-avatar> -->
+    
         <ion-card >
-
-        <!-- <ion-item>
+            <ion-avatar class="flexav">
+                <img src="{{a.image}}">
+              </ion-avatar>
         
-          <h2>Marty McFly</h2>
-          <p>November 5, 1955</p>
-        </ion-item> -->
-       
+            <ion-card-header>
+                <h2>{{a.message}}</h2>
+               </ion-card-header>
+               <ion-card-content text-wrap >
+                  <p>{{a.title}}</p>
+                </ion-card-content> 
+          <!-- <h2>{{a.message}}</h2> 
+           <p>{{a.title}}</p> -->
+        
+<!--        
         <img src="{{a.image}}">
         <ion-card-header>
-           <h3>{{a.title}}</h3>
+           <h2>{{a.message}}</h2>
           </ion-card-header>
         <ion-card-content >
-          <p>{{a.message}}</p>
-        </ion-card-content>
+          <p>{{a.title}}</p>
+        </ion-card-content> -->
       
        
       

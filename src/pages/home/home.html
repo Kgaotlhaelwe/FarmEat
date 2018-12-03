@@ -4,18 +4,38 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <!-- <ion-title>Home</ion-title> -->
+    
     <ion-buttons end>
         <button ion-button icon-only (click)="search()">
-            <ion-icon ios="ios-search" md="md-search"></ion-icon>
+            <ion-icon ios="ios-search" md="md-search" ></ion-icon>
         </button>
       </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="map">
-      <div #map id="map"></div>
-  </div>
+  <div #map id="map"></div>
 
-  
+    <ion-slides class="slides" (ionSlideDidChange)="slideChanged()" direction="" effect="" slidesPerView="2" centeredSlides="true" >
+       <ion-slide *ngFor="let a of nearbyArray " >
+         <ion-card class="card">
+
+              <ion-item color="dark-green">
+          
+                <h2>{{a.name}}</h2>
+                <!-- <p>{{a.type}}</p> -->
+              </ion-item>
+            
+              <img src="{{a.image}}" class="imgs">
+              
+
+              <ion-card-content color="dark-green">
+                  <p>{{a.type}}</p>
+              </ion-card-content>
+            </ion-card> 
+         
+        </ion-slide> 
+      </ion-slides>
+
+
 </ion-content>

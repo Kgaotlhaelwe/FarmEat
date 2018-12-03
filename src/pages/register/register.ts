@@ -40,14 +40,23 @@ export class RegisterPage {
     this.farmEatDb.register(user.email ,user.password, user.username ).then(()=>{
    
      
-      const alert = this.alertCtrl.create({
-        subTitle: 'You have successfully registered',
-        buttons: ['OK']
-      });
-      alert.present();
+    //   const alert = this.alertCtrl.create({
+    //     subTitle: 'You have successfully registered',
+    //     buttons: ['OK']
+    //   });
+    //   alert.present();
      
-      this.navCtrl.setRoot(HomePage)
-    } , (error)=>{
+    //   this.navCtrl.setRoot(HomePage)
+    // } 
+    const loader = this.loadingCtrl.create({
+      content: "Logging in please wait...",
+      duration: 3000
+    });
+    this.navCtrl.setRoot(HomePage)
+    loader.present();
+  
+  
+  }, (error)=>{
  
  
       const alert = this.alertCtrl.create({

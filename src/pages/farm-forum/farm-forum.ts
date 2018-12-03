@@ -73,7 +73,7 @@ export class FarmForumPage {
           return (item.toLowerCase().indexOf(this.inputquest.toLowerCase()) > -1);
            
         })
-        console.log(this.ques);
+       // console.log(this.ques);
     }
   }
 

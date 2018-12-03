@@ -303,15 +303,13 @@ getSearchbyFarms(lat , lng){
         for (var x = 0; x < org.length; x++){
           var orglat = new String(org[x].lat).substr(0,6);
           var orgLong =  new String(org[x].lng).substr(0,5);
-        
-
-          // console.log(lat);
-          // console.log(long);
-          // console.log(orgLong);
-          // console.log(radius.left);
-          // console.log(radius.right);
-          // console.log(radius.down);
-          // console.log( radius.up);
+          console.log('out');
+          console.log(orglat);
+          console.log(orgLong);
+          console.log( radius.left);
+          console.log(radius.right);
+          console.log(radius.down);
+          console.log(radius.up);
           
           
           if ((orgLong  <= long  && orgLong  >= radius.left || orgLong  >= long  && orgLong  <= radius.right) && (orglat >= lat && orglat <= radius.down || orglat <= lat && orglat >= radius.up)){
@@ -416,10 +414,14 @@ console.log('in');
 }
 
 signout(){
-  firebase.auth().signOut().then(function() {
-  }).catch(function(error) {
+  return new Promise((resolve, reject)=>{ 
+    firebase.auth().signOut().then(function() {
+    }).catch(function(error) {
+  
+    });
+    resolve()
+  })
 
-  });
 }
 forgetPassword(email){
 
