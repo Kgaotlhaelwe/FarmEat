@@ -160,7 +160,7 @@ export class HomePage {
 
    
    
-    animation: google.maps.Animation.BOUNCE,
+    animation: google.maps.Animation.DROP,
        icon: {
          url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"},
          position: this.map.getCenter()
