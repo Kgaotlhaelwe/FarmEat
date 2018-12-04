@@ -268,4 +268,5 @@ slideChanged(){
 search(){
  this.navCtrl.push(SearchPage)
 }
+
 }
