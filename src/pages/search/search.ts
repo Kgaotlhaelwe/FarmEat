@@ -43,7 +43,7 @@ export class SearchPage {
   constructor(public platform: Platform,public navCtrl: NavController, public navParams: NavParams,private keyboard: Keyboard) {
     this.platform.ready().then(() => {
 
-      this.keyboard.show();
+     
     })
     
     console.log(this.keyboard.show());
@@ -52,6 +52,8 @@ export class SearchPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SearchPage');
+
+    this.keyboard.show();
   }
 
    search(address){

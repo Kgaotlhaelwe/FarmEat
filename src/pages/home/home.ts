@@ -8,6 +8,10 @@ import { SearchPage } from '../search/search';
 import searchArray from '../search/search'
 import { AlertController } from 'ionic-angular';
 import { Slides } from 'ionic-angular';
+import { Keyboard } from '@ionic-native/keyboard';
+
+import { LoadingController } from 'ionic-angular';
+
 declare var google: any;
 @Component({
  selector: 'page-home',
@@ -26,12 +30,14 @@ export class HomePage {
  icon ;
  abmarker;
  slideArr:any = []
- constructor(public navCtrl: NavController, public navParams: NavParams, private geo: Geolocation, private farmEatDb:FarmEatProvider,public alertCtrl: AlertController) {
- 
+ constructor(public navCtrl: NavController, public navParams: NavParams, private geo: Geolocation, private farmEatDb:FarmEatProvider,public alertCtrl: AlertController,private keyboard: Keyboard, public loadingCtrl: LoadingController) {
+  
  }
  
  
  ionViewDidEnter() {
+
+ this.map = null ;
  
  if(this.trackSearch.length == 0){
    this.farmEatDb.getCurrentLocation().then((radius:any)=>{
@@ -100,6 +106,13 @@ export class HomePage {
  
  }
  loadMap(){
+
+
+  let loading = this.loadingCtrl.create({
+    content: 'Please wait...'
+  });
+
+
  
  this.geo.getCurrentPosition().then((position) => {
   console.log(position)
@@ -165,6 +178,8 @@ export class HomePage {
   searchFarm.addListener('click' , ()=>{
    
   })
+
+  loading.dismiss();
  
  } 
   
@@ -175,11 +190,7 @@ export class HomePage {
  
   
   for (let index = 0; index < this.nearbyArray.length; index++) {
-  console.log(this.nearbyArray);
-console.log('out');
-console.log(this.nearbyArray[index].aquatic);
-console.log(this.nearbyArray[index].beeKeeping);
-console.log(this.nearbyArray[index].crops);
+   
   if(this.nearbyArray[index].aquatic == "true"){
    this.icon = '../../assets/imgs/icons8_Prawn_96px_2.png' ;
    console.log('inaqautic');
@@ -300,5 +311,30 @@ slideChanged(){
 }
 search(){
  this.navCtrl.push(SearchPage)
+ this.keyboard.show();
+}
+
+
+moreinfo(name , image , type ,email , description, tel ,address , facebook ,beeKeeping,liveStock, website , crop, aquatic){
+
+  let obj = {
+    name:name ,
+    image:image ,
+    type:type ,
+    email:email ,
+    description:description ,
+    tel:tel  ,
+    address :address ,
+    facebook:facebook ,
+    beeKeeping:beeKeeping ,
+    liveStock:liveStock ,
+    website:website ,
+    crop:crop ,
+    aquatic:aquatic
+
+  }
+
+  this.navCtrl.push(DescriptionPage, { description:obj})
+
 }
 }
