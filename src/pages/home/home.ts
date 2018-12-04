@@ -23,7 +23,8 @@ export class HomePage {
   nearbySeachFarmArray = [] ;
   @ViewChild(Slides) slides: Slides;
   icon ;
-  
+  abmarker;
+  slideArr:any = []
   constructor(public navCtrl: NavController,  public navParams: NavParams, private geo: Geolocation, private farmEatDb:FarmEatProvider,public alertCtrl: AlertController) {
  
   }
@@ -193,18 +194,22 @@ console.log(this.nearbyArray[index].crops);
     
   // console.log(lat +" "+lng);
    var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/'
-    let abmarker = new google.maps.Marker({
+    this.abmarker = new google.maps.Marker({
      map: this.map,
     //icon: iconBase,
     
     //animation: google.maps.Animation.DROP,
     position: {lat: parseFloat(this.nearbyArray[index].lat),lng:parseFloat(this.nearbyArray[index].lng)},
     label:name ,
-    zoom:8
+    zoom:8,
+ 
    });
-  
+
+   this.slideArr.push(this.abmarker)
+   console.log(this.slideArr);
+   
     
-   abmarker.addListener('click' , ()=>{
+   this.abmarker.addListener('click' , ()=>{
     
     // var lat = this.nearbyArray[index].lat
     // var lon = this.nearbyArray[index].lng
@@ -246,21 +251,48 @@ console.log(this.nearbyArray[index].crops);
  
 })
 }
+
  
 slideChanged(){
   let currentIndex = this.slides.getActiveIndex();
   let currentLat = this.nearbyArray[currentIndex].lat
   let currentLon = this.nearbyArray[currentIndex].lng
-  let marker = new google.maps.Marker({
-   // map: this.map,
-   //icon: iconBase + 'farm_maps.png',
+  console.log(this.slideArr[currentIndex].getAnimation());
+  
+
+  if (this.slideArr[currentIndex].getAnimation() != null) {
+    console.log("has Anime");
+    this.slideArr[currentIndex].setAnimation(null);
+  } else {
+
+    let marker = new google.maps.Marker({
+      // map: this.map,
+      //icon: iconBase + 'farm_maps.png',
+       
+      
+       position:  this.map.setCenter({lat: parseFloat( currentLat),lng:parseFloat( currentLon)}),
+       animation: this.slideArr[currentIndex].setAnimation(google.maps.Animation.BOUNCE),
+       label:name ,
+       zoom:20 ,
+     })
+    setTimeout(()=>{
+      
+       this.slideArr[currentIndex].setAnimation(null);
+      
+    }, 2000)
+    
+  }
+  
+  // let marker = new google.maps.Marker({
+  //  // map: this.map,
+  //  //icon: iconBase + 'farm_maps.png',
     
    
-    position:  this.map.setCenter({lat: parseFloat( currentLat),lng:parseFloat( currentLon)}),
-    animation: google.maps.Animation.DROP,
-    label:name ,
-    zoom:20 ,
-  })
+  //   position:  this.map.setCenter({lat: parseFloat( currentLat),lng:parseFloat( currentLon)}),
+  //   animation: this.slideArr[currentIndex].setAnimation(google.maps.Animation.BOUNCE),
+  //   label:name ,
+  //   zoom:20 ,
+  // })
  
   console.log(currentLat);
   
