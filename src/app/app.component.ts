@@ -53,7 +53,7 @@ export class MyApp {
       homePage: HomePage,
       newsfeedPage: NewsfeedPage,
       farmForumPage: FarmForumPage,
-      addFarmPage:AddFarmPage,
+      addFarm:AddFarmPage,
       logout: null
   
     }
