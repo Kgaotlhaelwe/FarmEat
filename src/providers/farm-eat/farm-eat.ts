@@ -55,7 +55,7 @@ export class FarmEatProvider {
 var downlat = new String(latitude); 
 var latIndex = downlat.indexOf( "." ); 
 var down = parseInt(downlat.substr(latIndex + 1,2)) + 6;
-var down = parseInt(downlat.substr(latIndex + 1,2)) + 12;
+var down = parseInt(downlat.substr(latIndex + 1,2)) + 120;
 if (down >= 100){
   if (downlat.substr(0,1) == "-"){
     var firstDigits = parseInt(downlat.substr(0,3)) + 1;

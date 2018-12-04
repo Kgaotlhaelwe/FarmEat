@@ -202,7 +202,7 @@ console.log(this.nearbyArray[index].crops);
     position: {lat: parseFloat(this.nearbyArray[index].lat),lng:parseFloat(this.nearbyArray[index].lng)},
     label:name ,
     zoom:8,
-    id: this.nearbyArray[index].name
+ 
    });
 
    this.slideArr.push(this.abmarker)
@@ -245,7 +245,6 @@ console.log(this.nearbyArray[index].crops);
      this.navCtrl.push(DescriptionPage, {description:obj})
      })
     
-     this.abmarker.addListener('click', this.toggleBounce)
   }
     
  
@@ -278,7 +277,7 @@ slideChanged(){
      })
     setTimeout(()=>{
       
-      this.slideArr[currentIndex].setAnimation(null);
+       this.slideArr[currentIndex].setAnimation(null);
       
     }, 2000)
     
