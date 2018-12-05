@@ -41,6 +41,8 @@ export class AddFarmPage {
 
   insertImage(event: any){
     this.url = event.target.files[0];
+    console.log(this.url);
+    
   }
 
   addFarm(){
