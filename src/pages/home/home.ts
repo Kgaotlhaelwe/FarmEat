@@ -147,34 +147,202 @@ export class HomePage {
         center: { lat: this.lat, lng: this.lon },
         zoom: 10,
         disableDefaultUI: true,
-        styles: [
-          {
-            "featureType": "administrative.land_parcel",
-            "elementType": "labels",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          },
-          {
-            "featureType": "road",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          },
-          {
-            "featureType": "road.local",
-            "elementType": "labels",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          }
-        ]
+        styles: 
+          [
+            {
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#f5f5f5"
+                }
+              ]
+            },
+            {
+              "elementType": "labels.icon",
+              "stylers": [
+                {
+                  "visibility": "off"
+                }
+              ]
+            },
+            {
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#616161"
+                }
+              ]
+            },
+            {
+              "elementType": "labels.text.stroke",
+              "stylers": [
+                {
+                  "color": "#f5f5f5"
+                }
+              ]
+            },
+            {
+              "featureType": "administrative.land_parcel",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#bdbdbd"
+                }
+              ]
+            },
+            {
+              "featureType": "landscape",
+              "stylers": [
+                {
+                  "color": "#ffffff"
+                }
+              ]
+            },
+            {
+              "featureType": "landscape.man_made",
+              "elementType": "labels.text",
+              "stylers": [
+                {
+                  "saturation": -5
+                }
+              ]
+            },
+            {
+              "featureType": "poi",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#eeeeee"
+                }
+              ]
+            },
+            {
+              "featureType": "poi",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#757575"
+                }
+              ]
+            },
+            {
+              "featureType": "poi.park",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#e5e5e5"
+                }
+              ]
+            },
+            {
+              "featureType": "poi.park",
+              "elementType": "geometry.fill",
+              "stylers": [
+                {
+                  "color": "#73d22d"
+                }
+              ]
+            },
+            {
+              "featureType": "poi.park",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#9e9e9e"
+                }
+              ]
+            },
+            {
+              "featureType": "poi.sports_complex",
+              "elementType": "geometry.fill",
+              "stylers": [
+                {
+                  "color": "#d19c2e"
+                }
+              ]
+            },
+            {
+              "featureType": "road",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#ffffff"
+                }
+              ]
+            },
+            {
+              "featureType": "road.arterial",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#757575"
+                }
+              ]
+            },
+            {
+              "featureType": "road.highway",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#dadada"
+                }
+              ]
+            },
+            {
+              "featureType": "road.highway",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#616161"
+                }
+              ]
+            },
+            {
+              "featureType": "road.local",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#9e9e9e"
+                }
+              ]
+            },
+            {
+              "featureType": "transit.line",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#e5e5e5"
+                }
+              ]
+            },
+            {
+              "featureType": "transit.station",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#eeeeee"
+                }
+              ]
+            },
+            {
+              "featureType": "water",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#c9c9c9"
+                }
+              ]
+            },
+            {
+              "featureType": "water",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#9e9e9e"
+                }
+              ]
+            }
+          ]
         //streetViewControl: false,
         //mapTypeId: 'satellite'
       }
@@ -414,46 +582,56 @@ export class HomePage {
   }
   ionViewWillLeave() {
 
-    let options: NativeTransitionOptions = {
-       direction: 'up',
-       duration: 500,
-       slowdownfactor: 3,
-       slidePixels: 20,
-       iosdelay: 100,
-       androiddelay: 150,
-       fixedPixelsTop: 0,
-       fixedPixelsBottom: 60
-      };
+    // let options: NativeTransitionOptions = {
+    //    direction: 'up',
+    //    duration: 500,
+    //    slowdownfactor: 3,
+    //    slidePixels: 20,
+    //    iosdelay: 100,
+    //    androiddelay: 150,
+    //    fixedPixelsTop: 0,
+    //    fixedPixelsBottom: 60
+    //   };
    
-    this.nativePageTransitions.slide(options)
+    // this.nativePageTransitions.slide(options)
       
    
    }
 
-  moreinfo(name,image,type ,email ,description,tel,address ,facebook,beeKeeping,liveStock,website,crops, aquatic){
+  moreinfo(i){
+console.log(i);
 
-    let obj = {
-      name:name ,
-      image:image , 
-      email :email ,
-      description:description  ,
-      tel:tel ,
-      address:address ,
-      facebook:facebook ,
-      beeKeeping:beeKeeping ,
-      liveStock:liveStock ,
-      website:website ,
-      crops:crops ,
-      aquatic:aquatic
-    }
+var info = this.nearbyArray[i]
+console.log(info);
+
+    // let obj = {
+    //   name:name ,
+    //   image:image , 
+    //   email :email ,
+    //   description:description  ,
+    //   tel:tel ,
+    //   address:address ,
+    //   facebook:facebook ,
+    //   beeKeeping:beeKeeping ,
+    //   liveStock:liveStock ,
+    //   website:website ,
+    //   crops:crops ,
+    //   aquatic:aquatic
+    // }
     let options: NativeTransitionOptions = {
       direction: 'up',
-      duration: 600
+      duration: 600,
+         slowdownfactor: 3,
+         slidePixels: 20,
+         iosdelay: 100,
+         androiddelay: 250,
+         fixedPixelsTop: 0,
+         fixedPixelsBottom: 60
      };
  
-    this.nativePageTransitions.flip(options);
+    this.nativePageTransitions.fade(options);
 
-    this.navCtrl.push(DescriptionPage , { description:obj})
+    this.navCtrl.push(DescriptionPage, {description: info} )
   }
  
   search() {

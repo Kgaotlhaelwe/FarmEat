@@ -49,19 +49,22 @@ page-description {
             font-display: normal;
             background-color:#087150;
             color: white;
-            font-size: 15px;
+            font-size: 20px;
+            padding-top: 15px;
+            padding-bottom: 15px;
             padding-left: 25px;
             padding-right: 15px;
             text-align: center;
-            display: grid;          
-            grid-template-columns: 1fr 1fr ;
+         
+            // display: flex;          
+            // grid-template-columns: 1fr 1fr ;
         }
-        .address-box > div{
-        }
-        .address-box > div:nthchild(odd){
-        }
+        // .address-box > div{
+        // }
+        // .address-box > div:nthchild(odd){
+        // }
         .first-column{
-            width: 170%;
+        text-align: center;
             
         }
         .fab-button{
@@ -194,6 +197,7 @@ page-description {
             h4{
                 padding-right: 5px;
                 font-size: 1em;
+                text-align: center;
             }
            
        

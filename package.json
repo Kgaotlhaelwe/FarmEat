@@ -39,7 +39,7 @@
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-dialogs": "^2.0.1",
     "cordova-plugin-geolocation": "^4.0.1",
-    "cordova-plugin-googlemaps": "2.4.6",
+    "cordova-plugin-googlemaps": "^2.4.6",
     "cordova-plugin-ionic-keyboard": "^2.1.3",
     "cordova-plugin-ionic-webview": "^2.2.5",
     "cordova-plugin-splashscreen": "^5.0.2",
@@ -51,11 +51,11 @@
     "fix": "0.0.6",
     "ionic-angular": "3.9.2",
     "ionicons": "3.0.0",
-    "mx.ferreyra.callnumber": "~0.0.2",
+    "mx.ferreyra.callnumber": "0.0.2",
     "npm": "^6.4.1",
     "rxjs": "5.5.11",
     "sw-toolbox": "3.6.0",
-    "uk.co.workingedge.phonegap.plugin.launchnavigator": "4.2.2",
+    "uk.co.workingedge.phonegap.plugin.launchnavigator": "^4.2.2",
     "zone.js": "0.8.26"
   },
   "devDependencies": {
@@ -78,13 +78,16 @@
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
       "mx.ferreyra.callnumber": {},
-      "cordova-plugin-x-socialsharing": {},
+      "cordova-plugin-x-socialsharing": {
+        "ANDROID_SUPPORT_V4_VERSION": "24.1.1+"
+      },
       "cordova-plugin-googlemaps": {
         "API_KEY_FOR_ANDROID": "AIzaSyAT55USDnQ-tZLHJlzryDJbxseD8sLSdZE&libraries",
         "PLAY_SERVICES_VERSION": "15.0.1",
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
       },
-      "com.telerik.plugins.nativepagetransitions": {}
+      "com.telerik.plugins.nativepagetransitions": {},
+      "call-number": {}
     },
     "platforms": [
       "android",

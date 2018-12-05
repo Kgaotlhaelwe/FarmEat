@@ -36,7 +36,9 @@ pet
   testarray = [{lat:23.35 ,long:34.12} , {lat:56.67, long:23.89} , {lat:78.45, long:78.6}]
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private launchNavigator: LaunchNavigator, private callNumber: CallNumber,private socialSharing: SocialSharing) {
-    this.pet="kittens";
+    this.pet="kittens";  
+    console.log(this.description);
+    
       this.name = this.description.name
       this.desc = this.description.description
       this.address = this.description.address
