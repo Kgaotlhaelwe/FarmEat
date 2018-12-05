@@ -29,7 +29,7 @@ page-home {
         
     }
     .swiper-slide.swiper-slide-active{
-        height: 45%;
+        //height: 45%;
         left: 20%;
 
     }
@@ -61,6 +61,10 @@ page-home {
     }
     ion-card-title{
         padding: 10px;
+    }
+    .flex{
+        display: flex;
+        flex-direction: row
     }
 
 

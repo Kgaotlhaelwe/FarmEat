@@ -43,7 +43,7 @@ export class MyApp {
       { title: 'Home', component: HomePage, icon:'home'  },
       { title: 'News Feeds', component: NewsfeedPage, icon:'md-paper'  },
       { title: 'Farms Farum', component: FarmForumPage,icon:'ios-people' },
-      { title: 'Add Farm', component: AddFarmPage,icon:'ios-add' },
+      // { title: 'Add Farm', component: AddFarmPage,icon:'ios-add' },
 
       { title: 'Logout', component: null , icon:'md-log-out' },
      
@@ -53,7 +53,7 @@ export class MyApp {
       homePage: HomePage,
       newsfeedPage: NewsfeedPage,
       farmForumPage: FarmForumPage,
-      addFarm:AddFarmPage,
+      // addFarm:AddFarmPage,
       logout: null
   
     }
