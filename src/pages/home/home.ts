@@ -50,6 +50,7 @@ export class HomePage {
      
      this.farmEatDb.getNearByOrganizations(radius ,data).then((data:any)=>{
      console.log(data);
+     
  
      this.nearbyArray =data ;
      console.log(this.nearbyArray);
@@ -96,6 +97,11 @@ export class HomePage {
   }
   
    setTimeout(()=>{
+
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...',
+      duration:5000
+    });
    this.loadMap();
    }, 2000)
   
@@ -108,13 +114,15 @@ export class HomePage {
  loadMap(){
 
 
+  
   let loading = this.loadingCtrl.create({
     content: 'Please wait...'
   });
 
+  loading.present();
 
- 
- this.geo.getCurrentPosition().then((position) => {
+  
+this.geo.getCurrentPosition().then((position) => {
   console.log(position)
   this.lat = position.coords.latitude;
   this.lon = position.coords.longitude; 
@@ -122,6 +130,36 @@ export class HomePage {
   const options = {
   center: {lat: this.lat, lng: this.lon},
   zoom: 10,
+
+  styles:[
+    {
+      "featureType": "administrative.land_parcel",
+      "elementType": "labels",
+      "stylers": [
+        {
+          "visibility": "off"
+        }
+      ]
+    },
+    {
+      "featureType": "road",
+      "stylers": [
+        {
+          "visibility": "off"
+        }
+      ]
+    },
+    {
+      "featureType": "road.local",
+      "elementType": "labels",
+      "stylers": [
+        {
+          "visibility": "off"
+
+                  }
+      ]
+    }
+   ]
   
   //streetViewControl: false,
   //mapTypeId: 'satellite'
@@ -179,7 +217,7 @@ export class HomePage {
    
   })
 
-  loading.dismiss();
+  //loading.dismiss();
  
  } 
   
@@ -203,28 +241,28 @@ export class HomePage {
    this.icon ="../../assets/imgs/icons8_Compost_Heap_96px_1.png" ;
    console.log('incrop');
   }
+
+  console.log(this.nearbyArray.indexOf(this.nearbyArray[index].lat));
+  console.log(this.nearbyArray.indexOf(this.nearbyArray[index].lng));
   
- // console.log(lat +" "+lng);
-  var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/'
-  this.abmarker = new google.maps.Marker({
-   map: this.map,
-  //icon: iconBase,
   
-  //animation: google.maps.Animation.DROP,
-  position: {lat: parseFloat(this.nearbyArray[index].lat),lng:parseFloat(this.nearbyArray[index].lng)},
-  label:name ,
-  zoom:8,
+  
  
-  });
 ​
   this.slideArr.push(this.abmarker)
   console.log(this.slideArr);
   
   
   this.abmarker.addListener('click' , ()=>{
+  let a  = index ;
+this.nearbyArray[index]
+  console.log(a);
   
-  // var lat = this.nearbyArray[index].lat
-  // var lon = this.nearbyArray[index].lng
+  
+  var ter =this.nearbyArray[index].name ;
+
+  console.log(ter);
+  
    var name =this.nearbyArray[index].name ;
    var description = this.nearbyArray[index].description ;
    var tel =this.nearbyArray[index].tel ;
@@ -239,8 +277,7 @@ export class HomePage {
    var image = this.nearbyArray[index].image; 
    console.log(name);
    let obj = {
-   // name:this.nearbyArray[index ].name ,
-   // description:this.nearbyArray[index].description,
+   
    name: name,
    description: description,
    tel: tel,
@@ -255,11 +292,13 @@ export class HomePage {
    image: image
    }
    this.navCtrl.push(DescriptionPage, {description:obj})
+
+
    })
   
  }
   
- 
+ loading.dismiss();
  
 })
 }
@@ -290,8 +329,9 @@ slideChanged(){
   setTimeout(()=>{
    
     this.slideArr[currentIndex].setAnimation(null);
+
    
-  }, 2000)
+  }, 1000)
   
  }
  
