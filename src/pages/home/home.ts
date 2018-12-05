@@ -128,8 +128,8 @@ export class HomePage {
     this.geo.getCurrentPosition().then((position) => {
 
       //declaring google map services
-    //  const directionsService = new google.maps.DirectionsService;
-     // const directionsDisplay = new google.maps.DirectionsRenderer;
+      // const directionsService = new google.maps.DirectionsService;
+      // const directionsDisplay = new google.maps.DirectionsRenderer;
 
 
       this.lat = position.coords.latitude;
@@ -145,6 +145,7 @@ export class HomePage {
       const options = {
         center: { lat: this.lat, lng: this.lon },
         zoom: 10,
+        disableDefaultUI: true,
         styles: [
           {
             "featureType": "administrative.land_parcel",
@@ -338,6 +339,7 @@ export class HomePage {
         directionsDisplay.setDirections(response);
         console.log("routing OK");
         directionsDisplay.setMap(this.map);
+        directionsDisplay.setOptions( { suppressMarkers: true } );
       } else {
         console.log(status);
 
