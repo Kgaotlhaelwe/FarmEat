@@ -9,6 +9,7 @@ import searchArray from '../search/search'
 import { AlertController } from 'ionic-angular';
 import { Slides } from 'ionic-angular';
 import { Keyboard } from '@ionic-native/keyboard';
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 
 import { LoadingController } from 'ionic-angular';
 
@@ -36,7 +37,7 @@ export class HomePage {
   directionsDisplay = new google.maps.DirectionsRenderer;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geo: Geolocation, private farmEatDb: FarmEatProvider, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geo: Geolocation, private farmEatDb: FarmEatProvider, public alertCtrl: AlertController, private nativePageTransitions: NativePageTransitions) {
 
   }
 
@@ -409,6 +410,50 @@ export class HomePage {
     console.log(currentLat);
 
   }
+  ionViewWillLeave() {
+
+    let options: NativeTransitionOptions = {
+       direction: 'up',
+       duration: 500,
+       slowdownfactor: 3,
+       slidePixels: 20,
+       iosdelay: 100,
+       androiddelay: 150,
+       fixedPixelsTop: 0,
+       fixedPixelsBottom: 60
+      };
+   
+    this.nativePageTransitions.slide(options)
+      
+   
+   }
+
+  moreinfo(name,image,type ,email ,description,tel,address ,facebook,beeKeeping,liveStock,website,crops, aquatic){
+
+    let obj = {
+      name:name ,
+      image:image , 
+      email :email ,
+      description:description  ,
+      tel:tel ,
+      address:address ,
+      facebook:facebook ,
+      beeKeeping:beeKeeping ,
+      liveStock:liveStock ,
+      website:website ,
+      crops:crops ,
+      aquatic:aquatic
+    }
+    let options: NativeTransitionOptions = {
+      direction: 'up',
+      duration: 600
+     };
+ 
+    this.nativePageTransitions.flip(options);
+
+    this.navCtrl.push(DescriptionPage , { description:obj})
+  }
+ 
   search() {
     this.navCtrl.push(SearchPage)
   }
