@@ -36,12 +36,13 @@ export class LoginPage {
         console.log(users.uid);
         
       
-        const loader = this.loadingCtrl.create({
-          content: "Logging in please wait...",
-          duration: 3000
-        });
+        // const loader = this.loadingCtrl.create({
+        //   content: "Logging in please wait...",
+        //   duration: 3000
+        // });
+        // loader.present();
         this.navCtrl.setRoot(HomePage)
-        loader.present();
+      
       
       
       } ,(error)=>{

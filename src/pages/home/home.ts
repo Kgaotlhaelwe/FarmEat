@@ -129,8 +129,8 @@ export class HomePage {
     this.geo.getCurrentPosition().then((position) => {
 
       //declaring google map services
-      const directionsService = new google.maps.DirectionsService;
-      const directionsDisplay = new google.maps.DirectionsRenderer;
+      // const directionsService = new google.maps.DirectionsService;
+      // const directionsDisplay = new google.maps.DirectionsRenderer;
 
 
       this.lat = position.coords.latitude;
@@ -146,6 +146,7 @@ export class HomePage {
       const options = {
         center: { lat: this.lat, lng: this.lon },
         zoom: 10,
+        disableDefaultUI: true,
         styles: [
           {
             "featureType": "administrative.land_parcel",
@@ -217,7 +218,7 @@ export class HomePage {
 
       }
 
-      directionsDisplay.setMap(this.map);
+      this.directionsDisplay.setMap(this.map);
 
       for (let index = 0; index < this.nearbyArray.length; index++) {
         console.log(this.nearbyArray);
@@ -226,15 +227,15 @@ export class HomePage {
         console.log(this.nearbyArray[index].beeKeeping);
         console.log(this.nearbyArray[index].crops);
         if (this.nearbyArray[index].aquatic == "true") {
-          this.icon = '../../assets/imgs/icons8_Prawn_96px_2.png';
+          this.icon = '../../assets/imgs/fish-icon.png';
           console.log('inaqautic');
 
           console.log(this.nearbyArray[index].aquatic);
         } else if (this.nearbyArray[index].beeKeeping == "true") {
-          this.icon = "../../assets/imgs/icons8_Bee_100px.png";
+          this.icon = "../../assets/imgs/fish-icon.png";
           console.log('inbeekeeping');
         } else if (this.nearbyArray[index].crops == "true") {
-          this.icon = "../../assets/imgs/icons8_Compost_Heap_96px_1.png";
+          this.icon = "../../assets/imgs/fish-icon.png";
           console.log('incrop');
         }
 
@@ -244,7 +245,7 @@ export class HomePage {
         var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/'
         this.abmarker = new google.maps.Marker({
           map: this.map,
-          //icon: iconBase,
+          icon: this.icon,
 
           //animation: google.maps.Animation.DROP,
           position: { lat: parseFloat(this.nearbyArray[index].lat), lng: parseFloat(this.nearbyArray[index].lng) },
@@ -264,7 +265,7 @@ export class HomePage {
           console.log("clicked marker");
 
           //calling method to display route from a to b
-          this.calculateAndDisplayRoute(this.loca, destination, directionsDisplay, directionsService);
+          this.calculateAndDisplayRoute(this.loca, destination, this.directionsDisplay, this.directionsService);
 
           // var name = this.nearbyArray[index].name;
           // var description = this.nearbyArray[index].description;
@@ -339,6 +340,7 @@ export class HomePage {
         directionsDisplay.setDirections(response);
         console.log("routing OK");
         directionsDisplay.setMap(this.map);
+        directionsDisplay.setOptions( { suppressMarkers: true } );
       } else {
         console.log(status);
 

@@ -55,7 +55,7 @@ export class FarmEatProvider {
 var downlat = new String(latitude); 
 var latIndex = downlat.indexOf( "." ); 
 var down = parseInt(downlat.substr(latIndex + 1,2)) + 6;
-var down = parseInt(downlat.substr(latIndex + 1,2)) + 120;
+var down = parseInt(downlat.substr(latIndex + 1,2)) + 12;
 if (down >= 100){
   if (downlat.substr(0,1) == "-"){
     var firstDigits = parseInt(downlat.substr(0,3)) + 1;
@@ -336,7 +336,8 @@ getSearchbyFarms(lat , lng){
         
         console.log(lt);
           console.log(long);
-        for (let x = 0; x< org.length; x++) {
+        for (let x = 0; x< org.length/2; x++) {
+          
 
           var orglat = new String(org[x].lat).substr(0,6);
           var orgLong =  new String(org[x].lng).substr(0,5);

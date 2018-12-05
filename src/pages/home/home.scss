@@ -27,17 +27,20 @@ page-home {
     }
     .swiper-slide.swiper-slide-active{
         height: 45%;
+       
 
     }
     .swiper-slide.swiper-slide-next{
         height: 50%;
         opacity: 0.8;
         filter: blur(1px);
+       
     }
     .swiper-slide.swiper-slide-prev{
         height: 50%;
         opacity: 0.8; 
         filter: blur(1px);
+      
     }
     // .card-content-md {
     //     padding: 0px;

@@ -6,7 +6,7 @@
 
   
     <!-- <ion-title>Home</ion-title> -->
-    
+   
     <ion-buttons end>
         <button ion-button icon-only (click)="search()">
             <ion-icon ios="ios-search" md="md-search" ></ion-icon>
@@ -19,7 +19,7 @@
   <div #map id="map"></div>
 
     <ion-slides class="slides" (ionSlideDidChange)="slideChanged()" slidesPerView="2" centeredSlides="true" >
-       <ion-slide *ngFor="let a of nearbyArray " >
+       <ion-slide *ngFor="let a of nearbyArray " (click)="moreinfo()" >
          <ion-card class="card">
 
               <ion-item color="dark-green">
