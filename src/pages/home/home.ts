@@ -31,10 +31,12 @@ export class HomePage {
   abmarker;
   slideArr: any = [];
   loca;
-
+  distance;
   directionsService = new google.maps.DirectionsService;
   directionsDisplay = new google.maps.DirectionsRenderer;
-
+  service = new google.maps.DistanceMatrixService();
+  geocoder = new google.maps.Geocoder;
+  destinationAddress;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private geo: Geolocation, private farmEatDb: FarmEatProvider, public alertCtrl: AlertController) {
 
@@ -304,24 +306,31 @@ export class HomePage {
     })
   }
 
-  //getting address from coordinates
-  geocodeLatLng(geocoder, location) {
+  //getting an address coordinates
+  geocodeLatLng(location) {
     return new Promise((resolve, reject) => {
-      geocoder.geocode({ 'location': location }, function (results, status) {
+      this.geocoder.geocode({ 'location': location }, function (results, status) {
         if (status === 'OK') {
+          console.log('OK');
+          console.log(status);
           let locName = results[0].formatted_address;
-          let locStart = locName.split(",");
-          this.locationAddress = locStart[0];
-          console.log(locStart);
-          console.log("Location Push:" + this.locationAddress);
+          //let locStart = locName.split(",");
+          this.destinationAddress = locName;
+          console.log("Location Push:" + this.destinationAddress);
         } else {
+          console.log(' not OK'+ status);
+          
           window.alert('Geocoder failed due to: ' + status);
-        } resolve(this.locationAddress);
+        } resolve(this.destinationAddress);
       }, (error) => {
         reject(error);
       });
     });
   }
+
+ 
+
+
 
   //calculating route
   calculateAndDisplayRoute(location, destination, directionsDisplay, directionsService) {
@@ -338,8 +347,9 @@ export class HomePage {
       if (status === 'OK') {
         directionsDisplay.setDirections(response);
         console.log("routing OK");
-        directionsDisplay.setMap(this.map);
+
         directionsDisplay.setOptions( { suppressMarkers: true } );
+        
       } else {
         console.log(status);
 
@@ -348,6 +358,38 @@ export class HomePage {
     });
   }
 
+
+  
+   //getting distance and calling the callback method
+    getDistance(destination){
+
+      this.geocodeLatLng(destination)
+      this.service.getDistanceMatrix(
+        {
+          origins: [this.loca],
+          destinations: [this.destinationAddress],
+          travelMode: 'Driving'
+        }, (response, status) => {
+          if (status == 'OK') {
+            var origins = response.originAddresses;
+            var destinations = response.destinationAddresses;
+        
+            for (var i = 0; i < origins.length; i++) {
+              var results = response.rows[i].elements;
+              for (var j = 0; j < results.length; j++) {
+                var element = results[j];
+                this.distance = element.distance.text;
+                console.log(this.distance);
+              }
+            }
+          }
+      });
+      console.log("distance core : "+this.distance);
+    
+    }  
+
+   
+    
 
   slideChanged() {
 

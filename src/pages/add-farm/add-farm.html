@@ -14,15 +14,15 @@
 
 
 <ion-content padding>
-    <ion-item> 
-       <ion-input type="text" placeholder="Name of Urban-Farm" [(ngModel)]="name"></ion-input>
+    
+  <ion-input type="text" placeholder="Name of Urban-Farm" [(ngModel)]="name"></ion-input>
   <ion-input type="text" placeholder="Address" [(ngModel)]="address"></ion-input>
   <ion-input type="text" placeholder="Description" [(ngModel)]="description"></ion-input>
   <ion-input type="email" placeholder="Email" [(ngModel)]="email"></ion-input>
   <ion-input type="text" placeholder="Phone Number" [(ngModel)]="phoneNo"></ion-input>
   <ion-input type="text" placeholder="Website" [(ngModel)]="website"></ion-input>
   <ion-input type="text" placeholder="Facebook" [(ngModel)]="facebook"></ion-input>
-</ion-item>
+
 
   <ion-item>
       <ion-label>Farm Type</ion-label>
@@ -53,6 +53,6 @@
           <ion-checkbox [(ngModel)]="aquatic"></ion-checkbox>
         </ion-item>
     </ion-list>
-    <ion-input type="file" accept="image/*" (change)="insertImage($event)"></ion-input>
+    <input type="file" accept="image/*" (change)="insertImage($event)">
     <button ion-button (click)="addFarm()">Save</button>
 </ion-content>
