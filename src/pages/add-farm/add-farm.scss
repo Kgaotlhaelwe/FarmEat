@@ -1,3 +1,43 @@
 page-add-farm {
+    .flex{
+        display: flex;
+        flex-direction: row
+    }
+    #hide{
+        display: none;
+    }
+    .ion-label{
+        width: 50%;
+    }
+    button {
+   
+    }
+    .bar-button::after {
+        left: 0px;
+        right: -2px;
+        top: -7px;
+        bottom: -6px;
+        position: absolute;
+        content: "";
+    }
+    .label-heading{
+        text-align: center
+    }
+    ion-item{
+        box-shadow: 20px;
+    }
+    .text-input::-moz-placeholder {
+        
+      }
+      .text-input:-ms-input-placeholder {
+  
+      }
+      .text-input::-webkit-input-placeholder {
+  
+      }
+      .item-md{
+          box-shadow: 20px ;
+ 
+      }
 
 }

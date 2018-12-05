@@ -50,19 +50,19 @@ page-description {
             background-color:#087150;
             color: white;
             font-size: 20px;
-            padding-top: 15px;
-            padding-bottom: 15px;
+            // padding-top: 15px;
+            // padding-bottom: 15px;
             padding-left: 25px;
             padding-right: 15px;
             text-align: center;
          
-            // display: flex;          
-            // grid-template-columns: 1fr 1fr ;
+            display: flex;          
+            grid-template-columns: 1fr 1fr ;
         }
-        // .address-box > div{
-        // }
-        // .address-box > div:nthchild(odd){
-        // }
+        .address-box > div{
+        }
+        .address-box > div:nthchild(odd){
+        }
         .first-column{
         text-align: center;
             
@@ -198,7 +198,24 @@ page-description {
                 padding-right: 5px;
                 font-size: 1em;
                 text-align: center;
-            }
+            }  
+            //  .address-box{
+            //     letter-spacing: 0.1em;
+            //     font-family: system;
+            //     font-display: normal;
+            //     background-color:#087150;
+            //     color: white;
+            //     font-size: 15px;
+            //     padding-left: 25px;
+            //     padding-right: 15px;
+            //     text-align: center;
+            //     display: grid;          
+            //     grid-template-columns: 1fr 1fr ;
+            // }
+            // .address-box > div{
+            // }
+            // .address-box > div:nthchild(odd){
+            // }
            
        
        
