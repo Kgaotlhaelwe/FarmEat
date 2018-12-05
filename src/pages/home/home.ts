@@ -1,3 +1,4 @@
+
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
@@ -7,6 +8,10 @@ import { SearchPage } from '../search/search';
 import searchArray from '../search/search'
 import { AlertController } from 'ionic-angular';
 import { Slides } from 'ionic-angular';
+import { Keyboard } from '@ionic-native/keyboard';
+
+import { LoadingController } from 'ionic-angular';
+
 declare var google: any;
 @Component({
   selector: 'page-home',
