@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {FarmEatProvider} from '../providers/farm-eat/farm-eat';
@@ -22,7 +22,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any,icon?:string}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public farmEatDb:FarmEatProvider ,) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public farmEatDb:FarmEatProvider ) {
     this.initializeApp();
 
     //checkstate
@@ -85,5 +85,10 @@ export class MyApp {
       this.nav.setRoot(LoginPage);
     })
     
+  }
+
+  goHome(){
+    //this.nav.popTo(HomePage);
+    this.nav.popTo(HomePage)
   }
 }
