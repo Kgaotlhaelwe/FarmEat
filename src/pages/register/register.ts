@@ -48,12 +48,12 @@ export class RegisterPage {
      
     //   this.navCtrl.setRoot(HomePage)
     // } 
-    const loader = this.loadingCtrl.create({
-      content: "Logging in please wait...",
-      duration: 3000
-    });
+    // const loader = this.loadingCtrl.create({
+    //   content: "Logging in please wait...",
+    //   duration: 3000
+    // });
     this.navCtrl.setRoot(HomePage)
-    loader.present();
+    //loader.present();
   
   
   }, (error)=>{

@@ -1,42 +1,50 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar color="dark-green">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
 
   
-    <!-- <ion-title>Home</ion-title> -->
-    
+ 
+   <img src="../../assets/imgs/tree-icon.png">
     <ion-buttons end>
         <button ion-button icon-only (click)="search()">
             <ion-icon ios="ios-search" md="md-search" ></ion-icon>
         </button>
       </ion-buttons>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
+<ion-content>
+  <ion-fab top left >
+      <button ion-fab color="dark-green"  menuToggle ><ion-icon name="menu"></ion-icon></button>
 
+    </ion-fab>
 <ion-content>
   <div #map id="map"></div>
-
-    <ion-slides class="slides" (ionSlideDidChange)="slideChanged()" slidesPerView="2" centeredSlides="true" >
-       <ion-slide *ngFor="let a of nearbyArray " >
+  <h1>Neary by farms</h1>
+  <div class="cards">
+      
+    <ion-slides class="slides" (ionSlideDidChange)="slideChanged()" slidesPerView="1" centeredSlides="true" >
+       <ion-slide *ngFor="let a of nearbyArray; let i = index  " (click)="moreinfo(i)" >
+         
+  <div class="cards">
          <ion-card class="card">
 
               <ion-item color="dark-green">
-          
-                <h2>{{a.name}}</h2>
-                <!-- <p>{{a.type}}</p> -->
+                <p text-center>{{a.type}}</p>
+                <h2 text-center>{{a.name}}</h2>
               </ion-item>
             
               <img src="{{a.image}}" class="imgs">
-              
+              <h2>What we offer</h2>
+             
               <ion-card-content color="dark-green">
-                  <p>{{a.type}}</p>
+                  <p></p>
               </ion-card-content>
             </ion-card> 
-         
+          </div>
         </ion-slide> 
       </ion-slides>
-
+    </div>
 
 </ion-content>

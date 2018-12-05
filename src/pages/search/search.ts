@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { Keyboard } from '@ionic-native/keyboard';
 import { HomePage } from '../home/home';
+
+import { LoadingController } from 'ionic-angular';
+
 /**
  * Generated class for the SearchPage page.
  *
@@ -40,7 +43,7 @@ export class SearchPage {
 ]
   
 
-  constructor(public platform: Platform,public navCtrl: NavController, public navParams: NavParams,private keyboard: Keyboard) {
+  constructor(public platform: Platform,public navCtrl: NavController, public navParams: NavParams,private keyboard: Keyboard, public loadingCtrl: LoadingController) {
     this.platform.ready().then(() => {
 
      
@@ -91,10 +94,27 @@ export class SearchPage {
              
             searchArray[0]=obj
              console.log( searchArray);
-            setTimeout(()=>{
+
+
+             
+
+       
+
+            
               this.navCtrl.push(HomePage, {searchArea:coordinate})
-            } , 5000)
-         
+
+              
+             let loading = this.loadingCtrl.create({
+              content: 'Please wait...'
+            });
+          
+            loading.present();
+          
+            setTimeout(() => {
+              loading.dismiss();
+            }, 5000);
+            
+            
           
               
               

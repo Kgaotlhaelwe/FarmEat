@@ -23,6 +23,7 @@ import { NewsfeedPage } from '../pages/newsfeed/newsfeed';
 import { FarmForumPage } from '../pages/farm-forum/farm-forum'
 import { LoginPage } from '../pages/login/login';
 import { AddFarmPage } from '../pages/add-farm/add-farm';
+import { NativePageTransitions } from '@ionic-native/native-page-transitions';
 
 
 @NgModule({
@@ -68,7 +69,8 @@ import { AddFarmPage } from '../pages/add-farm/add-farm';
     Geolocation,
     Keyboard,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    FarmEatProvider
+    FarmEatProvider,
+    NativePageTransitions,
   ]
 })
 export class AppModule {}
