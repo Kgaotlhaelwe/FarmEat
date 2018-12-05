@@ -231,10 +231,10 @@ export class HomePage {
 
           console.log(this.nearbyArray[index].aquatic);
         } else if (this.nearbyArray[index].beeKeeping == "true") {
-          this.icon = "../../assets/imgs/fish-icon.png";
+          this.icon = "../../assets/imgs/Bee-icon.png";
           console.log('inbeekeeping');
         } else if (this.nearbyArray[index].crops == "true") {
-          this.icon = "../../assets/imgs/fish-icon.png";
+          this.icon = "../../assets/imgs/tree-icon.png";
           console.log('incrop');
         }
 
