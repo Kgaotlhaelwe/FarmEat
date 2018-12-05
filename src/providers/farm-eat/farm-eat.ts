@@ -227,6 +227,8 @@ getSearchbyFarms(lat , lng){
    getNewsFeed(){
 
     return new Promise((resolve ,reject)=>{
+
+      
       firebase.database().ref('Newsfeed').on('value' , (data:any)=>{
         var Newsfeed =data.val();
         var keys:any =Object.keys(Newsfeed);
@@ -258,7 +260,7 @@ getSearchbyFarms(lat , lng){
         console.log(farms);
         var keys:any =Object.keys(farms)
         console.log(keys);
-
+        this.farmArray =[]
         for(var i =0 ; i <keys.length;i++){
           var  k =keys[i];
           let obj = {

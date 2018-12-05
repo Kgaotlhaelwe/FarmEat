@@ -11,6 +11,7 @@ import { Slides } from 'ionic-angular';
 import { Keyboard } from '@ionic-native/keyboard';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 
+
 import { LoadingController } from 'ionic-angular';
 
 declare var google: any;
@@ -37,7 +38,7 @@ export class HomePage {
   directionsDisplay = new google.maps.DirectionsRenderer;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geo: Geolocation, private farmEatDb: FarmEatProvider, public alertCtrl: AlertController, private nativePageTransitions: NativePageTransitions) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geo: Geolocation, private farmEatDb: FarmEatProvider, public alertCtrl: AlertController, private nativePageTransitions: NativePageTransitions, public loadingCtrl: LoadingController) {
 
   }
 
@@ -48,7 +49,7 @@ export class HomePage {
 
     this.nearbyArray = [];
 
-    if (this.trackSearch.length == 0) {
+    
       this.farmEatDb.getCurrentLocation().then((radius: any) => {
         console.log(radius);
 
@@ -77,47 +78,51 @@ export class HomePage {
         })
 
       })
-    } else if (this.trackSearch.length == 1) {
+   
+
+      // this.farmEatDb.getSearchbyFarms(this.searchArea.lat, this.searchArea.lng).then((radius: any) => {
+      //   console.log(radius);
+      //   this.farmEatDb.getallFarms().then((data: any) => {
+      //     console.log(data);
+
+      //     this.farmEatDb.getSearchedFarm(this.searchArea.lat, this.searchArea.lng, radius, data).then((data: any) => {
+      //       console.log(data);
+      //       this.nearbyArray = data;
+      //       console.log(this.nearbySeachFarmArray);
+      //       if (this.nearbyArray.length == 0) {
+      //         const alert = this.alertCtrl.create({
+      //           title: 'Confirmation',
+      //           subTitle: 'Currently we dont have Farms around your Area',
+      //           buttons: ['OK']
+      //         });
+      //         alert.present();
+
+      //       } else {
 
 
-      this.farmEatDb.getSearchbyFarms(this.searchArea.lat, this.searchArea.lng).then((radius: any) => {
-        console.log(radius);
-        this.farmEatDb.getallFarms().then((data: any) => {
-          console.log(data);
+      //       }
+      //     })
+      //   })
 
-          this.farmEatDb.getSearchedFarm(this.searchArea.lat, this.searchArea.lng, radius, data).then((data: any) => {
-            console.log(data);
-            this.nearbyArray = data;
-            console.log(this.nearbySeachFarmArray);
-            if (this.nearbyArray.length == 0) {
-              const alert = this.alertCtrl.create({
-                title: 'Confirmation',
-                subTitle: 'Currently we dont have Farms around your Area',
-                buttons: ['OK']
-              });
-              alert.present();
-
-            } else {
-
-
-            }
-          })
-        })
-
-      })
-
-
+      // })
 
 
 
-    }
+
+
+    
 
     setTimeout(() => {
+      const loader = this.loadingCtrl.create({
+        content: "Please wait...",
+        duration:8000
+        
+      });
       this.loadMap();
-    }, 2000)
+    }, 8000)
 
 
-
+    
 
 
 
@@ -126,23 +131,22 @@ export class HomePage {
 
   loadMap() {
     //this.clearMarkers();
+
+    const loader = this.loadingCtrl.create({
+      content: "Please wait...",
+      
+    });
+    loader.present();
     this.geo.getCurrentPosition().then((position) => {
 
-      //declaring google map services
-      // const directionsService = new google.maps.DirectionsService;
-      // const directionsDisplay = new google.maps.DirectionsRenderer;
-
+      
 
       this.lat = position.coords.latitude;
       this.lon = position.coords.longitude;
 
       this.loca = new google.maps.LatLng(this.lat, this.lon);
 
-      //getting an address from coordinates
-      //this.geocodeLatLng()
-      console.log(position)
-
-      //map options
+  
       const options = {
         center: { lat: this.lat, lng: this.lon },
         zoom: 10,
@@ -175,24 +179,19 @@ export class HomePage {
             ]
           }
         ]
-        //streetViewControl: false,
-        //mapTypeId: 'satellite'
+       
       }
 
+      
       this.map = new google.maps.Map(this.mapRef.nativeElement, options);
 
-      if (this.trackSearch.length == 0) {
+    
 
-
-        // var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/'
+      
         let marker = new google.maps.Marker({
           map: this.map,
           zoom: 10,
-          //icon: iconBase + 'info-i_maps.png',
-          //animation: google.maps.Animation.DROP,
-
-
-          animation: google.maps.Animation.DROP,
+         animation: google.maps.Animation.DROP,
           icon: {
             url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
           },
@@ -200,35 +199,40 @@ export class HomePage {
         });
 
 
-      } else if (this.trackSearch.length == 1) {
-        console.log("second if statata");
+      //  else if (this.trackSearch.length == 1) {
+       
 
-        let a = this.searchArea.lat;
-        let b = this.searchArea.lng
-
-
+      //   let a = this.searchArea.lat;
+      //   let b = this.searchArea.lng
 
 
-        let marker = new google.maps.Marker({
-          map: this.map,
-          zoom: 8,
-          // animation: google.maps.Animation.DROP,
-          position: this.map.setCenter({ lat: parseFloat(a), lng: parseFloat(b) })
-        });
 
-      }
 
-      this.directionsDisplay.setMap(this.map);
+      //   let marker = new google.maps.Marker({
+      //     map: this.map,
+      //     zoom: 8,
+      //     // animation: google.maps.Animation.DROP,
+      //     position: this.map.setCenter({ lat: parseFloat(a), lng: parseFloat(b) })
+      //   });
+
+      // }
+
+      
 
       for (let index = 0; index < this.nearbyArray.length; index++) {
-        console.log(this.nearbyArray);
+      
         console.log('out');
+        console.log("in the loop");
+        
         console.log(this.nearbyArray[index].aquatic);
         console.log(this.nearbyArray[index].beeKeeping);
         console.log(this.nearbyArray[index].crops);
         if (this.nearbyArray[index].aquatic == "true") {
           this.icon = '../../assets/imgs/fish-icon.png';
           console.log('inaqautic');
+
+          console.log('inif statement');
+          
 
           console.log(this.nearbyArray[index].aquatic);
         } else if (this.nearbyArray[index].beeKeeping == "true") {
@@ -241,13 +245,13 @@ export class HomePage {
 
 
 
-        // console.log(lat +" "+lng);
+       
         var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/'
         this.abmarker = new google.maps.Marker({
           map: this.map,
           icon: this.icon,
 
-          //animation: google.maps.Animation.DROP,
+        
           position: { lat: parseFloat(this.nearbyArray[index].lat), lng: parseFloat(this.nearbyArray[index].lng) },
           label: name,
           zoom: 8,
@@ -264,43 +268,17 @@ export class HomePage {
 
           console.log("clicked marker");
 
+          //this.map = new google.maps.Map(this.mapRef.nativeElement, options);
+
           //calling method to display route from a to b
           this.calculateAndDisplayRoute(this.loca, destination, this.directionsDisplay, this.directionsService);
-
-          // var name = this.nearbyArray[index].name;
-          // var description = this.nearbyArray[index].description;
-          // var tel = this.nearbyArray[index].tel;
-          // var email = this.nearbyArray[index].email;
-          // var address = this.nearbyArray[index].address;
-          // var facebook = this.nearbyArray[index].facebook;
-          // var beeKeeping = this.nearbyArray[index].beeKeeping;
-          // var liveStock = this.nearbyArray[index].liveStock;
-          // var website = this.nearbyArray[index].website;
-          // var aquatic = this.nearbyArray[index].aquatic;
-          // var crops = this.nearbyArray[index].crops;
-          // var image = this.nearbyArray[index].image;
-          // console.log(name);
-          // let obj = {
-
-          //   name: name,
-          //   description: description,
-          //   tel: tel,
-          //   email: email,
-          //   address: address,
-          //   facebook: facebook,
-          //   beeKeeping: beeKeeping,
-          //   liveStock: liveStock,
-          //   website: website,
-          //   aquatic: aquatic,
-          //   crops: crops,
-          //   image: image
-          // }
-          // this.navCtrl.push(DescriptionPage, { description: obj })
+         // this.directionsDisplay.setMap(this.map);
+        
         })
 
       }
 
-
+      loader.dismiss()
 
     })
   }
@@ -359,7 +337,7 @@ export class HomePage {
     let currentIndex = this.slides.getActiveIndex();
     let currentLat = this.nearbyArray[currentIndex].lat
     let currentLon = this.nearbyArray[currentIndex].lng
-    console.log(this.slideArr[currentIndex].getAnimation());
+  //  console.log(this.slideArr[currentIndex].getAnimation());
 
 
     // if (this.slideArr[currentIndex].getAnimation() != null) {
@@ -374,16 +352,16 @@ export class HomePage {
     } else {
       console.log("directionDisplay has nothing");
     }
-    let marker = new google.maps.Marker({
-      // map: this.map,
-      //icon: iconBase + 'farm_maps.png',
+    // let marker = new google.maps.Marker({
+    //   // map: this.map,
+    //   //icon: iconBase + 'farm_maps.png',
 
 
-      position: this.map.setCenter({ lat: parseFloat(currentLat), lng: parseFloat(currentLon) }),
-      //animation: this.slideArr[currentIndex].setAnimation(google.maps.Animation.BOUNCE),
-      label: name,
-      zoom: 20,
-    })
+    //   position: this.map.setCenter({ lat: parseFloat(currentLat), lng: parseFloat(currentLon) }),
+    //   //animation: this.slideArr[currentIndex].setAnimation(google.maps.Animation.BOUNCE),
+    //   label: name,
+    //   zoom: 20,
+    // })
 
     this.directionsDisplay.setMap(this.map);
     let destination = new google.maps.LatLng(currentLat, currentLon);
@@ -451,7 +429,7 @@ export class HomePage {
       duration: 600
      };
  
-    this.nativePageTransitions.flip(options);
+    this.nativePageTransitions.fade(options);
 
     this.navCtrl.push(DescriptionPage , { description:obj})
   }
