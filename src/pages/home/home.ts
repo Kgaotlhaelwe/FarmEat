@@ -1,6 +1,6 @@
 
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { FarmEatProvider } from '../../providers/farm-eat/farm-eat'
 import { DescriptionPage } from '../description/description';
@@ -43,7 +43,7 @@ export class HomePage {
   arrow = "arrow-down";
   arrowDir = "arrow-down"
   
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geo: Geolocation, private farmEatDb: FarmEatProvider, public alertCtrl: AlertController, private nativePageTransitions: NativePageTransitions, public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, private geo: Geolocation, private farmEatDb: FarmEatProvider, public alertCtrl: AlertController, private nativePageTransitions: NativePageTransitions, public loadingCtrl: LoadingController) {
 
   }
 
@@ -673,18 +673,15 @@ export class HomePage {
 
     let options: NativeTransitionOptions = {
       direction: 'up',
-      duration: 600,
-         slowdownfactor: 3,
-         slidePixels: 20,
-         iosdelay: 100,
-         androiddelay: 250,
-         fixedPixelsTop: 0,
-         fixedPixelsBottom: 60
+      duration: 1000,         
      };
  
-    this.nativePageTransitions.fade(options);
+    this.nativePageTransitions.slide(options);
     var info = this.nearbyArray[i]
-    this.navCtrl.push(DescriptionPage, {description: info} )
+    let Modal = this.modalCtrl.create(DescriptionPage, {description: info} );
+   
+    // this.navCtrl.push(DescriptionPage, {description: info} )
+     Modal.present();
   }
  
   search() {
