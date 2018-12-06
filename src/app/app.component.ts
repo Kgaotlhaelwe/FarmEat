@@ -18,7 +18,7 @@ declare var firebase
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   pages2:any
-  rootPage: any 
+  rootPage: any = NewsfeedPage
 
   pages: Array<{title: string, component: any,icon?:string}>;
 
@@ -27,16 +27,16 @@ export class MyApp {
 
     //checkstate
 
-    farmEatDb.checkstate().then((data:any)=>{
+    // farmEatDb.checkstate().then((data:any)=>{
 
-      if (data ==1){
-        this.rootPage = HomePage;
+    //   if (data ==1){
+    //     this.rootPage = HomePage;
      
-      }
-      else {
-        this.rootPage = LoginPage;
-      }
-     })
+    //   }
+    //   else {
+    //     this.rootPage = LoginPage;
+    //   }
+    //  })
 
     // used for an example of ngFor and navigation
     this.pages = [

@@ -1,24 +1,17 @@
 page-newsfeed {
     .content{
-        background-color: whitesmoke
+        background-color: rgb(255, 255, 255)
     }
-
-    ion-card-content{
-         height: 10%;
+    .card-md p {
+        margin: 0 0 2px;
+        font-size: 1.4rem;
+        font-weight: normal;
+        line-height: 1.5;
+        color: #222;
+        height: 50px;
     }
-    // .flex{
-    //     //background-color: aquamarine;
-    //     display: flex;
-    //     justify-content: flex-end;
-    //     align-items: flex-end
-    // }
-    // ion-avatar {
-    //     height: 20%;
-    //     width: 20%;
-    //     border-radius: 50px
-    // }
-    // .flexav{
-    //     display: flex;
-    //     align-self: auto
-    // }
+    .flex{
+        box-shadow: 10px 10px 10px rgba(8, 113, 80, 0.151);
+        border-radius: 10px
+    }
 }
