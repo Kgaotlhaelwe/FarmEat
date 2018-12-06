@@ -27,22 +27,31 @@
   
       <button ion-button large class="topbtn" color="dark-green" clear menuToggle ><ion-icon name="menu"></ion-icon></button>
 
+     
    
 
+  <ion-list id="hide" class="list">
+    <ion-item *ngFor="let item of items" (click)="serc(item)"  >
+      {{ item }}
+    </ion-item>
+  </ion-list>
+
+     
 
   <div #map id="map" class="theMap"></div>
 
+  
+  <ion-searchbar class="search" #searchz (ionInput)="getItems($event)"></ion-searchbar>
 
-
- <ion-searchbar class="search" (input)="getItems($event)"></ion-searchbar>
+ <!-- <ion-searchbar class="search" (input)="getItems($event)"></ion-searchbar> -->
 
     <div class="cards" >
       
                 <ion-slides class="slides" (ionSlideDidChange)="slideChanged()" slidesPerView="1" centeredSlides="true" >
                    <ion-slide *ngFor="let a of nearbyArray; let i = index  " (click)="moreinfo(i)" >
                      
-              <div class="cards">
-                     <ion-card class="card">
+              <div class="cards" (click)="search(item)">
+                     <ion-card class="card"  >
                         <img src="{{a.image}}" class="imgs">
                           <ion-item >
                            
@@ -62,36 +71,11 @@
                     </ion-slide> 
                   </ion-slides>
                 </div>  
+
+
+
          
 
 
-    <!-- <div class="cont"> -->
-        <!-- <div class="handle">  -->
-            <!-- <div class="ico" (click)="changeMapSize()">
-              <p align="center" class="theArrow"><ion-icon class="theIcon" name="add"></ion-icon></p>
-            </div>
-            <div class="cards">
-      
-                <ion-slides class="slides" (ionSlideDidChange)="slideChanged()" slidesPerView="1" centeredSlides="true" >
-                   <ion-slide *ngFor="let a of nearbyArray; let i = index  " (click)="moreinfo(i)" >
-                     
-              <div class="cards">
-                     <ion-card class="card">
-                        <img src="{{a.image}}" class="imgs">
-                          <ion-item >
-                           
-                            <h2 text-left>{{a.name}}</h2>
-                            <p text-left>{{a.type}}</p>
-                          </ion-item>
-  
-                        </ion-card> 
-                      </div>
-                    </ion-slide> 
-                  </ion-slides>
-                </div>  
-            
-         
-            -->
-      <!-- </div> -->
-
+    
 </ion-content>
