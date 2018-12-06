@@ -491,6 +491,7 @@ console.log('in');
 
 }
 
+
 signout(){
   return new Promise((resolve, reject)=>{ 
     firebase.auth().signOut().then(function() {

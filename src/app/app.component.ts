@@ -31,23 +31,23 @@ export class MyApp {
 
     //checkstate
 
-    farmEatDb.checkstate().then((data: any) => {
+            farmEatDb.checkstate().then((data: any) => {
 
-      if (data == 1) {
-        this.rootPage = HomePage;
-        //getting user info
-        this.farmEatDb.getUser().then((data: any) => {
-          console.log(data);
+              if (data == 1) {
+                this.rootPage = HomePage;
+              
+                this.farmEatDb.getUser().then((data: any) => {
+                  console.log(data);
 
-          this.username = data.username
-          this.email = data.email
-          this.proPic = data.proPicture
-        })
-      }
-      else {
-        this.rootPage = LoginPage;
-      }
-    })
+                  this.username = data.username
+                  this.email = data.email
+                  this.proPic = data.proPicture
+                })
+              }
+              else {
+                this.rootPage = LoginPage;
+              }
+            })
 
 
     // used for an example of ngFor and navigation
