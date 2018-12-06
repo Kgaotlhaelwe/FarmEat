@@ -1,17 +1,21 @@
 <ion-menu  [content]="content">
-  <ion-header (click)="goProfile()">
+  <ion-header text-center (click)="goProfile()">
     <ion-toolbar color="dark-green">
-      <div class="propic">
-          <img src="{{proPic}}">
-      </div>
-      <div class="info">
+      <div text-center>
+          <div class="propic">
+              <img class="pic" text-center src="{{proPic}}">
+          </div>
+         <div class="info">
           <div class="username">
-              {{username}}
+            <h1>{{username}}</h1> 
            </div>
            <div class="email">
-              {{email}}
+             <h6>{{email}}</h6>  
            </div>
       </div>
+      </div>
+     
+     
        
        
         
@@ -28,7 +32,7 @@
     </ion-list>
   </ion-content>
 
-  
+
 </ion-menu> -->
 <div class="flex" text-center padding>
   <h1>Menu</h1>

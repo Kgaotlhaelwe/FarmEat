@@ -50,7 +50,7 @@ export class HomePage {
 
       
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geo: Geolocation, private farmEatDb: FarmEatProvider, public alertCtrl: AlertController, private nativePageTransitions: NativePageTransitions, public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geo: Geolocation, private farmEatDb: FarmEatProvider, public alertCtrl: AlertController, private nativePageTransitions: NativePageTransitions, public loadingCtrl: LoadingController,public modalCtrl:ModalController) {
 
   }
 
@@ -681,12 +681,7 @@ console.log(info);
 
     let options: NativeTransitionOptions = {
       direction: 'up',
-<<<<<<< HEAD
-      duration: 1000,
-        
-=======
       duration: 1000,         
->>>>>>> f8ff3e4b2d918e49d01ff9ddcbe0826cd85f2f19
      };
  
     this.nativePageTransitions.slide(options);
