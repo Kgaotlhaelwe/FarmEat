@@ -222,6 +222,19 @@ getSearchbyFarms(lat , lng){
 }
 
 
+
+getSearchbyFarm(lat , lng){
+  return new Promise((accpt ,rej)=>{
+  this.createPositionRadius(lat , lng).then((data:any)=>{
+    accpt(data)
+  })
+  }).catch((error)=>{
+    console.log('Error getting location', error);
+    
+  })
+}
+
+
    
 
    getNewsFeed(){
@@ -346,8 +359,8 @@ getSearchbyFarms(lat , lng){
 
           
 
-          console.log(orgLong);
-          console.log(orglat );
+          // console.log(orgLong);
+          // console.log(orglat );
           
           
           
@@ -355,13 +368,13 @@ getSearchbyFarms(lat , lng){
           
           
           
-console.log('out');
+// console.log('out');
 
           if ((orgLong  <= long  && orgLong  >= radius.left || orgLong  >= long  && orgLong  <= radius.right) && (orglat >= lt && orglat <= radius.down || orglat <= lt && orglat >= radius.up)){
 console.log('in');
 
             this.newSeachedFarms.push(org[x]);
-             console.log(this.nearByOrg);
+            //  console.log(this.nearByOrg);
    
              }
           
@@ -468,34 +481,8 @@ addFarm(name, address,farmType, description, crops, liveStock, beeKeeping, aquat
 }
 
 
-// newsfeed(){
-//   return new Promise((resolve, reject)=>{
-//     firebase.database().ref('newsfeed/').on('value', (data: any) => {
- 
-//       var message = data.val();
-//        console.log(data.val());
- 
-//        var keys: any = Object.keys(message);
- 
-//        console.log(keys);
- 
-//        for (var i = 0; i < keys.length; i++){
-//         var m = keys[i];
- 
-//         let obj = {
-//           m:keys ,
-//           message:message[m].message
- 
-//         }
-//         this.newsMessage.push(obj)
- 
-//         resolve(this.newsMessage);
-//   }
- 
- 
-//   })
- 
-//  })
- 
-//  }
+loapMap(){
+
+  
+}
 }

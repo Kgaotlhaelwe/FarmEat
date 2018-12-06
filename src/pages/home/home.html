@@ -1,20 +1,29 @@
-<!-- <ion-header>
+<ion-header>
   <ion-toolbar color="dark-green">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-
+<button (click)="nextpage()">search</button>
   
- 
-   <img src="../../assets/imgs/tree-icon.png">
-    <ion-buttons end>
-        <button ion-button icon-only (click)="search()">
-            <ion-icon ios="ios-search" md="md-search" ></ion-icon>
+ <!-- <ion-input type="search" placeholder="search" #address id="pac-input" ></ion-input> -->
+  
+    <!-- <ion-buttons end>
+       
+            <ion-icon ios="ios-search" md="md-search"  ></ion-icon>
+
+            <button ion-button icon-only (click)="search(address.value)">
         </button>
-      </ion-buttons>
+      </ion-buttons> -->
+
+      <ion-searchbar #searchz (ionInput)="getItems($event)"></ion-searchbar>
+      <ion-list id="hide">
+        <ion-item *ngFor="let item of items" (click)="search(item)"  >
+          {{ item }}
+        </ion-item>
+      </ion-list>
   </ion-toolbar>
-</ion-header> -->
-<ion-content>
+</ion-header>
+<ion-content class="top">
   <ion-fab top left >
       <button ion-fab color="dark-green"  menuToggle ><ion-icon name="menu"></ion-icon></button>
 
@@ -23,7 +32,10 @@
 
   <div #map id="map"></div>
   <!-- <div class="neary"><h1 text-center >Neary by farms</h1></div> -->
-  
+  <div class="nearByText">
+    <h3 text-center style="color: rgb(0, 113, 80)" >Near by urban farms</h3>
+  </div>
+  <br>
   <div class="cards">
       
     <ion-slides class="slides" (ionSlideDidChange)="slideChanged()" slidesPerView="1" centeredSlides="true" >
