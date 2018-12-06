@@ -1,20 +1,40 @@
 page-description {
     .body-container{
-        padding-left: 10px;
-        padding-right: 10px;
+        // padding-left: 10px;
+        // padding-right: 10px;
     }
-    .segment{
-        position: relative;
-        top: -10px;
 
+    .cards{
+        max-height: 500px;
+    }
+    .swiper-slide img{
+        height:300px;
     }
     .body-box{
         text-align: center;
+        padding-left: 10px;
+        padding-right: 10px;
     }
   
     .sub-title{
         position: relative;
      
+    }
+    .fab{
+        border-radius: 50%;
+        position: relative;
+        z-index: 0;
+        display: block;
+        overflow: hidden;
+        width: 50px;
+        height: 50px;
+        font-size: 14px;
+        line-height: 56px;
+        text-overflow: ellipsis;
+        text-transform: none;
+        white-space: nowrap;
+        cursor: pointer;
+
     }
     .switch-seg{
         position: relative;
@@ -43,43 +63,45 @@ page-description {
 
         }       
 
-        .address-box{
+        .contact-box{
             letter-spacing: 0.1em;
+            margin-top: -20px;
             font-family: system;
             font-display: normal;
-            background-color:#087150;
+             background-color:#fafafa;
             color: white;
-            font-size: 20px;
-            // padding-top: 15px;
-            // padding-bottom: 15px;
-            padding-left: 25px;
-            padding-right: 15px;
+            font-size: 40px;       
+            display: grid;          
+            grid-template-columns: 1fr 1fr 1fr 1fr ;
+            height: 50px;
             text-align: center;
-         
-            display: flex;          
-            grid-template-columns: 1fr 1fr ;
+            line-height: 5%
         }
-        .address-box > div{
+     
+        .contact-box > div{
+            padding-top: 15px;
+            padding-bottom: 20px;
         }
-        .address-box > div:nthchild(odd){
+        .contact-box > div:nthchild(odd){
         }
         .first-column{
         text-align: center;
             
         }
-        .fab-button{
-            box-shadow:2px ; 
-            position: relative;
-            top: -12px;
+        // .fab-button{
+        //     box-shadow:2px ; 
+        //     position: relative;
+        //     top: -12px;
+        // }
+        ion-fab{
+            padding-right: 20px;
         }
-        .btn{
-            width: 100px;
-        }
+    
         img{
             width: 50px;
         }
         .img{
-            max-height: 200px;
+            max-height: 100%;
             max-width: 100%;
             position: relative;
             top: 15px;
@@ -91,30 +113,39 @@ page-description {
             float: left;
             display: flex;
         }
+    
   
-        .container{
+        .container-crops{
             justify-content: center;
-            display: flex;          
-            // grid-template-columns: 1fr 1fr 1fr 1fr ;
-         }
-         .crops-name{
-             display: flex;
-         }
-         .livestock-name{
-             display: flex;
-
-         }
-         .Aquafarming{
             display: flex;
          }
-         .beeKeeping-name{
+         .container-livestock{
+            justify-content: center;
             display: flex;
 
          }
+         .container-Aquafarming{
+            justify-content: center;
+            display: flex;
+
+         }
+        //  .crops-name{
+        //      display: flex;
+        //  }
+        //  .livestock-name{
+        //      display: flex;
+
+        //  }
+        //  .Aquafarming{
+        //     display: flex;
+        //  }
+        //  .beeKeeping-name{
+        //     display: flex;
+
+        //  }
       
          .btn {
             width: 50px;
-            padding-right: 5px;
         }
          hr {
             display: block;
@@ -128,18 +159,6 @@ page-description {
             border-width: 1px ;
             background-color: #087150;
         }
-       
-
-
-        .imgs {
-            position: relative;
-            width: 50%;
-          }
-          
-          .images {
-            display: block;
-            width: 100%;
-          }
           .text {
             font-size: 
             20px;
@@ -152,11 +171,6 @@ page-description {
             text-align: center;
           }
 
-          .image-container{
-              background-size: cover;
-              min-height: 200px;
-
-          }
           .ion-card{
             width: 115%;
             margin-left: -8%;
@@ -166,57 +180,31 @@ page-description {
     
             }
             .contact-box{
-                text-align: center;
-                line-height: 5%
+              
               
             }
             h6{
                   color: grey;
             }
-            .adress{
-                text-align: center;
-                font-weight: 100;
-            }
-            ion-icon{
-                font-size: 25px;
-                color: 	#08AF9E;
-                
-            }
-            .segment-md .segment-button{
-                color:#08AF9E;
-            }
-            .segment-md .segment-button.activated, 
-            .segment-md .segment-button.segment-activated{
-                color:#08AF9E;
-                border-color: #087150;
 
-            }
-            .swiper-pagination-bullet-active{
-                background:#087150;
+            ion-icon{
+                font-size: 27px;
+                color: 	rgb(8, 113, 80);
+                
             }
             h4{
                 padding-right: 5px;
                 font-size: 1em;
                 text-align: center;
-            }  
-            //  .address-box{
-            //     letter-spacing: 0.1em;
-            //     font-family: system;
-            //     font-display: normal;
-            //     background-color:#087150;
-            //     color: white;
-            //     font-size: 15px;
-            //     padding-left: 25px;
-            //     padding-right: 15px;
-            //     text-align: center;
-            //     display: grid;          
-            //     grid-template-columns: 1fr 1fr ;
-            // }
-            // .address-box > div{
-            // }
-            // .address-box > div:nthchild(odd){
-            // }
-           
+            } 
+            h3{
+                font-size: 1.5em;
+                color: rgb(92, 89, 89);
+                text-align: center;
+                // padding-left: 5%;
+            }
+        
+    
        
        
 }
