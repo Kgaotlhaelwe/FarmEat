@@ -1,6 +1,6 @@
 
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { FarmEatProvider } from '../../providers/farm-eat/farm-eat'
 import { DescriptionPage } from '../description/description';
@@ -681,13 +681,20 @@ console.log(info);
 
     let options: NativeTransitionOptions = {
       direction: 'up',
+<<<<<<< HEAD
       duration: 1000,
         
+=======
+      duration: 1000,         
+>>>>>>> f8ff3e4b2d918e49d01ff9ddcbe0826cd85f2f19
      };
  
     this.nativePageTransitions.slide(options);
     var info = this.nearbyArray[i]
-    this.navCtrl.push(DescriptionPage, {description: info} )
+    let Modal = this.modalCtrl.create(DescriptionPage, {description: info} );
+   
+    // this.navCtrl.push(DescriptionPage, {description: info} )
+     Modal.present();
   }
 
  
