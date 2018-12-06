@@ -673,16 +673,11 @@ export class HomePage {
 
     let options: NativeTransitionOptions = {
       direction: 'up',
-      duration: 600,
-         slowdownfactor: 3,
-         slidePixels: 20,
-         iosdelay: 100,
-         androiddelay: 250,
-         fixedPixelsTop: 0,
-         fixedPixelsBottom: 60
+      duration: 1000,
+        
      };
  
-    this.nativePageTransitions.fade(options);
+    this.nativePageTransitions.slide(options);
     var info = this.nearbyArray[i]
     this.navCtrl.push(DescriptionPage, {description: info} )
   }
