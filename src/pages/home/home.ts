@@ -13,6 +13,7 @@ import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/na
 
 
 import { LoadingController } from 'ionic-angular';
+import { THIS_EXPR } from '../../../node_modules/@angular/compiler/src/output/output_ast';
 
 
 declare var google: any;
@@ -703,7 +704,7 @@ console.log(info);
     let map ;
     
     let loca  ;
-    const geocoder = new google.maps.Geocoder;
+    let geocoder = new google.maps.Geocoder();
    
     geocoder.geocode({'address': address}, function(results, status) {
 
@@ -721,35 +722,39 @@ console.log(info);
          console.log( this.Searchlat);
 
 
-     map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 12,
-          center: { lat:  this.Searchlat , lng:this.Searchlng },
-          disableDefaultUI: true,
-          //styles: this.media.mapstyle
-        });
-
-        var input = document.getElementById('pac-input');
-      
+     
+      }
 
 
 
+      this.map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        center: { lat:  this.Searchlat , lng:this.Searchlng },
+        disableDefaultUI: true,
+        //styles: this.media.mapstyle
+      });
 
-         let marker = new google.maps.Marker({
-          map: map,
-          zoom: 10,
-         animation: google.maps.Animation.DROP,
-          icon: {
-            url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-          },
-          position: ({lat: this.Searchlat,lng:this.Searchlng})
-        });
-
-        document.getElementById("hide").style.display="none";
+      //var input = document.getElementById('pac-input');
     
 
-  } else {
-           alert('Geocode was not successful for the following reason: ' + status);
-         }
+      this.nearbyArray.length = 0
+
+
+       let marker = new google.maps.Marker({
+        map: map,
+        zoom: 10,
+       animation: google.maps.Animation.DROP,
+        icon: {
+          url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+        },
+        position: ({lat: this.Searchlat,lng:this.Searchlng})
+      });
+
+      document.getElementById("hide").style.display="none";
+
+  // } else {
+  //          alert('Geocode was not successful for the following reason: ' + status);
+  //        }
          
 
   })
@@ -848,8 +853,134 @@ setTimeout(()=>{
 
 
 
-nextpage(){
-  this.navCtrl.push(SearchPage);
+serc (address){
+  let Searchlat ;
+  let Searchlng ;
+
+  let geocoder = new google.maps.Geocoder();
+
+  geocoder.geocode({'address': address}, (results, status)=>{
+
+    if (status === 'OK') {
+      //this.desLatLng = results[0].geometry.location;
+    
+      Searchlat = results[0].geometry.location.lat();
+      Searchlng = results[0].geometry.location.lng();
+
+  
+     console.log( Searchlat);
+     console.log( Searchlat);
+}
+
+
+this.map = new google.maps.Map(document.getElementById('map'), {
+  zoom: 12,
+  center: { lat:  Searchlat , lng:Searchlng },
+  disableDefaultUI: true,
+  //styles: this.media.mapstyle
+});
+
+this.nearbyArray.length = 0 ;
+
+
+
+let marker = new google.maps.Marker({
+  map: this.map,
+  zoom: 10,
+ animation: google.maps.Animation.DROP,
+  icon: {
+    url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+  },
+  position: ({lat: Searchlat,lng:this.Searchlng})
+});
+
+
+this.farmEatDb.getSearchbyFarms(Searchlat,Searchlng).then((radius)=>{
+  this.farmEatDb.getallFarms().then((data)=>{
+    console.log(data);
+    this.farmEatDb.getSearchedFarm(Searchlat,Searchlng,radius,data).then((data:any)=>{
+      console.log(data);
+
+      this.nearbyArray =data
+
+      console.log(this.nearbyArray);
+      
+
+      document.getElementById("hide").style.display="none"
+
+
+      for (let index = 0; index < this.nearbyArray.length; index++) {
+      
+        if (this.nearbyArray[index].aquatic == "true") {
+           this.icon = '../../assets/imgs/fish-icon.png';
+           console.log('inaqautic');
+ 
+           console.log('inif statement');
+           
+ 
+           console.log(this.nearbyArray[index].aquatic);
+         } else if (this.nearbyArray[index].beeKeeping == "true") {
+           this.icon = "../../assets/imgs/Bee-icon.png";
+           console.log('inbeekeeping');
+         } else if (this.nearbyArray[index].crops == "true") {
+           this.icon = "../../assets/imgs/tree-icon.png";
+           console.log('incrop');
+         }
+ 
+         console.log( parseFloat(this.nearbyArray[index].lat));
+         console.log( parseFloat(this.nearbyArray[index].lng));
+         
+         
+         this.loca = new google.maps.LatLng(Searchlat, Searchlng);
+         console.log(this.loca);
+
+         alert("kb")
+         
+         let destination =new google.maps.LatLng(this.nearbyArray[index].lat, this.nearbyArray[index].lng);
+         //calling method to display route from a to b
+         this.calculateAndDisplayRoute(this.loca, destination, this.directionsDisplay, this.directionsService);
+        // this.directionsDisplay.setMap(this.map);
+       
+        
+         var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/'
+         this.abmarker = new google.maps.Marker({
+           map: this.map,
+           icon: this.icon,
+ 
+         
+           position: { lat: parseFloat(this.nearbyArray[index].lat), lng: parseFloat(this.nearbyArray[index].lng) },
+           label: name,
+           zoom: 10,
+ 
+         });
+
+
+
+         this.abmarker.addListener('click', () => {
+
+
+          console.log("clicked marker");
+
+          //this.map = new google.maps.Map(this.mapRef.nativeElement, options);
+
+          console.log(Searchlat);
+          console.log( Searchlng);
+          
+          
+
+         
+        })
+
+
+        }
+      
+    })
+    
+  })
+})
+
+})
+
 }
 
 initializeItems() {
