@@ -51,7 +51,7 @@ page-home {
     .card{
         border-radius: 8px;
         display: flex;
-        box-shadow: 10px 10px 10px rgb(204, 204, 204)
+        box-shadow: 0px 0px 20px    rgba(0, 0, 0, 0.514)
     }
     ion-card-title{
         padding: 10px;
@@ -62,6 +62,13 @@ page-home {
         padding: 5%;
       
     }
+
+
+    // .list {
+
+    //     position: absolute;
+
+    // }
   
     // .fab-md-dark-green {
     //     color: rgb(0, 0, 0);
@@ -92,7 +99,7 @@ ion-slides {
     position: absolute;
     top:0%;
     z-index: 999;
-    //box-shadow: 10px 10px 10px rgb(197, 197, 197)
+   
 }
 .searchbar-md .searchbar-input {
     padding: 6px 55px;
@@ -105,8 +112,11 @@ ion-slides {
     color: #141414;
     background-color: #fff;
     box-shadow: 10px 10px 10px rgb(211, 211, 211)
-    //box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  
 } 
+.fruits{
+    display: flex;
+}
 
 
 
@@ -114,21 +124,13 @@ ion-slides {
 
 .label-md {
      margin: 0px 0px 0px 0; 
-     top:-20%;
+     top:-8%;
      position: relative;
 }
-    //   ion-label {
-    //     margin: 0;
-    //     display: block;
-    //     overflow: hidden;
-    //     -webkit-box-flex: 1;
-    //     -webkit-flex: 1;
-    //     -ms-flex: 1;
-    //     flex: 1;
-    //     font-size: inherit;
-    //     text-overflow: ellipsis;
-    //     white-space: nowrap;
-    // }
+.imgz{
+    height: 30px;
+}
+
     
    
    
