@@ -1,6 +1,6 @@
 
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { FarmEatProvider } from '../../providers/farm-eat/farm-eat'
 import { DescriptionPage } from '../description/description';
@@ -51,7 +51,7 @@ export class HomePage {
 
       
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geo: Geolocation, private farmEatDb: FarmEatProvider, public alertCtrl: AlertController, private nativePageTransitions: NativePageTransitions, public loadingCtrl: LoadingController,public modalCtrl:ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geo: Geolocation, private farmEatDb: FarmEatProvider, public alertCtrl: AlertController, private nativePageTransitions: NativePageTransitions, public loadingCtrl: LoadingController) {
 
   }
 
@@ -409,25 +409,7 @@ export class HomePage {
         });
 
 
-      //  else if (this.trackSearch.length == 1) {
-       
-
-      //   let a = this.searchArea.lat;
-      //   let b = this.searchArea.lng
-
-
-
-
-      //   let marker = new google.maps.Marker({
-      //     map: this.map,
-      //     zoom: 8,
-      //     // animation: google.maps.Animation.DROP,
-      //     position: this.map.setCenter({ lat: parseFloat(a), lng: parseFloat(b) })
-      //   });
-
-      // }
-
-      
+    
 
       for (let index = 0; index < this.nearbyArray.length; index++) {
       
@@ -580,38 +562,21 @@ export class HomePage {
 
   slideChanged() {
 
-    //declaring google map services
-    // var directionsService = new google.maps.DirectionsService;
-    // var directionsDisplay = new google.maps.DirectionsRenderer;
+   
 
     let currentIndex = this.slides.getActiveIndex();
     let currentLat = this.nearbyArray[currentIndex].lat
     let currentLon = this.nearbyArray[currentIndex].lng
-  //  console.log(this.slideArr[currentIndex].getAnimation());
-
-
-    // if (this.slideArr[currentIndex].getAnimation() != null) {
-    //   console.log("has Anime");
-    //   this.slideArr[currentIndex].setAnimation(null);
-    // } else {
+  
     if (this.directionsDisplay != null) {
       this.directionsDisplay.setMap(null);
-      // directionsDisplay = null;
+     
         console.log("directionDisplay has something");
         
     } else {
       console.log("directionDisplay has nothing");
     }
-    // let marker = new google.maps.Marker({
-    //   // map: this.map,
-    //   //icon: iconBase + 'farm_maps.png',
-
-
-    //   position: this.map.setCenter({ lat: parseFloat(currentLat), lng: parseFloat(currentLon) }),
-    //   //animation: this.slideArr[currentIndex].setAnimation(google.maps.Animation.BOUNCE),
-    //   label: name,
-    //   zoom: 20,
-    // })
+  
 
     this.directionsDisplay.setMap(this.map);
     let destination = new google.maps.LatLng(currentLat, currentLon);
@@ -623,24 +588,7 @@ export class HomePage {
         destinations: [destination],
         travelMode: 'DRIVING'
       }, this.callback);
-    //   setTimeout(() => {
-
-    //     this.slideArr[currentIndex].setAnimation(null);
-
-    //   }, 2000)
-
-    // }
-
-    // let marker = new google.maps.Marker({
-    //  // map: this.map,
-    //  //icon: iconBase + 'farm_maps.png',
-
-
-    //   position:  this.map.setCenter({lat: parseFloat( currentLat),lng:parseFloat( currentLon)}),
-    //   animation: this.slideArr[currentIndex].setAnimation(google.maps.Animation.BOUNCE),
-    //   label:name ,
-    //   zoom:20 ,
-    // })
+  
 
     console.log(currentLat);
 
@@ -682,173 +630,22 @@ console.log(info);
 
     let options: NativeTransitionOptions = {
       direction: 'up',
-      duration: 1000,         
+      duration: 600,
+         slowdownfactor: 3,
+         slidePixels: 20,
+         iosdelay: 100,
+         androiddelay: 250,
+         fixedPixelsTop: 0,
+         fixedPixelsBottom: 60
      };
  
-    this.nativePageTransitions.slide(options);
+    this.nativePageTransitions.fade(options);
     var info = this.nearbyArray[i]
-    let Modal = this.modalCtrl.create(DescriptionPage, {description: info} );
-   
-    // this.navCtrl.push(DescriptionPage, {description: info} )
-     Modal.present();
+    this.navCtrl.push(DescriptionPage, {description: info} )
   }
 
  
-  search(address) {
-
-    let a ;
-    let b ;
-    let map ;
-    
-    let loca  ;
-    let geocoder = new google.maps.Geocoder();
-   
-    geocoder.geocode({'address': address}, function(results, status) {
-
-    console.log(address);
-    
-        if (status === 'OK') {
-          this.desLatLng = results[0].geometry.location;
-        
-         this.Searchlat = results[0].geometry.location.lat();
-         this.Searchlng = results[0].geometry.location.lng();
-
-          a = results[0].geometry.location.lat();
-          b =results[0].geometry.location.lng()
-         console.log( this.Searchlat);
-         console.log( this.Searchlat);
-
-
-     
-      }
-
-
-
-      this.map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 12,
-        center: { lat:  this.Searchlat , lng:this.Searchlng },
-        disableDefaultUI: true,
-        //styles: this.media.mapstyle
-      });
-
-      //var input = document.getElementById('pac-input');
-    
-
-      this.nearbyArray.length = 0
-
-
-       let marker = new google.maps.Marker({
-        map: map,
-        zoom: 10,
-       animation: google.maps.Animation.DROP,
-        icon: {
-          url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-        },
-        position: ({lat: this.Searchlat,lng:this.Searchlng})
-      });
-
-      document.getElementById("hide").style.display="none";
-
-  // } else {
-  //          alert('Geocode was not successful for the following reason: ' + status);
-  //        }
-         
-
-  })
-
-setTimeout(()=>{
-
-  this.farmEatDb.getSearchbyFarm(a, b).then((radius)=>{
-    console.log(radius);
-    this.farmEatDb.getallFarms().then((data)=>{
-      this.farmEatDb. getSearchedFarm(a, b,radius,data).then((searchedFarm:any)=>{
-        console.log(searchedFarm);
-        this.nearbyArray=searchedFarm;
-        console.log( this.nearbyArray);
-
-
-        for (let index = 0; index < this.nearbyArray.length; index++) {
-      
-         if (this.nearbyArray[index].aquatic == "true") {
-            this.icon = '../../assets/imgs/fish-icon.png';
-            console.log('inaqautic');
   
-            console.log('inif statement');
-            
-  
-            console.log(this.nearbyArray[index].aquatic);
-          } else if (this.nearbyArray[index].beeKeeping == "true") {
-            this.icon = "../../assets/imgs/Bee-icon.png";
-            console.log('inbeekeeping');
-          } else if (this.nearbyArray[index].crops == "true") {
-            this.icon = "../../assets/imgs/tree-icon.png";
-            console.log('incrop');
-          }
-  
-          console.log( parseFloat(this.nearbyArray[index].lat));
-          console.log( parseFloat(this.nearbyArray[index].lng));
-          
-          
-  
-         
-          var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/'
-          this.abmarker = new google.maps.Marker({
-            map: map,
-            icon: this.icon,
-  
-          
-            position: { lat: parseFloat(this.nearbyArray[index].lat), lng: parseFloat(this.nearbyArray[index].lng) },
-            label: name,
-            zoom: 10,
-  
-          });
-  
-          this.slideArr.push(this.abmarker)
-          console.log(this.slideArr);
-  
-          let destination = new google.maps.LatLng(this.nearbyArray[index].lat, this.nearbyArray[index].lng);
-  
-          this.abmarker.addListener('click', () => {
-  
-  
-            console.log("clicked marker");
-  
-            //this.map = new google.maps.Map(this.mapRef.nativeElement, options);
-
-
-            console.log(this.loca)
-
-            setTimeout(()=>{
-              this.loca =new google.maps.LatLng(a, b);
-              console.log(this.loca);
-
-            }, 6000)
-            
-         
-            
-  
-  
-            //calling method to display route from a to b
-            this.calculateAndDisplayRoute(this.loca, destination, this.directionsDisplay, this.directionsService);
-           // this.directionsDisplay.setMap(this.map);
-          
-          })
-  
-        }
-        
-      })
-    })
-    
-  })
-}, 1200)
-  
-
-  
-  
-  
-}
-
-
 
 serc (address){
   let Searchlat ;
@@ -872,9 +669,9 @@ serc (address){
 
 this.map = new google.maps.Map(document.getElementById('map'), {
   zoom: 12,
-  center: { lat:  Searchlat , lng:Searchlng },
+  center: { lat:  parseFloat(Searchlat) , lng:parseFloat(Searchlng) },
   disableDefaultUI: true,
-  //styles: this.media.mapstyle
+  
 });
 
 this.nearbyArray.length = 0 ;
@@ -888,7 +685,7 @@ let marker = new google.maps.Marker({
   icon: {
     url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
   },
-  position: ({lat: Searchlat,lng:this.Searchlng})
+  position: ({lat: parseFloat(Searchlat) , lng:parseFloat(Searchlng)})
 });
 
 
@@ -901,6 +698,16 @@ this.farmEatDb.getSearchbyFarms(Searchlat,Searchlng).then((radius)=>{
       this.nearbyArray =data
 
       console.log(this.nearbyArray);
+
+      if(this.nearbyArray.length == 0 ){
+
+        const alert = this.alertCtrl.create({
+          title: 'New Friend!',
+          subTitle: 'Your friend, Obi wan Kenobi, just ac',
+          buttons: ['OK']
+        });
+        alert.present();
+      }
       
 
       document.getElementById("hide").style.display="none"
@@ -910,35 +717,32 @@ this.farmEatDb.getSearchbyFarms(Searchlat,Searchlng).then((radius)=>{
       
         if (this.nearbyArray[index].aquatic == "true") {
            this.icon = '../../assets/imgs/fish-icon.png';
-           console.log('inaqautic');
- 
-           console.log('inif statement');
+        
+       
            
  
            console.log(this.nearbyArray[index].aquatic);
          } else if (this.nearbyArray[index].beeKeeping == "true") {
            this.icon = "../../assets/imgs/Bee-icon.png";
-           console.log('inbeekeeping');
+       
          } else if (this.nearbyArray[index].crops == "true") {
            this.icon = "../../assets/imgs/tree-icon.png";
-           console.log('incrop');
+          
          }
  
          console.log( parseFloat(this.nearbyArray[index].lat));
          console.log( parseFloat(this.nearbyArray[index].lng));
-         
+          
          
          this.loca = new google.maps.LatLng(Searchlat, Searchlng);
          console.log(this.loca);
 
-         alert("kb")
+       
          
          let destination =new google.maps.LatLng(this.nearbyArray[index].lat, this.nearbyArray[index].lng);
-         //calling method to display route from a to b
+      
          this.calculateAndDisplayRoute(this.loca, destination, this.directionsDisplay, this.directionsService);
-        // this.directionsDisplay.setMap(this.map);
-       
-        
+    
          var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/'
          this.abmarker = new google.maps.Marker({
            map: this.map,
@@ -988,7 +792,10 @@ initializeItems() {
       "Midrand" ,
       "Braamfontein" ,
       "Durban",
-      "Capetown"
+      "Capetown" ,
+      "Pretoria" ,
+      "Krugerdorp" ,
+      
       
 
       
