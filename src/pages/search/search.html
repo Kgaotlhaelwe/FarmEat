@@ -23,7 +23,7 @@
 
 
   <ion-searchbar #searchz (ionInput)="getItems($event)"></ion-searchbar>
-<ion-list id="hide">
+<ion-list>
   <ion-item *ngFor="let item of items" (click)="search(item)"  >
     {{ item }}
   </ion-item>
