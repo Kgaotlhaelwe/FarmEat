@@ -21,34 +21,23 @@
             
                 <div class="adress" (click)="navigate()" >
                     <ion-icon name="md-pin" ></ion-icon>
-                    <!-- <h6>{{address}}</h6> -->
+                    
                 </div>
                 <div class="call" (click)="call(tel)">
                   <ion-icon name="md-call"></ion-icon>
-                  <!-- <h6>{{tel}}</h6> -->
+                  
                 </div>
                 <div class="email" (click)="sendEmail(email)">
                   <ion-icon name="md-mail"></ion-icon>
-                  <!-- <h6>{{email}}</h6> -->
+                 
                 </div>
                 <div class="time" >
                   <ion-icon name="logo-facebook"></ion-icon>
-                  <!-- <h6>{{facebook}}</h6> -->
+             
                 </div>
-              
-          
-           <!-- <h4>{{name}} </h4> -->
+    
     </div>
-    <!-- <div padding>
-        <ion-segment [(ngModel)]="pet" class="segment">
-          <ion-segment-button value="kittens">
-        About Us
-          </ion-segment-button>
-          <ion-segment-button value="puppies">
-            Contact Us
-          </ion-segment-button>
-        </ion-segment>
-      </div> -->
+  
       
       <div   [ngSwitch]="pet">  
         <ion-list *ngSwitchCase="'kittens'">
@@ -59,8 +48,7 @@
                   </div>
                   <h3>Green House</h3>
                   <p> {{desc}}</p>
-                  
-                  <hr>
+
                   </div>
                   <div class="farm-facilities" >
                     <h1>We offer</h1>
@@ -103,32 +91,10 @@
                         </span>
                         <!-- <span  *ngIf="aquatic == 'true'" class="Aquafarming" >Aquafarming</span> -->
                       </div>
-                 
-               
-                  <hr>
                   </div>
                 </div> 
         </ion-list>
-        <ion-list *ngSwitchCase="'puppies'">
-            <!-- <div class="contact-box">
-                <div class="adress" (click)="navigate()" >
-                    <ion-icon name="md-pin" ></ion-icon>
-                    <h6>{{address}}</h6>
-                </div>
-                <div class="call" (click)="call(tel)">
-                  <ion-icon name="md-call"></ion-icon>
-                  <h6>{{tel}}</h6>
-                </div>
-                <div class="email" (click)="sendEmail(email)">
-                  <ion-icon name="md-mail"></ion-icon>
-                  <h6>{{email}}</h6>
-                </div>
-                <div class="time" >
-                  <ion-icon name="logo-facebook"></ion-icon>
-                  <h6>{{facebook}}</h6>
-                </div>
-              </div>    -->
-        </ion-list>
+    
       </div>
     </div>
     </div>
