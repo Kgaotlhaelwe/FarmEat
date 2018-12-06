@@ -98,21 +98,21 @@ export class SearchPage {
 
              
 
-       
+       document.getElementById("hide").style.display="none";
 
             
-              this.navCtrl.push(HomePage, {searchArea:coordinate})
+             // this.navCtrl.push(HomePage, {searchArea:coordinate})
 
               
-             let loading = this.loadingCtrl.create({
-              content: 'Please wait...'
-            });
+            //  let loading = this.loadingCtrl.create({
+            //   content: 'Please wait...'
+            // });
           
-            loading.present();
+            // loading.present();
           
-            setTimeout(() => {
-              loading.dismiss();
-            }, 5000);
+            // setTimeout(() => {
+            //   loading.dismiss();
+            // }, 5000);
             
             
           
