@@ -23,6 +23,7 @@ pet
   desc:string;
   address:string;
   image: string;
+  type:string;
   crops:string;
   liveStock:string;
   aquatic: string;
@@ -51,6 +52,7 @@ pet
       this.email = this.description.email
       this.website = this.description.website
       this.facebook = this.description.facebook
+      this.type = this.type
       console.log(this.facebook);
       console.log(this.website);
       console.log(this.tel);

@@ -15,36 +15,67 @@
   </ion-toolbar>
 </ion-header> -->
 <ion-content>
-  <ion-fab top left >
-      <button ion-fab color="dark-green"  menuToggle ><ion-icon name="menu"></ion-icon></button>
+  
+      <button ion-button large class="topbtn" color="dark-green" clear menuToggle ><ion-icon name="menu"></ion-icon></button>
 
-    </ion-fab>
-<ion-content>
-  <div #map id="map"></div>
-  <h1>Neary by farms</h1>
-  <div class="cards">
+   
+
+
+  <div #map id="map" class="theMap"></div>
+
+
+
+ <ion-searchbar class="search" (input)="getItems($event)"></ion-searchbar>
+
+    <div class="cards" >
       
-    <ion-slides class="slides" (ionSlideDidChange)="slideChanged()" slidesPerView="1" centeredSlides="true" >
-       <ion-slide *ngFor="let a of nearbyArray; let i = index  " (click)="moreinfo(i)" >
+                <ion-slides class="slides" (ionSlideDidChange)="slideChanged()" slidesPerView="1" centeredSlides="true" >
+                   <ion-slide *ngFor="let a of nearbyArray; let i = index  " (click)="moreinfo(i)" >
+                     
+              <div class="cards">
+                     <ion-card class="card">
+                        <img src="{{a.image}}" class="imgs">
+                          <ion-item >
+                           
+                            <h2 text-left>{{a.name}}</h2>
+                            <p text-left>{{a.type}}</p>
+                          </ion-item>
+  
+                        </ion-card> 
+                      </div>
+                    </ion-slide> 
+                  </ion-slides>
+                </div>  
          
-  <div class="cards">
-         <ion-card class="card">
 
-              <ion-item color="dark-green">
-                <p text-center>{{a.type}}</p>
-                <h2 text-center>{{a.name}}</h2>
-              </ion-item>
+
+    <!-- <div class="cont"> -->
+        <!-- <div class="handle">  -->
+            <!-- <div class="ico" (click)="changeMapSize()">
+              <p align="center" class="theArrow"><ion-icon class="theIcon" name="add"></ion-icon></p>
+            </div>
+            <div class="cards">
+      
+                <ion-slides class="slides" (ionSlideDidChange)="slideChanged()" slidesPerView="1" centeredSlides="true" >
+                   <ion-slide *ngFor="let a of nearbyArray; let i = index  " (click)="moreinfo(i)" >
+                     
+              <div class="cards">
+                     <ion-card class="card">
+                        <img src="{{a.image}}" class="imgs">
+                          <ion-item >
+                           
+                            <h2 text-left>{{a.name}}</h2>
+                            <p text-left>{{a.type}}</p>
+                          </ion-item>
+  
+                        </ion-card> 
+                      </div>
+                    </ion-slide> 
+                  </ion-slides>
+                </div>  
             
-              <img src="{{a.image}}" class="imgs">
-              <h2>What we offer</h2>
-             
-              <ion-card-content color="dark-green">
-                  <p></p>
-              </ion-card-content>
-            </ion-card> 
-          </div>
-        </ion-slide> 
-      </ion-slides>
-    </div>
+         
+            -->
+      <!-- </div> -->
 
 </ion-content>
