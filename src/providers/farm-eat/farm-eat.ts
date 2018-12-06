@@ -20,13 +20,25 @@ export class FarmEatProvider {
   newFeedArray = new Array();
   newSeachedFarms = new Array() ;
   condition;
-
+  userID;
   
   
   constructor(public http: HttpClient , private geolocation :  Geolocation) {
     console.log('Hello FarmEatProvider Provider');
+    var user = firebase.auth().currentUser;
+
+    console.log(firebase.auth().currentUser);
+    
+    console.log(user);
+    console.log("Nthabi");
+    
+    
+    //this.userID= firebase.auth().currentUser.uid;
+    // console.log(this.userID);
+    
   }
 
+  
   checkstate(){
     return new Promise((resolve, reject)=>{
     firebase.auth().onAuthStateChanged((user)=>
@@ -34,6 +46,8 @@ export class FarmEatProvider {
       if (user != null) {
        // alert('user signed in')
        this.condition = 1
+       console.log(user.uid);
+       this.userID = user.uid
    
       } else {
    
@@ -46,6 +60,53 @@ export class FarmEatProvider {
   })
   }
 
+  // editCover(url){
+  //   return new Promise ((accpt, rej) =>{
+  //     var uid= firebase.auth().currentUser.uid;
+  //       firebase.database().ref("user/"+uid).update({
+  //         cover:url
+  //       })
+  //       accpt()
+  //   })
+  // }
+
+  // editPropic(url){
+  //   return new Promise ((accpt, rej) =>{
+  //  let uid= firebase.auth().currentUser.uid;
+  //       firebase.database().ref("user/"+uid).update({
+  //         proPicture:url
+  //       })
+  //       accpt()
+  //   })
+  // }
+
+
+  editUser(username){
+    return new Promise ((accpt, rej) =>{
+      let uid= firebase.auth().currentUser.uid;
+      var updates = {
+        username: username
+      }
+     
+        firebase.database().ref("user/"+uid).update(updates)
+
+        accpt()
+    })
+  }
+
+  getUser(){
+    return new Promise ((accpt, rej) =>{
+      // let uid= firebase.auth().currentUser.uid;
+      console.log(this.userID);
+      firebase.database().ref('user/'+this.userID).on('value' , (data:any)=>{
+        var user =data.val();
+        console.log(user);
+        accpt(user)
+       
+
+      })
+    })
+  }
 
 
   createPositionRadius(latitude, longitude){
@@ -387,7 +448,8 @@ console.log('in');
         firebase.database().ref("user/"+uid).set({
           username:username,
           email:email,
- 
+          proPicture:"../../assets/imgs/default-profile-picture1-744x744.jpg",
+          cover: "../../assets/imgs/cover.jpg"
         })
 
         resolve()

@@ -1,8 +1,20 @@
 <ion-menu  [content]="content">
-  <ion-header >
+  <ion-header (click)="goProfile()">
     <ion-toolbar color="dark-green">
+      <div class="propic">
+          <img src="{{proPic}}">
+      </div>
+      <div class="info">
+          <div class="username">
+              {{username}}
+           </div>
+           <div class="email">
+              {{email}}
+           </div>
+      </div>
+       
+       
         
-      <ion-title text-center >Farm' eat</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -31,10 +43,10 @@
   <ion-icon color="dark-green" class="icons" ios="ios-paper" md="md-paper"></ion-icon>
   News Feed
 </button>
-<!-- <button class="options"  menuClose ion-item icon-left no-line (click)="nav.setRoot(pages2.farmForumPage)">
+<button class="options"  menuClose ion-item icon-left no-line (click)="nav.setRoot(pages2.farmForumPage)">
   <ion-icon color="dark-green" class="icons" name="ios-people"></ion-icon>
   Farm Forum
-</button> -->
+</button>
 
 <button class="options"  menuClose ion-item no-line icon-left (click)="signOut()">
     <ion-icon color="dark-green" class="icons" ios="ios-power" md="md-power"></ion-icon>
