@@ -1,28 +1,45 @@
 
 <ion-content >
-    <div class="body-container">
+    <div no-padding class="body-container">
   
     <div class="header-box" >
+      
    <div class="ion-card"  >
       <ion-slides pager effect="coverflow" class="cards" (ionSlideDidChange)="slideChanged()">
   
           <ion-slide *ngFor="let i of image"  >
               <img class="img" src="{{i}}" alt="">
           </ion-slide>
+         
         </ion-slides>
-        <div class="address-box">
-            <div class="first-column" >
-             <h4>{{name}} </h4>
-              </div>
-            <div class="second-column" >
-               <ion-fab  mini right>
-                 <button class="fab-button" ion-fab color="dark-green" (click)="navigate()" ><img  class="btn"src="../../assets/imgs/icons8_Route_100px_2.png"></button>
-                </ion-fab>
-          </div>
-    
-        </div>
+         <ion-fab  mini bottom right>
+              <button class="fab-button" ion-fab color="dark-green" (click)="navigate()" ><img  class="btn"src="../../assets/imgs/icons8_Route_100px_2.png"></button>
+             </ion-fab>
+      
     </div>
-    <div padding>
+    <div no-padding class="contact-box">
+            
+                <div class="adress" (click)="navigate()" >
+                    <ion-icon name="md-pin" ></ion-icon>
+                    <!-- <h6>{{address}}</h6> -->
+                </div>
+                <div class="call" (click)="call(tel)">
+                  <ion-icon name="md-call"></ion-icon>
+                  <!-- <h6>{{tel}}</h6> -->
+                </div>
+                <div class="email" (click)="sendEmail(email)">
+                  <ion-icon name="md-mail"></ion-icon>
+                  <!-- <h6>{{email}}</h6> -->
+                </div>
+                <div class="time" >
+                  <ion-icon name="logo-facebook"></ion-icon>
+                  <!-- <h6>{{facebook}}</h6> -->
+                </div>
+              
+          
+           <!-- <h4>{{name}} </h4> -->
+    </div>
+    <!-- <div padding>
         <ion-segment [(ngModel)]="pet" class="segment">
           <ion-segment-button value="kittens">
         About Us
@@ -31,46 +48,69 @@
             Contact Us
           </ion-segment-button>
         </ion-segment>
-      </div>
+      </div> -->
       
       <div   [ngSwitch]="pet">  
         <ion-list *ngSwitchCase="'kittens'">
             <div class="body-box" >
                 <div class="description-section"  >
                   <div class="sub-title">
-                    <h1>Farm Description</h1>
-                     {{desc}}
+                    <h2>{{name}}</h2>
                   </div>
+                  <h3>Green House</h3>
+                  <p> {{desc}}</p>
+                  
                   <hr>
                   </div>
                   <div class="farm-facilities" >
-                    <h1>What we offer</h1>
-                    <hr>
-                    <div class="container" >
-                      <div class="crops" >
-                        <span *ngIf="crops == 'true'"><img   src="../../assets/imgs/icons8_Sprout_96px.png" alt=""></span>
-                        <span *ngIf="crops == 'true'" class="crops-name" >Crops</span>
+                    <h1>We offer</h1>
+                  
+                   
+                      <div class="container-crops" >
+                        <span *ngIf="crops == 'true'">
+                          <img   src="../../assets/imgs/icons8_Beet_100px_2.png" alt=""> 
+                          <img src="../../assets/imgs/icons8_Cabbage_100px_1.png" alt="">
+                          <img src="../../assets/imgs/Broccoli_100px.png" alt="">
+                          <img src="../../assets/imgs/Pumpkin_100px.png" alt="">
+                          <img src="../../assets/imgs/Watermelon_100px.png" alt="">
+                          <img src="../../assets/imgs/icons8_Carrot_100px.png" alt="">
+                          <!-- <img src="../../assets/imgs/icons8_Sashimi_96px.png" alt=""> -->
+                          <img src="" alt="">
+                         </span>
+                        <!-- <span *ngIf="crops == 'true'" class="crops-name" >Crops</span> -->
                       </div>
-                      <div class="livestock" >
-                        <span *ngIf="liveStock == 'true'" ><img src="../../assets/imgs/icons8_Cow_96px_1.png" alt=""></span>
-                        <span  *ngIf="liveStock == 'true'" class="livestock-name" >Livestock</span>
+                      <div class="container-livestock" >
+                        <span *ngIf="liveStock == 'true'" >
+                          <img src="../../assets/imgs/icons8_Cow_96px_1.png" alt="">
+                          <img src="../../assets/imgs/icons8-chicken-48.png" alt="">
+                          <img src="../../assets/imgs/Pig_100px.png" alt="">
+                          <img src="../../assets/imgs/Lamb_100px.png" alt="">
+                          <img src="../../assets/imgs/" alt="">
+                        </span>
+                        <!-- <span  *ngIf="liveStock == 'true'" class="livestock-name" >Livestock</span> -->
                       </div>
-                      <div class="beeKeeping" >
-                        <span *ngIf="beeKeeping == 'true'" ><img src="../../assets/imgs/icons8_Bee_96px.png" alt=""></span>
-                        <span  *ngIf="beeKeeping == 'true'"class="beeKeeping-name" >Beekeeping</span>
+                      <div class="container-beeKeeping" >
+                        <span *ngIf="beeKeeping == 'true'" >
+                          <img src="../../assets/imgs/icons8_Bee_96px.png" alt="">
+                          <img src="../../assets/imgs/icons8_Honey_96px.png" alt="">
+                        </span>
+                        <!-- <span  *ngIf="beeKeeping == 'true'"class="beeKeeping-name" >Beekeeping</span> -->
                       </div>
-                      <div class="Aquafarming" >
-                        <span *ngIf="aquatic == 'true'"><img src="../../assets/imgs/icons8_Bee_96px.png" alt=""></span>
-                        <span  *ngIf="aquatic == 'true'" class="Aquafarming" >Aquafarming</span>
+                      <div class="container-Aquafarming" >
+                        <span *ngIf="aquatic == 'true'">
+                          <img src="../../assets/imgs/icons8_Bee_96px.png" alt="">
+                          <img src="../../assets/imgs/icons8_Sashimi_96px.png" alt="">
+                        </span>
+                        <!-- <span  *ngIf="aquatic == 'true'" class="Aquafarming" >Aquafarming</span> -->
                       </div>
-                      </div>
+                 
                
                   <hr>
                   </div>
                 </div> 
         </ion-list>
         <ion-list *ngSwitchCase="'puppies'">
-            <div class="contact-box">
+            <!-- <div class="contact-box">
                 <div class="adress" (click)="navigate()" >
                     <ion-icon name="md-pin" ></ion-icon>
                     <h6>{{address}}</h6>
@@ -87,7 +127,7 @@
                   <ion-icon name="logo-facebook"></ion-icon>
                   <h6>{{facebook}}</h6>
                 </div>
-              </div>   
+              </div>    -->
         </ion-list>
       </div>
     </div>

@@ -50,6 +50,16 @@ export class HomePage {
 
   ionViewDidEnter() {
 
+    const loader = this.loadingCtrl.create({
+      content: "Please wait...",
+      duration:7000
+      
+    });
+    
+    loader.present();
+
+    
+
     // this.deleteMarkers()
 
     this.nearbyArray = [];
