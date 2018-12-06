@@ -16,6 +16,7 @@ import { LoadingController } from 'ionic-angular';
 
 
 declare var google: any;
+declare var firebase
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -40,13 +41,6 @@ export class HomePage {
   service = new google.maps.DistanceMatrixService();
   geocoder = new google.maps.Geocoder;
   destinationAddress;
-<<<<<<< HEAD
-  decide = 0;
-  arrow = "arrow-down";
-  arrowDir = "arrow-down"
-  
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, private geo: Geolocation, private farmEatDb: FarmEatProvider, public alertCtrl: AlertController, private nativePageTransitions: NativePageTransitions, public loadingCtrl: LoadingController) {
-=======
 
 
    Searchlat  ;
@@ -54,16 +48,23 @@ export class HomePage {
 
    searchQuery: string = '';
   items: string[];
-
+  
       
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geo: Geolocation, private farmEatDb: FarmEatProvider, public alertCtrl: AlertController, private nativePageTransitions: NativePageTransitions, public loadingCtrl: LoadingController) {
->>>>>>> 9219ce56921238d8bb299f2e26793c2c81dc89a6
-
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geo: Geolocation, private farmEatDb: FarmEatProvider, public alertCtrl: AlertController, private nativePageTransitions: NativePageTransitions, public loadingCtrl: LoadingController, public modalCtrl: ModalController) {
+    
   }
 
 
   ionViewDidEnter() {
+    let userID = this.navParams.get('userID')
+    console.log(userID);
+    
+    firebase.database().ref('user/'+userID).on('value' , (data:any)=>{
+      var user =data.val();
+      console.log(user);
+
+    })
 
     const loader = this.loadingCtrl.create({
       content: "Loading map, Please wait...",

@@ -38,7 +38,14 @@ export class RegisterPage {
   
     if(this.user.email !=null  && this.user.password  !=null  ){
     this.farmEatDb.register(user.email ,user.password, user.username ).then(()=>{
-   
+      let userID = firebase.auth().currentUser; 
+      firebase.database().ref('user/'+userID).on('value' , (data:any)=>{
+        
+        var user =data.val();
+        console.log(user);
+
+      })
+    
      
     //   const alert = this.alertCtrl.create({
     //     subTitle: 'You have successfully registered',
@@ -52,7 +59,7 @@ export class RegisterPage {
     //   content: "Logging in please wait...",
     //   duration: 3000
     // });
-    this.navCtrl.setRoot(HomePage)
+    this.navCtrl.setRoot(HomePage, {userID:userID})
     //loader.present();
   
   

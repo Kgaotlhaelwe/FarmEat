@@ -20,6 +20,9 @@ import { RegisterPage } from '../register/register';
 })
 export class LoginPage {
   user = {} as user ;
+  username;
+  email;
+  proPic;
   constructor(public navCtrl: NavController, public navParams: NavParams, public farmEatDb:FarmEatProvider, public alertCtrl:AlertController, public loadingCtrl:LoadingController,  private keyboard: Keyboard) {
   }
 
@@ -33,15 +36,19 @@ export class LoginPage {
     if(user.email !=undefined && user.password !=undefined){
       this.farmEatDb.login(user.email ,user.password).then(()=>{
         var users= firebase.auth().currentUser;
+        let userID = users.uid
         console.log(users.uid);
-        
+        firebase.database().ref('user/'+userID).on('value' , (data:any)=>{
+          var user =data.val();
+          console.log(user);
+        })
       
         // const loader = this.loadingCtrl.create({
         //   content: "Logging in please wait...",
         //   duration: 3000
         // });
         // loader.present();
-        this.navCtrl.setRoot(HomePage)
+        this.navCtrl.setRoot(HomePage, {userID:userID})
       
       
       

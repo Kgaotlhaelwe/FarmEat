@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation';
-
+import { Events } from 'ionic-angular';
 
 declare var firebase
 
@@ -23,10 +23,16 @@ export class FarmEatProvider {
   userID;
   
   
-  constructor(public http: HttpClient , private geolocation :  Geolocation) {
+  constructor(public http: HttpClient , private geolocation :  Geolocation, public events: Events) {
     console.log('Hello FarmEatProvider Provider');
-    var user = firebase.auth().currentUser;
-
+    let user = firebase.auth().currentUser;
+    //let id = user.uid
+    console.log(user);
+    
+      
+      this.events.publish('user:created', user, Date.now());
+   
+    
     console.log(firebase.auth().currentUser);
     
     console.log(user);
@@ -38,6 +44,13 @@ export class FarmEatProvider {
     
   }
 
+  getUID(){
+    return new Promise((resolve, reject)=>{
+      let userID = firebase.auth().currentUser.uid
+      resolve(userID);
+    })
+  }
+
   
   checkstate(){
     return new Promise((resolve, reject)=>{
@@ -47,8 +60,9 @@ export class FarmEatProvider {
        // alert('user signed in')
        this.condition = 1
        console.log(user.uid);
+
        this.userID = user.uid
-   
+       this.events.publish('user:created', this.userID, Date.now());
       } else {
    
         this.condition = 0
@@ -493,11 +507,15 @@ console.log('in');
 
 signout(){
   return new Promise((resolve, reject)=>{ 
-    firebase.auth().signOut().then(function() {
+    firebase.auth().signOut().then(()=>{
+      // console.log("Logged out");
+       // Revoke all refresh tokens for a specified user for whatever reason.
+      // Retrieve the timestamp of the revocation, in seconds since the epoch.
+     
+      resolve()
     }).catch(function(error) {
-  
+      console.log(error);
     });
-    resolve()
   })
 
 }
@@ -548,3 +566,6 @@ loapMap(){
   
 }
 }
+
+var userId = []
+export default userId

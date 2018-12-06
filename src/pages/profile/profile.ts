@@ -28,10 +28,9 @@ export class ProfilePage {
       
   }
 
-  ionViewWillEnter(){
+  ionViewDidEnter(){
     this.farmEat.getUser().then((data:any)=>{
       console.log(data);
-      
       this.username = data.username
       this.email = data.email
       this.coverUrl = data.cover
@@ -224,6 +223,7 @@ export class ProfilePage {
                 duration: 3000
               });
               toast.present();
+              this.navCtrl.push(ProfilePage);
             })
           }
         }
