@@ -26,9 +26,17 @@
 .propic{
     height: 80px;
     width: 80px;
-    border-radius: 50px;
+    border-radius: 10px;
 }
 
-.info{
-    
+.flex{
+    display: flex;
+    justify-content: center;
+}
+.pic{
+    border-radius: 50px
+}
+h1,h6{
+    margin: 0%;
+    color: white
 }
