@@ -17,26 +17,40 @@
 .color{
     color: #087150
 }
-.flex{
-    display: flex;
-    justify-content: center;
-    flex-direction: column
-}
+// .flex{
+//     display: flex;
+//     justify-content: center;
+//     flex-direction: column
+// }
 
 .propic{
+    display: flex;
+    position: relative;
     height: 80px;
     width: 80px;
     border-radius: 10px;
+    
 }
 
-.flex{
-    display: flex;
-    justify-content: center;
-}
+// .flex{
+//     display: flex;
+//     justify-content: center;
+// }
 .pic{
-    border-radius: 50px
+    height: 80px;
+    width: 80px;
+    border-radius: 50px;
+    position: relative;
+    top: 30%;
+    // left: 190%;
+    // transform: translate(-50%, -50%);
 }
 h1,h6{
     margin: 0%;
     color: white
+}
+.info{
+    position: relative;
+    top: -28px
+
 }

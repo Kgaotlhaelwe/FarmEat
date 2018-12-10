@@ -7,19 +7,17 @@ import { FarmEatProvider } from '../../providers/farm-eat/farm-eat'
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
  declare var firebase;
 
-@IonicPage()
+ 
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
-
-  username:string = "Nthabi Mputle";
+  username:string ;
   
-  email:string = "mputle15@gmail.com";
+  email:string;
   coverUrl ;
   propicUrl;
   urlCover;
@@ -27,7 +25,6 @@ export class ProfilePage {
   constructor(public navCtrl: NavController, public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, private farmEat: FarmEatProvider) {
       
   }
-
   ionViewWillEnter(){
     this.farmEat.getUser().then((data:any)=>{
       console.log(data);
@@ -38,11 +35,9 @@ export class ProfilePage {
       this.propicUrl = data.proPicture
     })
   }
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
   }
-
   uploadCover(event: any){
     if (event.target.files && event.target.files[0]) {
       let reader = new FileReader();
@@ -99,6 +94,7 @@ export class ProfilePage {
                       toast.present();
                     } else {
                       // Data saved successfully!
+                      this.navCtrl.push(ProfilePage)
                       const toast = this.toastCtrl.create({
                         message: 'Your cover picture was added successfully',
                         duration: 3000
@@ -119,7 +115,6 @@ export class ProfilePage {
  
       }
   }
-
   uploadProPic(event: any) {
     if (event.target.files && event.target.files[0]) {
       let reader = new FileReader();
@@ -175,6 +170,7 @@ export class ProfilePage {
                       toast.present();
                     } else {
                       // Data saved successfully!
+                      this.navCtrl.push(ProfilePage)
                       const toast = this.toastCtrl.create({
                         message: 'Your profile picture was added successfully',
                         duration: 3000
@@ -194,7 +190,6 @@ export class ProfilePage {
  
       }
   }
-
   editProfile(){
     const prompt = this.alertCtrl.create({
       title: 'Edit your details',
@@ -224,6 +219,7 @@ export class ProfilePage {
                 duration: 3000
               });
               toast.present();
+              this.navCtrl.push(ProfilePage)
             })
           }
         }
@@ -231,5 +227,4 @@ export class ProfilePage {
     });
     prompt.present();
   }
-
 }

@@ -1,6 +1,6 @@
 
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { FarmEatProvider } from '../../providers/farm-eat/farm-eat'
 import { DescriptionPage } from '../description/description';
@@ -14,7 +14,6 @@ import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/na
 
 import { LoadingController } from 'ionic-angular';
 import { THIS_EXPR } from '../../../node_modules/@angular/compiler/src/output/output_ast';
-
 
 declare var google: any;
 @Component({
@@ -41,7 +40,8 @@ export class HomePage {
   service = new google.maps.DistanceMatrixService();
   geocoder = new google.maps.Geocoder;
   destinationAddress;
-
+  kiloMeter = "0";
+  duration = "0";
 
    Searchlat  ;
    Searchlng ;
@@ -49,9 +49,15 @@ export class HomePage {
    searchQuery: string = '';
   items: string[];
 
+  brocolli;
+  watermelon ;
+  pumpkin ;
+  redPaper ;
+  searchbar ;
+
       
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geo: Geolocation, private farmEatDb: FarmEatProvider, public alertCtrl: AlertController, private nativePageTransitions: NativePageTransitions, public loadingCtrl: LoadingController,public modalCtrl:ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geo: Geolocation, private farmEatDb: FarmEatProvider, public alertCtrl: AlertController, private nativePageTransitions: NativePageTransitions, public loadingCtrl: LoadingController) {
 
   }
 
@@ -59,7 +65,7 @@ export class HomePage {
   ionViewDidEnter() {
 
     const loader = this.loadingCtrl.create({
-      content: "Loading map, Please wait...",
+      content: "Please wait...",
       duration:7000
       
     });
@@ -68,7 +74,8 @@ export class HomePage {
 
     
 
-  
+    // this.deleteMarkers()
+
     this.nearbyArray = [];
 
     
@@ -90,7 +97,7 @@ export class HomePage {
               console.log(' duplicate outttttt');
 
             }
-           
+            //this.nearbyArray = data;
             console.log(this.nearbyArray);
 
 
@@ -100,16 +107,35 @@ export class HomePage {
         })
 
       })
-
-      
-
-      this.farmEatDb.getSearchbyFarms(26.2583 , 27.9014).then((v)=>{
-        console.log(v);
-       
-     })
    
 
-     
+      // this.farmEatDb.getSearchbyFarms(this.searchArea.lat, this.searchArea.lng).then((radius: any) => {
+      //   console.log(radius);
+      //   this.farmEatDb.getallFarms().then((data: any) => {
+      //     console.log(data);
+
+      //     this.farmEatDb.getSearchedFarm(this.searchArea.lat, this.searchArea.lng, radius, data).then((data: any) => {
+      //       console.log(data);
+      //       this.nearbyArray = data;
+      //       console.log(this.nearbySeachFarmArray);
+      //       if (this.nearbyArray.length == 0) {
+      //         const alert = this.alertCtrl.create({
+      //           title: 'Confirmation',
+      //           subTitle: 'Currently we dont have Farms around your Area',
+      //           buttons: ['OK']
+      //         });
+      //         alert.present();
+
+      //       } else {
+
+
+      //       }
+      //     })
+      //   })
+
+      // })
+
+
 
 
 
@@ -117,7 +143,7 @@ export class HomePage {
 
     setTimeout(() => {
       const loader = this.loadingCtrl.create({
-        content: "Loading map, Please wait...",
+        content: "Please wait...",
         duration:8000
         
       });
@@ -134,10 +160,9 @@ export class HomePage {
 
   loadMap() {
     //this.clearMarkers();
-    
 
     const loader = this.loadingCtrl.create({
-      content: "Loading map, Please wait...",
+      content: "Please wait...",
       
     });
     loader.present();
@@ -150,8 +175,7 @@ export class HomePage {
 
       this.loca = new google.maps.LatLng(this.lat, this.lon);
 
-      console.log(this.loca);
-      
+  
       const options = {
         center: { lat: this.lat, lng: this.lon },
         zoom: 10,
@@ -409,47 +433,31 @@ export class HomePage {
         });
 
 
-      //  else if (this.trackSearch.length == 1) {
-       
-
-      //   let a = this.searchArea.lat;
-      //   let b = this.searchArea.lng
-
-
-
-
-      //   let marker = new google.maps.Marker({
-      //     map: this.map,
-      //     zoom: 8,
-      //     // animation: google.maps.Animation.DROP,
-      //     position: this.map.setCenter({ lat: parseFloat(a), lng: parseFloat(b) })
-      //   });
-
-      // }
-
-      
+    
 
       for (let index = 0; index < this.nearbyArray.length; index++) {
-      
-        console.log('out');
-        console.log("in the loop");
-        
-        console.log(this.nearbyArray[index].aquatic);
-        console.log(this.nearbyArray[index].beeKeeping);
-        console.log(this.nearbyArray[index].crops);
+   
         if (this.nearbyArray[index].aquatic == "true") {
           this.icon = '../../assets/imgs/fish-icon.png';
-          console.log('inaqautic');
-
-          console.log('inif statement');
+        
           
 
-          console.log(this.nearbyArray[index].aquatic);
+         
         } else if (this.nearbyArray[index].beeKeeping == "true") {
           this.icon = "../../assets/imgs/Bee-icon.png";
-          console.log('inbeekeeping');
+          
+
+          this.brocolli="../../assets/imgs/icons8_Bee_96px.png";
+          this.watermelon= "../../assets/imgs/icons8_Honey_96px.png"
         } else if (this.nearbyArray[index].crops == "true") {
           this.icon = "../../assets/imgs/tree-icon.png";
+
+          this.brocolli ="../../assets/imgs/Broccoli_100px.png";
+          this.watermelon = "../../assets/imgs/Watermelon_100px.png";
+          this.pumpkin="../../assets/imgs/Pumpkin_100px.png" ;
+          this.redPaper= "../../assets/imgs/Paprika_100px.png";
+
+
           console.log('incrop');
         }
 
@@ -580,38 +588,21 @@ export class HomePage {
 
   slideChanged() {
 
-    //declaring google map services
-    // var directionsService = new google.maps.DirectionsService;
-    // var directionsDisplay = new google.maps.DirectionsRenderer;
+   
 
     let currentIndex = this.slides.getActiveIndex();
     let currentLat = this.nearbyArray[currentIndex].lat
     let currentLon = this.nearbyArray[currentIndex].lng
-  //  console.log(this.slideArr[currentIndex].getAnimation());
-
-
-    // if (this.slideArr[currentIndex].getAnimation() != null) {
-    //   console.log("has Anime");
-    //   this.slideArr[currentIndex].setAnimation(null);
-    // } else {
+  
     if (this.directionsDisplay != null) {
       this.directionsDisplay.setMap(null);
-      // directionsDisplay = null;
+     
         console.log("directionDisplay has something");
         
     } else {
       console.log("directionDisplay has nothing");
     }
-    // let marker = new google.maps.Marker({
-    //   // map: this.map,
-    //   //icon: iconBase + 'farm_maps.png',
-
-
-    //   position: this.map.setCenter({ lat: parseFloat(currentLat), lng: parseFloat(currentLon) }),
-    //   //animation: this.slideArr[currentIndex].setAnimation(google.maps.Animation.BOUNCE),
-    //   label: name,
-    //   zoom: 20,
-    // })
+  
 
     this.directionsDisplay.setMap(this.map);
     let destination = new google.maps.LatLng(currentLat, currentLon);
@@ -622,233 +613,87 @@ export class HomePage {
         origins: [this.loca],
         destinations: [destination],
         travelMode: 'DRIVING'
-      }, this.callback);
-    //   setTimeout(() => {
-
-    //     this.slideArr[currentIndex].setAnimation(null);
-
-    //   }, 2000)
-
-    // }
-
-    // let marker = new google.maps.Marker({
-    //  // map: this.map,
-    //  //icon: iconBase + 'farm_maps.png',
-
-
-    //   position:  this.map.setCenter({lat: parseFloat( currentLat),lng:parseFloat( currentLon)}),
-    //   animation: this.slideArr[currentIndex].setAnimation(google.maps.Animation.BOUNCE),
-    //   label:name ,
-    //   zoom:20 ,
-    // })
-
-    console.log(currentLat);
-
-  }
-
-  callback(response, status) {
-    if (status == 'OK') {
-      var origins = response.originAddresses;
-      var destinations = response.destinationAddresses;
-  
-      for (var i = 0; i < origins.length; i++) {
-        var results = response.rows[i].elements;
-        for (var j = 0; j < results.length; j++) {
-          var element = results[j];
-          var distance = element.distance.text;
-          var duration = element.duration.text;
-          var from = origins[i];
-          var to = destinations[j];
-          console.log(distance);
-          console.log(duration);
+      }, (response, status)=>{
+        
+        if (status == 'OK') {
+          var origins = response.originAddresses;
+          var destinations = response.destinationAddresses;
+          console.log(this.kiloMeter);
+          console.log(  this.duration);
+          for (var i = 0; i < origins.length; i++) {
+            var results = response.rows[i].elements;
+            console.log(this.kiloMeter);
+          console.log(  this.duration);
+            for (var j = 0; j < results.length; j++) {
+              var element = results[j];
+              this.kiloMeter = element.distance.text;
+              this.duration = element.duration.text;
+             console.log(this.kiloMeter);
+             console.log(  this.duration);
+             
+             
+              // console.log(distance);
+              // console.log(duration);
+            }
+          }
         }
-      }
-    }
+       });
+      console.log( this.callback);
+      
+  
+
+   document.getElementById("time").style.display="flex"
+   document.getElementById("kilos").style.display="flex"
+
   }
   ionViewWillLeave() {
 
-   
+    
    
    }
 
+   callback(response, status) {
+    console.log(this.kiloMeter);
+    console.log(  this.duration);
+    if (status == 'OK') {
+      var origins = response.originAddresses;
+      var destinations = response.destinationAddresses;
+      console.log(this.kiloMeter);
+      console.log(  this.duration);
+      for (var i = 0; i < origins.length; i++) {
+        var results = response.rows[i].elements;
+        console.log(this.kiloMeter);
+      console.log(  this.duration);
+        for (var j = 0; j < results.length; j++) {
+          var element = results[j];
+          this.kiloMeter = element.distance.text;
+          this.duration = element.duration.text;
+         console.log(this.kiloMeter);
+         console.log(  this.duration);
+         
+         
+          // console.log(distance);
+          // console.log(duration);
+        }
+      }
+    }
+   }
+
   moreinfo(i){
-console.log(i);
-
-var info = this.nearbyArray[i]
-console.log(info);
-
-   
 
 
     let options: NativeTransitionOptions = {
       direction: 'up',
-      duration: 1000,         
+      duration: 1000,
+       
      };
  
     this.nativePageTransitions.slide(options);
     var info = this.nearbyArray[i]
-    let Modal = this.modalCtrl.create(DescriptionPage, {description: info} );
-   
-    // this.navCtrl.push(DescriptionPage, {description: info} )
-     Modal.present();
+    this.navCtrl.push(DescriptionPage, {description: info} )
   }
-
  
-  search(address) {
-
-    let a ;
-    let b ;
-    let map ;
-    
-    let loca  ;
-    let geocoder = new google.maps.Geocoder();
-   
-    geocoder.geocode({'address': address}, function(results, status) {
-
-    console.log(address);
-    
-        if (status === 'OK') {
-          this.desLatLng = results[0].geometry.location;
-        
-         this.Searchlat = results[0].geometry.location.lat();
-         this.Searchlng = results[0].geometry.location.lng();
-
-          a = results[0].geometry.location.lat();
-          b =results[0].geometry.location.lng()
-         console.log( this.Searchlat);
-         console.log( this.Searchlat);
-
-
-     
-      }
-
-
-
-      this.map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 12,
-        center: { lat:  this.Searchlat , lng:this.Searchlng },
-        disableDefaultUI: true,
-        //styles: this.media.mapstyle
-      });
-
-      //var input = document.getElementById('pac-input');
-    
-
-      this.nearbyArray.length = 0
-
-
-       let marker = new google.maps.Marker({
-        map: map,
-        zoom: 10,
-       animation: google.maps.Animation.DROP,
-        icon: {
-          url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-        },
-        position: ({lat: this.Searchlat,lng:this.Searchlng})
-      });
-
-      document.getElementById("hide").style.display="none";
-
-  // } else {
-  //          alert('Geocode was not successful for the following reason: ' + status);
-  //        }
-         
-
-  })
-
-setTimeout(()=>{
-
-  this.farmEatDb.getSearchbyFarm(a, b).then((radius)=>{
-    console.log(radius);
-    this.farmEatDb.getallFarms().then((data)=>{
-      this.farmEatDb. getSearchedFarm(a, b,radius,data).then((searchedFarm:any)=>{
-        console.log(searchedFarm);
-        this.nearbyArray=searchedFarm;
-        console.log( this.nearbyArray);
-
-
-        for (let index = 0; index < this.nearbyArray.length; index++) {
-      
-         if (this.nearbyArray[index].aquatic == "true") {
-            this.icon = '../../assets/imgs/fish-icon.png';
-            console.log('inaqautic');
   
-            console.log('inif statement');
-            
-  
-            console.log(this.nearbyArray[index].aquatic);
-          } else if (this.nearbyArray[index].beeKeeping == "true") {
-            this.icon = "../../assets/imgs/Bee-icon.png";
-            console.log('inbeekeeping');
-          } else if (this.nearbyArray[index].crops == "true") {
-            this.icon = "../../assets/imgs/tree-icon.png";
-            console.log('incrop');
-          }
-  
-          console.log( parseFloat(this.nearbyArray[index].lat));
-          console.log( parseFloat(this.nearbyArray[index].lng));
-          
-          
-  
-         
-          var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/'
-          this.abmarker = new google.maps.Marker({
-            map: map,
-            icon: this.icon,
-  
-          
-            position: { lat: parseFloat(this.nearbyArray[index].lat), lng: parseFloat(this.nearbyArray[index].lng) },
-            label: name,
-            zoom: 10,
-  
-          });
-  
-          this.slideArr.push(this.abmarker)
-          console.log(this.slideArr);
-  
-          let destination = new google.maps.LatLng(this.nearbyArray[index].lat, this.nearbyArray[index].lng);
-  
-          this.abmarker.addListener('click', () => {
-  
-  
-            console.log("clicked marker");
-  
-            //this.map = new google.maps.Map(this.mapRef.nativeElement, options);
-
-
-            console.log(this.loca)
-
-            setTimeout(()=>{
-              this.loca =new google.maps.LatLng(a, b);
-              console.log(this.loca);
-
-            }, 6000)
-            
-         
-            
-  
-  
-            //calling method to display route from a to b
-            this.calculateAndDisplayRoute(this.loca, destination, this.directionsDisplay, this.directionsService);
-           // this.directionsDisplay.setMap(this.map);
-          
-          })
-  
-        }
-        
-      })
-    })
-    
-  })
-}, 1200)
-  
-
-  
-  
-  
-}
-
-
 
 serc (address){
   let Searchlat ;
@@ -870,15 +715,248 @@ serc (address){
 }
 
 
+
+
 this.map = new google.maps.Map(document.getElementById('map'), {
   zoom: 12,
-  center: { lat:  Searchlat , lng:Searchlng },
+  styles: 
+  [
+    {
+      "elementType": "geometry",
+      "stylers": [
+        {
+          "color": "#f5f5f5"
+        }
+      ]
+    },
+    {
+      "elementType": "labels.icon",
+      "stylers": [
+        {
+          "visibility": "off"
+        }
+      ]
+    },
+    {
+      "elementType": "labels.text.fill",
+      "stylers": [
+        {
+          "color": "#616161"
+        }
+      ]
+    },
+    {
+      "elementType": "labels.text.stroke",
+      "stylers": [
+        {
+          "color": "#f5f5f5"
+        }
+      ]
+    },
+    {
+      "featureType": "administrative.land_parcel",
+      "elementType": "labels.text.fill",
+      "stylers": [
+        {
+          "color": "#bdbdbd"
+        }
+      ]
+    },
+    {
+      "featureType": "landscape",
+      "stylers": [
+        {
+          "color": "#ffffff"
+        }
+      ]
+    },
+    {
+      "featureType": "landscape.man_made",
+      "elementType": "labels.text",
+      "stylers": [
+        {
+          "saturation": -5
+        }
+      ]
+    },
+    {
+      "featureType": "landscape.natural",
+      "elementType": "geometry.stroke",
+      "stylers": [
+        {
+          "color": "#73d22d"
+        }
+      ]
+    },
+    {
+      "featureType": "landscape.natural.terrain",
+      "elementType": "geometry.fill",
+      "stylers": [
+        {
+          "color": "#73d22d"
+        }
+      ]
+    },
+    {
+      "featureType": "landscape.natural.terrain",
+      "elementType": "geometry.stroke",
+      "stylers": [
+        {
+          "color": "#73d22d"
+        }
+      ]
+    },
+    {
+      "featureType": "poi",
+      "elementType": "geometry",
+      "stylers": [
+        {
+          "color": "#eeeeee"
+        }
+      ]
+    },
+    {
+      "featureType": "poi",
+      "elementType": "labels.text.fill",
+      "stylers": [
+        {
+          "color": "#757575"
+        }
+      ]
+    },
+    {
+      "featureType": "poi.government",
+      "stylers": [
+        {
+          "weight": 8
+        }
+      ]
+    },
+    {
+      "featureType": "poi.park",
+      "elementType": "geometry",
+      "stylers": [
+        {
+          "color": "#e5e5e5"
+        }
+      ]
+    },
+    {
+      "featureType": "poi.park",
+      "elementType": "geometry.fill",
+      "stylers": [
+        {
+          "color": "#73d22d"
+        }
+      ]
+    },
+    {
+      "featureType": "poi.park",
+      "elementType": "labels.text.fill",
+      "stylers": [
+        {
+          "color": "#9e9e9e"
+        }
+      ]
+    },
+    {
+      "featureType": "poi.sports_complex",
+      "elementType": "geometry.fill",
+      "stylers": [
+        {
+          "color": "#d19c2e"
+        }
+      ]
+    },
+    {
+      "featureType": "road",
+      "elementType": "geometry",
+      "stylers": [
+        {
+          "color": "#ffffff"
+        }
+      ]
+    },
+    {
+      "featureType": "road.arterial",
+      "elementType": "labels.text.fill",
+      "stylers": [
+        {
+          "color": "#757575"
+        }
+      ]
+    },
+    {
+      "featureType": "road.highway",
+      "elementType": "geometry",
+      "stylers": [
+        {
+          "color": "#dadada"
+        }
+      ]
+    },
+    {
+      "featureType": "road.highway",
+      "elementType": "labels.text.fill",
+      "stylers": [
+        {
+          "color": "#616161"
+        }
+      ]
+    },
+    {
+      "featureType": "road.local",
+      "elementType": "labels.text.fill",
+      "stylers": [
+        {
+          "color": "#9e9e9e"
+        }
+      ]
+    },
+    {
+      "featureType": "transit.line",
+      "elementType": "geometry",
+      "stylers": [
+        {
+          "color": "#e5e5e5"
+        }
+      ]
+    },
+    {
+      "featureType": "transit.station",
+      "elementType": "geometry",
+      "stylers": [
+        {
+          "color": "#eeeeee"
+        }
+      ]
+    },
+    {
+      "featureType": "water",
+      "elementType": "geometry",
+      "stylers": [
+        {
+          "color": "#c9c9c9"
+        }
+      ]
+    },
+    {
+      "featureType": "water",
+      "elementType": "labels.text.fill",
+      "stylers": [
+        {
+          "color": "#9e9e9e"
+        }
+      ]
+    }
+  ] ,
+  
+  center: { lat:  parseFloat(Searchlat) , lng:parseFloat(Searchlng) },
   disableDefaultUI: true,
-  //styles: this.media.mapstyle
+  
 });
 
 this.nearbyArray.length = 0 ;
-
 
 
 let marker = new google.maps.Marker({
@@ -888,8 +966,11 @@ let marker = new google.maps.Marker({
   icon: {
     url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
   },
-  position: ({lat: Searchlat,lng:this.Searchlng})
+  position: ({lat: parseFloat(Searchlat) , lng:parseFloat(Searchlng)})
 });
+
+
+
 
 
 this.farmEatDb.getSearchbyFarms(Searchlat,Searchlng).then((radius)=>{
@@ -901,75 +982,86 @@ this.farmEatDb.getSearchbyFarms(Searchlat,Searchlng).then((radius)=>{
       this.nearbyArray =data
 
       console.log(this.nearbyArray);
-      
 
-      document.getElementById("hide").style.display="none"
+      if(this.nearbyArray.length == 0 ){
 
-
-      for (let index = 0; index < this.nearbyArray.length; index++) {
-      
-        if (this.nearbyArray[index].aquatic == "true") {
-           this.icon = '../../assets/imgs/fish-icon.png';
-           console.log('inaqautic');
- 
-           console.log('inif statement');
-           
- 
-           console.log(this.nearbyArray[index].aquatic);
-         } else if (this.nearbyArray[index].beeKeeping == "true") {
-           this.icon = "../../assets/imgs/Bee-icon.png";
-           console.log('inbeekeeping');
-         } else if (this.nearbyArray[index].crops == "true") {
-           this.icon = "../../assets/imgs/tree-icon.png";
-           console.log('incrop');
-         }
- 
-         console.log( parseFloat(this.nearbyArray[index].lat));
-         console.log( parseFloat(this.nearbyArray[index].lng));
-         
-         
-         this.loca = new google.maps.LatLng(Searchlat, Searchlng);
-         console.log(this.loca);
-
-         alert("kb")
-         
-         let destination =new google.maps.LatLng(this.nearbyArray[index].lat, this.nearbyArray[index].lng);
-         //calling method to display route from a to b
-         this.calculateAndDisplayRoute(this.loca, destination, this.directionsDisplay, this.directionsService);
-        // this.directionsDisplay.setMap(this.map);
-       
+        const loader = this.loadingCtrl.create({
+          content: "Please wait...",
+          duration:2000
+          
+        });
+        loader.present();
         
-         var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/'
-         this.abmarker = new google.maps.Marker({
-           map: this.map,
-           icon: this.icon,
- 
+        setTimeout(()=>{
+          const alert = this.alertCtrl.create({
+            title: 'Notice',
+            subTitle: "Currently we don't have farms around your area " ,
+            buttons: ['OK']
+          });
+          alert.present();
+
+        }, 2000)
+        
+        document.getElementById("hide").style.display="none"
+        this.searchbar = null ;
+       
+      } else {
+
+        document.getElementById("hide").style.display="none"
+        this.searchbar = null ;
+      
+  
+        const loader = this.loadingCtrl.create({
+          content: "Please wait...",
+          
+        });
+        loader.present();
+  
+        for (let index = 0; index < this.nearbyArray.length; index++) {
+        
+          if (this.nearbyArray[index].aquatic == "true") {
+             this.icon = '../../assets/imgs/fish-icon.png';
+          
          
+             
+   
+             console.log(this.nearbyArray[index].aquatic);
+           } else if (this.nearbyArray[index].beeKeeping == "true") {
+             this.icon = "../../assets/imgs/Bee-icon.png";
+         
+           } else if (this.nearbyArray[index].crops == "true") {
+             this.icon = "../../assets/imgs/tree-icon.png";
+            
+           }
+   
+          this.loca = new google.maps.LatLng(Searchlat, Searchlng);
+          let destination =new google.maps.LatLng(this.nearbyArray[index].lat, this.nearbyArray[index].lng);
+           this.calculateAndDisplayRoute(this.loca, destination, this.directionsDisplay, this.directionsService);
+          var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/'
+           this.abmarker = new google.maps.Marker({
+             map: this.map,
+             icon: this.icon,
            position: { lat: parseFloat(this.nearbyArray[index].lat), lng: parseFloat(this.nearbyArray[index].lng) },
-           label: name,
-           zoom: 10,
- 
-         });
+             label: name,
+             zoom: 10,
+   
+           });
+  
+       this.abmarker.addListener('click', () => {
+  
+  
+          })
+  
+         loader.dismiss()
+  
+  
+          }
 
+        
+      }
+      
 
-
-         this.abmarker.addListener('click', () => {
-
-
-          console.log("clicked marker");
-
-          //this.map = new google.maps.Map(this.mapRef.nativeElement, options);
-
-          console.log(Searchlat);
-          console.log( Searchlng);
-          
-          
-
-         
-        })
-
-
-        }
+     
       
     })
     
@@ -983,12 +1075,20 @@ this.farmEatDb.getSearchbyFarms(Searchlat,Searchlng).then((radius)=>{
 initializeItems() {
   this.items = [
     
-      "Soweto diepkloof" , "Soweto Maponya" ,
+      "Soweto diepkloof" ,
+       "Soweto Maponya" ,
       "Soweto South gate Mall",
       "Midrand" ,
       "Braamfontein" ,
       "Durban",
-      "Capetown"
+      "Capetown" ,
+      "Pretoria" ,
+      "Krugerdorp" ,
+      "Johannesburg",
+      "Rustenburg",
+      "Eastern Cape",
+      "Kwazulu Natal"
+      
       
 
       
@@ -1013,6 +1113,23 @@ getItems(ev: any) {
       return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
     })
     document.getElementById("hide").style.display="block"
+  }
+  
+}
+
+
+display(){
+
+  //document.getElementById("hide").style.display="block"
+  if(this.searchbar == ""){
+    document.getElementById("hide").style.display="none" ;
+   // document.getElementById("cardsHide").style.display="block"
+    
+  }else{
+    document.getElementById("hide").style.display="block" ;
+
+    //document.getElementById("cardsHide").style.display="none"
+
   }
   
 }

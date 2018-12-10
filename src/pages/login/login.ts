@@ -5,6 +5,7 @@ declare var firebase
 import {FarmEatProvider} from '../../providers/farm-eat/farm-eat'
 import { HomePage } from '../home/home';
 import { RegisterPage } from '../register/register';
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 
 /**
  * Generated class for the LoginPage page.
@@ -20,7 +21,7 @@ import { RegisterPage } from '../register/register';
 })
 export class LoginPage {
   user = {} as user ;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public farmEatDb:FarmEatProvider, public alertCtrl:AlertController, public loadingCtrl:LoadingController,  private keyboard: Keyboard) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public farmEatDb:FarmEatProvider, public alertCtrl:AlertController, public loadingCtrl:LoadingController,  private keyboard: Keyboard, private nativePageTransitions: NativePageTransitions) {
   }
 
   ionViewDidLoad() {
@@ -85,6 +86,19 @@ export class LoginPage {
     })
   }
   register(){
+    
+    let options: NativeTransitionOptions = {
+      direction: 'up',
+      duration: 1000,
+      
+     };
+ 
+    this.nativePageTransitions.slide(options);
     this.navCtrl.push(RegisterPage)
   }
+
+
+
+
+  
 }

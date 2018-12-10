@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams , AlertController, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams , AlertController, LoadingController, ToastController, Keyboard } from 'ionic-angular';
 import {user} from '../model/user';
 declare var firebase
 import {FarmEatProvider} from '../../providers/farm-eat/farm-eat'
 import { LoginPage } from '../login/login';
 import { HomePage } from '../../pages/home/home';
 import { DescriptionPage } from '../description/description';
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 
 
 
@@ -23,7 +24,7 @@ import { DescriptionPage } from '../description/description';
 })
 export class RegisterPage {
   user = {} as user ;
-  constructor(public navCtrl: NavController, public navParams: NavParams , public farmEatDb:FarmEatProvider, public alertCtrl:AlertController, public loadingCtrl:LoadingController, public toastCtrl :ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams , public farmEatDb:FarmEatProvider,   private keyboard: Keyboard, private nativePageTransitions: NativePageTransitions, public alertCtrl:AlertController, public loadingCtrl:LoadingController, public toastCtrl :ToastController) {
 
   }
 
@@ -76,6 +77,14 @@ export class RegisterPage {
   }
   }
   Login(){
+      
+    let options: NativeTransitionOptions = {
+      direction: 'down',
+      duration: 1000,
+      
+     };
+ 
+    this.nativePageTransitions.slide(options);
     this.navCtrl.push(LoginPage)
   }
 }

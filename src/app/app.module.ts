@@ -60,6 +60,7 @@ import { ProfilePage } from '../pages/profile/profile';
     LoginPage,
     AddFarmPage,
     ProfilePage
+    
    
    
   ],

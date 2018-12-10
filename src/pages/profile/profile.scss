@@ -1,61 +1,88 @@
 page-profile {
-
-    .info{
-         padding: 7%;
+    .propicbo{
+        position: fixed;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
-
-    .cover{
-        height: 60%;
+    #hide{
+    display: none;
+    
     }
-
-    .coverImg{
-        height: 100%;
+    #hideCover{
+        display: none;
+        
+    }
+    .add{
+        z-index: 999;
+        position: relative;
+        bottom: 70px;
+        left: -10%;
+        font-size: 4rem
     }
     .proPic{
-        height: 80px;
-        width: 80px;
-        border-radius: 50%;
-        margin-top: -18%
+        position: relative;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: solid 5px rgb(255, 255, 255);
+        width: 120px;
+        border-radius: 100px;
+        height: 120px;
+        box-shadow: 10px 10px 10px rgba(209, 209, 209, 0.404)
+   
     }
-
     .name{
-
-        padding: 5%;
-        font-size: 2em;
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+        display: flex;
+        position: absolute;
+        top: 65%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 2.5rem
     }
     .email{
-        margin-left: 5%;
-        margin-right: 5%;
-        font-size: 1.5em;
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+        display: flex;
+        position: absolute;
+        top: 70%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 2rem
     }
-
-    .add{
-        font-size: 2em;
+    p{
+        margin: 0%
+    }
+    .addCover{
         position: relative;
-        right: 1em;
-       // bottom: 0.5em
+        bottom: 80%;
+        font-size: 5rem;
+        color: rgb(8, 113, 80);
+        left: 1.5%;
+        z-index: 999;
+        
+       
     }
-      #hide{
-         display: none
-      }
-
-      #hideCover{
-        position: absolute;
-        margin-top: -8%;
-        margin-left: 70%;
-        display: none  
-      }
-      .addCover{
-        font-size: 3em;
-        position: absolute;
-        right: 0.3em;
-        margin-top: -15%;
-       // bottom: 0.5em
+    .cover,.coverImg{
+        width: 100%;
+        height: 80%;
+        z-index: 999;
+        //transform: skewY(10deg);
     }
-
+    .box{
+        position: relative;
+       
+        height: 0%;
+        width: 0%;
+        border-left: 100vw solid white;
+        border-bottom: 5vh solid white;
+        border-top: 20vh solid transparent;
+        bottom: 40%
+    }
     .nameEdit{
-        font-size: 0.8em;
+        font-size: 22px
     }
+    // .layover{
+    //     position: absolute;
+    //     bottom: 4%; 
+    // }
+ 
 }

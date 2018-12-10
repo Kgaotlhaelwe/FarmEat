@@ -1,6 +1,9 @@
 page-login {
     .content{
-          background-color: #087150;
+          background-color: white;
+          background-image: url('../../assets/imgs/login4.jpg');
+          background-size: cover;
+          background-repeat: no-repeat;
 
          
     }
@@ -17,7 +20,6 @@ page-login {
 
     }
     .img{
-       
         width: 120px;
     }
     .input-box{
@@ -36,21 +38,21 @@ page-login {
     }
     .item{
         text-align: center;
-        color:#28ECAC;
+        color:white;
         
     }
 .first-item{
-    background-color:	#0B2816; 
-    border-radius: 25px;
+    background-color:	rgba(68, 67, 62, 0.473); 
+    border-radius: 10px;
 }
   .second-item{
-    background-color:	#0B2816; 
-    border-radius: 25px;
+    background-color:	rgba(63, 63, 62, 0.582); 
+    border-radius: 10px;
 
   }  
   .text-input::-moz-placeholder {
       text-align: center;
-    color: 	#28ECAC;
+      color: 		white;
     
    }
    .text-input-md {
@@ -61,12 +63,12 @@ page-login {
 }
    
    .text-input:-ms-input-placeholder {
-    color:		#28ECAC;
+    color: 		white;
    
    }
    
    .text-input::-webkit-input-placeholder {
-    color: 		#28ECAC;
+    color: 		white;
    
    }
    .footer-md::before, .tabs-md[tabsPlacement="bottom"] > .tabbar::before {
@@ -78,16 +80,35 @@ page-login {
 }
 .sign_up{
     text-transform: none;
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
 
 }
 .forget-password{
     text-transform: none;
-    color: #28ECAC;
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
 
 }
 ion-footer{
     display: flex;
 }
+.body-inputs{
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0);
+    
+
+}
+.button-round-md{
+    border-radius: 10px;
+
+}
+
+
+
+
+
+
 
 
 
