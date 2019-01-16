@@ -1,28 +1,82 @@
-// http://ionicframework.com/docs/theming/
 
-
-// App Global Sass
-// --------------------------------------------------
-// Put style rules here that you want to apply globally. These
-// styles are for the entire app and not just one component.
-// Additionally, this file can be also used as an entry point
-// to import other Sass files to be included in the output CSS.
-//
-// Shared Sass variables, which can be used to adjust Ionic's
-// default Sass variables, belong in "theme/variables.scss".
-//
-// To declare rules for a specific mode, create a child rule
-// for the .md, .ios, or .wp mode classes. The mode class is
-// automatically applied to the <body> element in the app.
-.color{
-    color: #087150
+.div-1{
+    //background: #00eba0;
+    height: 600px;
+    width: 600px;
+    top: -240px;
+    left: -240px;
+    //box-shadow: 0 0 5px rgb(0, 0, 0);
+    
+    position: absolute;
+    border-radius: 500px;
 }
-// .flex{
-//     display: flex;
-//     justify-content: center;
-//     flex-direction: column
-// }
-
+.profilePicture{
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    margin-top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 500px;
+}
+.div-2{
+    //background: #02cc8c;
+    height: 500px;
+    width: 500px;
+    position: absolute;
+    margin-top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    //box-shadow: 0 0 5px rgb(0, 0, 0);
+    //border-radius: 500px;
+}
+.div-3{
+    //background: #05a06f;
+    height: 400px;
+    width: 400px;
+    border-radius: 500px;
+    position: absolute;
+    margin-top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    //box-shadow: 0 0 5px rgb(0, 0, 0);
+    
+}
+.div-4{
+   // background: #087150;
+    height: 300px;
+    width: 300px;
+    
+    margin-top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    border-radius: 500px;
+   // box-shadow: 0 0 5px rgb(0, 0, 0);
+}
+.div-0{
+    z-index: 1000000000000000000000000000000000;
+    color: white;
+}
+.color{
+   // color: #087150
+}
+.flex{
+    //background-color: #00B97F;
+    margin-top: 150px;
+    padding: 20px
+}
+.name{
+    position: absolute;
+    margin-top: 50%;
+    width: 70%;
+    transform: translateY(-50%);
+    z-index: 1000000000000000000000000000000000;
+    color: white;
+    right: -40%;
+}
+.username{
+}
 .propic{
     display: flex;
     position: relative;
@@ -31,26 +85,77 @@
     border-radius: 10px;
     
 }
-
-// .flex{
-//     display: flex;
-//     justify-content: center;
-// }
 .pic{
-    height: 80px;
-    width: 80px;
-    border-radius: 50px;
+    height: 70px;
+    width: 70px;
+    border-radius: 0px;
     position: relative;
-    top: 30%;
-    // left: 190%;
-    // transform: translate(-50%, -50%);
+    top: 0%;
+    left: 20%;
+   
 }
-h1,h6{
+h6{
     margin: 0%;
     color: white
 }
 .info{
-    position: relative;
-    top: -28px
+height: 50px;
+}
+.backcolor{
+    //  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.438) ,
+    //  #095849b9), url('../../assets/icon/47059.png');
+    background-image: url("../assets/icon/small.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    //background-color: #000000
+   
+   
 
 }
+
+
+.username{
+    position: relative;
+    top: 15px;
+    font-size: 20px;
+    font-weight: bold;
+  
+}
+.email{
+     position: relative;
+        top: 0px;
+        left: -30%;
+       
+}
+.options{
+    background-color: rgba(255, 0, 0, 0);
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
+    font-size: 20px;
+    font-weight: 100;
+    line-height: 1.5;
+  
+}
+.item-md{
+    padding: 0px;
+    z-index: 999999999999999999999999999999999999999999999999;
+}
+.div-0{
+    position: relative;
+    top: 15%
+}
+
+
+.content-md hr {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+.content-md hr {
+    background-color: rgba(255, 255, 255, 0.486);
+}
+.version{
+    color: white;
+    position: relative;
+    top: 17%;
+}
+

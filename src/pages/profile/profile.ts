@@ -218,8 +218,14 @@ export class ProfilePage {
                 message: 'Your details were added successfully',
                 duration: 3000
               });
+              this.farmEat.getUser().then((data:any)=>{
+                console.log(data);
+                
+                this.username = data.username
+               
+              })
               toast.present();
-              this.navCtrl.push(ProfilePage)
+             
             })
           }
         }

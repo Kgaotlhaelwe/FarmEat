@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController,Keyboard} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController,Keyboard,MenuController} from 'ionic-angular';
 import {user} from '../model/user';
 declare var firebase
 import {FarmEatProvider} from '../../providers/farm-eat/farm-eat'
@@ -21,7 +21,10 @@ import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/na
 })
 export class LoginPage {
   user = {} as user ;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public farmEatDb:FarmEatProvider, public alertCtrl:AlertController, public loadingCtrl:LoadingController,  private keyboard: Keyboard, private nativePageTransitions: NativePageTransitions) {
+  pet
+  constructor(public navCtrl: NavController, public navParams: NavParams, public farmEatDb:FarmEatProvider, public alertCtrl:AlertController, public loadingCtrl:LoadingController,  private keyboard: Keyboard, private nativePageTransitions: NativePageTransitions, public menuCtrl: MenuController) {
+    this.pet="kittens"; 
+    this.menuCtrl.enable(false, 'myMenu');
   }
 
   ionViewDidLoad() {
@@ -67,24 +70,61 @@ export class LoginPage {
     }
   }
   forgetPassword(user:user){
-    this.farmEatDb.forgetPassword(user.email).then(()=>{
+    const prompt = this.alertCtrl.create({
+      title: 'Forget Password',
+      //message: "Enter your Email....",
+      inputs: [
+        {
+          name: 'name',
+          placeholder: 'Enter your Email....'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Send',
+          handler: data => {
 
-      const alert = this.alertCtrl.create({
-        subTitle:  "We have sent you email to recover password, Please check your Email",
-        buttons: ['OK']
-      });
-      alert.present();
-      
-    } , (error)=>{
-
-      const alert = this.alertCtrl.create({
-        subTitle:  "Please fill in the email field. ",
-        buttons: ['OK']
-      });
-      alert.present();
-
-    })
+            console.log('Saved clicked');
+            var em:string = data.name
+            console.log(em.indexOf(' '));
+            if(em.indexOf(' ') == -1){
+              this.farmEatDb.forgetPassword(data.name).then(()=>{
+ 
+                const alert2 = this.alertCtrl.create({
+              subTitle:  "We have sent you email to recover password, Please check your Email",
+               buttons: ['OK']
+             });
+            alert2.present();
+            })
+            }else{
+              var emailLength = em.length
+              console.log( emailLength);
+              var constructedEmail = em.substring(0, emailLength-1)
+              console.log(em.substring(0, emailLength-1));
+              this.farmEatDb.forgetPassword(constructedEmail).then(()=>{
+ 
+                const alert = this.alertCtrl.create({
+              subTitle:  "We have sent you email to recover password, Please check your Email",
+               buttons: ['OK']
+             });
+            alert.present();
+            })
+            }
+            
+            
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
+  
   register(){
     
     let options: NativeTransitionOptions = {
@@ -98,7 +138,56 @@ export class LoginPage {
   }
 
 
+  Register(user:user){
+    console.log(user.username);
+    console.log(user.password);
+    console.log(user.email);
+  
+    if(this.user.email !=null  && this.user.password  !=null  ){
+    this.farmEatDb.register(user.email ,user.password, user.username ).then(()=>{
+   
+     
+    //   const alert = this.alertCtrl.create({
+    //     subTitle: 'You have successfully registered',
+    //     buttons: ['OK']
+    //   });
+    //   alert.present();
+     
+    //   this.navCtrl.setRoot(HomePage)
+    // } 
+    // const loader = this.loadingCtrl.create({
+    //   content: "Logging in please wait...",
+    //   duration: 3000
+    // });
+    this.navCtrl.setRoot(HomePage)
+    //loader.present();
+  
+  
+  }, (error)=>{
+ 
+ 
+      const alert = this.alertCtrl.create({
+        subTitle:error.message,
+        buttons: ['OK']
+      });
+      alert.present();
+     
+ 
+    })
+  }else{
+    const alert = this.alertCtrl.create({
+      subTitle:  'Please enter email and password' ,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+  }
 
-
+ 
+  changeColor(){
+    console.log("V");
+    
+    document.getElementById("fullgreen").style.display="none";
+  }
   
 }

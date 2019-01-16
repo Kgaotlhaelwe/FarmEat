@@ -15,30 +15,54 @@
   </ion-toolbar>
 </ion-header> -->
 <ion-content>
-  
+  <!-- <ion-fab top left  >
+    <button ion-fab mini class="fabShadow " color="light" clear menuToggle><ion-icon name="menu" color="dark-green"></ion-icon></button>
+ 
+  </ion-fab>
+  <ion-fab top right >
+    <button ion-fab mini class="fabShadow "  color="light" clear menuToggle> <ion-icon ios="ios-funnel" md="md-funnel" color="dark-green"></ion-icon></button>
+ 
+  </ion-fab>
+  <div class="pad">
+
+    <ion-segment [(ngModel)]="pet" class="seg" >
+
+      <ion-segment-button  value="Details">
+          MAP
+      </ion-segment-button>
+
+      <ion-segment-button value="Photos">
+          FAV
+      </ion-segment-button>
+
+    </ion-segment>
+  </div> -->
       <button ion-button large class="topbtn" color="dark-green" clear menuToggle ><ion-icon name="menu"></ion-icon></button>
 
+      <div class="upbox"></div>
       
       
 
-  <ion-list id="hide" >
-    <ion-item class="list" *ngFor="let item of items" (click)="serc(item)"  >
-      {{ item }}
-    </ion-item>
-  </ion-list>
+
 
   <div #map id="map" class="theMap"></div> 
-
-
-
-  
   <ion-searchbar class="search" #searchz (ionInput)="getItems($event)" (input)="display()" [(ngModel)]="searchbar"></ion-searchbar>
+  <div class="suggest">
+      <ion-list class="list" id="hide" >
+         <ion-item  *ngFor="let item of items" (click)="serc(item)"  >
+           {{ item }}
+         </ion-item>
+       </ion-list>
+   </div>
+ 
+  
+ 
 
  <!-- <div class="name"> <h4>Neary by farms</h4> </div> -->
- <div class="km" id="kilos">  <ion-icon class="car" name="car"></ion-icon> &nbsp; &nbsp; <h4>{{kiloMeter}}</h4></div>
- <div class="time" id="time"> <ion-icon class="car" name="timer"></ion-icon> &nbsp; &nbsp; <h4>{{duration}}</h4> </div>
 
-    <div class="cards" id="cardsHide">
+ 
+
+    <div class="cards" id="cardsHide" >
       
                 <ion-slides class="slides" (ionSlideDidChange)="slideChanged()" slidesPerView="1" centeredSlides="true" >
                    <ion-slide *ngFor="let a of nearbyArray; let i = index  " (click)="moreinfo(i)" >
@@ -55,6 +79,7 @@
                             <img src="{{watermelon}}" class="imgz">
                             <img src="{{pumpkin}}" class="imgz">
                             <img src="{{redPaper}}" class="imgz">
+              
                           </div>
                             
                           </ion-item>
@@ -65,10 +90,20 @@
                   </ion-slides>
                 </div>  
 
+<div class="max">
+                  <div class="fabflex" id="hidekilos">
+                  <ion-fab middle  left class="movefabt" >
+                    <button ion-fab mini color="dark-green"><ion-icon name="car"></ion-icon></button>
+                    </ion-fab> 
+                    <h4 class="car" class="km" id="kilos">{{kiloMeter}}</h4>
+                  </div>
 
-
-         
-
-
-    
+                  <div class="fabflex" id="hidetime">
+                      <ion-fab middle left class="movefabb">
+                        <button ion-fab mini color="dark-green"><ion-icon name="timer"></ion-icon></button>
+                        </ion-fab>  
+                        <h4 class="car" class="time" id="time">{{duration}}</h4> 
+                    </div>
+               
+                  </div>
 </ion-content>

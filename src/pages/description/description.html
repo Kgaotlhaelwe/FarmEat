@@ -1,4 +1,3 @@
-
 <ion-content >
     <div no-padding class="body-container">
   
@@ -17,43 +16,34 @@
              </ion-fab>
       
     </div>
-    <div no-padding class="contact-box">
-            
-                <div class="adress" (click)="navigate()" >
-                    <ion-icon name="md-pin" ></ion-icon>
-                    
-                </div>
-                <div class="call" (click)="call(tel)">
-                  <ion-icon name="md-call"></ion-icon>
-                  
-                </div>
-                <div class="email" (click)="sendEmail(email)">
-                  <ion-icon name="md-mail"></ion-icon>
-                 
-                </div>
-                <div class="time" >
-                  <ion-icon name="logo-facebook"></ion-icon>
-             
-                </div>
-    
-    </div>
-  
+    <div class="cotact-box">
+      <div class="sub-title">
+        <br>
+        <h2>{{name}}</h2>
+        <br>
+      </div> 
+      <div>
+          <h3>Green House</h3>
+      </div>
       
-      <div   [ngSwitch]="pet">  
+     
+               
+    </div>
+ 
+   <div padding class="description-section"  >
+                
+                  <p> {{desc}}</p>
+                  </div>
+      
+      <div padding  class="PET" [ngSwitch]="pet">  
         <ion-list *ngSwitchCase="'kittens'">
             <div class="body-box" >
-                <div class="description-section"  >
-                  <div class="sub-title">
-                    <h2>{{name}}</h2>
-                  </div>
-                  <h3>Green House</h3>
-                  <p> {{desc}}</p>
-
-                  </div>
+               
                   <div class="farm-facilities" >
-                    <h1>We offer</h1>
-                  
-                   
+                    <div class="we-offer" >
+        
+                       <h3>We offer</h3>
+                    </div>
                       <div class="container-crops" >
                         <span *ngIf="crops == 'true'">
                           <img   src="../../assets/imgs/icons8_Beet_100px_2.png" alt=""> 
@@ -82,6 +72,7 @@
                           <img src="../../assets/imgs/icons8_Bee_96px.png" alt="">
                           <img src="../../assets/imgs/icons8_Honey_96px.png" alt="">
                         </span>
+                        <br>
                         <!-- <span  *ngIf="beeKeeping == 'true'"class="beeKeeping-name" >Beekeeping</span> -->
                       </div>
                       <div class="container-Aquafarming" >
@@ -92,6 +83,30 @@
                         <!-- <span  *ngIf="aquatic == 'true'" class="Aquafarming" >Aquafarming</span> -->
                       </div>
                   </div>
+                  <br>
+                  <br>
+                  <div class="container-offer" >
+                    
+                    <div class="contact-us" > <br> <h3>Find us here </h3></div>
+                  
+                
+      <div class="contact-icons" >
+       <div class="adress" (click)="navigate()" >
+                     <ion-icon name="md-pin" ></ion-icon>
+                     
+                 </div>
+                 <div class="call" (click)="call(tel)">
+                   <ion-icon name="md-call"></ion-icon>
+                   
+                 </div>
+                 <div class="email" (click)="sendEmail(email)">
+            
+                   <ion-icon name="md-mail"></ion-icon>
+                 </div>
+        </div>
+        <br>
+        <br>
+                  </div>
                 </div> 
         </ion-list>
     
@@ -99,4 +114,3 @@
     </div>
     </div>
       </ion-content>
-  

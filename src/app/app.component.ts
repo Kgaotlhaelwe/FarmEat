@@ -52,6 +52,8 @@ export class MyApp {
     farmEatDb.checkstate().then((data:any)=>{
 
       if (data ==1){
+        // firebase.database().ref('Farms').off('value') ;
+        // firebase.database.ref('UrbanFarms').off('value')
         this.rootPage = HomePage;
      
       }
@@ -65,7 +67,7 @@ export class MyApp {
       { title: 'Home', component: HomePage, icon:'home'  },
       { title: 'News Feeds', component: NewsfeedPage, icon:'md-paper'  },
       { title: 'Farms Farum', component: FarmForumPage,icon:'ios-people' },
-      { title: 'Add Farm', component: AddFarmPage,icon:'ios-add' },
+      { title: 'Profile', component: ProfilePage,icon:'ios-add' },
 
       { title: 'Logout', component: null , icon:'md-log-out' },
      
@@ -75,7 +77,7 @@ export class MyApp {
       homePage: HomePage,
       newsfeedPage: NewsfeedPage,
       farmForumPage: FarmForumPage,
-      addFarm:AddFarmPage,
+      ProfilePage,
       logout: null
   
     }
@@ -102,6 +104,8 @@ export class MyApp {
       this.nav.setRoot(LoginPage);
     }
   }
+
+  
   signOut(){
     this.farmEatDb.signout().then(()=>{
       this.nav.setRoot(LoginPage);
@@ -114,7 +118,7 @@ export class MyApp {
     this.nav.popTo(HomePage)
   }
 
-  goProfile(){
-    this.nav.setRoot(ProfilePage)
-  }
+  // goProfile(){
+  //   this.nav.setRoot(ProfilePage)
+  // }
 }

@@ -1,12 +1,16 @@
 <ion-content>
     <div class="cover">
+            <button ion-button  large class="topbtn" color="light" clear menuToggle ><ion-icon id="menu" name="menu"></ion-icon></button>
         <img id="images" [src]="coverUrl"  *ngIf="coverUrl != null" class="coverImg" imageViewer>
         
         <input type="file" id="hideCover" #image accept="image/png, image/jpeg" (change)="uploadCover($event)">
-        <label for="hideCover"><ion-icon class="addCover" ios="ios-add-circle" md="md-add-circle"></ion-icon></label>
+        <label for="hideCover" id="menu"><ion-icon  class="addCover" ios="ios-add-circle" md="md-add-circle"></ion-icon></label>
        
       </div>
      
+  
+
+  
       <div class="box"></div>
       <div class="info" >
         <div class="propicbo">
@@ -14,20 +18,23 @@
             <input type="file" #image id="hide" accept="image/png, image/jpeg" (change)="uploadProPic($event)">
             <label for="hide"><ion-icon class="add"  ios="ios-add-circle" md="md-add-circle"></ion-icon></label>
         </div>
-       <br>
-       <br>
-        <div class="name" padding text-center>
-          <p>{{username}}</p> &nbsp;
-           <label for="hide" (click)="editProfile()"><ion-icon class="nameEdit" ios="ios-create" md="md-create"></ion-icon></label>
-   
+      
+        <div class="names" padding>
+        <ion-card class="ionc"> 
+                    <ion-card-header>
+                        <b>Username:</b> &nbsp;{{username}}
+                    </ion-card-header>
+                  </ion-card >
+                  
+                  <ion-card class="ionc">
+                      <ion-card-header>
+                          <b>Email:</b> &nbsp;{{email}}
+                      </ion-card-header>
+                    </ion-card>
         </div>
         <br>
-        <div class="email">
-          <p> {{email}}</p>
-        
-        </div>
-        <br>
-      <!-- <button ion-button (click)="editProfile()">Edit Profile</button> -->
+
+      <button padding class="nameEdit" color="dark-green" ion-button block (click)="editProfile()">Edit Username</button>
     </div>
 
   <!-- <img class="layover" src="../../assets/imgs/farmer-clipart-subsistence-farming-6.png" alt=""> -->

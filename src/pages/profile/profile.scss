@@ -1,5 +1,6 @@
 page-profile {
     .propicbo{
+        display: flex;
         position: fixed;
         top: 60%;
         left: 50%;
@@ -16,8 +17,8 @@ page-profile {
     .add{
         z-index: 999;
         position: relative;
-        bottom: 70px;
-        left: -10%;
+        top: 20px;
+        right: 40%;
         font-size: 4rem
     }
     .proPic{
@@ -26,22 +27,23 @@ page-profile {
         left: 50%;
         transform: translate(-50%, -50%);
         border: solid 5px rgb(255, 255, 255);
-        width: 120px;
+        width: 150px;
         border-radius: 100px;
-        height: 120px;
-        box-shadow: 10px 10px 10px rgba(209, 209, 209, 0.404)
+        height: 150px;
+        box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.26)
    
     }
-    .name{
-        display: flex;
-        position: absolute;
-        top: 65%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 2.5rem
+    .names{
+       
+        position: relative;
+        top: -190%;
+      
     }
-    .email{
-        display: flex;
+    .ionc{
+        box-shadow: 10px 10px 50px rgba(0, 0, 0, 0.26)
+    }
+    .emails{
+      
         position: absolute;
         top: 70%;
         left: 50%;
@@ -52,37 +54,91 @@ page-profile {
         margin: 0%
     }
     .addCover{
+        display: inline-block;
         position: relative;
-        bottom: 80%;
-        font-size: 5rem;
-        color: rgb(8, 113, 80);
-        left: 1.5%;
+        bottom: 73%;
+        font-size: 4rem;
+        color: black;
+        left: 90%;
         z-index: 999;
+        height: 36px;
+        width: 31.5px;
+        border-radius: 50px;
+        box-shadow: 5px 5px 10px  rgba(0, 0, 0, 0.342)
         
        
     }
     .cover,.coverImg{
         width: 100%;
-        height: 80%;
+        height: 75%;
         z-index: 999;
         //transform: skewY(10deg);
     }
     .box{
-        position: relative;
+        position: absolute;
        
         height: 0%;
         width: 0%;
         border-left: 100vw solid white;
         border-bottom: 5vh solid white;
         border-top: 20vh solid transparent;
-        bottom: 40%
+        //bottom: 40%
+        top: 48%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        
     }
     .nameEdit{
-        font-size: 22px
+        position: relative;
+        font-size: 20px;
+        top: -190%;
+        box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.26);
+        width: 85%;
+        left: 5%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
-    // .layover{
-    //     position: absolute;
-    //     bottom: 4%; 
+    .topbtn{
+        position: absolute;
+         top:0%;
+         z-index: 999;
+         color: black
+       
+    }
+    .scroll-content {
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        position: absolute;
+        z-index: 1;
+        display: block;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        will-change: scroll-position;
+        contain: size style layout;
+    }
+    ion-fab[top] {
+        top: 0px;
+    }
+    // #menu{
+    //     position: relative; 
+    //     top: 0px; 
+    //     left: 0%; 
+    //     box-shadow: 5px 5px 10px    rgba(0, 0, 0, 0.3);
+    //      border-radius: 100%;
+    //      width: 40px;
+    //      height: 40px;
+    //      display: flex;
+    //      justify-content: center;
+    //      justify-content: space-around;
+    //      text-align: center;
+    //      vertical-align:middle;
+    //     // height: 36px;
+    //     // width: 31.5px;
+    //     // border-radius: 50px;
+    //     // box-shadow: 5px 5px 5px  rgba(0, 0, 0, 0.342)
     // }
  
 }

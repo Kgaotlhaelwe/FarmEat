@@ -76,6 +76,10 @@ export class RegisterPage {
     alert.present();
   }
   }
+
+
+
+  
   Login(){
       
     let options: NativeTransitionOptions = {

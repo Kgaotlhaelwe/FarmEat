@@ -1,70 +1,62 @@
-<ion-menu  [content]="content">
-  <ion-header text-center (click)="goProfile()">
-    <ion-toolbar color="dark-green">
-      <div text-center>
-          <div class="propic">
-              <img class="pic" text-center src="{{proPic}}">
-          </div>
-         
-         <div class="info">
-          <div class="username">
-            <h1>{{username}}</h1> 
-           </div>
-           
-           <div class="email">
-             <h6>{{email}}</h6>  
-           </div>
-      </div>
-      </div>
-     
-     
- 
-       
-        
+<ion-menu id="myMenu" [content]="content" color="dark-green">
+
+    <ion-content color="highlight" class="backcolor" >
+  
+        <div class="div-1" >
+            <div class="div-2" >  <div  class="div-3" >  <div  class="div-4" >
+            <div class="div-0">
       
-    </ion-toolbar>
-  </ion-header>
+              <img class="profilePicture" src="{{proPic}}" alt="">
+              <div class="name" >
+              <p class="username" > {{username}}</p>
+              <p> {{email}}</p>
+              </div>
+            </div>
+            </div>
+          </div>
+         </div>
+          </div>
+      
+  <div class="flex" text-center  >
+    <br>
+    <br>
+  <button  class="options"menuClose ion-item no-lines icon-left clear  (click)="nav.setRoot(pages2.homePage)">
+    <!-- <ion-icon color="light" class="icons" name="home"></ion-icon> -->
+    <ion-icon color="light" class="icons" name="ios-home"></ion-icon>
+    Home
+  </button>
+<hr>
+  
+  <button  class="options" color="dark-green" menuClose ion-item no-lines icon-left (click)="nav.setRoot(pages2.ProfilePage)">
+      <!-- <ion-icon color="light" class="icons" ios="contact" md="md-contact"></ion-icon> -->
+      <ion-icon color="light" class="icons" name="ios-person"></ion-icon>
+    Profile
+  </button>
+<hr>
+  
+  <button  class="options" color="dark-green" menuClose ion-item icon-left no-lines (click)="nav.setRoot(pages2.newsfeedPage)">
+    <!-- <ion-icon color="light" class="icons" ios="ios-paper" md="md-paper"></ion-icon> -->
+    <ion-icon color="light" class="icons" name="ios-paper"></ion-icon>
+    News Feed
+  </button>
+<hr>
+  <!-- <button class="options"  menuClose ion-item icon-left no-line (click)="nav.setRoot(pages2.farmForumPage)">
+    <ion-icon color="dark-green" class="icons" name="ios-people"></ion-icon>
+    Farm Forum
+  </button> -->
+  
+  <button  class="options" color="dark-green" menuClose ion-item no-lines icon-left (click)="signOut()">
+      <ion-icon  color="light" class="icons" name="ios-log-out"></ion-icon>
+      <!-- <ion-icon color="light" class="icons" ios="ios-log-out" md="md-log-out"></ion-icon> -->
+      Logout
+  </button>
+  </div>
+  <!-- <div class="backcolor"></div> -->
 
-  <ion-content >
-    
-    <!-- <ion-list  no-lines  padding >
-      <button class="color" menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
-        <ion-icon class="color"  text-center item-start [name]="p.icon"></ion-icon>
-      </button>
-    </ion-list>
+  <p class="version" text-center  >Farmeat - Version 0.0.1</p>
   </ion-content>
-
-
-</ion-menu> -->
-<div class="flex" text-center padding>
-  <h1>Menu</h1>
-<button class="options"  menuClose ion-item no-line icon-left (click)="nav.setRoot(pages2.homePage)">
-  <ion-icon color="dark-green" class="icons" name="home"></ion-icon>
-  Home
-</button>
-<button class="options"  menuClose ion-item no-line icon-left (click)="nav.setRoot(pages2.addFarm)">
-    <ion-icon color="dark-green" class="icons" ios="ios-add" md="md-add"></ion-icon>
-  Add Farm
-</button>
-<button class="options"  menuClose ion-item icon-left no-line (click)="nav.setRoot(pages2.newsfeedPage)">
-  <ion-icon color="dark-green" class="icons" ios="ios-paper" md="md-paper"></ion-icon>
-  News Feed
-</button>
-<!-- <button class="options"  menuClose ion-item icon-left no-line (click)="nav.setRoot(pages2.farmForumPage)">
-  <ion-icon color="dark-green" class="icons" name="ios-people"></ion-icon>
-  Farm Forum
-</button> -->
-
-<button class="options"  menuClose ion-item no-line icon-left (click)="signOut()">
-    <ion-icon color="dark-green" class="icons" ios="ios-power" md="md-power"></ion-icon>
-    Logout
-</button>
-</div>
-
-</ion-content>
-</ion-menu> 
-
-
-<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
-<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+  </ion-menu> 
+  
+  
+  <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+  <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

@@ -1,8 +1,15 @@
 
-<ion-content padding>
+<ion-content >
 
+  <div class="topboxx" ></div>
+  <div padding>
+    <div class="logo-box" >
+  
+        <img class="img" src="../../assets/imgs/unnamed.png" alt="logo">
+        <h1>Farm-Eat</h1>
+    </div>
 
-  <div class="body-container"  >
+  <!-- <div class="body-container"  >
     <div class="header">
         <br> <br>
       <div class="logo-box" >
@@ -27,24 +34,96 @@
       </div>
     </div>
   </div>
-  <br><br>
+  <br><br> -->
 
-  <!-- <div class="flowers" ion-fixed >
-     <div class='flower flower-5'><span></span></div>
-    <div class='flower flower-0'><span></span></div>
-  <div class='flower flower-1'><span></span></div>
-  <div class='flower flower-2'><span></span></div>
-  <div class='flower flower-3'><span></span></div>
-  <div class='flower flower-4'><span></span></div>
- 
-  <div class='flower flower-6'><span></span></div>
-  </div> -->
- 
+  <div padding  [hidden]="keyboard.isOpen()">
+      <ion-segment [(ngModel)]="pet">
+        <ion-segment-button value="kittens">
+          LOGIN
+        </ion-segment-button>
+        <ion-segment-button value="puppies">
+          SIGNUP
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+    
+    <div [ngSwitch]="pet">
+      <ion-list class="topbox" *ngSwitchCase="'puppies'">
+        <ion-item id="items">
+        
+
+          <div  padding>
+
+
+              <ion-list id="items" no-lines>
+            
+                <ion-item class="first-item">
+                   
+                  <ion-input type="text" placeholder="Username" type = 'username' [(ngModel)]='user.username' (input)="changeColor()"></ion-input>
+                </ion-item>
+            
+                <ion-item class="first-item" >
+                  
+                  <ion-input type="text" placeholder="Email" type = 'email' [(ngModel)]='user.email'></ion-input>
+                </ion-item>
+            
+                <ion-item class="first-item">
+                   
+                  <ion-input type="password" placeholder="Password"  [(ngModel)]= 'user.password'></ion-input>
+                </ion-item>
+                <br>
+                <button color="dark-green" ion-button full round (click)="Register(user)">  Sign up </button>
+              </ion-list>
+              </div>
+              
+                
+          
+              
+              
+        </ion-item>
+       
+      </ion-list>
+    
+      <ion-list class="topbox" *ngSwitchCase="'kittens'">
+        <ion-item id="items">
+         
+         
+            <div id="items" padding>
+            <ion-list class="items">
+               <ion-item class="first-item" no-lines>
+                  
+                   <ion-input type="text" placeholder="Email" type = 'email' [(ngModel)]='user.email'></ion-input>
+                 </ion-item>
+                 
+                 <ion-item  class="second-item" no-lines >
+                
+                   <ion-input type="password" placeholder="Password"  [(ngModel)]= 'user.password'></ion-input>
+                 </ion-item>
+                 <br>
+           
+               <button ion-button full round (click)="Login(user)" color="dark-green">  <b>Sign In</b>  </button>
+             <br>
+               <button class="forget-password" color="green" ion-button full round  (click)="forgetPassword(user)" clear>Forgot password?
+                </button>
+              </ion-list>
+            </div>
+           
+        </ion-item>
+  
+      </ion-list>
+      <!-- <h2 padding text-center>Please login or register discover nearby farms  </h2> -->
+      <!-- <img class="bottomimg" src="../../assets/icon/94076a023ede44f12fd31f2bb4233b77.png" alt=""> -->
+      
+    </div>
+  </div>
+<div class="bottomimg" [hidden]="keyboard.isOpen()" ></div>
+
+
+
 </ion-content> 
-<ion-footer  [hidden]="keyboard.isOpen()" >
+<!-- <ion-footer  [hidden]="keyboard.isOpen()" >
     <button class="forget-password" color="green" ion-button full round  (click)="forgetPassword(user)" clear>Forgot password?
       </button>
     <button class="sign_up" color="green" ion-button full round (click)="register()" clear>Don't have account?
   </button>
-
-</ion-footer>
+</ion-footer> -->

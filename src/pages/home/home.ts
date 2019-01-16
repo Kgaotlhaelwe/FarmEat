@@ -1,6 +1,6 @@
 
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams,MenuController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { FarmEatProvider } from '../../providers/farm-eat/farm-eat'
 import { DescriptionPage } from '../description/description';
@@ -40,8 +40,8 @@ export class HomePage {
   service = new google.maps.DistanceMatrixService();
   geocoder = new google.maps.Geocoder;
   destinationAddress;
-  kiloMeter = "0";
-  duration = "0";
+  kiloMeter ;
+  duration ;
 
    Searchlat  ;
    Searchlng ;
@@ -55,15 +55,12 @@ export class HomePage {
   redPaper ;
   searchbar ;
 
-      
+  marker ;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geo: Geolocation, private farmEatDb: FarmEatProvider, public alertCtrl: AlertController, private nativePageTransitions: NativePageTransitions, public loadingCtrl: LoadingController) {
+  
 
-  }
-
-
-  ionViewDidEnter() {
-
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geo: Geolocation, private farmEatDb: FarmEatProvider, public alertCtrl: AlertController, private nativePageTransitions: NativePageTransitions, public loadingCtrl: LoadingController,public menuCtrl: MenuController,private keyboard: Keyboard) {
+    this.menuCtrl.enable(true, 'myMenu');
     const loader = this.loadingCtrl.create({
       content: "Please wait...",
       duration:7000
@@ -109,31 +106,7 @@ export class HomePage {
       })
    
 
-      // this.farmEatDb.getSearchbyFarms(this.searchArea.lat, this.searchArea.lng).then((radius: any) => {
-      //   console.log(radius);
-      //   this.farmEatDb.getallFarms().then((data: any) => {
-      //     console.log(data);
-
-      //     this.farmEatDb.getSearchedFarm(this.searchArea.lat, this.searchArea.lng, radius, data).then((data: any) => {
-      //       console.log(data);
-      //       this.nearbyArray = data;
-      //       console.log(this.nearbySeachFarmArray);
-      //       if (this.nearbyArray.length == 0) {
-      //         const alert = this.alertCtrl.create({
-      //           title: 'Confirmation',
-      //           subTitle: 'Currently we dont have Farms around your Area',
-      //           buttons: ['OK']
-      //         });
-      //         alert.present();
-
-      //       } else {
-
-
-      //       }
-      //     })
-      //   })
-
-      // })
+     
 
 
 
@@ -153,6 +126,15 @@ export class HomePage {
 
     
 
+  
+  
+  
+  }
+
+
+  ionViewDidEnter() {
+
+  
 
 
   }
@@ -181,6 +163,8 @@ export class HomePage {
         zoom: 10,
         disableDefaultUI: true,
         styles: 
+       
+
         [
           {
             "elementType": "geometry",
@@ -224,28 +208,101 @@ export class HomePage {
             ]
           },
           {
-            "featureType": "landscape",
+            "featureType": "landscape.natural",
+            "elementType": "geometry.fill",
             "stylers": [
               {
-                "color": "#ffffff"
-              }
-            ]
-          },
-          {
-            "featureType": "landscape.man_made",
-            "elementType": "labels.text",
-            "stylers": [
-              {
-                "saturation": -5
+                "visibility": "on"
               }
             ]
           },
           {
             "featureType": "landscape.natural",
+            "elementType": "labels.text",
+            "stylers": [
+              {
+                "color": "#93b039"
+              }
+            ]
+          },
+          {
+            "featureType": "landscape.natural",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#93b039"
+              }
+            ]
+          },
+          {
+            "featureType": "landscape.natural",
+            "elementType": "labels.text.stroke",
+            "stylers": [
+              {
+                "color": "#93b039"
+              }
+            ]
+          },
+          {
+            "featureType": "landscape.natural.landcover",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#93b039"
+              }
+            ]
+          },
+          {
+            "featureType": "landscape.natural.landcover",
+            "elementType": "geometry.fill",
+            "stylers": [
+              {
+                "color": "#93b039"
+              }
+            ]
+          },
+          {
+            "featureType": "landscape.natural.landcover",
             "elementType": "geometry.stroke",
             "stylers": [
               {
-                "color": "#73d22d"
+                "color": "#93b039"
+              }
+            ]
+          },
+          {
+            "featureType": "landscape.natural.landcover",
+            "elementType": "labels.text",
+            "stylers": [
+              {
+                "color": "#93b039"
+              }
+            ]
+          },
+          {
+            "featureType": "landscape.natural.landcover",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#93b039"
+              }
+            ]
+          },
+          {
+            "featureType": "landscape.natural.landcover",
+            "elementType": "labels.text.stroke",
+            "stylers": [
+              {
+                "color": "#93b039"
+              }
+            ]
+          },
+          {
+            "featureType": "landscape.natural.terrain",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#93b039"
               }
             ]
           },
@@ -254,16 +311,7 @@ export class HomePage {
             "elementType": "geometry.fill",
             "stylers": [
               {
-                "color": "#73d22d"
-              }
-            ]
-          },
-          {
-            "featureType": "landscape.natural.terrain",
-            "elementType": "geometry.stroke",
-            "stylers": [
-              {
-                "color": "#73d22d"
+                "color": "#93b039"
               }
             ]
           },
@@ -286,10 +334,11 @@ export class HomePage {
             ]
           },
           {
-            "featureType": "poi.government",
+            "featureType": "poi.attraction",
+            "elementType": "geometry.fill",
             "stylers": [
               {
-                "weight": 8
+                "color": "#93b039"
               }
             ]
           },
@@ -307,7 +356,16 @@ export class HomePage {
             "elementType": "geometry.fill",
             "stylers": [
               {
-                "color": "#73d22d"
+                "color": "#93b039"
+              }
+            ]
+          },
+          {
+            "featureType": "poi.park",
+            "elementType": "geometry.stroke",
+            "stylers": [
+              {
+                "color": "#93b039"
               }
             ]
           },
@@ -325,7 +383,16 @@ export class HomePage {
             "elementType": "geometry.fill",
             "stylers": [
               {
-                "color": "#d19c2e"
+                "color": "#93b039"
+              }
+            ]
+          },
+          {
+            "featureType": "poi.sports_complex",
+            "elementType": "geometry.stroke",
+            "stylers": [
+              {
+                "color": "#93b039"
               }
             ]
           },
@@ -352,7 +419,7 @@ export class HomePage {
             "elementType": "geometry",
             "stylers": [
               {
-                "color": "#dadada"
+                "color": "#d1e2d1"
               }
             ]
           },
@@ -397,7 +464,7 @@ export class HomePage {
             "elementType": "geometry",
             "stylers": [
               {
-                "color": "#c9c9c9"
+                "color": "#99e4fd"
               }
             ]
           },
@@ -411,7 +478,8 @@ export class HomePage {
             ]
           }
         ]
-        
+
+      
         //streetViewControl: false,
         //mapTypeId: 'satellite'
       }
@@ -422,35 +490,36 @@ export class HomePage {
     
 
       
-        let marker = new google.maps.Marker({
+        this. marker = new google.maps.Marker({
           map: this.map,
           zoom: 10,
          animation: google.maps.Animation.DROP,
           icon: {
             url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
           },
+          
           position: this.map.getCenter()
         });
-
+      
 
     
 
       for (let index = 0; index < this.nearbyArray.length; index++) {
    
         if (this.nearbyArray[index].aquatic == "true") {
-          this.icon = '../../assets/imgs/fish-icon.png';
+          this.icon = "../../assets/icon/icons-fish.pin.png";
         
           
 
          
         } else if (this.nearbyArray[index].beeKeeping == "true") {
-          this.icon = "../../assets/imgs/Bee-icon.png";
+          this.icon = "../../assets/icon/icons-bee.pin.png";
           
 
           this.brocolli="../../assets/imgs/icons8_Bee_96px.png";
           this.watermelon= "../../assets/imgs/icons8_Honey_96px.png"
         } else if (this.nearbyArray[index].crops == "true") {
-          this.icon = "../../assets/imgs/tree-icon.png";
+          this.icon = "../../assets/icon/icons-tree.pin.png";
 
           this.brocolli ="../../assets/imgs/Broccoli_100px.png";
           this.watermelon = "../../assets/imgs/Watermelon_100px.png";
@@ -639,11 +708,18 @@ export class HomePage {
         }
        });
       console.log( this.callback);
+
+     
       
   
 
+   document.getElementById("hidetime").style.display="flex"
+   document.getElementById("hidekilos").style.display="flex"
+
    document.getElementById("time").style.display="flex"
    document.getElementById("kilos").style.display="flex"
+  
+  
 
   }
   ionViewWillLeave() {
@@ -763,28 +839,101 @@ this.map = new google.maps.Map(document.getElementById('map'), {
       ]
     },
     {
-      "featureType": "landscape",
+      "featureType": "landscape.natural",
+      "elementType": "geometry.fill",
       "stylers": [
         {
-          "color": "#ffffff"
-        }
-      ]
-    },
-    {
-      "featureType": "landscape.man_made",
-      "elementType": "labels.text",
-      "stylers": [
-        {
-          "saturation": -5
+          "visibility": "on"
         }
       ]
     },
     {
       "featureType": "landscape.natural",
+      "elementType": "labels.text",
+      "stylers": [
+        {
+          "color": "#93b039"
+        }
+      ]
+    },
+    {
+      "featureType": "landscape.natural",
+      "elementType": "labels.text.fill",
+      "stylers": [
+        {
+          "color": "#93b039"
+        }
+      ]
+    },
+    {
+      "featureType": "landscape.natural",
+      "elementType": "labels.text.stroke",
+      "stylers": [
+        {
+          "color": "#93b039"
+        }
+      ]
+    },
+    {
+      "featureType": "landscape.natural.landcover",
+      "elementType": "geometry",
+      "stylers": [
+        {
+          "color": "#93b039"
+        }
+      ]
+    },
+    {
+      "featureType": "landscape.natural.landcover",
+      "elementType": "geometry.fill",
+      "stylers": [
+        {
+          "color": "#93b039"
+        }
+      ]
+    },
+    {
+      "featureType": "landscape.natural.landcover",
       "elementType": "geometry.stroke",
       "stylers": [
         {
-          "color": "#73d22d"
+          "color": "#93b039"
+        }
+      ]
+    },
+    {
+      "featureType": "landscape.natural.landcover",
+      "elementType": "labels.text",
+      "stylers": [
+        {
+          "color": "#93b039"
+        }
+      ]
+    },
+    {
+      "featureType": "landscape.natural.landcover",
+      "elementType": "labels.text.fill",
+      "stylers": [
+        {
+          "color": "#93b039"
+        }
+      ]
+    },
+    {
+      "featureType": "landscape.natural.landcover",
+      "elementType": "labels.text.stroke",
+      "stylers": [
+        {
+          "color": "#93b039"
+        }
+      ]
+    },
+    {
+      "featureType": "landscape.natural.terrain",
+      "elementType": "geometry",
+      "stylers": [
+        {
+          "color": "#93b039"
         }
       ]
     },
@@ -793,16 +942,7 @@ this.map = new google.maps.Map(document.getElementById('map'), {
       "elementType": "geometry.fill",
       "stylers": [
         {
-          "color": "#73d22d"
-        }
-      ]
-    },
-    {
-      "featureType": "landscape.natural.terrain",
-      "elementType": "geometry.stroke",
-      "stylers": [
-        {
-          "color": "#73d22d"
+          "color": "#93b039"
         }
       ]
     },
@@ -825,10 +965,11 @@ this.map = new google.maps.Map(document.getElementById('map'), {
       ]
     },
     {
-      "featureType": "poi.government",
+      "featureType": "poi.attraction",
+      "elementType": "geometry.fill",
       "stylers": [
         {
-          "weight": 8
+          "color": "#93b039"
         }
       ]
     },
@@ -846,7 +987,16 @@ this.map = new google.maps.Map(document.getElementById('map'), {
       "elementType": "geometry.fill",
       "stylers": [
         {
-          "color": "#73d22d"
+          "color": "#93b039"
+        }
+      ]
+    },
+    {
+      "featureType": "poi.park",
+      "elementType": "geometry.stroke",
+      "stylers": [
+        {
+          "color": "#93b039"
         }
       ]
     },
@@ -864,7 +1014,16 @@ this.map = new google.maps.Map(document.getElementById('map'), {
       "elementType": "geometry.fill",
       "stylers": [
         {
-          "color": "#d19c2e"
+          "color": "#93b039"
+        }
+      ]
+    },
+    {
+      "featureType": "poi.sports_complex",
+      "elementType": "geometry.stroke",
+      "stylers": [
+        {
+          "color": "#93b039"
         }
       ]
     },
@@ -891,7 +1050,7 @@ this.map = new google.maps.Map(document.getElementById('map'), {
       "elementType": "geometry",
       "stylers": [
         {
-          "color": "#dadada"
+          "color": "#d1e2d1"
         }
       ]
     },
@@ -936,7 +1095,7 @@ this.map = new google.maps.Map(document.getElementById('map'), {
       "elementType": "geometry",
       "stylers": [
         {
-          "color": "#c9c9c9"
+          "color": "#99e4fd"
         }
       ]
     },
@@ -949,7 +1108,7 @@ this.map = new google.maps.Map(document.getElementById('map'), {
         }
       ]
     }
-  ] ,
+  ],
   
   center: { lat:  parseFloat(Searchlat) , lng:parseFloat(Searchlng) },
   disableDefaultUI: true,
@@ -968,7 +1127,6 @@ let marker = new google.maps.Marker({
   },
   position: ({lat: parseFloat(Searchlat) , lng:parseFloat(Searchlng)})
 });
-
 
 
 
@@ -1020,17 +1178,17 @@ this.farmEatDb.getSearchbyFarms(Searchlat,Searchlng).then((radius)=>{
         for (let index = 0; index < this.nearbyArray.length; index++) {
         
           if (this.nearbyArray[index].aquatic == "true") {
-             this.icon = '../../assets/imgs/fish-icon.png';
+             this.icon = "../../assets/icon/icons-fish.pin.png";
           
          
              
    
              console.log(this.nearbyArray[index].aquatic);
            } else if (this.nearbyArray[index].beeKeeping == "true") {
-             this.icon = "../../assets/imgs/Bee-icon.png";
+             this.icon = "../../assets/icon/icons-bee.pin.png";
          
            } else if (this.nearbyArray[index].crops == "true") {
-             this.icon = "../../assets/imgs/tree-icon.png";
+             this.icon = "../../assets/icon/icons-tree.pin.png";
             
            }
    
@@ -1046,7 +1204,7 @@ this.farmEatDb.getSearchbyFarms(Searchlat,Searchlng).then((radius)=>{
              zoom: 10,
    
            });
-  
+           
        this.abmarker.addListener('click', () => {
   
   
@@ -1087,7 +1245,10 @@ initializeItems() {
       "Johannesburg",
       "Rustenburg",
       "Eastern Cape",
-      "Kwazulu Natal"
+      "Kwazulu Natal",
+      "Vaal",
+      "Vereeniging",
+      "Mpumalanga",
       
       
 
