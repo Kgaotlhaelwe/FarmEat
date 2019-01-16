@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <ion-menu id="myMenu" [content]="content" color="dark-green">
 
     <ion-content color="highlight" class="backcolor" >
@@ -52,11 +53,79 @@
   </button>
   </div>
   <!-- <div class="backcolor"></div> -->
+=======
+<ion-menu  [content]="content">
+<<<<<<< HEAD
+  <ion-header >
+    <ion-toolbar color="dark-green">
+=======
+  <ion-header text-center (click)="goProfile()">
+    <ion-toolbar color="dark-green">
+      <div text-center>
+          <div class="propic">
+              <img class="pic" text-center src="{{proPic}}">
+          </div>
+         <div class="info">
+          <div class="username">
+            <h1>{{username}}</h1> 
+           </div>
+           <div class="email">
+             <h6>{{email}}</h6>  
+           </div>
+      </div>
+      </div>
+     
+     
+       
+       
+>>>>>>> 111f4126eb96c04a8a07919316557cd3c7c4d8a1
+        
+      <ion-title text-center >Farm' eat</ion-title>
+    </ion-toolbar>
+  </ion-header>
+>>>>>>> 78027f5f9fc3e559bc26927f96810f1379ebb759
 
   <p class="version" text-center  >Farmeat - Version 0.0.1</p>
   </ion-content>
+<<<<<<< HEAD
   </ion-menu> 
   
   
   <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
   <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+=======
+
+
+</ion-menu> -->
+<div class="flex" text-center padding>
+  <h1>Menu</h1>
+<button class="options"  menuClose ion-item no-line icon-left (click)="nav.setRoot(pages2.homePage)">
+  <ion-icon color="dark-green" class="icons" name="home"></ion-icon>
+  Home
+</button>
+<button class="options"  menuClose ion-item no-line icon-left (click)="nav.setRoot(pages2.addFarm)">
+    <ion-icon color="dark-green" class="icons" ios="ios-add" md="md-add"></ion-icon>
+  Add Farm
+</button>
+<button class="options"  menuClose ion-item icon-left no-line (click)="nav.setRoot(pages2.newsfeedPage)">
+  <ion-icon color="dark-green" class="icons" ios="ios-paper" md="md-paper"></ion-icon>
+  News Feed
+</button>
+<!-- <button class="options"  menuClose ion-item icon-left no-line (click)="nav.setRoot(pages2.farmForumPage)">
+  <ion-icon color="dark-green" class="icons" name="ios-people"></ion-icon>
+  Farm Forum
+</button> -->
+
+<button class="options"  menuClose ion-item no-line icon-left (click)="signOut()">
+    <ion-icon color="dark-green" class="icons" ios="ios-power" md="md-power"></ion-icon>
+    Logout
+</button>
+</div>
+
+</ion-content>
+</ion-menu> 
+
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+>>>>>>> 78027f5f9fc3e559bc26927f96810f1379ebb759

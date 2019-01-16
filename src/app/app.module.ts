@@ -24,8 +24,11 @@ import { FarmForumPage } from '../pages/farm-forum/farm-forum'
 import { LoginPage } from '../pages/login/login';
 import { AddFarmPage } from '../pages/add-farm/add-farm';
 import { NativePageTransitions } from '@ionic-native/native-page-transitions';
+<<<<<<< HEAD
 import { ProfilePage } from '../pages/profile/profile';
 import { MoreinforPage } from '../pages/moreinfor/moreinfor';
+=======
+>>>>>>> 78027f5f9fc3e559bc26927f96810f1379ebb759
 
 
 @NgModule({
@@ -40,9 +43,13 @@ import { MoreinforPage } from '../pages/moreinfor/moreinfor';
     NewsfeedPage,
     LoginPage,
     FarmForumPage,
+<<<<<<< HEAD
     AddFarmPage,
     ProfilePage,
     MoreinforPage
+=======
+    AddFarmPage
+>>>>>>> 78027f5f9fc3e559bc26927f96810f1379ebb759
     
   ],
   imports: [

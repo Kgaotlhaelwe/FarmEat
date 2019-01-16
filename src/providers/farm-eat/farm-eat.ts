@@ -494,7 +494,6 @@ getUser(){
   })
 }
 
-
 // newsfeed(){
 //   return new Promise((resolve, reject)=>{
 //     firebase.database().ref('newsfeed/').on('value', (data: any) => {

@@ -62,6 +62,7 @@
    // color: #087150
 }
 .flex{
+<<<<<<< HEAD
     //background-color: #00B97F;
     margin-top: 150px;
     padding: 20px
@@ -76,6 +77,13 @@
     right: -40%;
 }
 .username{
+=======
+    display: flex;
+    justify-content: center;
+    flex-direction: column
+<<<<<<< HEAD
+=======
+>>>>>>> 78027f5f9fc3e559bc26927f96810f1379ebb759
 }
 .propic{
     display: flex;
@@ -97,6 +105,7 @@
 h6{
     margin: 0%;
     color: white
+<<<<<<< HEAD
 }
 .info{
 height: 50px;
@@ -159,3 +168,7 @@ height: 50px;
     top: 17%;
 }
 
+=======
+>>>>>>> 111f4126eb96c04a8a07919316557cd3c7c4d8a1
+}
+>>>>>>> 78027f5f9fc3e559bc26927f96810f1379ebb759
