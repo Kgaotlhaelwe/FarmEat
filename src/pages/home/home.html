@@ -3,88 +3,110 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-<button (click)="nextpage()">search</button>
-  
- <!-- <ion-input type="search" placeholder="search" #address id="pac-input" ></ion-input> -->
-  
-    <!-- <ion-buttons end>
-       
-            <ion-icon ios="ios-search" md="md-search"  ></ion-icon>
 
-            <button ion-button icon-only (click)="search(address.value)">
+  
+ 
+   <img src="../../assets/imgs/tree-icon.png">
+    <ion-buttons end>
+        <button ion-button icon-only (click)="search()">
+            <ion-icon ios="ios-search" md="md-search" ></ion-icon>
         </button>
-      </ion-buttons> -->
-
-      <!-- <ion-searchbar #searchz (ionInput)="getItems($event)"></ion-searchbar>
-      <ion-list id="hide">
-        <ion-item *ngFor="let item of items" (click)="search(item)"  >
-          {{ item }}
-        </ion-item>
-      </ion-list>
+      </ion-buttons>
   </ion-toolbar>
-</ion-header> --> --> -->
+</ion-header> -->
 <ion-content>
-  
+  <!-- <ion-fab top left  >
+    <button ion-fab mini class="fabShadow " color="light" clear menuToggle><ion-icon name="menu" color="dark-green"></ion-icon></button>
+ 
+  </ion-fab>
+  <ion-fab top right >
+    <button ion-fab mini class="fabShadow "  color="light" clear menuToggle> <ion-icon ios="ios-funnel" md="md-funnel" color="dark-green"></ion-icon></button>
+ 
+  </ion-fab>
+  <div class="pad">
+
+    <ion-segment [(ngModel)]="pet" class="seg" >
+
+      <ion-segment-button  value="Details">
+          MAP
+      </ion-segment-button>
+
+      <ion-segment-button value="Photos">
+          FAV
+      </ion-segment-button>
+
+    </ion-segment>
+  </div> -->
       <button ion-button large class="topbtn" color="dark-green" clear menuToggle ><ion-icon name="menu"></ion-icon></button>
 
-   
+      <div class="upbox"></div>
+      
+      
 
 
-  <div #map id="map" class="theMap"></div>
 
+  <div #map id="map" class="theMap"></div> 
+  <ion-searchbar class="search" #searchz (ionInput)="getItems($event)" (input)="display()" [(ngModel)]="searchbar"></ion-searchbar>
+  <div class="suggest">
+      <ion-list class="list" id="hide" >
+         <ion-item  *ngFor="let item of items" (click)="serc(item)"  >
+           {{ item }}
+         </ion-item>
+       </ion-list>
+   </div>
+ 
+  
+ 
 
+ <!-- <div class="name"> <h4>Neary by farms</h4> </div> -->
 
- <ion-searchbar class="search" (input)="getItems($event)"></ion-searchbar>
+ 
 
-    <div class="cards" >
+    <div class="cards" id="cardsHide" >
       
                 <ion-slides class="slides" (ionSlideDidChange)="slideChanged()" slidesPerView="1" centeredSlides="true" >
-                   <ion-slide *ngFor="let a of nearbyArray; let i = index  " (click)="moreinfo(i)" >
+                   <ion-slide *ngFor="let a of farmsOnSlide; let i = index  " (click)="moreinfo(i)" >
                      
-              <div class="cards">
-                     <ion-card class="card">
+              <div class="cards" (click)="search(item)">
+                     <ion-card class="card"  >
                         <img src="{{a.image}}" class="imgs">
                           <ion-item >
                            
                             <h2 text-left>{{a.name}}</h2>
                             <p text-left>{{a.type}}</p>
+                            <div class="fruits">
+                            <img src="{{brocolli}}" class="imgz">
+                            <img src="{{watermelon}}" class="imgz">
+                            <img src="{{pumpkin}}" class="imgz">
+                            <img src="{{redPaper}}" class="imgz">
+              
+                          </div>
+                            
                           </ion-item>
-  
+                          
                         </ion-card> 
                       </div>
                     </ion-slide> 
                   </ion-slides>
                 </div>  
-         
 
+<div class="max" *ngIf="connect == 0; else issue">
+                  <div class="fabflex" id="hidekilos">
+                  <ion-fab middle  left class="movefabt" >
+                    <button ion-fab mini color="dark-green"><ion-icon name="car"></ion-icon></button>
+                    </ion-fab> 
+                    <h4 class="car" class="km" id="kilos">{{kiloMeter}}</h4>
+                  </div>
 
-    <!-- <div class="cont"> -->
-        <!-- <div class="handle">  -->
-            <!-- <div class="ico" (click)="changeMapSize()">
-              <p align="center" class="theArrow"><ion-icon class="theIcon" name="add"></ion-icon></p>
-            </div>
-            <div class="cards">
-      
-                <ion-slides class="slides" (ionSlideDidChange)="slideChanged()" slidesPerView="1" centeredSlides="true" >
-                   <ion-slide *ngFor="let a of nearbyArray; let i = index  " (click)="moreinfo(i)" >
-                     
-              <div class="cards">
-                     <ion-card class="card">
-                        <img src="{{a.image}}" class="imgs">
-                          <ion-item >
-                           
-                            <h2 text-left>{{a.name}}</h2>
-                            <p text-left>{{a.type}}</p>
-                          </ion-item>
-  
-                        </ion-card> 
-                      </div>
-                    </ion-slide> 
-                  </ion-slides>
-                </div>  
-            
-         
-            -->
-      <!-- </div> -->
+                  <div class="fabflex" id="hidetime">
+                      <ion-fab middle left class="movefabb">
+                        <button ion-fab mini color="dark-green"><ion-icon name="timer"></ion-icon></button>
+                        </ion-fab>  
+                        <h4 class="car" class="time" id="time">{{duration}}</h4> 
+                    </div>
+               
+                  </div>
+                  <ng-template #issue>
 
+                  </ng-template>
 </ion-content>

@@ -1,93 +1,176 @@
 page-login {
     .content{
-          background-color: #087150;
+        //background-color: rgb(247, 245, 245);
+        //  background-image: url('../../assets/icon/mapTfull.PNG');
+        //  background-position: center;
+        //  background-size: cover;
+        //  background-repeat: no-repeat
+         
 
          
     }
-    .body-container{
-      padding-top: 20%;
+//     .body-container{
+//       padding-top: 20%;
       
 
         
-    }
+//     }
     .logo-box{
+        margin-top: 5%;
         text-align: center;
         display: block;
-        padding-bottom: 20%
+        padding-bottom: 5%
 
     }
     .img{
-       
-        width: 120px;
+        width: 100px;
     }
-    .input-box{
-        // position: relative;
-        // top: 10px;
+    // .input-box{
+    //     // position: relative;
+    //     // top: 10px;
 
 
-    }
+    // }
  
     h1{
         color: white;
         text-shadow: 2px 2px 4px #000000;
-         font-size: 4rem;
+         font-size: 3rem;
          margin-top: -5%;
  
     }
-    .item{
-        text-align: center;
-        color:#28ECAC;
+//     .item{
+//         text-align: center;
+//         color:white;
         
-    }
-.first-item{
-    background-color:	#0B2816; 
-    border-radius: 25px;
-}
-  .second-item{
-    background-color:	#0B2816; 
-    border-radius: 25px;
+//     }
+// .first-item{
+//     background-color:	rgba(68, 67, 62, 0.473); 
+//     border-radius: 10px;
+// }
+//   .second-item{
+//     background-color:	rgba(63, 63, 62, 0.582); 
+//     border-radius: 10px;
 
-  }  
-  .text-input::-moz-placeholder {
-      text-align: center;
-    color: 	#28ECAC;
+//   }  
+//   .text-input::-moz-placeholder {
+//       text-align: center;
+//       color: 		white;
     
-   }
-   .text-input-md {
-    text-align: center;
-}
-.text-label-md {
-    text-align: center;
-}
+//    }
+//    .text-input-md {
+//     text-align: center;
+// }
+// .text-label-md {
+//     text-align: center;
+// }
    
-   .text-input:-ms-input-placeholder {
-    color:		#28ECAC;
+//    .text-input:-ms-input-placeholder {
+//     color: 		white;
    
-   }
+//    }
    
-   .text-input::-webkit-input-placeholder {
-    color: 		#28ECAC;
+//    .text-input::-webkit-input-placeholder {
+//     color: 		white;
    
-   }
-   .footer-md::before, .tabs-md[tabsPlacement="bottom"] > .tabbar::before {
-    top: -2px;
-    bottom: auto;
-    background-position: left 0 top 0;
-    height: 0px;
+//    }
+//    .footer-md::before, .tabs-md[tabsPlacement="bottom"] > .tabbar::before {
+//     top: -2px;
+//     bottom: auto;
+//     background-position: left 0 top 0;
+//     height: 0px;
 
-}
-.sign_up{
-    text-transform: none;
+// }
+// .sign_up{
+//     text-transform: none;
+//     color: white;
+//     text-shadow: 2px 2px 4px #000000;
 
-}
-.forget-password{
-    text-transform: none;
-    color: #28ECAC;
+// }
+// .forget-password{
+//     text-transform: none;
+//     color: white;
+//     text-shadow: 2px 2px 4px #000000;
 
+// }
+// ion-footer{
+//     display: flex;
+// }
+// .body-inputs{
+//     padding: 20px;
+//     background-color: rgba(255, 255, 255, 0);
+    
+
+// }
+// .button-round-md{
+//     border-radius: 10px;
+
+// }
+.topbox{
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.253);
+    border-radius: 25px;
 }
-ion-footer{
-    display: flex;
+#items{
+    border-radius: 25px;
+    
 }
+.topboxx{
+    height: 50%;
+    width: 100%;
+    position: fixed;
+    background-color: rgb(8, 113, 80);
+    z-index: -1;
+}
+.segment-md .segment-button.activated, .segment-md .segment-button.segment-activated {
+    border-color: white;
+    opacity: 1;
+   
+}
+.segment-md .segment-button {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    width: 0;
+    height: 4.2rem;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: rgba(0, 0, 0, 0.1);
+    font-size: 1.8rem;
+    font-weight: 500;
+    line-height: 4rem;
+    text-transform: uppercase;
+    color: white;
+    background-color: transparent;
+    opacity: 0.7;
+    -webkit-transition: 100ms all linear;
+    transition: 100ms all linear;
+    padding: 0 6px;
+}
+h2{
+    color: #087150;
+    font-size: 40px
+}
+.bottomimg{
+    position: fixed;
+     top: 50%;
+    background-image: url("../../assets/icon/94076a023ede44f12fd31f2bb4233b77.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+     height: 50%;
+    z-index: -1999;
+    //background-color: #000000
+}
+title{
+    color: #000000
+}
+
+
+
+
+
 
 
 

@@ -2,7 +2,7 @@
 
 
 <ion-content  class="content" >
-  <div class="body-container" >
+  <!-- <div class="body-container" >
     <div class="header">
  <div class="logo-box">
   <img class="img" src="../../assets/imgs/unnamed.png" alt="logo">
@@ -11,10 +11,13 @@
 
  
   
- <div padding>  
+ <div class="inputs" padding>  
  
-  <h2>Welcome </h2>
-  <p >Register an account </p> 
+  <h3>Register an account  </h3>
+  
+  <div class="body-inputs" >
+
+
   <ion-list class="item" no-lines>
 
     <ion-item class="first-item">
@@ -29,10 +32,14 @@
       <ion-input type="password" placeholder="Password"  [(ngModel)]= 'user.password'></ion-input>
     </ion-item>
     <br>
-    <button color="green-lit" ion-button full round (click)="Register(user)">  Sign up </button>
+    <button color="dark-green" ion-button full round (click)="Register(user)">  Sign up </button>
   </ion-list>
   </div>
   </div>
-  <button color="green" ion-button full round (click)="Login()" clear>  <b>Sign In</b>  </button>
+  <button color="light" class="signin" ion-button full round (click)="Login()" clear>  <b>Sign In</b>  </button>
   </div>
+</div> -->
+
+
+
 </ion-content>

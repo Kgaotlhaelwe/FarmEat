@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {FarmEatProvider} from '../../providers/farm-eat/farm-eat'
+import { MoreinforPage } from '../moreinfor/moreinfor';
 
 /**
  * Generated class for the NewsfeedPage page.
@@ -32,6 +33,17 @@ export class NewsfeedPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NewsfeedPage');
+  }
+  more(image , title , message){
+
+    let obj = {
+      image:image ,
+      title:title ,
+      message:message
+    }
+this.navCtrl.push(MoreinforPage, {readMore:obj})
+
+
   }
 
 }

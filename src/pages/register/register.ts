@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams , AlertController, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams , AlertController, LoadingController, ToastController, Keyboard } from 'ionic-angular';
 import {user} from '../model/user';
 declare var firebase
 import {FarmEatProvider} from '../../providers/farm-eat/farm-eat'
 import { LoginPage } from '../login/login';
 import { HomePage } from '../../pages/home/home';
 import { DescriptionPage } from '../description/description';
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 
 
 
@@ -23,7 +24,7 @@ import { DescriptionPage } from '../description/description';
 })
 export class RegisterPage {
   user = {} as user ;
-  constructor(public navCtrl: NavController, public navParams: NavParams , public farmEatDb:FarmEatProvider, public alertCtrl:AlertController, public loadingCtrl:LoadingController, public toastCtrl :ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams , public farmEatDb:FarmEatProvider,   private keyboard: Keyboard, private nativePageTransitions: NativePageTransitions, public alertCtrl:AlertController, public loadingCtrl:LoadingController, public toastCtrl :ToastController) {
 
   }
 
@@ -38,14 +39,7 @@ export class RegisterPage {
   
     if(this.user.email !=null  && this.user.password  !=null  ){
     this.farmEatDb.register(user.email ,user.password, user.username ).then(()=>{
-      let userID = firebase.auth().currentUser; 
-      firebase.database().ref('user/'+userID).on('value' , (data:any)=>{
-        
-        var user =data.val();
-        console.log(user);
-
-      })
-    
+   
      
     //   const alert = this.alertCtrl.create({
     //     subTitle: 'You have successfully registered',
@@ -59,7 +53,7 @@ export class RegisterPage {
     //   content: "Logging in please wait...",
     //   duration: 3000
     // });
-    this.navCtrl.setRoot(HomePage, {userID:userID})
+    this.navCtrl.setRoot(HomePage)
     //loader.present();
   
   
@@ -82,7 +76,19 @@ export class RegisterPage {
     alert.present();
   }
   }
+
+
+
+  
   Login(){
+      
+    let options: NativeTransitionOptions = {
+      direction: 'down',
+      duration: 1000,
+      
+     };
+ 
+    this.nativePageTransitions.slide(options);
     this.navCtrl.push(LoginPage)
   }
 }

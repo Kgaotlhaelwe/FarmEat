@@ -3,7 +3,6 @@ page-description {
         // padding-left: 10px;
         // padding-right: 10px;
     }
-
     .cards{
         max-height: 500px;
     }
@@ -12,12 +11,24 @@ page-description {
     }
     .body-box{
         text-align: center;
-        padding-left: 10px;
-        padding-right: 10px;
+        // padding-left: 10px;
+        // padding-right: 10px;
+        // box-shadow: 0px 0px 10px    rgba(0, 0, 0, 0.2);
+        // border-radius: 5PX;
+    }
+    .pet{
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .farm-facilities{
+        box-shadow: 0px 10px 10px    rgba(0, 0, 0, 0.1);
+        border-radius: 5PX;
+        
     }
   
     .sub-title{
         position: relative;
+        margin-top: -10px;
      
     }
     .fab{
@@ -34,7 +45,6 @@ page-description {
         text-transform: none;
         white-space: nowrap;
         cursor: pointer;
-
     }
     .switch-seg{
         position: relative;
@@ -42,9 +52,15 @@ page-description {
         text-align: center;
     }
     .description-section{
+        text-align: center;
+        padding-left: 10px;
+        padding-right: 10px;
         position: relative;
+        // font-family: system;
+        // font-display: normal;
+        font-size: 16px;
+     
     }
-
     .title {
         position: absolute;
         font-size: 2.0em;
@@ -60,27 +76,61 @@ page-description {
       .header-box{
           position: relative;
           height: auto;
-
-        }       
-
-        .contact-box{
-            letter-spacing: 0.1em;
-            margin-top: -20px;
-            font-family: system;
-            font-display: normal;
-             background-color:#fafafa;
-            color: white;
-            font-size: 40px;       
-            display: grid;          
-            grid-template-columns: 1fr 1fr 1fr 1fr ;
-            height: 50px;
+        }
+        h4{
+            font-size: 3.0em;
+        }  
+        .description-section{
+            margin-top: -35px;
+        }   
+        .cotact-box{
+            // background-color: #087150d3;
+            padding-top: 10px;
+            padding-bottom: 5px;
+            //  display: flex;
+            //  justify-content: center;
+            //  justify-content: space-around;
+            //  letter-spacing: 0.1em;
+            //   margin-top: -20px;
+            //  font-family: system;
+            //  font-display: normal;
+            //    background-color:whitesmoke;
+             color: black;
+             margin-top: -16px;
+            //  font-size: 40px;       
+                
+            //  grid-template-columns: 1fr 1fr 1fr 1fr ;
+            //  height: 50px;
+             text-align: center;
+            //  line-height: 5%;
+             
+        }
+        .sub-title{
             text-align: center;
-            line-height: 5%
+            background-color: #087150;
+            height: 100%;
+            width: 110%
+            
+        }
+        .contact-icons{
+             display: flex;
+             justify-content: center;
+             justify-content: space-around;
+            //  box-shadow: 0px 0px 10px    rgba(0, 0, 0, 0.2);
+            //  border-radius: 5PX;
+        }
+        .container-offer{
+            box-shadow: 0px 10px 10px    rgba(0, 0, 0, 0.1);
+            border-radius: 5PX;
+        }
+        .contact-us{
+            text-align: center;
+            // box-shadow: 0px 0px 10px    rgba(0, 0, 0, 0.514)
         }
      
         .contact-box > div{
-            padding-top: 15px;
-            padding-bottom: 20px;
+            padding-top: 10px;
+            padding-bottom: 10px;
         }
         .contact-box > div:nthchild(odd){
         }
@@ -118,13 +168,12 @@ page-description {
          .container-livestock{
             justify-content: center;
             display: flex;
-
          }
          .container-Aquafarming{
             justify-content: center;
             display: flex;
-
          }
+         
     
       
          .btn {
@@ -141,6 +190,7 @@ page-description {
             border-style: inset;
             border-width: 1px ;
             background-color: #087150;
+            width: 60%;
         }
           .text {
             font-size: 
@@ -153,7 +203,6 @@ page-description {
             transform: translate(-50%, -50%);
             text-align: center;
           }
-
           .ion-card{
             width: 115%;
             margin-left: -8%;
@@ -163,30 +212,84 @@ page-description {
     
             }
             .contact-box{
-              
+              display: flex;
+            //   background-color: #087150;
               
             }
             h6{
                   color: grey;
             }
-
+    
             ion-icon{
                 font-size: 27px;
-                color: 	rgb(8, 113, 80);
+                color:  rgb(8, 113, 80);
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                display: block;
+              
                 
             }
             h4{
                 padding-right: 5px;
                 font-size: 1em;
                 text-align: center;
+                color: rgb(92, 89, 89);
             } 
             h3{
                 font-size: 1.5em;
-                color: rgb(92, 89, 89);
+               
                 text-align: center;
                 // padding-left: 5%;
             }
-        
+            .swiper-pagination-bullet-active {
+                background: white;
+                opacity: 1;
+            }
+            .email {
+                 position: relative; 
+                 top: 0px; 
+                 left: 0%; 
+                 box-shadow: 0px 0px 10px    rgba(0, 0, 0, 0.3);
+                  border-radius: 100%;
+                  width: 40px;
+                  height: 40px;
+                  text-align: center;
+                  vertical-align:middle;
+                 
+            }
+            .call{
+                position: relative; 
+                top: 0px; 
+                left: 0%; 
+                box-shadow: 0px 0px 10px    rgba(0, 0, 0, 0.3);
+                 border-radius: 100%;
+                 width: 40px;
+                 height: 40px;
+                 text-align: center;
+                 vertical-align:middle;
+            }
+            .adress{
+                position: relative; 
+                top: 0px; 
+                left: 0%; 
+                box-shadow: 0px 0px 10px    rgba(0, 0, 0, 0.3);
+                 border-radius: 100%;
+                 width: 40px;
+                 height: 40px;
+                 text-align: center;
+                 vertical-align:middle;
+            }
+            h2{
+                font-size: 21px;
+                color: white;
+                margin: 0%
+            }
+            h3{
+                font-size: 18px;
+            }
+   
     
        
        

@@ -7,19 +7,17 @@ import { FarmEatProvider } from '../../providers/farm-eat/farm-eat'
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
  declare var firebase;
 
-@IonicPage()
+ 
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
-
-  username:string = "Nthabi Mputle";
+  username:string ;
   
-  email:string = "mputle15@gmail.com";
+  email:string;
   coverUrl ;
   propicUrl;
   urlCover;
@@ -27,21 +25,19 @@ export class ProfilePage {
   constructor(public navCtrl: NavController, public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, private farmEat: FarmEatProvider) {
       
   }
-
-  ionViewDidEnter(){
+  ionViewWillEnter(){
     this.farmEat.getUser().then((data:any)=>{
       console.log(data);
+      
       this.username = data.username
       this.email = data.email
       this.coverUrl = data.cover
       this.propicUrl = data.proPicture
     })
   }
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
   }
-
   uploadCover(event: any){
     if (event.target.files && event.target.files[0]) {
       let reader = new FileReader();
@@ -98,11 +94,12 @@ export class ProfilePage {
                       toast.present();
                     } else {
                       // Data saved successfully!
-                      const toast = this.toastCtrl.create({
-                        message: 'Your cover picture was added successfully',
-                        duration: 3000
-                      });
-                      toast.present();
+                      this.navCtrl.push(ProfilePage)
+                      // const toast = this.toastCtrl.create({
+                      //   message: 'Your cover picture was added successfully',
+                      //   duration: 3000
+                      // });
+                      // toast.present();
                     }
                   });
  
@@ -118,8 +115,8 @@ export class ProfilePage {
  
       }
   }
-
   uploadProPic(event: any) {
+    console.log("uploasProPic Click");
     if (event.target.files && event.target.files[0]) {
       let reader = new FileReader();
       reader.onload = (event: any) => {
@@ -174,11 +171,12 @@ export class ProfilePage {
                       toast.present();
                     } else {
                       // Data saved successfully!
-                      const toast = this.toastCtrl.create({
-                        message: 'Your profile picture was added successfully',
-                        duration: 3000
-                      });
-                      toast.present();
+                      this.navCtrl.push(ProfilePage)
+                      // const toast = this.toastCtrl.create({
+                      //   message: 'Your profile picture was added successfully',
+                      //   duration: 3000
+                      // });
+                      // toast.present();
                     }
                   });
  
@@ -193,7 +191,6 @@ export class ProfilePage {
  
       }
   }
-
   editProfile(){
     const prompt = this.alertCtrl.create({
       title: 'Edit your details',
@@ -217,19 +214,34 @@ export class ProfilePage {
             console.log('Saved clicked');
             console.log(data.username);
             
-            this.farmEat.editUser(data.username).then(()=>{
-              const toast = this.toastCtrl.create({
-                message: 'Your details were added successfully',
-                duration: 3000
-              });
-              toast.present();
-              this.navCtrl.push(ProfilePage);
-            })
+            if(data.username != ""){
+              this.farmEat.editUser(data.username).then(()=>{
+                // const toast = this.toastCtrl.create({
+                //   message: 'Your details were added successfully',
+                //   duration: 3000
+                // });
+                this.farmEat.getUser().then((data:any)=>{
+                  console.log(data);
+                  
+                  this.username = data.username
+                 
+                })
+                // toast.present();
+               
+              })
+            }else{
+                const toast = this.toastCtrl.create({
+                  message: 'You have entered a blank username, please try again.',
+                  duration: 3000
+                });
+                
+                toast.present();
+            }
+           
           }
         }
       ]
     });
     prompt.present();
   }
-
 }

@@ -1,4 +1,7 @@
 page-add-farm {
+    .toolbar{
+        // height: 200px;
+    }
     .flex{
         display: flex;
         flex-direction: row
@@ -11,6 +14,13 @@ page-add-farm {
     }
     button {
    
+    }
+    .image-input{
+        text-align: center;
+        
+    }
+    #hide{
+        display: none;
     }
     .bar-button::after {
         left: 0px;
@@ -42,5 +52,14 @@ page-add-farm {
       h3{
           box-shadow: 1px 1px 1px 8px brown
       }
+      .buttons{
+          padding-left: 10px;
+          padding-right: 10px;
+      }
+      ion-checkbox{
+          background-color: #087150;
+
+      }
+
      
 }

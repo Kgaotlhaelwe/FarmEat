@@ -25,6 +25,7 @@ import { LoginPage } from '../pages/login/login';
 import { AddFarmPage } from '../pages/add-farm/add-farm';
 import { NativePageTransitions } from '@ionic-native/native-page-transitions';
 import { ProfilePage } from '../pages/profile/profile';
+import { MoreinforPage } from '../pages/moreinfor/moreinfor';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { ProfilePage } from '../pages/profile/profile';
     LoginPage,
     FarmForumPage,
     AddFarmPage,
-    ProfilePage
+    ProfilePage,
+    MoreinforPage
     
   ],
   imports: [
@@ -59,7 +61,9 @@ import { ProfilePage } from '../pages/profile/profile';
     FarmForumPage,
     LoginPage,
     AddFarmPage,
-    ProfilePage
+    ProfilePage,
+    MoreinforPage
+    
    
    
   ],

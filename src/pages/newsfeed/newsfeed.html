@@ -7,10 +7,11 @@
 <ion-header>
    
   <ion-navbar  color="dark-green">
-      <button ion-button menuToggle>
+      <!-- <button ion-button menuToggle>
           <ion-icon name="menu"></ion-icon>
-        </button>
-    <ion-title align="center">News Feed</ion-title>
+        </button> -->
+        <button ion-button  large class="topbtn" color="light" clear menuToggle ><ion-icon id="menu" name="menu"></ion-icon></button>
+    <ion-title text-center>News Feed</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -19,14 +20,15 @@
 <ion-content class="content" >
   <div  *ngFor="let  a of  newsFeedArray">
     
-        <ion-card class="flex">
-            <ion-avatar class="flexav">
+        <ion-card class="flexx" (click)="more(a.image , a.title , a.message)" >
+            <ion-card-header>
+                <h2 text-wrap text-center><b>{{a.message}}</b></h2>
+               </ion-card-header>
+            <ion-avatar class="flexav" padding>
                 <img src="{{a.image}}">
               </ion-avatar>
         
-            <ion-card-header>
-                <h2>{{a.message}}</h2>
-               </ion-card-header>
+         
                <ion-card-content class="text" >
                   <p>{{a.title}}</p>
                 </ion-card-content> 

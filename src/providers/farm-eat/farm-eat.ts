@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Events } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
+
 
 declare var firebase
 
@@ -20,38 +22,23 @@ export class FarmEatProvider {
   newFeedArray = new Array();
   newSeachedFarms = new Array() ;
   condition;
-  userID;
+  userID
+  lat = -26.2485;
+  lng = 27.8540;
   
   
-  constructor(public http: HttpClient , private geolocation :  Geolocation, public events: Events) {
+  constructor(public http: HttpClient , private geolocation :  Geolocation, public events: Events, public alertCtrl: AlertController) {
     console.log('Hello FarmEatProvider Provider');
-    let user = firebase.auth().currentUser;
-    //let id = user.uid
-    console.log(user);
-    
+    //this.currentLocation()
+  }
+
+  // currentLocation(){
+  //   this.geolocation.getCurrentPosition().then((resp) => {
+  //     var userLoc = resp;
+  //     console.log(userLoc);
       
-      this.events.publish('user:created', user, Date.now());
-   
-    
-    console.log(firebase.auth().currentUser);
-    
-    console.log(user);
-    console.log("Nthabi");
-    
-    
-    //this.userID= firebase.auth().currentUser.uid;
-    // console.log(this.userID);
-    
-  }
-
-  getUID(){
-    return new Promise((resolve, reject)=>{
-      let userID = firebase.auth().currentUser.uid
-      resolve(userID);
-    })
-  }
-
-  
+  //   })
+  // }
   checkstate(){
     return new Promise((resolve, reject)=>{
     firebase.auth().onAuthStateChanged((user)=>
@@ -60,7 +47,6 @@ export class FarmEatProvider {
        // alert('user signed in')
        this.condition = 1
        console.log(user.uid);
-
        this.userID = user.uid
        this.events.publish('user:created', this.userID, Date.now());
       } else {
@@ -74,53 +60,6 @@ export class FarmEatProvider {
   })
   }
 
-  // editCover(url){
-  //   return new Promise ((accpt, rej) =>{
-  //     var uid= firebase.auth().currentUser.uid;
-  //       firebase.database().ref("user/"+uid).update({
-  //         cover:url
-  //       })
-  //       accpt()
-  //   })
-  // }
-
-  // editPropic(url){
-  //   return new Promise ((accpt, rej) =>{
-  //  let uid= firebase.auth().currentUser.uid;
-  //       firebase.database().ref("user/"+uid).update({
-  //         proPicture:url
-  //       })
-  //       accpt()
-  //   })
-  // }
-
-
-  editUser(username){
-    return new Promise ((accpt, rej) =>{
-      let uid= firebase.auth().currentUser.uid;
-      var updates = {
-        username: username
-      }
-     
-        firebase.database().ref("user/"+uid).update(updates)
-
-        accpt()
-    })
-  }
-
-  getUser(){
-    return new Promise ((accpt, rej) =>{
-      // let uid= firebase.auth().currentUser.uid;
-      console.log(this.userID);
-      firebase.database().ref('user/'+this.userID).on('value' , (data:any)=>{
-        var user =data.val();
-        console.log(user);
-        accpt(user)
-       
-
-      })
-    })
-  }
 
 
   createPositionRadius(latitude, longitude){
@@ -251,16 +190,44 @@ if (up <= 0){
     })
   }
 
-  getCurrentLocation(){
+  getCurrentLocation(lat, lng){
     //get current location
      return new Promise ((accpt, rej) =>{
-     this.geolocation.getCurrentPosition().then((resp) => {
-       this.createPositionRadius(resp.coords.latitude, resp.coords.longitude).then((data:any) =>{
-         accpt(data);
-       })
-        }).catch((error) => {
-          console.log('Error getting location', error);
-        });
+       console.log("provider outside getCurPos");
+       this.createPositionRadius(lat, lng).then((data:any) =>{
+        accpt(data);
+      })
+    //  this.geolocation.getCurrentPosition().then((resp) => {
+    //    console.log(resp);
+    //    console.log("provider inside getCurPos");
+    //    this.lat = resp.coords.latitude
+    //    this.lng = resp.coords.longitude
+    //    this.createPositionRadius(this.lat, this.lng).then((data:any) =>{
+    //      accpt(data);
+    //    })
+    //     }).catch((error) => {
+    //       console.log("Error");
+    //       console.log('Error getting location', error);
+    //       const prompt = this.alertCtrl.create({
+    //         title: 'Login',
+    //         message: "There was a problem retreiving your location please try again",
+            
+    //         buttons: [
+    //           {
+    //             text: 'OK',
+    //             handler: data => {
+    //               console.log('Saved clicked');
+    //               this.geolocation.getCurrentPosition().then((resp) => {
+    //                 // this.createPositionRadius(resp.coords.latitude, resp.coords.longitude).then((data:any) =>{
+    //                 //   accpt(data);
+    //                 // })
+    //               })
+    //             }
+    //           }
+    //         ]
+    //       });
+    //       prompt.present();
+    //     });
       })
    }
 
@@ -276,6 +243,7 @@ if (up <= 0){
   
         }).catch((error) => {
           console.log('Error getting location', error);
+          
         });
       })
    }
@@ -286,19 +254,6 @@ if (up <= 0){
 
 
 getSearchbyFarms(lat , lng){
-  return new Promise((accpt ,rej)=>{
-  this.createPositionRadius(lat , lng).then((data:any)=>{
-    accpt(data)
-  })
-  }).catch((error)=>{
-    console.log('Error getting location', error);
-    
-  })
-}
-
-
-
-getSearchbyFarm(lat , lng){
   return new Promise((accpt ,rej)=>{
   this.createPositionRadius(lat , lng).then((data:any)=>{
     accpt(data)
@@ -433,23 +388,11 @@ getSearchbyFarm(lat , lng){
           var orgLong =  new String(org[x].lng).substr(0,5);
 
           
+    if ((orgLong  <= long  && orgLong  >= radius.left || orgLong  >= long  && orgLong  <= radius.right) && (orglat >= lt && orglat <= radius.down || orglat <= lt && orglat >= radius.up)){
 
-          // console.log(orgLong);
-          // console.log(orglat );
-          
-          
-          
-          
-          
-          
-          
-// console.log('out');
-
-          if ((orgLong  <= long  && orgLong  >= radius.left || orgLong  >= long  && orgLong  <= radius.right) && (orglat >= lt && orglat <= radius.down || orglat <= lt && orglat >= radius.up)){
-console.log('in');
 
             this.newSeachedFarms.push(org[x]);
-            //  console.log(this.nearByOrg);
+             console.log(this.nearByOrg);
    
              }
           
@@ -475,8 +418,8 @@ console.log('in');
         firebase.database().ref("user/"+uid).set({
           username:username,
           email:email,
-          proPicture:"../../assets/imgs/default-profile-picture1-744x744.jpg",
-          cover: "../../assets/imgs/cover.jpg"
+          cover: "../../assets/imgs/cover.jpg",
+          proPicture: "../../assets/imgs/default-profile-picture1-744x744.jpg"
         })
 
         resolve()
@@ -507,14 +450,10 @@ console.log('in');
 
 signout(){
   return new Promise((resolve, reject)=>{ 
-    firebase.auth().signOut().then(()=>{
-      // console.log("Logged out");
-       // Revoke all refresh tokens for a specified user for whatever reason.
-      // Retrieve the timestamp of the revocation, in seconds since the epoch.
-     
+    firebase.auth().signOut().then(function() {
       resolve()
     }).catch(function(error) {
-      console.log(error);
+  
     });
   })
 
@@ -560,12 +499,59 @@ addFarm(name, address,farmType, description, crops, liveStock, beeKeeping, aquat
   
 }
 
-
-loapMap(){
-
-  
+editUser(username){
+  return new Promise ((accpt, rej) =>{
+    let uid= firebase.auth().currentUser.uid;
+    var updates = {
+      username: username
+    }
+   
+      firebase.database().ref("user/"+uid).update(updates)
+      accpt()
+  })
 }
+getUser(){
+  return new Promise ((accpt, rej) =>{
+    // let uid= firebase.auth().currentUser.uid;
+    console.log(this.userID);
+    firebase.database().ref('user/'+this.userID).on('value' , (data:any)=>{
+      var user =data.val();
+      console.log(user);
+      accpt(user)
+     
+    })
+  })
 }
 
-var userId = []
-export default userId
+
+// newsfeed(){
+//   return new Promise((resolve, reject)=>{
+//     firebase.database().ref('newsfeed/').on('value', (data: any) => {
+ 
+//       var message = data.val();
+//        console.log(data.val());
+ 
+//        var keys: any = Object.keys(message);
+ 
+//        console.log(keys);
+ 
+//        for (var i = 0; i < keys.length; i++){
+//         var m = keys[i];
+ 
+//         let obj = {
+//           m:keys ,
+//           message:message[m].message
+ 
+//         }
+//         this.newsMessage.push(obj)
+ 
+//         resolve(this.newsMessage);
+//   }
+ 
+ 
+//   })
+ 
+//  })
+ 
+//  }
+}

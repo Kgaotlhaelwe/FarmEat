@@ -1,7 +1,13 @@
 page-register {
-    .content{
-        background-color: #087150;
+//     .content{
+//         background-color: white;
+//         background-image: url('../../assets/imgs/login4.jpg');
+//         background-size: cover;
+//         background-repeat: no-repeat;
        
+//   }
+  .inputs{
+      padding: 20px;
   }
   .body-container{
     padding-top: 20%;
@@ -26,32 +32,36 @@ page-register {
 }
 .item{
     text-align: center;
-    color:#28ECAC;
-    margin-top: 5%
+    color: white;
+    margin-top: 5%;
+
     
 }
 .first-item{
-background-color:	#0B2816; 
-border-radius: 25px;
+background-color:	rgba(11, 40, 22, 0.445); 
+border-radius: 10px;
 margin-top: 10px;
 margin-bottom: 10px
 }
-h2{
-    color: #28ECAC;
-    margin: 0%
+h3{
+   color: white;
+    margin: 0%;
+    text-shadow: 2px 2px 4px #000000;
+    padding-left: 20px;
 } 
 p{
-color: #28ECAC;
-margin: 0%
+color: white;
+margin: 0%;
+text-shadow: 2px 2px 4px #000000;
 }
   
 .text-input:-ms-input-placeholder {
-    color:		#28ECAC;
+    color:		white;
    
    }
    
    .text-input::-webkit-input-placeholder {
-    color: 		#28ECAC;
+    color: 		white;
    }
    .text-input-md {
     text-align: center;
@@ -59,5 +69,19 @@ margin: 0%
 .text-label-md {
     text-align: center;
 }
+.body-inputs{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+}
+.button-round-md{
+    border-radius: 10px;
+
+}
+.signin{
+    text-shadow: 2px 2px 4px #000000;
+
+}
+
     
 }
