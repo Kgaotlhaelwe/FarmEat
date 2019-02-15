@@ -4,7 +4,7 @@
         <img id="images" [src]="coverUrl"  *ngIf="coverUrl != null" class="coverImg" imageViewer>
         
         <input type="file" id="hideCover" #image accept="image/png, image/jpeg" (change)="uploadCover($event)">
-        <label for="hideCover" id="menu"><ion-icon  class="addCover" ios="ios-add-circle" md="md-add-circle"></ion-icon></label>
+        <label for="hideCover" id="menu"><ion-icon class="addCover" name="create"></ion-icon></label>
        
       </div>
      
@@ -25,7 +25,7 @@
         <div class="names" padding>
         <ion-card class="ionc"> 
                     <ion-card-header>
-                        <b>Username:</b> &nbsp;{{username}}
+                        <b>Username:</b> &nbsp;<ion-input [(ngModel)]="username"></ion-input>
                     </ion-card-header>
                   </ion-card >
                   
@@ -33,7 +33,7 @@
                       <ion-card-header>
                           <b>Email:</b> &nbsp;{{email}}
                       </ion-card-header>
-                    </ion-card> >
+                    </ion-card> 
         </div> 
         <br>
 

@@ -193,57 +193,25 @@ export class ProfilePage {
       }
   }
   editProfile(){
-    const prompt = this.alertCtrl.create({
-      title: 'Edit your details',
-      message: "Edit your information",
-      inputs: [
-        {
-          name: 'username',
-          placeholder: 'Username'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Save',
-          handler: data => {
-            console.log('Saved clicked');
-            console.log(data.username);
-            
-            if(data.username != ""){
-              this.farmEat.editUser(data.username).then(()=>{
-                // const toast = this.toastCtrl.create({
-                //   message: 'Your details were added successfully',
-                //   duration: 3000
-                // });
-                this.farmEat.getUser().then((data:any)=>{
-                  console.log(data);
-                  
-                  this.username = data.username
+    if(this.username != ""){
+                this.farmEat.editUser(this.username).then(()=>{
+                  this.farmEat.getUser().then((data:any)=>{
+                    console.log(data);
+                    
+                    this.username = data.username
+                   
+                  })
                  
                 })
-                // toast.present();
-               
-              })
-            }else{
-                const toast = this.toastCtrl.create({
-                  message: 'You have entered a blank username, please try again.',
-                  duration: 3000
-                });
-                
-                toast.present();
-            }
-           
-          }
-        }
-      ]
-    });
-    prompt.present();
+              }else{
+                  const toast = this.toastCtrl.create({
+                    message: 'You have entered a blank username, please try again.',
+                    duration: 3000
+                  });
+                  
+                  toast.present();
+              }
+
   }
 
 

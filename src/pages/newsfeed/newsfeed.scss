@@ -15,8 +15,16 @@ page-newsfeed {
         border-radius: 10px;
         
     }
-    ion-title{
+    .text{
         position: relative;
-        left: -10%
+        color: white;
+        text-align: center;
+        font-size: 1.5em;
+       
+        
+    }
+
+    .header{
+        background-color: #087150
     }
 }
