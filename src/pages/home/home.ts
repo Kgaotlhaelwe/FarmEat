@@ -421,6 +421,8 @@ export class HomePage {
         this.farmEatDb.getallFarms().then((data: any) => {
           console.log(data);
           console.log(radius);
+
+          
   
   
           this.farmEatDb.getNearByOrganizations(radius, data).then((data: any) => {
@@ -436,7 +438,21 @@ export class HomePage {
               console.log(' duplicate outttttt');
   
             }
-            //this.nearbyArray = data;
+            this.nearbyArray = data;
+
+            if(this.nearbyArray.length == 0){
+              setTimeout(() => {
+                const alert = this.alertCtrl.create({
+                  title: 'Notice',
+                  subTitle: "Currently we don't have farms around your area ",
+                  buttons: ['OK']
+                });
+                alert.present();
+
+              }, 2000)
+            }
+
+            
             console.log(this.nearbyArray);
   
   
@@ -486,6 +502,24 @@ export class HomePage {
   }
 
 
+
+
+  getUserLoc(){
+    this.farmEatDb.getCurrentLocations().then((data:any)=>{
+      console.log(data);
+      this.lat = data.coords.latitude;
+      this.lon = data.coords.longitude;
+      console.log(this.lat);
+      console.log(this.lon);
+      
+        this.loadMap()
+        //this.navCtrl.setRoot(HomePage)
+     
+       
+    })
+  }
+
+
   loadMap() {
 
     if (this.lat != -25.7479 && this.lon != 28.2293) {
@@ -524,23 +558,23 @@ export class HomePage {
         for (let index = 0; index < this.farmsOnSlide.length; index++) {
           console.log("inside for loop");
           
-          if (this.farmsOnSlide[index].crops == "true") {
-            if (this.farmsOnSlide[index].aquatic == "true") {
+          if (this.farmsOnSlide[index].crops == true) {
+            if (this.farmsOnSlide[index].aquatic == true) {
               this.icon = "../../assets/icon/icons-fish.pin.png";
               console.log(this.farmsOnSlide[index].aquatic);
-            } else if (this.farmsOnSlide[index].beeKeeping == "true") {
+            } else if (this.farmsOnSlide[index].beeKeeping == true) {
               this.icon = "../../assets/icon/icons-bee.pin.png";
-            } else if (this.farmsOnSlide[index].liveStock == "true") {
+            } else if (this.farmsOnSlide[index].liveStock == true) {
               this.icon = "../../assets/icon/icons-cow.pin.png";
             } else {
               this.icon = "../../assets/icon/icons-tree.pin.png";
             }
-          } else if (this.farmsOnSlide[index].aquatic == "true") {
+          } else if (this.farmsOnSlide[index].aquatic == true) {
             this.icon = "../../assets/icon/icons-fish.pin.png";
             console.log(this.farmsOnSlide[index].aquatic);
-          } else if (this.farmsOnSlide[index].beeKeeping == "true") {
+          } else if (this.farmsOnSlide[index].beeKeeping == true) {
             this.icon = "../../assets/icon/icons-bee.pin.png";
-          } else if (this.farmsOnSlide[index].liveStock == "true") {
+          } else if (this.farmsOnSlide[index].liveStock == true) {
             this.icon = "../../assets/icon/icons-cow.pin.png";
           }
   
@@ -600,7 +634,7 @@ export class HomePage {
 
       this.map = new google.maps.Map(this.mapRef.nativeElement, showallfarms);
 
-    console.log("getting all farms");
+   
     
       var allFarms = [];
       this.farmEatDb.getallFarms().then((data: any) => {
@@ -616,27 +650,25 @@ export class HomePage {
         for (let index = 0; index < this.farmsOnSlide.length; index++) {
           console.log("inside forloop");
           //this.icon = "../../assets/icon/icons-tree.pin.png";
-          if (this.farmsOnSlide[index].crops == "true") {
-            if (this.farmsOnSlide[index].aquatic == "true") {
+          if (this.farmsOnSlide[index].crops == true) {
+            if (this.farmsOnSlide[index].aquatic == true) {
               this.icon = "../../assets/icon/icons-fish.pin.png";
               console.log(this.farmsOnSlide[index].aquatic);
-            } else if (this.farmsOnSlide[index].beeKeeping == "true") {
+            } else if (this.farmsOnSlide[index].beeKeeping == true) {
               this.icon = "../../assets/icon/icons-bee.pin.png";
-            } else if (this.farmsOnSlide[index].liveStock == "true") {
+            } else if (this.farmsOnSlide[index].liveStock == true) {
               this.icon = "../../assets/icon/icons-cow.pin.png";
             } else {
               this.icon = "../../assets/icon/icons-tree.pin.png";
             }
-          } else if (this.farmsOnSlide[index].aquatic == "true") {
+          } else if (this.farmsOnSlide[index].aquatic == true) {
             this.icon = "../../assets/icon/icons-fish.pin.png";
             console.log(this.farmsOnSlide[index].aquatic);
-          } else if (this.farmsOnSlide[index].beeKeeping == "true") {
+          } else if (this.farmsOnSlide[index].beeKeeping == true) {
             this.icon = "../../assets/icon/icons-bee.pin.png";
-          } else if (this.farmsOnSlide[index].liveStock == "true") {
+          } else if (this.farmsOnSlide[index].liveStock == true) {
             this.icon = "../../assets/icon/icons-cow.pin.png";
           }
-
-
 
 
 
@@ -962,8 +994,8 @@ this.farmsOnSlide
 
               for (let index = 0; index < this.farmsOnSlide.length; index++) {
 
-                if (this.farmsOnSlide[index].crops == "true") {
-                  if (this.farmsOnSlide[index].aquatic == "true") {
+                if (this.farmsOnSlide[index].crops == true) {
+                  if (this.farmsOnSlide[index].aquatic == true) {
                     this.icon = "../../assets/icon/icons-fish.pin.png";
                     console.log(this.farmsOnSlide[index].aquatic);
                   } else if (this.farmsOnSlide[index].beeKeeping == "true") {

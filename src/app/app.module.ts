@@ -26,6 +26,7 @@ import { AddFarmPage } from '../pages/add-farm/add-farm';
 import { NativePageTransitions } from '@ionic-native/native-page-transitions';
 import { ProfilePage } from '../pages/profile/profile';
 import { MoreinforPage } from '../pages/moreinfor/moreinfor';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 
 @NgModule({
@@ -77,7 +78,7 @@ import { MoreinforPage } from '../pages/moreinfor/moreinfor';
     Keyboard,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FarmEatProvider,
-    NativePageTransitions,
+    NativePageTransitions,Camera
   ]
 })
 export class AppModule {}

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { FarmEatProvider } from '../../providers/farm-eat/farm-eat'
+import { Camera, CameraOptions } from '@ionic-native/camera';
 /**
  * Generated class for the ProfilePage page.
  *
@@ -22,7 +23,8 @@ export class ProfilePage {
   propicUrl;
   urlCover;
   urlPropic;
-  constructor(public navCtrl: NavController, public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, private farmEat: FarmEatProvider) {
+  mypic ;
+  constructor(public navCtrl: NavController, public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, private farmEat: FarmEatProvider,private camera: Camera) {
       
   }
   ionViewWillEnter(){
@@ -144,7 +146,6 @@ export class ProfilePage {
         },
         function () {
           // Handle successful uploads on complete
- 
           uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
             console.log("File available at", downloadURL);
  
@@ -243,5 +244,67 @@ export class ProfilePage {
       ]
     });
     prompt.present();
+  }
+
+
+  uploadImage(){
+    
+    const options: CameraOptions = {
+     quality: 70,
+     destinationType: this.camera.DestinationType.DATA_URL,
+     
+     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+     saveToPhotoAlbum:false
+   }
+   
+   this.camera.getPicture(options).then((imageData) => {
+     let userID = firebase.auth().currentUser.uid;
+    this.mypic = 'data:image/jpeg;base64,' + imageData;
+    console.log(this.mypic);
+ 
+    firebase.database().ref("user/" + userID).update({
+      cover: this.mypic
+ 
+    })
+ 
+ 
+ this.ionViewWillEnter()
+    
+   }, (err) => {
+   console.log(err);
+   
+   });
+  }
+
+
+
+  uploadProfileImage(){
+
+    const options: CameraOptions = {
+      quality: 70,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      saveToPhotoAlbum:false
+    }
+    
+    this.camera.getPicture(options).then((imageData) => {
+      let userID = firebase.auth().currentUser.uid;
+     this.mypic = 'data:image/jpeg;base64,' + imageData;
+     console.log(this.mypic);
+  
+     firebase.database().ref("user/" + userID).update({
+      proPicture: this.mypic
+  
+     })
+  
+     
+  this.ionViewWillEnter();
+     
+    }, (err) => {
+    console.log(err);
+    
+    });
+
   }
 }

@@ -293,44 +293,111 @@ getSearchbyFarms(lat , lng){
     })
    }
 
-  getallFarms(){
+//   getallFarms(){
 
-    return new Promise((resolve ,reject)=>{
-      firebase.database().ref('Farms').on('value',(data:any)=>{
-      firebase.database().ref('UrbanFarms').on('value',(data:any)=>{
+//     return new Promise((resolve ,reject)=>{
+//       firebase.database().ref('Farms').on('value',(data:any)=>{
+//       firebase.database().ref('UrbanFarms').on('value',(data:any)=>{
 
-        var farms =data.val() ;
-        console.log(farms);
-        var keys:any =Object.keys(farms)
-        console.log(keys);
-        this.farmArray =[]
-        for(var i =0 ; i <keys.length;i++){
-          var  k =keys[i];
-          let obj = {
-            k:k ,
-            lat:farms[k].lat ,
-            lng:farms[k].lng ,
-            name: farms[k].name ,
-            description:farms[k].description ,
-            type:farms[k].type ,
-            address: farms[k].address ,
-            aquatic: farms[k].aquatic ,
-            crops:farms[k].crops ,
-            tel:farms[k].tel ,
-            email: farms[k].email ,
-            image:farms[k].image ,
-            beeKeeping:farms[k].beeKeeping ,
-            liveStock:farms[k].liveStock ,
-            facebook:farms[k].facebook
-          }
-          this.farmArray.push(obj) ;
-          resolve(this.farmArray)
-        }
+//         var farms =data.val() ;
+//         console.log(farms);
+//         var keys:any =Object.keys(farms)
+//         console.log(keys);
+//         this.farmArray =[]
+//         for(var i =0 ; i <keys.length;i++){
+//           var  k =keys[i];
+//           let obj = {
+//             k:k ,
+//             lat:farms[k].lat ,
+//             lng:farms[k].lng ,
+//             name: farms[k].name ,
+//             description:farms[k].description ,
+//             type:farms[k].type ,
+//             address: farms[k].address ,
+//             aquatic: farms[k].aquatic ,
+//             crops:farms[k].crops ,
+//             tel:farms[k].tel ,
+//             email: farms[k].email ,
+//             image:farms[k].image ,
+//             beeKeeping:farms[k].beeKeeping ,
+//             liveStock:farms[k].liveStock ,
+//             facebook:farms[k].facebook
+//           }
+//           this.farmArray.push(obj) ;
+//           resolve(this.farmArray)
+//         }
       
-      })
+//       })
 
+//     })
+//   })
+// }
+
+
+
+
+getallFarms(){
+
+  return new Promise((resolve ,reject)=>{
+    firebase.database().ref('Farms').on('value',(data:any)=>{
+    firebase.database().ref('UrbanFarmz').on('value',(data2:any)=>{
+
+      var farms =data.val() ;
+      var farms2 =data2.val();
+      console.log(farms);
+      console.log(farms2)
+      var keys:any =Object.keys(farms2)
+
+
+      this.farmArray.length = 0;
+      console.log(keys);
+      for(var i =0 ; i <keys.length;i++){
+        var  k =keys[i];
+        var y  = 'UrbanFarmz/' + k;
+        var FarmDetails;
+        firebase.database().ref(y).on('value', (data3:any)=>{
+          FarmDetails = data3.val();
+          console.log(FarmDetails);
+
+          var keys3 = Object.keys(FarmDetails)
+          console.log(keys3)
+           for(var a = 0;a < keys3.length;a++){
+             var k3 = keys3[a];
+             console.log(k3)
+             let obj = {
+
+              k:k ,
+              lat:FarmDetails[k3].lat ,
+              lng:FarmDetails[k3].lng ,
+              name: FarmDetails[k3].name ,
+              description:FarmDetails[k3].description ,
+              type:FarmDetails[k3].type ,
+              address: FarmDetails[k3].address ,
+              aquatic: FarmDetails[k3].aquatic ,
+              crops:FarmDetails[k3].crops ,
+              tel:FarmDetails[k3].tel ,
+              email: FarmDetails[k3].email ,
+              image:FarmDetails[k3].image ,
+              beeKeeping:FarmDetails[k3].beeKeeping ,
+              liveStock:FarmDetails[k3].liveStock ,
+              facebook:FarmDetails[k3].facebook,
+              products:FarmDetails[k3].products
+            }
+            this.farmArray.push(obj)
+            console.log(this.farmArray)
+           }
+        })
+          console.log(FarmDetails)
+
+
+
+         ;
+        resolve(this.farmArray)
+      }
     })
+
   })
+})
 }
 
 

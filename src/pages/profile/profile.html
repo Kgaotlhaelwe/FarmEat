@@ -9,7 +9,7 @@
       </div>
      
   
-
+   
   
       <div class="box"></div>
       <div class="info" >
@@ -19,6 +19,8 @@
             <label for="hidez" ><ion-icon class="add"  ios="ios-add-circle" md="md-add-circle"></ion-icon></label>
             <ion-icon class="add"  ios="ios-add-circle" md="md-add-circle"></ion-icon>
         </div>
+
+    
       
         <div class="names" padding>
         <ion-card class="ionc"> 
@@ -31,11 +33,14 @@
                       <ion-card-header>
                           <b>Email:</b> &nbsp;{{email}}
                       </ion-card-header>
-                    </ion-card>
-        </div>
+                    </ion-card> >
+        </div> 
         <br>
 
-      <button padding class="nameEdit" color="dark-green" ion-button block (click)="editProfile()">Edit Username</button>
+      <button padding class="nameEdit" color="dark-green" ion-button block (click)="editProfile()">Edit Username</button> <br>
+
+      <button ion-button (click)="uploadImage()">cover photo</button>
+      <button ion-button (click)="uploadProfileImage()"> photo</button>
     </div>
 
   <!-- <img class="layover" src="../../assets/imgs/farmer-clipart-subsistence-farming-6.png" alt=""> -->

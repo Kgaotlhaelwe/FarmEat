@@ -102,6 +102,16 @@ export class LoginPage {
                buttons: ['OK']
              });
             alert2.present();
+            }).catch((error)=>{
+              //alert(error.message)
+
+              const alert = this.alertCtrl.create({
+                subTitle:  error.message,
+                 buttons: ['OK']
+               });
+              alert.present();
+
+              
             })
             }else{
               var emailLength = em.length

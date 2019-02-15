@@ -32,6 +32,7 @@ pet
   email:string;
   website:string;
   facebook:string;
+  products = []
 
 
   testarray = [{lat:23.35 ,long:34.12} , {lat:56.67, long:23.89} , {lat:78.45, long:78.6}]
@@ -53,10 +54,15 @@ pet
       this.website = this.description.website
       this.facebook = this.description.facebook
       this.type = this.type
+      this.products = this.description.products
       console.log(this.facebook);
       console.log(this.website);
       console.log(this.tel);
       console.log(this.email);
+      console.log("below is the products");
+      
+      console.log(this.products);
+      
   }
 
   ionViewDidLoad() {
