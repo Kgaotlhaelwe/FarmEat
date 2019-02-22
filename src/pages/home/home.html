@@ -1,85 +1,97 @@
-
 <ion-content>
- 
-      <button ion-button large class="topbtn" color="dark-green" clear menuToggle ><ion-icon name="menu"></ion-icon></button>
 
-      <div class="upbox"></div>
-      
-      
+  <button ion-button large class="topbtn" color="dark-green" clear menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
 
-    
-   
+  <div class="upbox"></div>
 
-  <div #map id="map" class="theMap"></div> 
+
+
+
+
+
+  <div #map id="map" class="theMap"></div>
   <ion-searchbar class="search" #searchz (ionInput)="getItems($event)" (input)="display()" [(ngModel)]="searchbar"></ion-searchbar>
-  
+
   <div class="location">
- <ion-fab  >
-        <button ion-fab mini class="fabdis " style="background-color: transparent" color="light" clear (click)="getUserLoc()"> <ion-icon ios="ios-locate" md="md-locate" color="dark-green"></ion-icon></button>
-     
-      </ion-fab>
+    <ion-fab>
+      <button ion-fab mini class="fabdis " style="background-color: transparent" color="light" clear (click)="getUserLoc()">
+        <ion-icon ios="ios-locate" md="md-locate" color="dark-green"></ion-icon>
+      </button>
+
+    </ion-fab>
   </div>
   <div class="suggest">
-      <ion-list class="list" id="hide" >
-         <ion-item  *ngFor="let item of items" (click)="serc(item)"  >
-           {{ item }}
-         </ion-item>
-       </ion-list>
+    <ion-list class="list" id="hide">
+      <ion-item *ngFor="let item of items" (click)="serc(item)">
+        {{ item }}
+      </ion-item>
+    </ion-list>
 
-     
-     
-   </div>
- 
-  
- 
 
- 
 
-    <div class="cards" id="cardsHide" >
-      
-                <ion-slides class="slides" (ionSlideDidChange)="slideChanged()" slidesPerView="1" centeredSlides="true" >
-                   <ion-slide *ngFor="let a of farmsOnSlide; let i = index  " (click)="moreinfo(i)" >
-                     
-              <div class="cards" (click)="search(item)">
-                     <ion-card class="card"  >
-                        <img src="{{a.image}}" class="imgs">
-                          <ion-item >
-                           
-                            <h2 text-left>{{a.name}}</h2>
-                            <p text-left>{{a.type}}</p>
-                            <div class="fruits">
-                            <img src="{{brocolli}}" class="imgz">
-                            <img src="{{watermelon}}" class="imgz">
-                            <img src="{{pumpkin}}" class="imgz">
-                            <img src="{{redPaper}}" class="imgz">
-              
-                          </div>
-                            
-                          </ion-item>
-                          
-                        </ion-card> 
-                      </div>
-                    </ion-slide> 
-                  </ion-slides>
-                </div>  
+  </div>
 
-<div class="max" *ngIf="connect == 0; else issue">
-                  <div class="fabflex" id="hidekilos">
-                  <ion-fab middle  left class="movefabt" >
-                    <button ion-fab mini color="dark-green"><ion-icon name="car"></ion-icon></button>
-                    </ion-fab> 
-                    <h4 class="car" class="km" id="kilos">{{kiloMeter}}</h4>
-                  </div>
 
-                  <div class="fabflex" id="hidetime">
-                      <ion-fab middle left class="movefabb">
-                        <button ion-fab mini color="dark-green"><ion-icon name="timer"></ion-icon></button>
-                        </ion-fab>  
-                        <h4 class="car" class="time" id="time">{{duration}}</h4> 
-                    </div>
-               
-                  </div>
-                  <ng-template #issue>
 
-                  </ng-template>
+
+
+
+  <div class="cards" id="cardsHide">
+
+    <ion-slides class="slides" (ionSlideDidChange)="slideChanged()" slidesPerView="1" centeredSlides="true">
+      <ion-slide *ngFor="let a of farmsOnSlide; let i = index  " (click)="moreinfo(i)">
+
+        <div class="cards" (click)="search(item)">
+          <ion-card class="card">
+            <img src="{{a.image}}" class="imgs">
+            <ion-item>
+
+              <h2 text-left>{{a.name}}</h2>
+              <p text-left>{{a.type}}</p>
+              <!-- <div class="fruits" *ngFor="let prod of a.products">
+                            <img src="{{prod}}" class="imgz">
+                          </div> -->
+
+
+              <ion-grid no-padding>
+                <ion-row no-padding>
+                  <ion-col  col-3  *ngFor="let prod of a.products">
+                    <img src="{{prod}}" class="imgz">
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+
+            </ion-item>
+
+          </ion-card>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <div class="max" *ngIf="connect == 0; else issue">
+    <div class="fabflex" id="hidekilos">
+      <ion-fab middle left class="movefabt">
+        <button ion-fab mini color="dark-green">
+          <ion-icon name="car"></ion-icon>
+        </button>
+      </ion-fab>
+      <h4 class="car" class="km" id="kilos">{{kiloMeter}}</h4>
+    </div>
+
+    <div class="fabflex" id="hidetime">
+      <ion-fab middle left class="movefabb">
+        <button ion-fab mini color="dark-green">
+          <ion-icon name="timer"></ion-icon>
+        </button>
+      </ion-fab>
+      <h4 class="car" class="time" id="time">{{duration}}</h4>
+    </div>
+
+  </div>
+  <ng-template #issue>
+
+  </ng-template>
 </ion-content>

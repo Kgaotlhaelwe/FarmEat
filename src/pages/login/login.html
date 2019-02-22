@@ -1,42 +1,13 @@
+<ion-content>
 
-<ion-content >
-
-  <div class="topboxx" ></div>
+  <div class="topboxx"></div>
   <div padding>
-    <div class="logo-box" >
-  
-        <img class="img" src="../../assets/imgs/unnamed.png" alt="logo">
-        <h1>Farm-Eat</h1>
+    <div class="logo-box">
+      <!-- <img style='height: 150px;' src="../../assets/icon/Farm-Eat Ww.png" alt="" srcset=""> -->
+      <h1 style="padding-top: 50px" >FarmEat</h1>
     </div>
 
-  <!-- <div class="body-container"  >
-    <div class="header">
-        <br> <br>
-      <div class="logo-box" >
-  
-          <img class="img" src="../../assets/imgs/unnamed.png" alt="logo">
-          <h1>Farm-Eat</h1>
-      </div>
-    </div>
-    <div class="body-inputs">
-       <div class="input-box">
-        <ion-item class="first-item" no-lines>
-            <ion-input type="text" placeholder="Email" type = 'email' [(ngModel)]='user.email'></ion-input>
-          </ion-item>
-          <br>
-          <ion-item  class="second-item" no-lines >
-            <ion-input type="password" placeholder="Password"  [(ngModel)]= 'user.password'></ion-input>
-          </ion-item>
-    </div>
-    <br><br> 
-    <div class="buttons" >
-        <button ion-button full round (click)="Login(user)" color="dark-green">  <b>Sign In</b>  </button>
-      </div>
-    </div>
-  </div>
-  <br><br> -->
-
-  <div padding  [hidden]="keyboard.isOpen()">
+    <div padding [hidden]="keyboard.isOpen()" (click)="check()">
       <ion-segment [(ngModel)]="pet">
         <ion-segment-button value="kittens">
           LOGIN
@@ -46,76 +17,95 @@
         </ion-segment-button>
       </ion-segment>
     </div>
-    
+
     <div [ngSwitch]="pet">
       <ion-list class="topbox" *ngSwitchCase="'puppies'">
         <ion-item id="items">
-        
 
-          <div  padding>
-
-
-              <ion-list id="items" no-lines>
-            
-                <ion-item class="first-item">
-                   
-                  <ion-input type="text" placeholder="Username" maxlength="25" type = 'username' [(ngModel)]='user.username' (input)="changeColor()"></ion-input>
-                </ion-item>
-            
-                <ion-item class="first-item" >
-                  
-                  <ion-input type="text" placeholder="Email" type = 'email' [(ngModel)]='user.email'></ion-input>
-                </ion-item>
-            
-                <ion-item class="first-item">
-                   
-                  <ion-input type="password" placeholder="Password"  [(ngModel)]= 'user.password'></ion-input>
-                </ion-item>
-                <br>
-                <button color="dark-green" ion-button full round id="btnExcel" (click)="Register(user)">  Sign up </button>
-              </ion-list>
-              </div>
-              
-                
-          
-              
-              
-        </ion-item>
-       
-      </ion-list>
+          <div id="items" padding>
+              <form>
+                <ion-list class="items">
+                    <ion-item class="first-item" no-lines>
     
-      <ion-list class="topbox" *ngSwitchCase="'kittens'">
-        <ion-item id="items">
-         
-         
-            <div id="items" padding>
-            <ion-list class="items">
-               <ion-item class="first-item" no-lines>
-                  
-                   <ion-input type="text" placeholder="Email" type = 'email' [(ngModel)]='user.email'></ion-input>
-                 </ion-item>
-                 
-                 <ion-item  class="second-item" no-lines >
-                
-                   <ion-input type="password" placeholder="Password"  [(ngModel)]= 'user.password'></ion-input>
-                 </ion-item>
-                 <br>
-           
-               <button ion-button full round (click)="Login(user)" color="dark-green">  <b>Sign In</b>  </button>
-             <br>
-               <button class="forget-password" color="green" ion-button full round id="btnExcel" (click)="forgetPassword(user)" clear>Forgot password?
-                </button>
-              </ion-list>
+                        <ion-input type="text" (ionChange)="getUsername(username.value)" name="username" placeholder="Username" ngModel #username="ngModel" required="true" id="username"></ion-input>
+                      </ion-item>
+        
+                      <p padding-top style='font-family: Arial, Helvetica, sans-serif; font-size: 15px;color: red' *ngIf="!username.valid && username.touched"
+                        class="err dis">Username Cannot Be Empty!</p>
+                  <ion-item class="first-item" no-lines>
+    
+                    <ion-input type="email" (ionChange)="getEmail(email.value)" name="email" placeholder="Email" ngModel #email="ngModel" required="true" id="email"></ion-input>
+                  </ion-item>
+    
+                  <p padding-top style='font-family: Arial, Helvetica, sans-serif; font-size: 15px;color: red' *ngIf="!email.valid && email.touched"
+                    class="err dis">Email Cannot Be Empty!</p>
+    
+                  <ion-item class="first-item" no-lines>
+    
+    
+                    <ion-input type="password" (ionChange)="getPassword(password.value)" name="passoword" placeholder="Password" ngModel #password="ngModel" required="true"
+                      id="pass"></ion-input>
+                  </ion-item>
+    
+                  <p padding-top style='font-family: Arial, Helvetica, sans-serif; font-size: 15px; color:red' *ngIf="!password.valid && password.touched"
+                    class="err dis">Password Cannot Be Empty!</p>
+                  <br>
+                  <!-- <div class="overlay" id="btnState"></div> -->
+                  <button color="dark-green" ion-button full round id="btnExcel" (click)="Register(username.value, email.value, password.value)"> Sign up </button>
+                </ion-list>
+              </form>
+             
             </div>
-           
+
+
+
+
         </ion-item>
-  
+
+      </ion-list>
+
+      <ion-list class="topbox" *ngSwitchCase="'kittens'">
+
+        <div id="items" padding>
+          <form>
+            <ion-list class="items">
+              <ion-item class="first-item" no-lines>
+
+                <ion-input type="email" (ionChange)="getEmailLog(email.value)" name="email" placeholder="Email" ngModel #email="ngModel" required="true" id="email"></ion-input>
+              </ion-item>
+
+              <p padding-top style='font-family: Arial, Helvetica, sans-serif; font-size: 15px;color: red' *ngIf="!email.valid && email.touched"
+                class="err dis">Email Cannot Be Empty!</p>
+
+              <ion-item class="first-item" no-lines>
+
+
+                <ion-input type="password" (ionChange)="getPasswordLog(password.value)" name="passoword" placeholder="Password" ngModel #password="ngModel" required="true"
+                  id="pass"></ion-input>
+              </ion-item>
+
+              <p padding-top style='font-family: Arial, Helvetica, sans-serif; font-size: 15px; color:red' *ngIf="!password.valid && password.touched"
+                class="err dis">Password Cannot Be Empty!</p>
+              <br>
+              
+              <!-- <div class="overlay" id="btnState"></div> -->
+              <button ion-button full round id="btnExcel" (click)="Login(email.value, password.value)" color="dark-green">
+                <b>Sign In</b> </button>
+              <br>
+              <button class="forget-password" color="green" ion-button full round (click)="forgetPassword()" clear>Forgot
+                password?
+              </button>
+            </ion-list>
+          </form>
+         
+        </div>
+
       </ion-list>
     </div>
   </div>
-<div class="bottomimg" [hidden]="keyboard.isOpen()" ></div>
+  <div class="bottomimg" [hidden]="keyboard.isOpen()"></div>
 
-</ion-content> 
+</ion-content>
 <!-- <ion-footer  [hidden]="keyboard.isOpen()" >
     <button class="forget-password" color="green" ion-button full round  (click)="forgetPassword(user)" clear>Forgot password?
       </button>

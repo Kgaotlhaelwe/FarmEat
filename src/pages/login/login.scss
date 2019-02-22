@@ -25,6 +25,13 @@ page-login {
     .img{
         width: 100px;
     }
+    .overlay{
+        width: 100%;
+        height: 50px;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.315);
+        position: absolute
+    }
     // .input-box{
     //     // position: relative;
     //     // top: 10px;
@@ -112,7 +119,7 @@ page-login {
 }
 #items{
     border-radius: 25px;
-    
+    background-color: white;
 }
 .topboxx{
     height: 50%;

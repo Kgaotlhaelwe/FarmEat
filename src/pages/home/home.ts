@@ -11,7 +11,7 @@ import { Slides } from 'ionic-angular';
 import { Keyboard } from '@ionic-native/keyboard';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 
-
+import indexArr from '../../app/app.component'
 import { LoadingController } from 'ionic-angular';
 
 declare var google: any;
@@ -24,6 +24,7 @@ export class HomePage {
   map: any;
   lat: number;
   lon: number;
+  indArr = indexArr
   nearbyArray = new Array();
   searchArea = this.navParams.get("searchArea");
   trackSearch = searchArray;
@@ -53,13 +54,14 @@ export class HomePage {
   pumpkin;
   redPaper;
   searchbar;
+  trackMap = 0;
 
-
+  loader
 
   marker;
   farmsOnSlide = [];
   connect = 1;
-  geoErr;
+  geoErr = "No Geo";
 
   mapStyle = [
     {
@@ -378,17 +380,27 @@ export class HomePage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private geo: Geolocation, private farmEatDb: FarmEatProvider, public alertCtrl: AlertController, private nativePageTransitions: NativePageTransitions, public loadingCtrl: LoadingController, public menuCtrl: MenuController, private keyboard: Keyboard) {
     this.menuCtrl.enable(true, 'myMenu');
 
-    // this.geo.getCurrentPosition().then((resp) => {
-    //   var userLoc = resp;
-    //   console.log();
+    console.log("Array");
+    console.log(this.indArr);
+    var views = navCtrl.getViews()
+    console.log(views);
 
-    // })
+  }
 
-    this.geo.getCurrentPosition().then((position) => {
+  // async ionViewWillEnter() {
+
+
+
+  // }
+
+  async ionViewDidLoad() {
+    await this.geo.getCurrentPosition().then((position) => {
       this.lat = position.coords.latitude;
       this.lon = position.coords.longitude;
       console.log(this.lat);
       console.log(this.lon);
+
+      this.geoErr = "Got Location"
       //alert(this.lat)
     }).catch((error) => {
 
@@ -396,17 +408,18 @@ export class HomePage {
       this.geoErr = error.message
       this.lat = -26.2041;
       this.lon = 28.0473;
-      //alert(error.message)
+
+
+
     })
 
+    //this.checkPermission()
 
-    const loader = this.loadingCtrl.create({
+    this.loader = this.loadingCtrl.create({
       content: "Please wait... Your map is still loading",
-      duration: 11000
-
     });
 
-    loader.present();
+    this.loader.present();
 
 
 
@@ -415,234 +428,313 @@ export class HomePage {
     this.nearbyArray = [];
     var allFarmss = []
 
-    setTimeout(() => {
-      this.farmEatDb.getCurrentLocation(this.lat, this.lon).then((radius: any) => {
+
+    this.farmEatDb.getCurrentLocation(this.lat, this.lon).then((radius: any) => {
+      console.log(radius);
+
+      this.farmEatDb.getallFarms().then((data: any) => {
+        console.log(data);
         console.log(radius);
+        allFarmss = data
 
-        this.farmEatDb.getallFarms().then((data: any) => {
+
+
+        this.farmEatDb.getNearByOrganizations(radius, data).then((data: any) => {
           console.log(data);
-          console.log(radius);
-          allFarmss = data
-
-
-
-          this.farmEatDb.getNearByOrganizations(radius, data).then((data: any) => {
-            console.log(data);
-            if (this.nearbyArray.length == 0) {
-              this.nearbyArray = data;
-              this.farmsOnSlide = data;
-              console.log(this.farmsOnSlide);
-
-              console.log("no duplication");
-              //  alert("no nearby")
-            } else if (this.nearbyArray.length > 0) {
-              console.log(' duplicate outttttt');
-
-            }
+          if (this.nearbyArray.length == 0) {
             this.nearbyArray = data;
-
-            if (this.nearbyArray.length == 0) {
-              setTimeout(() => {
-                const alert = this.alertCtrl.create({
-                  title: 'Notice',
-                  subTitle: "Currently we don't have farms around your area, so we will locate you to an area that does",
-                  buttons: [{
-                    text: 'OK',
-                    handler: data => {
-                      console.log('OK clicked');
-                      var defualtLat = -26.26213302840454
-                      var defualtLng = 27.950475030301852
-
-                      this.farmEatDb.getCurrentLocation(defualtLat, defualtLng).then((radius: any) => {
-                        this.farmEatDb.getNearByOrganizations(radius, allFarmss).then((data: any) => {
-                          if (this.nearbyArray.length == 0) {
-                            this.nearbyArray = data;
-                            this.farmsOnSlide = data;
-                            console.log(this.farmsOnSlide);
-
-                            console.log("no duplication");
-                            //  alert("no nearby")
-                          } else if (this.nearbyArray.length > 0) {
-                            console.log(' duplicate outttttt');
-
-                          }
-                        })
-                      })
-                    }
-                  }]
-                });
-                alert.present();
-
-              }, 2000)
-            }
-
-
+            this.farmsOnSlide = data;
+            console.log("Checking MArkers Arrays");
+            console.log(this.farmsOnSlide);
             console.log(this.nearbyArray);
 
+            console.log("no duplication");
+            //  alert("no nearby")
+          } else if (this.nearbyArray.length > 0) {
+            console.log(' duplicate outttttt');
+
+          }
+          this.nearbyArray = data;
+          console.log(this.nearbyArray);
+
+          if (this.nearbyArray.length == 0) {
+            setTimeout(() => {
+              const alert = this.alertCtrl.create({
+                title: 'Notice',
+                subTitle: "Currently we don't have farms around your area, so we will locate you to an area that does",
+                cssClass: "myAlert",
+                buttons: [{
+                  text: 'OK',
+                  handler: data => {
+                    console.log('OK clicked');
+                    var defualtLat = -26.26213302840454
+                    var defualtLng = 27.950475030301852
+
+                    this.farmEatDb.getCurrentLocation(defualtLat, defualtLng).then((radius: any) => {
+                      this.farmEatDb.getNearByOrganizations(radius, allFarmss).then((data: any) => {
+                        if (this.nearbyArray.length == 0) {
+                          this.nearbyArray = data;
+                          this.farmsOnSlide = data;
+                          console.log(this.farmsOnSlide);
+
+                          console.log("no duplication");
+                          //  alert("no nearby")
+                        } else if (this.nearbyArray.length > 0) {
+                          console.log(' duplicate outttttt');
+
+                        }
+                      })
+                    })
+                  }
+                }]
+              });
+              alert.present();
+
+            }, 2000)
+          }
 
 
-          })
+          console.log(this.nearbyArray);
+
+
 
         })
 
       })
+
+    })
+
+
+
+
+
+
+
+
+
+
+    setTimeout(() => {
+      this.loadMap();
     }, 10000);
 
 
 
-
-
-
-
-
-
-
-
-    //this.loadMap();
-    setTimeout(() => {
-      this.loadMap();
-      const loader = this.loadingCtrl.create({
-        content: "Please wait... Your map is still loading",
-        duration: 10000
-      });
-
-
-    }, 10000)
-
-
-
-
-
-
-
-  }
-
-
-  ionViewDidEnter() {
-
-
-
-
+    var views = this.navCtrl.getViews()
+    console.log(views);
   }
 
 
 
 
-  getUserLoc() {
-    this.farmEatDb.getCurrentLocations().then((data: any) => {
+  async getUserLoc() {
+    this.loader = this.loadingCtrl.create({
+      content: "Please wait... Your map is still loading",
+    });
+
+    this.loader.present();
+    await this.farmEatDb.getCurrentLocations().then((data: any) => {
       console.log(data);
       this.lat = data.coords.latitude;
       this.lon = data.coords.longitude;
       console.log(this.lat);
       console.log(this.lon);
+      this.geoErr = "Got Location"
+    })
 
-      this.loadMap()
-      //this.navCtrl.setRoot(HomePage)
+    this.nearbyArray = [];
+    var allFarmss = []
 
+
+    await this.farmEatDb.getCurrentLocation(this.lat, this.lon).then((radius: any) => {
+      console.log(radius);
+
+      this.farmEatDb.getallFarms().then((data: any) => {
+        console.log(data);
+        console.log(radius);
+        allFarmss = data
+
+
+
+        this.farmEatDb.getNearByOrganizations(radius, data).then((data: any) => {
+          console.log(data);
+          if (this.nearbyArray.length == 0) {
+
+            console.log("Got slidesssssssssssssssssssssssssssssssssss");
+
+            this.nearbyArray = data;
+            this.farmsOnSlide = data;
+            console.log(this.farmsOnSlide.length);
+            console.log(this.nearbyArray.length);
+
+
+            console.log("no duplication");
+            //  alert("no nearby")
+          } else if (this.nearbyArray.length > 0) {
+            console.log(' duplicate outttttt');
+
+          }
+          this.nearbyArray = data;
+          console.log(this.nearbyArray);
+
+          if (this.nearbyArray.length == 0) {
+            setTimeout(() => {
+              const alert = this.alertCtrl.create({
+                title: 'Notice',
+                subTitle: "Currently we don't have farms around your area, so we will locate you to an area that does",
+                cssClass: "myAlert",
+                buttons: [{
+                  text: 'OK',
+                  handler: data => {
+                    console.log('OK clicked');
+                    var defualtLat = -26.26213302840454
+                    var defualtLng = 27.950475030301852
+
+                    this.farmEatDb.getCurrentLocation(defualtLat, defualtLng).then((radius: any) => {
+                      this.farmEatDb.getNearByOrganizations(radius, allFarmss).then((data: any) => {
+                        if (this.nearbyArray.length == 0) {
+                          this.nearbyArray = data;
+                          this.farmsOnSlide = data;
+                          console.log(this.farmsOnSlide.length);
+
+                          console.log("no duplication");
+                          //  alert("no nearby")
+                        } else if (this.nearbyArray.length > 0) {
+                          console.log(' duplicate outttttt');
+
+                        }
+                      })
+                    })
+                  }
+                }]
+              });
+              alert.present();
+
+            }, 2000)
+          }
+
+
+          console.log(this.nearbyArray);
+
+
+
+        })
+
+      })
 
     })
+
+
+
+
+    this.loadMap()
+    // loader.dismiss()
   }
 
 
-  loadMap() {
+  async loadMap() {
+    console.log("LoadMap");
 
-    if (this.lat != -25.7479 && this.lon != 28.2293) {
-      console.log("show nearby");
-
-      setTimeout(() => {
-        this.connect = 0;
-        this.loca = new google.maps.LatLng(this.lat, this.lon);
-        console.log(this.loca);
-        console.log("location above");
+    console.log(this.geoErr);
 
 
-        const options = {
-          center: { lat: this.lat, lng: this.lon },
-          zoom: 10,
-          disableDefaultUI: true,
-          styles: this.mapStyle
-        }
-
-        this.map = new google.maps.Map(this.mapRef.nativeElement, options);
-
-        this.marker = new google.maps.Marker({
-          map: this.map,
-          zoom: 10,
-          animation: google.maps.Animation.DROP,
-          icon: {
-            url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-          },
-
-          position: this.map.getCenter()
-        });
-
-        console.log("outside for loop");
+    if (await this.geoErr == "Got Location") {
+      console.log("Allowed Location");
 
 
-        for (let index = 0; index < this.farmsOnSlide.length; index++) {
-          console.log("inside for loop");
+      this.connect = 0;
+      this.loca = new google.maps.LatLng(this.lat, this.lon);
+      console.log(this.loca);
+      console.log("location above");
 
-          if (this.farmsOnSlide[index].crops == true) {
-            if (this.farmsOnSlide[index].aquatic == true) {
-              this.icon = "../../assets/icon/icons-fish.pin.png";
-              console.log(this.farmsOnSlide[index].aquatic);
-            } else if (this.farmsOnSlide[index].beeKeeping == true) {
-              this.icon = "../../assets/icon/icons-bee.pin.png";
-            } else if (this.farmsOnSlide[index].liveStock == true) {
-              this.icon = "../../assets/icon/icons-cow.pin.png";
-            } else {
-              this.icon = "../../assets/icon/icons-tree.pin.png";
-            }
-          } else if (this.farmsOnSlide[index].aquatic == true) {
+
+      const options = {
+        center: { lat: this.lat, lng: this.lon },
+        zoom: 10,
+        disableDefaultUI: true,
+        styles: this.mapStyle
+      }
+
+      this.map = new google.maps.Map(this.mapRef.nativeElement, options);
+
+      this.marker = new google.maps.Marker({
+        map: this.map,
+        zoom: 10,
+        animation: google.maps.Animation.DROP,
+        icon: {
+          url: "../../assets/icon/manicon.png"
+        },
+
+        position: this.map.getCenter()
+      });
+
+      console.log("outside for loop");
+      console.log(this.farmsOnSlide.length);
+
+
+      for (let index = 0; index < this.farmsOnSlide.length; index++) {
+        console.log("inside for loop");
+
+        if (this.farmsOnSlide[index].crops == true) {
+          if (this.farmsOnSlide[index].aquatic == true) {
             this.icon = "../../assets/icon/icons-fish.pin.png";
             console.log(this.farmsOnSlide[index].aquatic);
           } else if (this.farmsOnSlide[index].beeKeeping == true) {
             this.icon = "../../assets/icon/icons-bee.pin.png";
           } else if (this.farmsOnSlide[index].liveStock == true) {
             this.icon = "../../assets/icon/icons-cow.pin.png";
+          } else {
+            this.icon = "../../assets/icon/icons-tree.pin.png";
           }
-
-
-
-          console.log("markers");
-
-          var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/'
-          this.abmarker = new google.maps.Marker({
-            map: this.map,
-            icon: this.icon,
-
-
-            position: { lat: parseFloat(this.farmsOnSlide[index].lat), lng: parseFloat(this.farmsOnSlide[index].lng) },
-            label: name,
-            zoom: 8,
-
-          });
-
-          console.log(this.abmarker);
-          this.slideArr.push(this.abmarker)
-          console.log(this.slideArr);
-
-          let destination = new google.maps.LatLng(this.farmsOnSlide[index].lat, this.farmsOnSlide[index].lng);
-
-          this.abmarker.addListener('click', () => {
-
-
-            console.log("clicked marker");
-
-            //calling method to display route from a to b
-            this.calculateAndDisplayRoute(this.loca, destination, this.directionsDisplay, this.directionsService);
-
-
-          })
-
+        } else if (this.farmsOnSlide[index].aquatic == true) {
+          this.icon = "../../assets/icon/icons-fish.pin.png";
+          console.log(this.farmsOnSlide[index].aquatic);
+        } else if (this.farmsOnSlide[index].beeKeeping == true) {
+          this.icon = "../../assets/icon/icons-bee.pin.png";
+        } else if (this.farmsOnSlide[index].liveStock == true) {
+          this.icon = "../../assets/icon/icons-cow.pin.png";
         }
-      }, 5000);
 
 
+
+
+        console.log("Farm Pins");
+
+        var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/'
+        this.abmarker = new google.maps.Marker({
+          map: this.map,
+          icon: this.icon,
+
+
+          position: { lat: parseFloat(this.farmsOnSlide[index].lat), lng: parseFloat(this.farmsOnSlide[index].lng) },
+          label: name,
+          zoom: 8,
+
+        });
+        console.log("Farm Pins End");
+
+
+        console.log(this.abmarker);
+        this.slideArr.push(this.abmarker)
+        console.log(this.slideArr);
+
+        let destination = new google.maps.LatLng(this.farmsOnSlide[index].lat, this.farmsOnSlide[index].lng);
+
+        this.abmarker.addListener('click', () => {
+
+
+          console.log("clicked marker");
+
+          //calling method to display route from a to b
+          this.calculateAndDisplayRoute(this.loca, destination, this.directionsDisplay, this.directionsService);
+
+
+        })
+
+      }
 
 
     } else if (this.geoErr == "Illegal Access") {
-
+      console.log("Dinied Location");
 
       console.log("show all");
 
@@ -661,7 +753,7 @@ export class HomePage {
 
 
       var allFarms = [];
-      this.farmEatDb.getallFarms().then((data: any) => {
+      await this.farmEatDb.getallFarms().then((data: any) => {
         this.farmsOnSlide = data;
         console.log(this.farmsOnSlide);
 
@@ -669,60 +761,56 @@ export class HomePage {
         console.log(this.farmsOnSlide);
       })
 
-      setTimeout(() => {
 
-        for (let index = 0; index < this.farmsOnSlide.length; index++) {
-          console.log("inside forloop");
-          //this.icon = "../../assets/icon/icons-tree.pin.png";
-          if (this.farmsOnSlide[index].crops == true) {
-            if (this.farmsOnSlide[index].aquatic == true) {
-              this.icon = "../../assets/icon/icons-fish.pin.png";
-              console.log(this.farmsOnSlide[index].aquatic);
-            } else if (this.farmsOnSlide[index].beeKeeping == true) {
-              this.icon = "../../assets/icon/icons-bee.pin.png";
-            } else if (this.farmsOnSlide[index].liveStock == true) {
-              this.icon = "../../assets/icon/icons-cow.pin.png";
-            } else {
-              this.icon = "../../assets/icon/icons-tree.pin.png";
-            }
-          } else if (this.farmsOnSlide[index].aquatic == true) {
+
+      for (let index = 0; index < this.farmsOnSlide.length; index++) {
+        console.log("inside forloop");
+        if (this.farmsOnSlide[index].crops == true) {
+          if (this.farmsOnSlide[index].aquatic == true) {
             this.icon = "../../assets/icon/icons-fish.pin.png";
             console.log(this.farmsOnSlide[index].aquatic);
           } else if (this.farmsOnSlide[index].beeKeeping == true) {
             this.icon = "../../assets/icon/icons-bee.pin.png";
           } else if (this.farmsOnSlide[index].liveStock == true) {
             this.icon = "../../assets/icon/icons-cow.pin.png";
+          } else {
+            this.icon = "../../assets/icon/icons-tree.pin.png";
           }
-
-
-
-          var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/'
-          this.abmarker = new google.maps.Marker({
-            map: this.map,
-            icon: this.icon,
-
-
-            position: { lat: parseFloat(this.farmsOnSlide[index].lat), lng: parseFloat(this.farmsOnSlide[index].lng) },
-            label: name,
-            zoom: 8,
-
-          });
-
-          this.slideArr.push(this.abmarker)
-          console.log(this.slideArr);
-
-
+        } else if (this.farmsOnSlide[index].aquatic == true) {
+          this.icon = "../../assets/icon/icons-fish.pin.png";
+          console.log(this.farmsOnSlide[index].aquatic);
+        } else if (this.farmsOnSlide[index].beeKeeping == true) {
+          this.icon = "../../assets/icon/icons-bee.pin.png";
+        } else if (this.farmsOnSlide[index].liveStock == true) {
+          this.icon = "../../assets/icon/icons-cow.pin.png";
         }
-      }, 5000);
+
+
+
+        var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/'
+        this.abmarker = new google.maps.Marker({
+          map: this.map,
+          icon: this.icon,
+
+
+          position: { lat: parseFloat(this.farmsOnSlide[index].lat), lng: parseFloat(this.farmsOnSlide[index].lng) },
+          label: name,
+          zoom: 8,
+
+        });
+
+        this.slideArr.push(this.abmarker)
+
+
+      }
 
       console.log("outside forloop");
     }
 
 
-
+    this.loader.dismiss()
   }
 
-  //getting an address coordinates
   geocodeLatLng(location) {
     return new Promise((resolve, reject) => {
       this.geocoder.geocode({ 'location': location }, function (results, status) {
@@ -730,7 +818,6 @@ export class HomePage {
           console.log('OK');
           console.log(status);
           let locName = results[0].formatted_address;
-          //let locStart = locName.split(",");
           this.destinationAddress = locName;
           console.log("Location Push:" + this.destinationAddress);
         } else {
@@ -769,14 +856,12 @@ export class HomePage {
       } else {
         console.log(status);
 
-        //window.alert('Directions request failed due to ' + status);
       }
     });
   }
 
 
 
-  //getting distance and calling the callback method
   getDistance(destination) {
 
     this.geocodeLatLng(destination)
@@ -810,6 +895,7 @@ export class HomePage {
   slideChanged() {
 
     this.farmsOnSlide
+    console.log(this.farmsOnSlide);
 
     let currentIndex = this.slides.getActiveIndex();
     let currentLat = this.nearbyArray[currentIndex].lat
@@ -852,9 +938,6 @@ export class HomePage {
               console.log(this.kiloMeter);
               console.log(this.duration);
 
-
-              // console.log(distance);
-              // console.log(duration);
             }
           }
         }
@@ -899,9 +982,6 @@ export class HomePage {
           console.log(this.kiloMeter);
           console.log(this.duration);
 
-
-          // console.log(distance);
-          // console.log(duration);
         }
       }
     }
@@ -924,8 +1004,20 @@ export class HomePage {
 
 
   serc(address) {
+
+    console.log("search");
+    
     let Searchlat;
     let Searchlng;
+
+    document.getElementById("hide").style.display = "none"
+
+    document.getElementById("hidetime").style.display = "none"
+    document.getElementById("hidekilos").style.display = "none"
+
+    document.getElementById("time").style.display = "none"
+    document.getElementById("kilos").style.display = "none"
+    this.searchbar = null;
 
     let geocoder = new google.maps.Geocoder();
 
@@ -954,8 +1046,8 @@ export class HomePage {
 
       });
 
-      this.farmsOnSlide.length = 0
-      this.nearbyArray.length = 0;
+      // this.farmsOnSlide.length = 0
+      // this.nearbyArray.length = 0;
 
 
       let marker = new google.maps.Marker({
@@ -963,7 +1055,7 @@ export class HomePage {
         zoom: 10,
         animation: google.maps.Animation.DROP,
         icon: {
-          url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+          url: "../../assets/icon/manicon.png"
         },
         position: ({ lat: parseFloat(Searchlat), lng: parseFloat(Searchlng) })
       });
@@ -996,13 +1088,14 @@ export class HomePage {
                 const alert = this.alertCtrl.create({
                   title: 'Notice',
                   subTitle: "Currently we don't have farms around your area, so we will locate you to an area that does",
+                  cssClass: "myAlert",
                   buttons: [{
                     text: 'OK',
                     handler: data => {
                       console.log('OK clicked');
                       var defualtLat = -26.26213302840454
                       var defualtLng = 27.950475030301852
-                     
+
                       this.farmEatDb.getCurrentLocation(defualtLat, defualtLng).then((radius: any) => {
                         this.farmEatDb.getNearByOrganizations(radius, allFarmss).then((data: any) => {
                           if (this.nearbyArray.length == 0) {
@@ -1011,7 +1104,6 @@ export class HomePage {
                             console.log(this.farmsOnSlide);
 
                             console.log("no duplication");
-                            //  alert("no nearby")
                           } else if (this.nearbyArray.length > 0) {
                             console.log(' duplicate outttttt');
 
@@ -1025,8 +1117,8 @@ export class HomePage {
 
               }, 2000)
 
-              document.getElementById("hide").style.display = "none"
-              this.searchbar = null;
+              // document.getElementById("hide").style.display = "none"
+              // this.searchbar = null;
 
             } else {
 
@@ -1053,12 +1145,12 @@ export class HomePage {
                   } else {
                     this.icon = "../../assets/icon/icons-tree.pin.png";
                   }
-                } else if (this.farmsOnSlide[index].aquatic == "true") {
+                } else if (this.farmsOnSlide[index].aquatic == true) {
                   this.icon = "../../assets/icon/icons-fish.pin.png";
                   console.log(this.farmsOnSlide[index].aquatic);
-                } else if (this.farmsOnSlide[index].beeKeeping == "true") {
+                } else if (this.farmsOnSlide[index].beeKeeping == true) {
                   this.icon = "../../assets/icon/icons-bee.pin.png";
-                } else if (this.farmsOnSlide[index].liveStock == "true") {
+                } else if (this.farmsOnSlide[index].liveStock == true) {
                   this.icon = "../../assets/icon/icons-cow.pin.png";
                 }
 
@@ -1105,7 +1197,6 @@ export class HomePage {
 
   initializeItems() {
     this.items = [
-
       "Soweto diepkloof",
       "Soweto Maponya",
       "Soweto South gate Mall",
@@ -1122,14 +1213,12 @@ export class HomePage {
       "Vaal",
       "Vereeniging",
       "Mpumalanga",
-
-
-
-
-
-
-
-
+      "Kempton Park",
+      "Alexandra Gauteng",
+      "Lenasia",
+      "Lenasia South",
+      "Sebokeng",
+      "Newcastle"
     ];
   }
 

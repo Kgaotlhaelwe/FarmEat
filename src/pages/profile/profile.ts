@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController,Keyboard } from 'ionic-angular';
 import { FarmEatProvider } from '../../providers/farm-eat/farm-eat'
 import { Camera, CameraOptions } from '@ionic-native/camera';
 /**
@@ -17,20 +17,24 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 })
 export class ProfilePage {
   username:string ;
-  
+ 
   email:string;
   coverUrl ;
   propicUrl;
   urlCover;
   urlPropic;
   mypic ;
-  constructor(public navCtrl: NavController, public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, private farmEat: FarmEatProvider,private camera: Camera) {
-      
+  constructor(public navCtrl: NavController, public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, private farmEat: FarmEatProvider,private camera: Camera,private keyboard: Keyboard) {
+    
   }
+  // closeCallback(){
+  //   this.Show()
+  //   console.log('close');
+    
+  // }
   ionViewWillEnter(){
     this.farmEat.getUser().then((data:any)=>{
       console.log(data);
-      
       this.username = data.username
       this.email = data.email
       this.coverUrl = data.cover
@@ -39,7 +43,10 @@ export class ProfilePage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
+ 
+   
   }
+
   uploadCover(event: any){
     if (event.target.files && event.target.files[0]) {
       let reader = new FileReader();
@@ -199,6 +206,12 @@ export class ProfilePage {
                     console.log(data);
                     
                     this.username = data.username
+                    const toast = this.toastCtrl.create({
+                      message: 'Your username was successfully updated.',
+                      duration: 3000
+                    });
+                    
+                    toast.present();
                    
                   })
                  
@@ -275,4 +288,14 @@ export class ProfilePage {
     });
 
   }
+  textpad(){}
+  
+  onKeyboardHide(){
+    console.log('hide');
+    document.getElementById('pad').style.marginTop="0px"
+  }
+  // show(){
+  //   console.log('show');
+  //   document.getElementById('pad').style.marginTop="10px"
+  // }
 }

@@ -27,7 +27,8 @@ import { NativePageTransitions } from '@ionic-native/native-page-transitions';
 import { ProfilePage } from '../pages/profile/profile';
 import { MoreinforPage } from '../pages/moreinfor/moreinfor';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-
+import {CommentsPage} from '../pages/comments/comments';
+import { Comments2Page } from '../pages/comments2/comments2'
 
 @NgModule({
   declarations: [
@@ -43,8 +44,9 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
     FarmForumPage,
     AddFarmPage,
     ProfilePage,
-    MoreinforPage
-    
+    MoreinforPage,
+    CommentsPage,
+    Comments2Page
   ],
   imports: [
     BrowserModule,HttpClientModule ,
@@ -63,7 +65,9 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
     LoginPage,
     AddFarmPage,
     ProfilePage,
-    MoreinforPage
+    MoreinforPage,
+    CommentsPage,
+    Comments2Page
     
    
    

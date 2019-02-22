@@ -23,12 +23,14 @@ export class FarmEatProvider {
   newSeachedFarms = new Array() ;
   condition;
   userID
+  username
   lat = -26.2485;
   lng = 27.8540;
   
   
   constructor(public http: HttpClient , private geolocation :  Geolocation, public events: Events, public alertCtrl: AlertController) {
     console.log('Hello FarmEatProvider Provider');
+    
     //this.currentLocation()
   }
 
@@ -49,6 +51,13 @@ export class FarmEatProvider {
        console.log(user.uid);
        this.userID = user.uid
        this.events.publish('user:created', this.userID, Date.now());
+
+       this.getUser().then((data:any)=>{
+        console.log(data);
+        this.username = data.username
+        console.log(this.username);
+        
+       })
       } else {
    
         this.condition = 0
@@ -242,7 +251,7 @@ if (up <= 0){
          accpt(resp);
   
         }).catch((error) => {
-          console.log('Error getting location', error);
+          console.log('Error getting location', error.message);
           
         });
       })
@@ -621,4 +630,27 @@ getUser(){
 //  })
  
 //  }
+
+
+getComments(key){
+  return new Promise ((resolve, reject) =>{
+    firebase.database().ref("Comments/"+key).on('value' , (data:any)=>{
+      var comments =data.val();
+      console.log(comments);
+      resolve(comments)
+     
+    })
+  })
+}
+
+addComments(key, comment, comDate){
+  return new Promise((resolve, reject)=>{
+    firebase.database().ref("Comments/"+key).push({
+      comment: comment,
+      name: this.username,
+      date: comDate
+    })
+  resolve();
+  })
+}
 }

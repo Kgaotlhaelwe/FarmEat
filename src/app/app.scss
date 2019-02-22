@@ -11,8 +11,8 @@
     border-radius: 500px;
 }
 .profilePicture{
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     position: absolute;
     margin-top: 50%;
     left: 50%;
@@ -104,16 +104,18 @@ height: 50px;
 .backcolor{
     //  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.438) ,
     //  #095849b9), url('../../assets/icon/47059.png');
-    background-image: url("../assets/icon/small.png");
+      background-image: url("../assets/icon/small.png");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    //background-color: #000000
-   
+      background-color: rgba(255, 255, 255, 0.9);
+       opacity: 0.9;
    
 
 }
-
+.menu-inner{
+    background-color: transparent !important;
+    }
 
 .username{
     position: relative;
@@ -158,4 +160,51 @@ height: 50px;
     position: relative;
     top: 17%;
 }
-
+.myAlert {
+  
+    color: #eaf0f1;
+    button {
+        color: rgb(255, 255, 255);
+      margin: 0 auto;
+      text-transform: uppercase;
+    }
+    .alert-message {
+      color: white; // text color for confirm alerts
+    }
+    .alert-wrapper {
+      background-color: #087150;
+      border-radius: 10px;
+      color: white;
+      animation: 0.7s bounceIn;
+    }
+    .alert-subTitle{
+      color: white;
+    }
+  
+    
+  }
+  .alert-md .alert-input {
+        margin: 5px 0;
+        border-bottom: 1px solid #ffffff;
+        color: rgb(255, 255, 255) !important;
+    }
+ .alert-md .alert-button .button-inner {
+  
+        border-radius: 2px;
+        position: relative;
+        overflow: hidden;
+        font-weight: 500;
+        text-transform: uppercase;
+        color: #ffffff !important;
+        background-color: transparent;
+    
+    }
+    .loading-md .loading-wrapper {
+        max-height: 13%;
+        border-radius: 15px;
+        background-color: #087150;
+        color: #ffffff !important;
+      }
+      .loading-md .spinner-crescent circle {
+        stroke: #ffffff;
+    }

@@ -4,6 +4,8 @@ import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-na
 import { EmailValidator } from '@angular/forms';
 import { CallNumber } from '@ionic-native/call-number';
 import { SocialSharing } from '@ionic-native/social-sharing';
+//import CommentsPage from '../comments/comments';
+import { Comments2Page } from '../comments2/comments2'
 /**
  * Generated class for the DescriptionPage page.
  *
@@ -33,7 +35,7 @@ pet
   website:string;
   facebook:string;
   products = []
-
+key;
 
   testarray = [{lat:23.35 ,long:34.12} , {lat:56.67, long:23.89} , {lat:78.45, long:78.6}]
 
@@ -55,6 +57,7 @@ pet
       this.facebook = this.description.facebook
       this.type = this.type
       this.products = this.description.products
+      this.key = this.description.k
       console.log(this.facebook);
       console.log(this.website);
       console.log(this.tel);
@@ -104,7 +107,13 @@ pet
   }
 
  
+  comment(){
+    this.navCtrl.push(Comments2Page)
+  }
 
+  rate(){
+
+  }
 
 
 }
