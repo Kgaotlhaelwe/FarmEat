@@ -27,8 +27,8 @@ import { NativePageTransitions } from '@ionic-native/native-page-transitions';
 import { ProfilePage } from '../pages/profile/profile';
 import { MoreinforPage } from '../pages/moreinfor/moreinfor';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import {CommentsPage} from '../pages/comments/comments';
 import { Comments2Page } from '../pages/comments2/comments2'
+import { RatingsPage } from '../pages/ratings/ratings';
 
 @NgModule({
   declarations: [
@@ -45,8 +45,8 @@ import { Comments2Page } from '../pages/comments2/comments2'
     AddFarmPage,
     ProfilePage,
     MoreinforPage,
-    CommentsPage,
-    Comments2Page
+    Comments2Page,
+    RatingsPage
   ],
   imports: [
     BrowserModule,HttpClientModule ,
@@ -66,10 +66,8 @@ import { Comments2Page } from '../pages/comments2/comments2'
     AddFarmPage,
     ProfilePage,
     MoreinforPage,
-    CommentsPage,
-    Comments2Page
-    
-   
+    Comments2Page,
+    RatingsPage
    
   ],
   providers: [
