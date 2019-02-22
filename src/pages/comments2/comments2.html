@@ -14,7 +14,7 @@
 
 
 <ion-content padding>
-  <div class="comments">
+  <!-- <div class="comments">
     <ion-list *ngFor="let a of comments">
         <ion-card >
           {{a.message}}
@@ -23,9 +23,24 @@
           </ion-card>
     </ion-list>
 
-  </div>
+  </div> -->
+  <ion-card  *ngFor="let a of comments">
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="../../assets/imgs/2180662.png">
+      </ion-avatar>
+      <h2>{{a.name}}</h2>
+      <p> {{a.date}}</p>
+    </ion-item>
+    <ion-card-content>
+      <p> {{a.message}}</p>
+    </ion-card-content>
+  
+  
+  
+  </ion-card>
   <div class="commentSection">
     <ion-input [(ngModel)]="message"></ion-input>
-    <button ion-button (click)="comment()"></button>
+    <button ion-button (click)="comment()">send</button>
   </div>
 </ion-content>
