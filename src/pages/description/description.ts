@@ -6,6 +6,7 @@ import { CallNumber } from '@ionic-native/call-number';
 import { SocialSharing } from '@ionic-native/social-sharing';
 //import CommentsPage from '../comments/comments';
 import { Comments2Page } from '../comments2/comments2'
+import { RatingsPage } from '../ratings/ratings';
 /**
  * Generated class for the DescriptionPage page.
  *
@@ -112,7 +113,7 @@ key;
   }
 
   rate(){
-
+    this.navCtrl.push(RatingsPage, {key: this.key})
   }
 
 

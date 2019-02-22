@@ -24,6 +24,7 @@ export class FarmEatProvider {
   condition;
   userID
   username
+  userPic
   lat = -26.2485;
   lng = 27.8540;
   comments = []
@@ -55,6 +56,7 @@ export class FarmEatProvider {
        this.getUser().then((data:any)=>{
         console.log(data);
         this.username = data.username
+        this.userPic = data.proPicture
         console.log(this.username);
         
        })
@@ -646,7 +648,8 @@ getComments(key){
           m:keys ,
           message:comments[m].comment,
           date: comments[m].date,
-          name: comments[m].name
+          name: comments[m].name,
+          userPic: this.userPic
         }
         this.comments.push(obj)
  
@@ -659,12 +662,43 @@ getComments(key){
   })
 }
 
+rate(userKey, farmKey, rate){
+  return new Promise((resolve, reject)=>{
+    firebase.database().ref("FarmRates/"+farmKey+"/"+userKey).set({
+      userRate: rate
+    })
+  resolve();
+  })
+}
+
+getRate(farmKey){
+  return new Promise ((resolve, reject) =>{
+    firebase.database().ref("FarmRates/"+farmKey).on('value' , (data:any)=>{
+      var FarmRAtes =data.val();
+      var keys: any = Object.keys(FarmRAtes);
+      var totalRate
+        
+       for (var i = 0; i < keys.length; i++){
+        var m = keys[i];
+        totalRate += FarmRAtes[m].rate
+      }
+
+      var avg = totalRate / keys.length
+        
+      console.log(avg);
+      resolve(avg)
+     
+    })
+  })
+}
+
 addComments(key, comment, comDate){
   return new Promise((resolve, reject)=>{
     firebase.database().ref("Comments/"+key).push({
       comment: comment,
       name: this.username,
-      date: comDate
+      date: comDate,
+      userPic: this.userPic
     })
   resolve();
   })
