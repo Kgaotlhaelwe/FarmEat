@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { FarmEatProvider } from '../../providers/farm-eat/farm-eat';
+import * as moment from 'moment'
 
 /**
  * Generated class for the Comments2Page page.
@@ -15,11 +17,40 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class Comments2Page {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  key = this.navParams.get("key");
+  comments = []
+  message;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private farmEat: FarmEatProvider) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad Comments2Page');
+    console.log("ionViewDidLoad");
   }
 
+  ionViewWillLoad(){
+    console.log("ionViewWillLoad");
+    this.getCommets()
+  }
+
+  getCommets(){
+    console.log('ionViewDidLoad Comments2Page');
+    this.farmEat.getComments(this.key).then((data:any)=>{
+      console.log(data);
+      this.comments = data
+    })
+  }
+
+  comment(){
+
+    var today = new Date()
+    console.log(today);
+    var comDate = moment(today).format('ll');
+    this.farmEat.addComments(this.key, this.message, comDate).then(()=>{
+      this.message = ""
+      this.ionViewWillLoad()
+    
+      
+    })
+  }
 }

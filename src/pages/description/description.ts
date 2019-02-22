@@ -108,7 +108,7 @@ key;
 
  
   comment(){
-    this.navCtrl.push(Comments2Page)
+    this.navCtrl.push(Comments2Page, {key: this.key})
   }
 
   rate(){

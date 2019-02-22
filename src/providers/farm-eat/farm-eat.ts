@@ -26,7 +26,7 @@ export class FarmEatProvider {
   username
   lat = -26.2485;
   lng = 27.8540;
-  
+  comments = []
   
   constructor(public http: HttpClient , private geolocation :  Geolocation, public events: Events, public alertCtrl: AlertController) {
     console.log('Hello FarmEatProvider Provider');
@@ -636,8 +636,24 @@ getComments(key){
   return new Promise ((resolve, reject) =>{
     firebase.database().ref("Comments/"+key).on('value' , (data:any)=>{
       var comments =data.val();
-      console.log(comments);
-      resolve(comments)
+      var keys: any = Object.keys(comments);
+      this.comments = []
+        
+       for (var i = 0; i < keys.length; i++){
+        var m = keys[i];
+ 
+        let obj = {
+          m:keys ,
+          message:comments[m].comment,
+          date: comments[m].date,
+          name: comments[m].name
+        }
+        this.comments.push(obj)
+ 
+      }
+        
+      console.log(this.comments);
+      resolve(this.comments)
      
     })
   })
