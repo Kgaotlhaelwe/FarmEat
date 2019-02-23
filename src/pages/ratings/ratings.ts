@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { FarmEatProvider } from '../../providers/farm-eat/farm-eat'
 /**
  * Generated class for the RatingsPage page.
  *
@@ -15,16 +15,68 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class RatingsPage {
   farmKey = this.navParams.get("key");
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  userRate;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private farmEAt: FarmEatProvider) {
   }
 
   ionViewDidLoad() {
+
+    var star1 =  <HTMLInputElement>document.getElementById('s1');
+    var star2 =  <HTMLInputElement>document.getElementById('s2');
+    var star3 =  <HTMLInputElement>document.getElementById('s3');
+    var star4 =  <HTMLInputElement>document.getElementById('s4');
+    var star5 =  <HTMLInputElement>document.getElementById('s5');
+
     console.log('ionViewDidLoad RatingsPage');
+    if(this.userRate == 1){
+      star1.style.backgroundColor = "gold";
+      star2.style.backgroundColor = "transparent";
+      star3.style.backgroundColor = "transparent";
+      star4.style.backgroundColor = "transparent";
+      star5.style.backgroundColor = "transparent";
+    }else if(this.userRate == 2){
+      star1.style.backgroundColor = "gold";
+      star2.style.backgroundColor = "gold";
+      star3.style.backgroundColor = "transparent";
+      star4.style.backgroundColor = "transparent";
+      star5.style.backgroundColor = "transparent";
+    }else if(this.userRate == 3){
+      star1.style.backgroundColor = "gold";
+      star2.style.backgroundColor = "gold";
+      star3.style.backgroundColor = "gold";
+      star4.style.backgroundColor = "transparent";
+      star5.style.backgroundColor = "transparent";
+    }else if(this.userRate == 4){
+      star1.style.backgroundColor = "gold";
+      star2.style.backgroundColor = "gold";
+      star3.style.backgroundColor = "gold";
+      star4.style.backgroundColor = "gold";
+      star5.style.backgroundColor = "transparent";
+    }else if(this.userRate == 5){
+      star1.style.backgroundColor = "gold";
+      star2.style.backgroundColor = "gold";
+      star3.style.backgroundColor = "gold";
+      star4.style.backgroundColor = "gold";
+      star5.style.backgroundColor = "gold";
+    }
+    
+  }
+
+  userRates(val){
+    console.log(val);
+    this.userRate = val
+    this.ionViewDidLoad()
   }
   
 
   rate(){
 
+    if(this.userRate != undefined){
+      this.farmEAt.rate(this.farmKey, this.userRate).then(()=>{
+        alert("you've rated successfully")
+      })
+    }
+    
   }
 
 }

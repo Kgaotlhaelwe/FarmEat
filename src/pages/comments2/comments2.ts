@@ -46,11 +46,16 @@ export class Comments2Page {
     var today = new Date()
     console.log(today);
     var comDate = moment(today).format('ll');
-    this.farmEat.addComments(this.key, this.message, comDate).then(()=>{
-      this.message = ""
-      this.ionViewWillLoad()
-    
+    if(this.message == "" || this.message == undefined){
+      alert("Empty")
+    }else{
+      this.farmEat.addComments(this.key, this.message, comDate).then(()=>{
+        this.message = ""
+        this.ionViewWillLoad()
       
-    })
+        
+      })
+    }
+
   }
 }

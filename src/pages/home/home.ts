@@ -13,6 +13,7 @@ import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/na
 
 import indexArr from '../../app/app.component'
 import { LoadingController } from 'ionic-angular';
+import { duration } from 'moment';
 
 declare var google: any;
 @Component({
@@ -385,6 +386,14 @@ export class HomePage {
     var views = navCtrl.getViews()
     console.log(views);
 
+
+    //  console.log("starting"); 
+    //   farmEatDb.getRate("T3v41wJXuSaK2wvmkXavCHZKeey1").then((data:any)=>{
+    //     console.log("getting ratings");
+    //     console.log(data);
+
+    //   })
+
   }
 
   // async ionViewWillEnter() {
@@ -420,6 +429,7 @@ export class HomePage {
     });
 
     this.loader.present();
+
 
 
 
@@ -523,6 +533,19 @@ export class HomePage {
     console.log(views);
   }
 
+  getRate() {
+    console.log("starting");
+
+    for (let index = 0; index < this.farmsOnSlide.length; index++) {
+      const element = this.farmsOnSlide[index].k;
+      this.farmEatDb.getRate(element).then((data: any) => {
+        console.log("got a match");
+        console.log(data);
+
+      })
+    }
+
+  }
 
 
 
@@ -669,6 +692,7 @@ export class HomePage {
 
       console.log("outside for loop");
       console.log(this.farmsOnSlide.length);
+
 
 
       for (let index = 0; index < this.farmsOnSlide.length; index++) {
@@ -934,18 +958,32 @@ export class HomePage {
             for (var j = 0; j < results.length; j++) {
               var element = results[j];
               this.kiloMeter = element.distance.text;
-              this.duration = element.duration.text;
+              var dura = element.duration.text;
+
               console.log(this.kiloMeter);
               console.log(this.duration);
+
+              var hourCheck = dura.indexOf("h")
+              console.log(hourCheck);
+              if (hourCheck > -1) {
+
+                var splitted = dura.split(" ");
+                console.log(splitted)
+                var dur = splitted.splice(1, 1, "hr")
+                console.log(dur);
+                console.log(splitted);
+                this.duration = splitted[0]+""+splitted[1]+" "+splitted[2]+""+splitted[3]
+
+                
+              }else{
+                this.duration = dura
+              }
 
             }
           }
         }
       });
     console.log(this.callback);
-
-
-
 
 
     document.getElementById("hidetime").style.display = "flex"
@@ -1003,18 +1041,22 @@ export class HomePage {
 
 
 
-  serc(address) {
+  async serc(address) {
 
+    this.loader = this.loadingCtrl.create({
+      content: "Please wait... Your map is still loading",
+      duration: 5000
+    });
+
+    this.loader.present();
     console.log("search");
-    
+
     let Searchlat;
     let Searchlng;
 
     document.getElementById("hide").style.display = "none"
-
     document.getElementById("hidetime").style.display = "none"
     document.getElementById("hidekilos").style.display = "none"
-
     document.getElementById("time").style.display = "none"
     document.getElementById("kilos").style.display = "none"
     this.searchbar = null;
@@ -1049,6 +1091,7 @@ export class HomePage {
       // this.farmsOnSlide.length = 0
       // this.nearbyArray.length = 0;
 
+      console.log(this.farmsOnSlide);
 
       let marker = new google.maps.Marker({
         map: this.map,
@@ -1063,133 +1106,191 @@ export class HomePage {
 
       var allFarmss = []
 
-      this.farmEatDb.getSearchbyFarms(Searchlat, Searchlng).then((radius) => {
-        this.farmEatDb.getallFarms().then((data: any) => {
-          console.log(data);
-          allFarmss = data
-          this.farmEatDb.getSearchedFarm(Searchlat, Searchlng, radius, data).then((data: any) => {
+      setTimeout(() => {
+        this.farmEatDb.getSearchbyFarms(Searchlat, Searchlng).then((radius) => {
+          this.farmEatDb.getallFarms().then((data: any) => {
             console.log(data);
+            allFarmss = data
+            console.log(allFarmss);
 
-            this.farmsOnSlide = data
-            this.nearbyArray = data
+            this.farmEatDb.getSearchedFarm(Searchlat, Searchlng, radius, data).then((data: any) => {
+              console.log(data);
 
-            console.log(this.farmsOnSlide);
+              this.farmsOnSlide = data
+              this.nearbyArray = data
+              console.log(this.farmsOnSlide);
 
-            if (this.farmsOnSlide.length == 0) {
-              this.connect = 1;
-              const loader = this.loadingCtrl.create({
-                content: "Please wait...",
-                duration: 2000
+              console.log(this.farmsOnSlide);
 
-              });
-              loader.present();
+              if (this.farmsOnSlide.length == 0) {
 
-              setTimeout(() => {
-                const alert = this.alertCtrl.create({
-                  title: 'Notice',
-                  subTitle: "Currently we don't have farms around your area, so we will locate you to an area that does",
-                  cssClass: "myAlert",
-                  buttons: [{
-                    text: 'OK',
-                    handler: data => {
-                      console.log('OK clicked');
-                      var defualtLat = -26.26213302840454
-                      var defualtLng = 27.950475030301852
+                setTimeout(() => {
 
-                      this.farmEatDb.getCurrentLocation(defualtLat, defualtLng).then((radius: any) => {
-                        this.farmEatDb.getNearByOrganizations(radius, allFarmss).then((data: any) => {
-                          if (this.nearbyArray.length == 0) {
-                            this.nearbyArray = data;
-                            this.farmsOnSlide = data;
-                            console.log(this.farmsOnSlide);
+                  const alert = this.alertCtrl.create({
+                    title: 'Notice',
+                    subTitle: "Currently we don't have farms around your area, so we will locate you to an area that does",
+                    cssClass: "myAlert",
+                    buttons: [{
+                      text: 'OK',
+                      handler: data => {
+                        console.log('OK clicked');
+                        this.loader = this.loadingCtrl.create({
+                          content: "Please wait... Your map is still loading",
+                          duration: 5000
+                        });
 
-                            console.log("no duplication");
-                          } else if (this.nearbyArray.length > 0) {
-                            console.log(' duplicate outttttt');
+                        this.loader.present();
+                        var defualtLat = -26.26213302840454
+                        var defualtLng = 27.950475030301852
 
-                          }
+                        this.farmEatDb.getCurrentLocation(defualtLat, defualtLng).then((radius: any) => {
+                          this.farmEatDb.getNearByOrganizations(radius, allFarmss).then((data: any) => {
+                            if (this.nearbyArray.length == 0) {
+                              this.nearbyArray = data;
+                              this.farmsOnSlide = data;
+                              console.log(this.farmsOnSlide);
+                              for (let index = 0; index < this.farmsOnSlide.length; index++) {
+
+                                if (this.farmsOnSlide[index].crops == true) {
+                                  if (this.farmsOnSlide[index].aquatic == true) {
+                                    this.icon = "../../assets/icon/icons-fish.pin.png";
+                                    console.log(this.farmsOnSlide[index].aquatic);
+                                  } else if (this.farmsOnSlide[index].beeKeeping == "true") {
+                                    this.icon = "../../assets/icon/icons-bee.pin.png";
+                                  } else if (this.farmsOnSlide[index].liveStock == "true") {
+                                    this.icon = "../../assets/icon/icons-cow.pin.png";
+                                  } else {
+                                    this.icon = "../../assets/icon/icons-tree.pin.png";
+                                  }
+                                } else if (this.farmsOnSlide[index].aquatic == true) {
+                                  this.icon = "../../assets/icon/icons-fish.pin.png";
+                                  console.log(this.farmsOnSlide[index].aquatic);
+                                } else if (this.farmsOnSlide[index].beeKeeping == true) {
+                                  this.icon = "../../assets/icon/icons-bee.pin.png";
+                                } else if (this.farmsOnSlide[index].liveStock == true) {
+                                  this.icon = "../../assets/icon/icons-cow.pin.png";
+                                }
+
+
+                                console.log("Markers");
+
+                                var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/'
+                                this.abmarker = new google.maps.Marker({
+                                  map: this.map,
+                                  icon: this.icon,
+                                  position: { lat: parseFloat(this.farmsOnSlide[index].lat), lng: parseFloat(this.farmsOnSlide[index].lng) },
+                                  label: name,
+                                  zoom: 10,
+
+                                });
+
+
+
+                                this.loca = new google.maps.LatLng(Searchlat, Searchlng);
+                                let destination = new google.maps.LatLng(this.farmsOnSlide[index].lat, this.farmsOnSlide[index].lng);
+                                this.calculateAndDisplayRoute(this.loca, destination, this.directionsDisplay, this.directionsService);
+
+                                this.abmarker.addListener('click', () => {
+                                  console.log("clicked marker");
+
+                                  //calling method to display route from a to b
+                                  this.calculateAndDisplayRoute(this.loca, destination, this.directionsDisplay, this.directionsService);
+
+                                })
+
+
+
+
+                              }
+                              console.log("no duplication");
+                            } else if (this.nearbyArray.length > 0) {
+                              console.log(' duplicate outttttt');
+
+                            }
+                          })
                         })
-                      })
+                      }
+                    }]
+                  });
+                  alert.present();
+
+                }, 2000)
+
+                // document.getElementById("hide").style.display = "none"
+                // this.searchbar = null;
+
+              } else {
+
+                document.getElementById("hide").style.display = "none"
+                this.searchbar = null;
+
+                for (let index = 0; index < this.farmsOnSlide.length; index++) {
+
+                  if (this.farmsOnSlide[index].crops == true) {
+                    if (this.farmsOnSlide[index].aquatic == true) {
+                      this.icon = "../../assets/icon/icons-fish.pin.png";
+                      console.log(this.farmsOnSlide[index].aquatic);
+                    } else if (this.farmsOnSlide[index].beeKeeping == "true") {
+                      this.icon = "../../assets/icon/icons-bee.pin.png";
+                    } else if (this.farmsOnSlide[index].liveStock == "true") {
+                      this.icon = "../../assets/icon/icons-cow.pin.png";
+                    } else {
+                      this.icon = "../../assets/icon/icons-tree.pin.png";
                     }
-                  }]
-                });
-                alert.present();
-
-              }, 2000)
-
-              // document.getElementById("hide").style.display = "none"
-              // this.searchbar = null;
-
-            } else {
-
-              document.getElementById("hide").style.display = "none"
-              this.searchbar = null;
-
-
-              const loader = this.loadingCtrl.create({
-                content: "Please wait...",
-
-              });
-              loader.present();
-
-              for (let index = 0; index < this.farmsOnSlide.length; index++) {
-
-                if (this.farmsOnSlide[index].crops == true) {
-                  if (this.farmsOnSlide[index].aquatic == true) {
+                  } else if (this.farmsOnSlide[index].aquatic == true) {
                     this.icon = "../../assets/icon/icons-fish.pin.png";
                     console.log(this.farmsOnSlide[index].aquatic);
-                  } else if (this.farmsOnSlide[index].beeKeeping == "true") {
+                  } else if (this.farmsOnSlide[index].beeKeeping == true) {
                     this.icon = "../../assets/icon/icons-bee.pin.png";
-                  } else if (this.farmsOnSlide[index].liveStock == "true") {
+                  } else if (this.farmsOnSlide[index].liveStock == true) {
                     this.icon = "../../assets/icon/icons-cow.pin.png";
-                  } else {
-                    this.icon = "../../assets/icon/icons-tree.pin.png";
                   }
-                } else if (this.farmsOnSlide[index].aquatic == true) {
-                  this.icon = "../../assets/icon/icons-fish.pin.png";
-                  console.log(this.farmsOnSlide[index].aquatic);
-                } else if (this.farmsOnSlide[index].beeKeeping == true) {
-                  this.icon = "../../assets/icon/icons-bee.pin.png";
-                } else if (this.farmsOnSlide[index].liveStock == true) {
-                  this.icon = "../../assets/icon/icons-cow.pin.png";
-                }
 
-                this.loca = new google.maps.LatLng(Searchlat, Searchlng);
-                let destination = new google.maps.LatLng(this.farmsOnSlide[index].lat, this.farmsOnSlide[index].lng);
-                this.calculateAndDisplayRoute(this.loca, destination, this.directionsDisplay, this.directionsService);
-                var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/'
-                this.abmarker = new google.maps.Marker({
-                  map: this.map,
-                  icon: this.icon,
-                  position: { lat: parseFloat(this.farmsOnSlide[index].lat), lng: parseFloat(this.farmsOnSlide[index].lng) },
-                  label: name,
-                  zoom: 10,
 
-                });
+                  console.log("Markers");
 
-                this.abmarker.addListener('click', () => {
-                  console.log("clicked marker");
+                  var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/'
+                  this.abmarker = new google.maps.Marker({
+                    map: this.map,
+                    icon: this.icon,
+                    position: { lat: parseFloat(this.farmsOnSlide[index].lat), lng: parseFloat(this.farmsOnSlide[index].lng) },
+                    label: name,
+                    zoom: 10,
 
-                  //calling method to display route from a to b
+                  });
+
+
+
+                  this.loca = new google.maps.LatLng(Searchlat, Searchlng);
+                  let destination = new google.maps.LatLng(this.farmsOnSlide[index].lat, this.farmsOnSlide[index].lng);
                   this.calculateAndDisplayRoute(this.loca, destination, this.directionsDisplay, this.directionsService);
 
-                })
+                  this.abmarker.addListener('click', () => {
+                    console.log("clicked marker");
 
-                loader.dismiss()
+                    //calling method to display route from a to b
+                    this.calculateAndDisplayRoute(this.loca, destination, this.directionsDisplay, this.directionsService);
+
+                  })
+
+
+
+
+                }
 
 
               }
 
 
-            }
 
 
-
+            })
 
           })
-
         })
-      })
+      }, 5000);
+
+
 
     })
 

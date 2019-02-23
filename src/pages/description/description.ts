@@ -113,6 +113,8 @@ key;
   }
 
   rate(){
+    console.log("rate cllick");
+    
     this.navCtrl.push(RatingsPage, {key: this.key})
   }
 

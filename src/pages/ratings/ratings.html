@@ -15,11 +15,11 @@
 
 <ion-content padding>
 <div class="rating">
-    <ion-icon id="s1" name="star-outline"></ion-icon>
-    <ion-icon id="s2" name="star-outline"></ion-icon>
-    <ion-icon id="s3" name="star-outline"></ion-icon>
-    <ion-icon id="s4" name="star-outline"></ion-icon>
-    <ion-icon id="s5" name="star-outline"></ion-icon>
+    <ion-icon id="s1" name="star-outline" (click)="userRates(1)"></ion-icon>
+    <ion-icon id="s2" name="star-outline" (click)="userRates(2)"></ion-icon>
+    <ion-icon id="s3" name="star-outline" (click)="userRates(3)"></ion-icon>
+    <ion-icon id="s4" name="star-outline" (click)="userRates(4)"></ion-icon>
+    <ion-icon id="s5" name="star-outline" (click)="userRates(5)"></ion-icon>
 </div>
 <button ion-button (click)="rate()">Submit</button>
 </ion-content>

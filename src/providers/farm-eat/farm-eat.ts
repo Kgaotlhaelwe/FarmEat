@@ -358,7 +358,7 @@ getallFarms(){
       console.log(farms);
       console.log(farms2)
       var keys:any =Object.keys(farms2)
-
+      
 
       this.farmArray.length = 0;
       console.log(keys);
@@ -375,9 +375,10 @@ getallFarms(){
            for(var a = 0;a < keys3.length;a++){
              var k3 = keys3[a];
              console.log(k3)
+
              let obj = {
 
-              k:k ,
+              k:k3 ,
               lat:FarmDetails[k3].lat ,
               lng:FarmDetails[k3].lng ,
               name: FarmDetails[k3].name ,
@@ -392,7 +393,7 @@ getallFarms(){
               beeKeeping:FarmDetails[k3].beeKeeping ,
               liveStock:FarmDetails[k3].liveStock ,
               facebook:FarmDetails[k3].facebook,
-              products:FarmDetails[k3].products
+              products:FarmDetails[k3].products,
             }
             this.farmArray.push(obj)
             console.log(this.farmArray)
@@ -662,9 +663,9 @@ getComments(key){
   })
 }
 
-rate(userKey, farmKey, rate){
+rate(farmKey, rate){
   return new Promise((resolve, reject)=>{
-    firebase.database().ref("FarmRates/"+farmKey+"/"+userKey).set({
+    firebase.database().ref("FarmRates/"+farmKey+"/"+this.userID).set({
       userRate: rate
     })
   resolve();
@@ -676,11 +677,13 @@ getRate(farmKey){
     firebase.database().ref("FarmRates/"+farmKey).on('value' , (data:any)=>{
       var FarmRAtes =data.val();
       var keys: any = Object.keys(FarmRAtes);
-      var totalRate
+      var totalRate = 0
         
        for (var i = 0; i < keys.length; i++){
         var m = keys[i];
-        totalRate += FarmRAtes[m].rate
+        totalRate += FarmRAtes[m].userRate
+        console.log(FarmRAtes[m].userRate);
+        
       }
 
       var avg = totalRate / keys.length
