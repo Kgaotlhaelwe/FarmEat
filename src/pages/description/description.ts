@@ -7,6 +7,8 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 //import CommentsPage from '../comments/comments';
 import { Comments2Page } from '../comments2/comments2'
 import { RatingsPage } from '../ratings/ratings';
+import { FarmEatProvider } from '../../providers/farm-eat/farm-eat'
+import * as moment from 'moment'
 /**
  * Generated class for the DescriptionPage page.
  *
@@ -20,78 +22,84 @@ import { RatingsPage } from '../ratings/ratings';
   templateUrl: 'description.html',
 })
 export class DescriptionPage {
-pet 
-  description = this. navParams.get("description");
-  name:string;
-  desc:string;
-  address:string;
+  pet
+  description = this.navParams.get("description");
+  name: string;
+  desc: string;
+  address: string;
   image: string;
-  type:string;
-  crops:string;
-  liveStock:string;
+  type: string;
+  crops: string;
+  liveStock: string;
   aquatic: string;
-  beeKeeping:string;
-  tel:string;
-  email:string;
-  website:string;
-  facebook:string;
+  beeKeeping: string;
+  tel: string;
+  email: string;
+  website: string;
+  facebook: string;
+  farmUserK
+  farmRate
   products = []
-key;
+  key;
 
-  testarray = [{lat:23.35 ,long:34.12} , {lat:56.67, long:23.89} , {lat:78.45, long:78.6}]
+  testarray = [{ lat: 23.35, long: 34.12 }, { lat: 56.67, long: 23.89 }, { lat: 78.45, long: 78.6 }]
+  // farmKey = this.navParams.get("key");
+  // userKey = this.navParams.get("userK")
+  userRate = 0;
+  userComment;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private launchNavigator: LaunchNavigator, private callNumber: CallNumber,private socialSharing: SocialSharing) {
-    this.pet="kittens";  
+  constructor(public navCtrl: NavController, public navParams: NavParams, private launchNavigator: LaunchNavigator, private callNumber: CallNumber, private socialSharing: SocialSharing, private farmEAt: FarmEatProvider) {
+    this.pet = "kittens";
     console.log(this.description);
-    
-      this.name = this.description.name
-      this.desc = this.description.description
-      this.address = this.description.address
-      this.image = this.description.image
-      this.crops = this.description.crops
-      this.liveStock = this.description.liveStock
-      this.aquatic = this.description.aquatic
-      this.beeKeeping = this.description.beeKeeping
-      this.tel = this.description.tel
-      this.email = this.description.email
-      this.website = this.description.website
-      this.facebook = this.description.facebook
-      this.type = this.type
-      this.products = this.description.products
-      this.key = this.description.k
-      console.log(this.facebook);
-      console.log(this.website);
-      console.log(this.tel);
-      console.log(this.email);
-      console.log("below is the products");
-      
-      console.log(this.products);
-      
+    console.log(this.userRate);
+
+    this.name = this.description.name
+    this.desc = this.description.description
+    this.address = this.description.address
+    this.image = this.description.image
+    this.crops = this.description.crops
+    this.liveStock = this.description.liveStock
+    this.aquatic = this.description.aquatic
+    this.beeKeeping = this.description.beeKeeping
+    this.tel = this.description.tel
+    this.email = this.description.email
+    this.website = this.description.website
+    this.facebook = this.description.facebook
+    this.type = this.type
+    this.products = this.description.products
+    this.key = this.description.k
+    this.farmUserK = this.description.userK
+    this.farmRate = this.description.farmRate
+    console.log(this.facebook);
+    console.log(this.website);
+    console.log(this.tel);
+    console.log(this.email);
+    console.log(this.farmRate);
+
+    console.log("below is the products");
+
+    console.log(this.products);
+
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad DescriptionPage');
 
-    console.log(this.description);
-    
-  }
 
-  navigate(){
+  navigate() {
     this.launchNavigator.navigate(this.address)
-  .then(
-    success => console.log('Launched navigator'),
-    error => console.log('Error launching navigator', error)
-  );
+      .then(
+        success => console.log('Launched navigator'),
+        error => console.log('Error launching navigator', error)
+      );
   }
 
-  call(tel){
+  call(tel) {
     this.callNumber.callNumber(tel, true)
-  .then(res => console.log('Launched dialer!', res))
-  .catch(err => console.log('Error launching dialer', err));
+      .then(res => console.log('Launched dialer!', res))
+      .catch(err => console.log('Error launching dialer', err));
   }
 
-  sendEmail(email){
-        // Share via email
+  sendEmail(email) {
+    // Share via email
     this.socialSharing.shareViaEmail('Body', 'Subject', [email]).then(() => {
       // Success!
     }).catch(() => {
@@ -104,19 +112,77 @@ key;
     //let currentIndex = this.slides.getActiveIndex();
     console.log('Current index is');
 
-    
+
   }
 
- 
-  comment(){
-    this.navCtrl.push(Comments2Page, {key: this.key})
+
+  comment() {
+    this.navCtrl.push(Comments2Page, { key: this.key })
   }
 
-  rate(){
-    console.log("rate cllick");
-    
-    this.navCtrl.push(RatingsPage, {key: this.key})
+  ionViewDidLoad() {
+
+
+
   }
 
+  userRates(val) {
+    console.log(val);
+    this.userRate = val
+    this.ionViewDidLoad()
+  }
+
+
+  rate() {
+    document.getElementById('rate').style.display = "inline-block";
+    document.getElementById('locate').style.display = "none"
+  }
+
+  submit() {
+    var today = new Date()
+    console.log(today);
+    var comDate = moment(today).format('ll');
+    console.log(this.userComment, this.userRate);
+// console.log(this.userComment.length);
+console.log(this.key, this.userRate, this.farmUserK);
+
+
+
+if(this.userComment != undefined && this.userComment != "" && this.userRate > 0){
+  console.log("all is good");
+  this.farmEAt.addComments(this.key, this.userComment, comDate).then(()=>{
+    this.farmEAt.rate(this.key, this.userRate, this.farmUserK).then(() => {
+      alert("Rate and Comments submitted successfully")
+    })
+  })
+}else if(this.userComment == undefined || this.userComment == ""){
+  if( this.userRate > 0){
+    console.log("rate is good");
+    this.farmEAt.rate(this.key, this.userRate, this.farmUserK).then(() => {
+      alert("Rate submitted successfully")
+    })
+  }else{
+    console.log("none is good");
+    alert("Please rate or comment on the farm")
+  }
+}else if(this.userComment != undefined && this.userComment != ""){
+  if( this.userRate > 0){
+    console.log("all is good");
+    this.farmEAt.addComments(this.key, this.userComment, comDate).then(()=>{
+      this.farmEAt.rate(this.key, this.userRate, this.farmUserK).then(() => {
+        alert("Rate and Comments submitted successfully")
+      })
+    })
+  }else{
+    console.log("comment is good");
+    this.farmEAt.addComments(this.key, this.userComment, comDate).then(()=>{
+     
+        alert("Comments submitted successfully")
+     
+    })
+  }
+}
+
+  }
 
 }

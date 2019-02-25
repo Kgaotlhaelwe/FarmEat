@@ -15,6 +15,7 @@ import { FarmEatProvider } from '../../providers/farm-eat/farm-eat'
 })
 export class RatingsPage {
   farmKey = this.navParams.get("key");
+  userKey = this.navParams.get("userK")
   userRate;
   constructor(public navCtrl: NavController, public navParams: NavParams, private farmEAt: FarmEatProvider) {
   }
@@ -71,8 +72,10 @@ export class RatingsPage {
 
   rate(){
 
+    console.log( this.userKey);
+    
     if(this.userRate != undefined){
-      this.farmEAt.rate(this.farmKey, this.userRate).then(()=>{
+      this.farmEAt.rate(this.farmKey, this.userRate, this.userKey).then(()=>{
         alert("you've rated successfully")
       })
     }

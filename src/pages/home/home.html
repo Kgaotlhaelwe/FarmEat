@@ -38,12 +38,12 @@
 
 
 
-  <div class="cards" id="cardsHide">
+  <div [hidden]="keyboard.isOpen()" class="cards" id="cardsHide">
 
     <ion-slides class="slides" (ionSlideDidChange)="slideChanged()" slidesPerView="1" centeredSlides="true">
       <ion-slide *ngFor="let a of farmsOnSlide; let i = index  " (click)="moreinfo(i)">
 
-        <div class="cards" (click)="search(item)">
+        <div class="cards" >
           <ion-card class="card">
             <img src="{{a.image}}" class="imgs">
             <ion-item>
@@ -57,10 +57,78 @@
 
               <ion-grid no-padding>
                 <ion-row no-padding>
-                    
-                  <ion-col  col-3  *ngFor="let prod of a.products">
-                    <img src="{{prod}}" class="imgz">
-                  </ion-col>
+
+                  <ng-container *ngIf="a.farmRate == 0; then zero; else one">
+                      
+                  </ng-container>
+                  <ng-template #zero>
+                      <ion-icon id="s1" name="star-outline" color="star" ></ion-icon>
+                      <ion-icon id="s2" name="star-outline" color="star"></ion-icon>
+                      <ion-icon id="s3" name="star-outline" color="star"></ion-icon>
+                      <ion-icon id="s4" name="star-outline" color="star"></ion-icon>
+                      <ion-icon id="s5" name="star-outline" color="star"></ion-icon>
+                  </ng-template>
+                  <ng-template #one>
+                      <ng-container *ngIf="a.farmRate == 1; then ones; else two">
+                      
+                        </ng-container>
+                        <ng-template #ones>
+                            <ion-icon id="s1" name="star" color="star"></ion-icon>
+                            <ion-icon id="s2" name="star-outline" color="star"></ion-icon>
+                            <ion-icon id="s3" name="star-outline" color="star"></ion-icon>
+                            <ion-icon id="s4" name="star-outline" color="star"></ion-icon>
+                            <ion-icon id="s5" name="star-outline" color="star"></ion-icon>
+                        </ng-template>
+                        <ng-template #two>
+                            <ng-container *ngIf="a.farmRate == 2; then twos; else three">
+                      
+                              </ng-container>
+                              <ng-template #twos>
+                                  <ion-icon id="s1" name="star" color="star"></ion-icon>
+                                  <ion-icon id="s2" name="star" color="star"></ion-icon>
+                                  <ion-icon id="s3" name="star-outline" color="star"></ion-icon>
+                                  <ion-icon id="s4" name="star-outline" color="star"></ion-icon>
+                                  <ion-icon id="s5" name="star-outline" color="star"></ion-icon>
+                              </ng-template>
+                              <ng-template #three>
+                                  <ng-container *ngIf="a.farmRate == 3; then threes; else four">
+                      
+                                    </ng-container>
+                                    <ng-template #threes>
+                                        <ion-icon id="s1" name="star" color="star"></ion-icon>
+                                        <ion-icon id="s2" name="star" color="star"></ion-icon>
+                                        <ion-icon id="s3" name="star" color="star"></ion-icon>
+                                        <ion-icon id="s4" name="star-outline" color="star"></ion-icon>
+                                        <ion-icon id="s5" name="star-outline" color="star"></ion-icon>
+                                    </ng-template>
+                                    <ng-template #four>
+                                        <ng-container *ngIf="a.farmRate == 4; then fours; else five">
+                      
+                                          </ng-container>
+                                          <ng-template #fours>
+                                              <ion-icon id="s1" name="star" color="star"></ion-icon>
+                                              <ion-icon id="s2" name="star" color="star"></ion-icon>
+                                              <ion-icon id="s3" name="star" color="star"></ion-icon>
+                                              <ion-icon id="s4" name="star" color="star"></ion-icon>
+                                              <ion-icon id="s5" name="star-outline" color="star"></ion-icon>
+                                          </ng-template>
+                                          <ng-template #five>
+                                              <ng-container *ngIf="a.farmRate == 5; then fives">
+                      
+                                                </ng-container>
+                                                <ng-template #fives>
+                                                    <ion-icon id="s1" name="star" color="star"></ion-icon>
+                                                    <ion-icon id="s2" name="star" color="star"></ion-icon>
+                                                    <ion-icon id="s3" name="star" color="star"></ion-icon>
+                                                    <ion-icon id="s4" name="star" color="star"></ion-icon>
+                                                    <ion-icon id="s5" name="star" color="star"></ion-icon>
+                                                </ng-template>
+                                            </ng-template>
+                                      </ng-template>
+                                </ng-template>
+
+                          </ng-template>
+                  </ng-template>
                 </ion-row>
               </ion-grid>
 
@@ -72,7 +140,7 @@
     </ion-slides>
   </div>
 
-  <div class="max" *ngIf="connect == 0; else issue">
+  <div [hidden]="keyboard.isOpen()" class="max" *ngIf="connect == 0; else issue">
     <div class="fabflex" id="hidekilos">
       <ion-fab middle left class="movefabt">
         <button ion-fab mini color="dark-green">

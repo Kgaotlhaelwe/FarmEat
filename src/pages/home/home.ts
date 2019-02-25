@@ -1,6 +1,6 @@
 
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams, MenuController } from 'ionic-angular';
+import { NavController, NavParams, MenuController,Keyboard } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { FarmEatProvider } from '../../providers/farm-eat/farm-eat'
 import { DescriptionPage } from '../description/description';
@@ -8,7 +8,7 @@ import { SearchPage } from '../search/search';
 import searchArray from '../search/search'
 import { AlertController } from 'ionic-angular';
 import { Slides } from 'ionic-angular';
-import { Keyboard } from '@ionic-native/keyboard';
+// import { Keyboard } from '@ionic-native/keyboard';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 
 import indexArr from '../../app/app.component'
@@ -378,6 +378,18 @@ export class HomePage {
     }
   ]
 
+  provinces = [
+    "Eastern Cape",
+    "Free State",
+    "Gauteng",
+    "KwaZulu-Natal",
+    "Limpopo",
+    "Mpumalanga",
+    "North West",
+    "Northern Cape",
+    "Western Cape"
+  ]
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private geo: Geolocation, private farmEatDb: FarmEatProvider, public alertCtrl: AlertController, private nativePageTransitions: NativePageTransitions, public loadingCtrl: LoadingController, public menuCtrl: MenuController, private keyboard: Keyboard) {
     this.menuCtrl.enable(true, 'myMenu');
 
@@ -387,20 +399,7 @@ export class HomePage {
     console.log(views);
 
 
-    //  console.log("starting"); 
-    //   farmEatDb.getRate("T3v41wJXuSaK2wvmkXavCHZKeey1").then((data:any)=>{
-    //     console.log("getting ratings");
-    //     console.log(data);
-
-    //   })
-
   }
-
-  // async ionViewWillEnter() {
-
-
-
-  // }
 
   async ionViewDidLoad() {
     await this.geo.getCurrentPosition().then((position) => {
@@ -446,7 +445,7 @@ export class HomePage {
         console.log(data);
         console.log(radius);
         allFarmss = data
-
+        console.log(allFarmss);
 
 
         this.farmEatDb.getNearByOrganizations(radius, data).then((data: any) => {
@@ -533,19 +532,7 @@ export class HomePage {
     console.log(views);
   }
 
-  getRate() {
-    console.log("starting");
 
-    for (let index = 0; index < this.farmsOnSlide.length; index++) {
-      const element = this.farmsOnSlide[index].k;
-      this.farmEatDb.getRate(element).then((data: any) => {
-        console.log("got a match");
-        console.log(data);
-
-      })
-    }
-
-  }
 
 
 
@@ -972,10 +959,10 @@ export class HomePage {
                 var dur = splitted.splice(1, 1, "hr")
                 console.log(dur);
                 console.log(splitted);
-                this.duration = splitted[0]+""+splitted[1]+" "+splitted[2]+""+splitted[3]
+                this.duration = splitted[0] + "" + splitted[1] + " " + splitted[2] + "" + splitted[3]
 
-                
-              }else{
+
+              } else {
                 this.duration = dura
               }
 
@@ -991,11 +978,6 @@ export class HomePage {
 
     document.getElementById("time").style.display = "flex"
     document.getElementById("kilos").style.display = "flex"
-
-
-
-  }
-  ionViewWillLeave() {
 
 
 
@@ -1036,12 +1018,24 @@ export class HomePage {
 
     this.nativePageTransitions.slide(options);
     var info = this.farmsOnSlide[i]
-    this.navCtrl.push(DescriptionPage, { description: info })
+    this.navCtrl.push(DescriptionPage, { description: info }).then(()=>{
+      this.farmEatDb.farmView(info.k).then(()=>{
+        console.log("user has viewed");
+        this.farmEatDb.getFarmView(info.k).then((data:any)=>{
+          console.log("number of views for this farm "+data);
+          
+        })
+      })
+    })
   }
 
 
 
   async serc(address) {
+
+    this.farmsOnSlide = []
+    this.nearbyArray = []
+    //this.farmsOnSlide = []
 
     this.loader = this.loadingCtrl.create({
       content: "Please wait... Your map is still loading",
@@ -1356,6 +1350,14 @@ export class HomePage {
 
     }
 
+  }
+
+  getProvinceStats(){
+    for (let index = 0; index < this.provinces.length; index++) {
+      const province = this.provinces[index];
+
+      
+    }
   }
 
 }

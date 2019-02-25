@@ -372,13 +372,14 @@ getallFarms(){
 
           var keys3 = Object.keys(FarmDetails)
           console.log(keys3)
-           for(var a = 0;a < keys3.length;a++){
+           for(var a = 0 ;a < keys3.length;a++){
              var k3 = keys3[a];
              console.log(k3)
 
              let obj = {
 
               k:k3 ,
+              userK: k,
               lat:FarmDetails[k3].lat ,
               lng:FarmDetails[k3].lng ,
               name: FarmDetails[k3].name ,
@@ -394,6 +395,7 @@ getallFarms(){
               liveStock:FarmDetails[k3].liveStock ,
               facebook:FarmDetails[k3].facebook,
               products:FarmDetails[k3].products,
+              farmRate: FarmDetails[k3].farmRate
             }
             this.farmArray.push(obj)
             console.log(this.farmArray)
@@ -415,6 +417,7 @@ getallFarms(){
 
   getNearByOrganizations(radius,org){
     return new Promise((accpt,rej) =>{
+      this.nearByOrg = []
       this.getCurrentLocations().then((resp:any) =>{
         console.log(resp);
         
@@ -663,35 +666,87 @@ getComments(key){
   })
 }
 
-rate(farmKey, rate){
+// rate(farmKey, rate){
+//   return new Promise((resolve, reject)=>{
+//     firebase.database().ref("FarmRates/"+farmKey+"/"+this.userID).set({
+//       userRate: rate
+//     })
+//   resolve();
+//   })
+// }
+
+
+
+rate(farmKey, rate, userK){
   return new Promise((resolve, reject)=>{
     firebase.database().ref("FarmRates/"+farmKey+"/"+this.userID).set({
       userRate: rate
+    }).then(()=>{
+    console.log("after");
+    
+      firebase.database().ref("FarmRates/"+farmKey).on('value' , (data:any)=>{
+        var FarmRAtes =data.val();
+        var keys: any = Object.keys(FarmRAtes);
+
+        var totalRate = 0
+     
+        for (var i = 0; i < keys.length; i++){
+          var m = keys[i];
+          totalRate += FarmRAtes[m].userRate
+          console.log(FarmRAtes[m].userRate);
+          
+        }
+
+        console.log(totalRate);
+        
+        var avg = totalRate / keys.length
+        console.log(avg);
+        
+        var updates = {
+          farmRate: avg
+        }
+        firebase.database().ref("UrbanFarmz/"+userK+"/"+farmKey).update(updates)
+      })
     })
   resolve();
   })
 }
 
+
 getRate(farmKey){
   return new Promise ((resolve, reject) =>{
     firebase.database().ref("FarmRates/"+farmKey).on('value' , (data:any)=>{
       var FarmRAtes =data.val();
+      if(FarmRAtes != undefined || FarmRAtes != null){
+        
+      //var FarmRAtes =data.val();
+      //console.log(FarmRAtes);
+      
       var keys: any = Object.keys(FarmRAtes);
+      //console.log(keys);
+      
       var totalRate = 0
-        
-       for (var i = 0; i < keys.length; i++){
-        var m = keys[i];
-        totalRate += FarmRAtes[m].userRate
-        console.log(FarmRAtes[m].userRate);
-        
-      }
-
-      var avg = totalRate / keys.length
-        
-      console.log(avg);
-      resolve(avg)
      
+        for (var i = 0; i < keys.length; i++){
+          var m = keys[i];
+          totalRate += FarmRAtes[m].userRate
+          console.log(FarmRAtes[m].userRate);
+          
+        }
+  
+        var avg =  Math.round(totalRate / keys.length); 
+       
+          
+        //console.log(avg);
+        resolve(avg)
+      }
+        
+    }).catch((error)=>{
+      console.log("some error happend");
+      
+      
     })
+    reject()
   })
 }
 
@@ -706,4 +761,57 @@ addComments(key, comment, comDate){
   resolve();
   })
 }
+
+getFarmView(farmK){
+  return new Promise ((resolve, reject) =>{
+    firebase.database().ref("FarmViews/"+farmK).on('value' , (data:any)=>{
+      var FarmViews =data.val();
+      console.log(FarmViews);
+      var views = 0
+      var keys: any = Object.keys(FarmViews);
+      for (let index = 0; index < keys.length; index++) {
+        var v = keys[index];
+        
+        console.log(keys[index]);
+       
+        const element = FarmViews[v].view;
+        console.log(element);
+        
+        views += element
+      }
+      resolve(views)
+    })
+  })
+ }
+ 
+ 
+ farmView(farmK){
+  return new Promise ((resolve, reject) =>{
+    firebase.database().ref("FarmViews/"+farmK+"/"+this.userID).set({
+      view:1
+    })
+    resolve()
+  })
+ 
+ }
+
+ gettingGeoStats(lat, lng){
+  return new Promise ((resolve, reject) =>{
+    var counter = 0
+    this.getallFarms().then((data:any)=>{
+     for (let index = 0; index < data.length; index++) {
+       var farmLat = data[index].lat
+       var farmLng = data[index].lng
+       if(lat <= farmLat && lng <= farmLng){
+         counter += 1
+       }
+       
+     }
+     resolve(counter)
+    })
+  })
+ 
+ }
+
+
 }

@@ -11,7 +11,7 @@
           </ion-slide>
          
         </ion-slides>
-         <ion-fab  mini bottom right>
+         <ion-fab id="locate" mini bottom right>
               <button class="fab-button" ion-fab color="dark-green" (click)="navigate()" ><img  class="btn"src="../../assets/imgs/icons8_Route_100px_2.png"></button>
              </ion-fab>
       
@@ -60,23 +60,109 @@
                   </div>
                   <br>
                   <br>
+                  <div class="ratingstar" >
+                      <div class="we-offer" >
+          
+                         <h3>Farm rating</h3>
+                      </div>
+                      <ion-item>
+                          <ion-grid no-padding>
+                            <ion-row no-padding>
+            
+                              <ng-container *ngIf="farmRate == 0; then zero; else one">
+                                  
+                              </ng-container>
+                              <ng-template #zero>
+                                  <ion-icon id="s1" name="star-outline" color="star" ></ion-icon>
+                                  <ion-icon id="s2" name="star-outline" color="star"></ion-icon>
+                                  <ion-icon id="s3" name="star-outline" color="star"></ion-icon>
+                                  <ion-icon id="s4" name="star-outline" color="star"></ion-icon>
+                                  <ion-icon id="s5" name="star-outline" color="star"></ion-icon>
+                              </ng-template>
+                              <ng-template #one>
+                                  <ng-container *ngIf="farmRate == 1; then ones; else two">
+                                  
+                                    </ng-container>
+                                    <ng-template #ones>
+                                        <ion-icon id="s1" name="star" color="star"></ion-icon>
+                                        <ion-icon id="s2" name="star-outline" color="star"></ion-icon>
+                                        <ion-icon id="s3" name="star-outline" color="star"></ion-icon>
+                                        <ion-icon id="s4" name="star-outline" color="star"></ion-icon>
+                                        <ion-icon id="s5" name="star-outline" color="star"></ion-icon>
+                                    </ng-template>
+                                    <ng-template #two>
+                                        <ng-container *ngIf="farmRate == 2; then twos; else three">
+                                  
+                                          </ng-container>
+                                          <ng-template #twos>
+                                              <ion-icon id="s1" name="star" color="star"></ion-icon>
+                                              <ion-icon id="s2" name="star" color="star"></ion-icon>
+                                              <ion-icon id="s3" name="star-outline" color="star"></ion-icon>
+                                              <ion-icon id="s4" name="star-outline" color="star"></ion-icon>
+                                              <ion-icon id="s5" name="star-outline" color="star"></ion-icon>
+                                          </ng-template>
+                                          <ng-template #three>
+                                              <ng-container *ngIf="farmRate == 3; then threes; else four">
+                                  
+                                                </ng-container>
+                                                <ng-template #threes>
+                                                    <ion-icon id="s1" name="star" color="star"></ion-icon>
+                                                    <ion-icon id="s2" name="star" color="star"></ion-icon>
+                                                    <ion-icon id="s3" name="star" color="star"></ion-icon>
+                                                    <ion-icon id="s4" name="star-outline" color="star"></ion-icon>
+                                                    <ion-icon id="s5" name="star-outline" color="star"></ion-icon>
+                                                </ng-template>
+                                                <ng-template #four>
+                                                    <ng-container *ngIf="farmRate == 4; then fours; else five">
+                                  
+                                                      </ng-container>
+                                                      <ng-template #fours>
+                                                          <ion-icon id="s1" name="star" color="star"></ion-icon>
+                                                          <ion-icon id="s2" name="star" color="star"></ion-icon>
+                                                          <ion-icon id="s3" name="star" color="star"></ion-icon>
+                                                          <ion-icon id="s4" name="star" color="star"></ion-icon>
+                                                          <ion-icon id="s5" name="star-outline" color="star"></ion-icon>
+                                                      </ng-template>
+                                                      <ng-template #five>
+                                                          <ng-container *ngIf="farmRate == 5; then fives">
+                                  
+                                                            </ng-container>
+                                                            <ng-template #fives>
+                                                                <ion-icon id="s1" name="star" color="star"></ion-icon>
+                                                                <ion-icon id="s2" name="star" color="star"></ion-icon>
+                                                                <ion-icon id="s3" name="star" color="star"></ion-icon>
+                                                                <ion-icon id="s4" name="star" color="star"></ion-icon>
+                                                                <ion-icon id="s5" name="star" color="star"></ion-icon>
+                                                            </ng-template>
+                                                        </ng-template>
+                                                  </ng-template>
+                                            </ng-template>
+            
+                                      </ng-template>
+                              </ng-template>
+                            </ion-row>
+                          </ion-grid>
+            
+                        </ion-item>
+                    </div>
+                  
                   <div class="container-offer" >
                     
                     <div class="contact-us" > <br> <h3>Find us here </h3></div>
                   
                 
       <div class="contact-icons" >
-       <div class="adress" (click)="navigate()" >
-                     <ion-icon name="md-pin" ></ion-icon>
+       <div  class="adress" (click)="navigate()" >
+                     <ion-icon class="cont-icon" name="md-pin" ></ion-icon>
                      
                  </div>
                  <div class="call" (click)="call(tel)">
-                   <ion-icon name="md-call"></ion-icon>
+                   <ion-icon class="cont-icon" name="md-call"></ion-icon>
                    
                  </div>
                  <div class="email" (click)="sendEmail(email)">
             
-                   <ion-icon name="md-mail"></ion-icon>
+                   <ion-icon class="cont-icon"  name="md-mail"></ion-icon>
                  </div>
         </div>
         <br>
@@ -89,11 +175,84 @@
     </div>
     </div>
 
-    <button ion-button (click)="rate()">Rate</button>
-    <button ion-button (click)="comment()">Comment</button>
+
+    <div id="rate" class="rateoverlay" >
+      <div padding class="rating">
+      <h5 text-center>Rating</h5>
+      <div >
+          <ion-list padding-left class="cardrate">
+              <ion-item>
+                <ion-avatar item-start>
+                  <img src="{{image}}">
+                </ion-avatar>
+                <h5>{{name}}</h5>
+                <p>Rated:{{farmRate}}</p>
+              </ion-item>
+            </ion-list>
+      </div>
+      <div >
+        <p text-center>Rate the farm</p>
+        <div class="stars">
+            <div *ngIf="userRate == 0">
+                <ion-icon id="s1" name="star-outline" color="star" (click)="userRates(1)"></ion-icon>
+                <ion-icon id="s2" name="star-outline" color="star" (click)="userRates(2)"></ion-icon>
+                <ion-icon id="s3" name="star-outline" color="star" (click)="userRates(3)"></ion-icon>
+                <ion-icon id="s4" name="star-outline" color="star" (click)="userRates(4)"></ion-icon>
+                <ion-icon id="s5" name="star-outline" color="star" (click)="userRates(5)"></ion-icon>
+            </div>
+            <div *ngIf="userRate == 1">
+                <ion-icon id="s1" name="star" color="star" (click)="userRates(1)"></ion-icon>
+                <ion-icon id="s2" name="star-outline" color="star" (click)="userRates(2)"></ion-icon>
+                <ion-icon id="s3" name="star-outline" color="star" (click)="userRates(3)"></ion-icon>
+                <ion-icon id="s4" name="star-outline" color="star" (click)="userRates(4)"></ion-icon>
+                <ion-icon id="s5" name="star-outline" color="star" (click)="userRates(5)"></ion-icon>
+            </div>
+            <div *ngIf="userRate == 2">
+                <ion-icon id="s1" name="star" color="star" (click)="userRates(1)"></ion-icon>
+                <ion-icon id="s2" name="star" color="star" (click)="userRates(2)"></ion-icon>
+                <ion-icon id="s3" name="star-outline" color="star" (click)="userRates(3)"></ion-icon>
+                <ion-icon id="s4" name="star-outline" color="star" (click)="userRates(4)"></ion-icon>
+                <ion-icon id="s5" name="star-outline" color="star" (click)="userRates(5)"></ion-icon>
+            </div>
+            <div *ngIf="userRate == 3">
+                <ion-icon id="s1" name="star" color="star" (click)="userRates(1)"></ion-icon>
+                <ion-icon id="s2" name="star" color="star" (click)="userRates(2)"></ion-icon>
+                <ion-icon id="s3" name="star" color="star" (click)="userRates(3)"></ion-icon>
+                <ion-icon id="s4" name="star-outline" color="star" (click)="userRates(4)"></ion-icon>
+                <ion-icon id="s5" name="star-outline" color="star" (click)="userRates(5)"></ion-icon>
+            </div>
+            <div *ngIf="userRate == 4">
+                <ion-icon id="s1" name="star" color="star" (click)="userRates(1)"></ion-icon>
+                <ion-icon id="s2" name="star" color="star" (click)="userRates(2)"></ion-icon>
+                <ion-icon id="s3" name="star" color="star" (click)="userRates(3)"></ion-icon>
+                <ion-icon id="s4" name="star" color="star" (click)="userRates(4)"></ion-icon>
+                <ion-icon id="s5" name="star-outline" color="star" (click)="userRates(5)"></ion-icon>
+            </div>
+            <div *ngIf="userRate == 5">
+                <ion-icon id="s1" name="star" color="star" (click)="userRates(1)"></ion-icon>
+                <ion-icon id="s2" name="star" color="star" (click)="userRates(2)"></ion-icon>
+                <ion-icon id="s3" name="star" color="star" (click)="userRates(3)"></ion-icon>
+                <ion-icon id="s4" name="star" color="star" (click)="userRates(4)"></ion-icon>
+                <ion-icon id="s5" name="star" color="star" (click)="userRates(5)"></ion-icon>
+            </div>
+             
+             
+            <!-- <ion-icon id="s1" class="iconstar" color="star" name="star-outline" (click)="userRates(1)"></ion-icon>
+            <ion-icon id="s2" class="iconstar" color="star" name="star-outline" (click)="userRates(2)"></ion-icon>
+          <ion-icon id="s3" class="iconstar" color="star" name="star-outline" (click)="userRates(3)"></ion-icon>
+        <ion-icon id="s4" class="iconstar" color="star" name="star-outline" (click)="userRates(4)"></ion-icon>
+        <ion-icon id="s5" class="iconstar" color="star" name="star-outline" (click)="userRates(5)"></ion-icon> -->
+      </div>
+      </div>
+      <ion-textarea type="text" placeholder="Type your comment" [(ngModel)]="userComment"></ion-textarea>
+      <button full ion-button round color="dark-green" (click)="submit()">Submit</button>
+      </div>
+      </div>
+
       </ion-content>
     <ion-footer>
       <div class="btn">
-        <button class="btn2" color="dark-green" ion-button block (click)="comment()">Comment</button>
+          <button class="btn1" color="dark-green" ion-button block (click)="rate()">Rate</button>
+        <button class="btn2" color="dark-green" ion-button block (click)="comment()">Reviews</button>
       </div>
     </ion-footer>
