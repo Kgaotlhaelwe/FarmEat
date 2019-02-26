@@ -1,6 +1,6 @@
 
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams, MenuController,Keyboard } from 'ionic-angular';
+import { NavController, NavParams, MenuController, Keyboard } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { FarmEatProvider } from '../../providers/farm-eat/farm-eat'
 import { DescriptionPage } from '../description/description';
@@ -34,6 +34,7 @@ export class HomePage {
   icon;
   abmarker;
   slideArr: any = [];
+  contentString = []
   loca;
   distance;
   directionsService = new google.maps.DirectionsService;
@@ -659,7 +660,7 @@ export class HomePage {
 
       const options = {
         center: { lat: this.lat, lng: this.lon },
-        zoom: 10,
+        zoom: 8,
         disableDefaultUI: true,
         styles: this.mapStyle
       }
@@ -709,7 +710,9 @@ export class HomePage {
 
 
         console.log("Farm Pins");
-
+        var contentString = '<div id="infoWindow">' +
+        this.farmsOnSlide[index].name
+      
         var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/'
         this.abmarker = new google.maps.Marker({
           map: this.map,
@@ -718,7 +721,7 @@ export class HomePage {
 
           position: { lat: parseFloat(this.farmsOnSlide[index].lat), lng: parseFloat(this.farmsOnSlide[index].lng) },
           label: name,
-          zoom: 8,
+          zoom: 10,
 
         });
         console.log("Farm Pins End");
@@ -730,18 +733,11 @@ export class HomePage {
 
         let destination = new google.maps.LatLng(this.farmsOnSlide[index].lat, this.farmsOnSlide[index].lng);
 
-        this.abmarker.addListener('click', () => {
-
-
-          console.log("clicked marker");
-
-          //calling method to display route from a to b
-          this.calculateAndDisplayRoute(this.loca, destination, this.directionsDisplay, this.directionsService);
-
-
-        })
+        this.attachSecretMessage(this.abmarker,this.farmsOnSlide[index].name);
 
       }
+
+
 
 
     } else if (this.geoErr == "Illegal Access") {
@@ -753,7 +749,7 @@ export class HomePage {
 
       const showallfarms = {
         center: { lat: this.lat, lng: this.lon },
-        zoom: 10,
+        zoom: 12,
         disableDefaultUI: true,
         styles: this.mapStyle
       }
@@ -797,6 +793,8 @@ export class HomePage {
         }
 
 
+        
+        var infowindow = new google.maps.InfoWindow();
 
         var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/'
         this.abmarker = new google.maps.Marker({
@@ -811,8 +809,8 @@ export class HomePage {
         });
 
         this.slideArr.push(this.abmarker)
-
-
+      
+      this.attachSecretMessage(this.abmarker,this.farmsOnSlide[index].name);
       }
 
       console.log("outside forloop");
@@ -820,6 +818,16 @@ export class HomePage {
 
 
     this.loader.dismiss()
+  }
+
+  attachSecretMessage(marker, secretMessage) {
+    var infowindow = new google.maps.InfoWindow({
+      content: secretMessage
+    });
+
+    marker.addListener('click', function() {
+      infowindow.open(marker.get('map'), marker);
+    });
   }
 
   geocodeLatLng(location) {
@@ -1018,12 +1026,12 @@ export class HomePage {
 
     this.nativePageTransitions.slide(options);
     var info = this.farmsOnSlide[i]
-    this.navCtrl.push(DescriptionPage, { description: info }).then(()=>{
-      this.farmEatDb.farmView(info.k).then(()=>{
+    this.navCtrl.push(DescriptionPage, { description: info }).then(() => {
+      this.farmEatDb.farmView(info.k).then(() => {
         console.log("user has viewed");
-        this.farmEatDb.getFarmView(info.k).then((data:any)=>{
-          console.log("number of views for this farm "+data);
-          
+        this.farmEatDb.getFarmView(info.k).then((data: any) => {
+          console.log("number of views for this farm " + data);
+
         })
       })
     })
@@ -1039,7 +1047,7 @@ export class HomePage {
 
     this.loader = this.loadingCtrl.create({
       content: "Please wait... Your map is still loading",
-      duration: 5000
+      duration: 8000
     });
 
     this.loader.present();
@@ -1074,7 +1082,7 @@ export class HomePage {
       this.loca = new google.maps.LatLng(Searchlat, Searchlng);
 
       this.map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 12,
+        zoom: 10,
         styles: this.mapStyle,
 
         center: { lat: parseFloat(Searchlat), lng: parseFloat(Searchlng) },
@@ -1174,7 +1182,7 @@ export class HomePage {
                                   icon: this.icon,
                                   position: { lat: parseFloat(this.farmsOnSlide[index].lat), lng: parseFloat(this.farmsOnSlide[index].lng) },
                                   label: name,
-                                  zoom: 10,
+                                  zoom: 14,
 
                                 });
 
@@ -1184,15 +1192,15 @@ export class HomePage {
                                 let destination = new google.maps.LatLng(this.farmsOnSlide[index].lat, this.farmsOnSlide[index].lng);
                                 this.calculateAndDisplayRoute(this.loca, destination, this.directionsDisplay, this.directionsService);
 
-                                this.abmarker.addListener('click', () => {
-                                  console.log("clicked marker");
+                                // this.abmarker.addListener('click', () => {
+                                //   console.log("clicked marker");
 
-                                  //calling method to display route from a to b
-                                  this.calculateAndDisplayRoute(this.loca, destination, this.directionsDisplay, this.directionsService);
+                                //   //calling method to display route from a to b
+                                //   this.calculateAndDisplayRoute(this.loca, destination, this.directionsDisplay, this.directionsService);
 
-                                })
+                                // })
 
-
+                                this.attachSecretMessage(this.abmarker,this.farmsOnSlide[index].name);
 
 
                               }
@@ -1249,7 +1257,7 @@ export class HomePage {
                     icon: this.icon,
                     position: { lat: parseFloat(this.farmsOnSlide[index].lat), lng: parseFloat(this.farmsOnSlide[index].lng) },
                     label: name,
-                    zoom: 10,
+                    zoom: 12,
 
                   });
 
@@ -1259,15 +1267,15 @@ export class HomePage {
                   let destination = new google.maps.LatLng(this.farmsOnSlide[index].lat, this.farmsOnSlide[index].lng);
                   this.calculateAndDisplayRoute(this.loca, destination, this.directionsDisplay, this.directionsService);
 
-                  this.abmarker.addListener('click', () => {
-                    console.log("clicked marker");
+                  // this.abmarker.addListener('click', () => {
+                  //   console.log("clicked marker");
 
-                    //calling method to display route from a to b
-                    this.calculateAndDisplayRoute(this.loca, destination, this.directionsDisplay, this.directionsService);
+                  //   //calling method to display route from a to b
+                  //   this.calculateAndDisplayRoute(this.loca, destination, this.directionsDisplay, this.directionsService);
 
-                  })
+                  // })
 
-
+                  this.attachSecretMessage(this.abmarker,this.farmsOnSlide[index].name);
 
 
                 }
@@ -1313,7 +1321,8 @@ export class HomePage {
       "Lenasia",
       "Lenasia South",
       "Sebokeng",
-      "Newcastle"
+      "Newcastle",
+      "Betrams",
     ];
   }
 
@@ -1352,11 +1361,11 @@ export class HomePage {
 
   }
 
-  getProvinceStats(){
+  getProvinceStats() {
     for (let index = 0; index < this.provinces.length; index++) {
       const province = this.provinces[index];
 
-      
+
     }
   }
 
