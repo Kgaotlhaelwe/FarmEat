@@ -1322,7 +1322,7 @@ export class HomePage {
       "Lenasia South",
       "Sebokeng",
       "Newcastle",
-      "Betrams",
+      
     ];
   }
 
