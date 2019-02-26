@@ -5,6 +5,7 @@
       <div >
         <ion-card padding  class="rating" >
       <h5 text-center>Rating</h5>
+      <br>
       <div >
           <ion-list padding-left class="cardrate">
               <ion-item>
@@ -16,6 +17,7 @@
               </ion-item>
             </ion-list>
       </div>
+      <br>
       <div >
         <p text-center>Rate the farm</p>
         <div class="stars">
@@ -253,7 +255,7 @@
     
 
       </ion-content>
-    <ion-footer >
+    <ion-footer [hidden]="keyboard.isOpen()">
       <div class="btn">
           <button class="btn1" color="dark-green" ion-button block (click)="rate()">Rate</button>
         <button class="btn2" color="dark-green" ion-button block (click)="comment()">Reviews</button>

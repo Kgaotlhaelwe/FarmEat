@@ -26,6 +26,7 @@ export class Comments2Page {
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad");
+
   }
 
   ionViewWillLoad(){
@@ -38,6 +39,7 @@ export class Comments2Page {
     this.farmEat.getComments(this.key).then((data:any)=>{
       console.log(data);
       this.comments = data
+      this.comments.reverse()
     })
   }
 
@@ -45,7 +47,7 @@ export class Comments2Page {
 
     var today = new Date()
     console.log(today);
-    var comDate = moment(today).format('ll');
+    var comDate = moment(today).startOf("minute").fromNow(); ;
     if(this.message == "" || this.message == undefined){
       alert("Empty")
     }else{

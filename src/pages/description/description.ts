@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Backdrop ,Keyboard} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Backdrop ,Keyboard, AlertController} from 'ionic-angular';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 import { EmailValidator } from '@angular/forms';
 import { CallNumber } from '@ionic-native/call-number';
@@ -47,7 +47,7 @@ export class DescriptionPage {
   userRate = 0;
   userComment;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private launchNavigator: LaunchNavigator, private callNumber: CallNumber, private socialSharing: SocialSharing, private farmEAt: FarmEatProvider, private keyboard: Keyboard) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private launchNavigator: LaunchNavigator, private callNumber: CallNumber, private socialSharing: SocialSharing, private farmEAt: FarmEatProvider, private keyboard: Keyboard,public alertCtrl: AlertController) {
     this.pet = "kittens";
     console.log(this.description);
     console.log(this.userRate);
@@ -134,10 +134,30 @@ export class DescriptionPage {
 
   rate() {
    
-    var dismisser = document.getElementsByClassName("divhead") as HTMLCollectionOf <HTMLElement>;
+    
+      if (document.getElementById('rate').style.display == "none"  ) {
+        console.log('in');
+        
+          var dismisser = document.getElementsByClassName("divhead") as HTMLCollectionOf <HTMLElement>;
     dismisser[0].style.display = "block"
     document.getElementById('locate').style.display = "none"
     document.getElementById('rate').style.display = "block"
+      } else if (document.getElementById('rate').style.display == "block" ) {
+        console.log('mid');
+        var dismisser = document.getElementsByClassName("divhead") as HTMLCollectionOf <HTMLElement>;
+        dismisser[0].style.display = "none"
+        document.getElementById('locate').style.display = "bloc"
+        document.getElementById('rate').style.display = "none"
+      }
+   
+      else {
+        console.log('out');
+        var dismisser = document.getElementsByClassName("divhead") as HTMLCollectionOf <HTMLElement>;
+        dismisser[0].style.display = "block"
+        document.getElementById('locate').style.display = "none"
+        document.getElementById('rate').style.display = "block"
+      
+      }
   }
 
   submit() {
@@ -154,7 +174,13 @@ if(this.userComment != undefined && this.userComment != "" && this.userRate > 0)
   console.log("all is good");
   this.farmEAt.addComments(this.key, this.userComment, comDate).then(()=>{
     this.farmEAt.rate(this.key, this.userRate, this.farmUserK).then(() => {
-      alert("Rate and Comments submitted successfully")
+      const alert = this.alertCtrl.create({
+        cssClass: "myAlert",
+        subTitle: "Rate and Comments submitted successfully",
+        buttons: ['OK']
+      });
+      alert.present();
+     
       this.navCtrl.push(Comments2Page,{key : this.description.k})
       var dismisser = document.getElementsByClassName("divhead") as HTMLCollectionOf <HTMLElement>;
       dismisser[0].style.display = "none"
@@ -166,22 +192,39 @@ if(this.userComment != undefined && this.userComment != "" && this.userRate > 0)
   if( this.userRate > 0){
     console.log("rate is good");
     this.farmEAt.rate(this.key, this.userRate, this.farmUserK).then(() => {
-      alert("Rate submitted successfully")
+      const alert = this.alertCtrl.create({
+        subTitle: 'Rate submitted successfully',
+        cssClass: "myAlert",
+        buttons: ['OK']
+      });
+      alert.present();
+     
       var dismisser = document.getElementsByClassName("divhead") as HTMLCollectionOf <HTMLElement>;
       dismisser[0].style.display = "none"
       document.getElementById('locate').style.display = "block"
       document.getElementById('rate').style.display = "none"
     })
   }else{
-    console.log("none is good");
-    alert("Please rate or comment on the farm")
+    const alert = this.alertCtrl.create({
+      cssClass: "myAlert",
+      subTitle: 'Please rate or comment on the farm',
+      buttons: ['OK']
+    });
+    alert.present();
+
   }
 }else if(this.userComment != undefined && this.userComment != ""){
   if( this.userRate > 0){
     console.log("all is good");
     this.farmEAt.addComments(this.key, this.userComment, comDate).then(()=>{
       this.farmEAt.rate(this.key, this.userRate, this.farmUserK).then(() => {
-        alert("Rate and Comments submitted successfully")
+        const alert = this.alertCtrl.create({
+          cssClass: "myAlert",
+          subTitle: 'Rate and Comments submitted successfully',
+          buttons: ['OK']
+        });
+        alert.present();
+   
         this.navCtrl.push(Comments2Page,{key : this.description.k})
         var dismisser = document.getElementsByClassName("divhead") as HTMLCollectionOf <HTMLElement>;
       dismisser[0].style.display = "none"
@@ -192,8 +235,13 @@ if(this.userComment != undefined && this.userComment != "" && this.userRate > 0)
   }else{
     console.log("comment is good");
     this.farmEAt.addComments(this.key, this.userComment, comDate).then(()=>{
-     
-        alert("Comments submitted successfully")
+      const alert = this.alertCtrl.create({
+        cssClass: "myAlert",
+        subTitle: 'Comments submitted successfully',
+        buttons: ['OK']
+      });
+      alert.present();
+
      this.navCtrl.push(Comments2Page,{key : this.description.k})
      var dismisser = document.getElementsByClassName("divhead") as HTMLCollectionOf <HTMLElement>;
       dismisser[0].style.display = "none"
