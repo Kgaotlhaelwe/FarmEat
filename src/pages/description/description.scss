@@ -317,7 +317,7 @@ page-description {
             .rating{
                 position: relative;
                 height: 55%;
-                width: 100%;
+                width: 90%;
                 background-color: white;
                 border-radius: 15px;
                 // top: 50%;
@@ -333,9 +333,10 @@ page-description {
                 justify-content: center;
                 align-items: center;
                  position: relative;
-                top: 35%;
-                left: 48%;
+                top: 50%;
+                left: 50%;
                 transform: translate(-50%,-50%);
+                padding: 16px
                 }
                 .stars{
                    display: flex;
@@ -359,7 +360,7 @@ page-description {
                     .rating{
                         position: relative;
                         height: 50%;
-                        width: 100%;
+                        width: 90%;
                         background-color: white;
                         border-radius: 15px;
                         box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.719);
@@ -373,7 +374,7 @@ page-description {
                             .rating{
                                 position: relative;
                                 height: 50%;
-                                width: 100%;
+                                width: 90%;
                                 background-color: white;
                                 border-radius: 15px;
                                 box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.719);
