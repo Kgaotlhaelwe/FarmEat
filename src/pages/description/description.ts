@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Backdrop } from 'ionic-angular';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 import { EmailValidator } from '@angular/forms';
 import { CallNumber } from '@ionic-native/call-number';
@@ -134,8 +134,11 @@ export class DescriptionPage {
 
 
   rate() {
-    document.getElementById('rate').style.display = "inline-block";
+   
+    var dismisser = document.getElementsByClassName("divhead") as HTMLCollectionOf <HTMLElement>;
+    dismisser[0].style.display = "block"
     document.getElementById('locate').style.display = "none"
+    document.getElementById('rate').style.display = "block"
   }
 
   submit() {
@@ -153,6 +156,7 @@ if(this.userComment != undefined && this.userComment != "" && this.userRate > 0)
   this.farmEAt.addComments(this.key, this.userComment, comDate).then(()=>{
     this.farmEAt.rate(this.key, this.userRate, this.farmUserK).then(() => {
       alert("Rate and Comments submitted successfully")
+      this.navCtrl.push(Comments2Page,{key : this.description.k})
     })
   })
 }else if(this.userComment == undefined || this.userComment == ""){
@@ -160,6 +164,10 @@ if(this.userComment != undefined && this.userComment != "" && this.userRate > 0)
     console.log("rate is good");
     this.farmEAt.rate(this.key, this.userRate, this.farmUserK).then(() => {
       alert("Rate submitted successfully")
+      var dismisser = document.getElementsByClassName("divhead") as HTMLCollectionOf <HTMLElement>;
+      dismisser[0].style.display = "none"
+      document.getElementById('locate').style.display = "block"
+      document.getElementById('rate').style.display = "none"
     })
   }else{
     console.log("none is good");
@@ -171,6 +179,7 @@ if(this.userComment != undefined && this.userComment != "" && this.userRate > 0)
     this.farmEAt.addComments(this.key, this.userComment, comDate).then(()=>{
       this.farmEAt.rate(this.key, this.userRate, this.farmUserK).then(() => {
         alert("Rate and Comments submitted successfully")
+        this.navCtrl.push(Comments2Page,{key : this.description.k})
       })
     })
   }else{
@@ -178,11 +187,29 @@ if(this.userComment != undefined && this.userComment != "" && this.userRate > 0)
     this.farmEAt.addComments(this.key, this.userComment, comDate).then(()=>{
      
         alert("Comments submitted successfully")
-     
+     this.navCtrl.push(Comments2Page,{key : this.description.k})
     })
   }
 }
 
+
   }
 
+
+  // scroll(event) {
+  //   let ratemodel = document.getElementsByClassName('rating') as HTMLCollectionOf<HTMLElement>;
+  //   var overlay = document.getElementsByClassName('rateoverlay') as HTMLCollectionOf<HTMLElement>;
+  //   if (event.scrollTop > 100 && event.directionY == "down") {
+  //     ratemodel[0].style.position= "fixed";
+      
+      
+  //   }
+    
+
+  // }
+
+
+
+ 
+ 
 }

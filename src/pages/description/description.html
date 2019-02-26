@@ -1,4 +1,76 @@
-<ion-content >
+<ion-header class="overhead">
+
+  <div class="divhead">
+    <div id="rate" class="rateoverlay" >
+      <div  padding class="rating">
+      <h5 text-center>Rating</h5>
+      <div >
+          <ion-list padding-left class="cardrate">
+              <ion-item>
+                <ion-avatar item-start>
+                  <img src="{{image}}">
+                </ion-avatar>
+                <h5>{{name}}</h5>
+                <p>Rated:{{farmRate}}</p>
+              </ion-item>
+            </ion-list>
+      </div>
+      <div >
+        <p text-center>Rate the farm</p>
+        <div class="stars">
+            <div *ngIf="userRate == 0">
+                <ion-icon id="s1" name="star-outline" color="star" (click)="userRates(1)"></ion-icon>
+                <ion-icon id="s2" name="star-outline" color="star" (click)="userRates(2)"></ion-icon>
+                <ion-icon id="s3" name="star-outline" color="star" (click)="userRates(3)"></ion-icon>
+                <ion-icon id="s4" name="star-outline" color="star" (click)="userRates(4)"></ion-icon>
+                <ion-icon id="s5" name="star-outline" color="star" (click)="userRates(5)"></ion-icon>
+            </div>
+            <div *ngIf="userRate == 1">
+                <ion-icon id="s1" name="star" color="star" (click)="userRates(1)"></ion-icon>
+                <ion-icon id="s2" name="star-outline" color="star" (click)="userRates(2)"></ion-icon>
+                <ion-icon id="s3" name="star-outline" color="star" (click)="userRates(3)"></ion-icon>
+                <ion-icon id="s4" name="star-outline" color="star" (click)="userRates(4)"></ion-icon>
+                <ion-icon id="s5" name="star-outline" color="star" (click)="userRates(5)"></ion-icon>
+            </div>
+            <div *ngIf="userRate == 2">
+                <ion-icon id="s1" name="star" color="star" (click)="userRates(1)"></ion-icon>
+                <ion-icon id="s2" name="star" color="star" (click)="userRates(2)"></ion-icon>
+                <ion-icon id="s3" name="star-outline" color="star" (click)="userRates(3)"></ion-icon>
+                <ion-icon id="s4" name="star-outline" color="star" (click)="userRates(4)"></ion-icon>
+                <ion-icon id="s5" name="star-outline" color="star" (click)="userRates(5)"></ion-icon>
+            </div>
+            <div *ngIf="userRate == 3">
+                <ion-icon id="s1" name="star" color="star" (click)="userRates(1)"></ion-icon>
+                <ion-icon id="s2" name="star" color="star" (click)="userRates(2)"></ion-icon>
+                <ion-icon id="s3" name="star" color="star" (click)="userRates(3)"></ion-icon>
+                <ion-icon id="s4" name="star-outline" color="star" (click)="userRates(4)"></ion-icon>
+                <ion-icon id="s5" name="star-outline" color="star" (click)="userRates(5)"></ion-icon>
+            </div>
+            <div *ngIf="userRate == 4">
+                <ion-icon id="s1" name="star" color="star" (click)="userRates(1)"></ion-icon>
+                <ion-icon id="s2" name="star" color="star" (click)="userRates(2)"></ion-icon>
+                <ion-icon id="s3" name="star" color="star" (click)="userRates(3)"></ion-icon>
+                <ion-icon id="s4" name="star" color="star" (click)="userRates(4)"></ion-icon>
+                <ion-icon id="s5" name="star-outline" color="star" (click)="userRates(5)"></ion-icon>
+            </div>
+            <div *ngIf="userRate == 5">
+                <ion-icon id="s1" name="star" color="star" (click)="userRates(1)"></ion-icon>
+                <ion-icon id="s2" name="star" color="star" (click)="userRates(2)"></ion-icon>
+                <ion-icon id="s3" name="star" color="star" (click)="userRates(3)"></ion-icon>
+                <ion-icon id="s4" name="star" color="star" (click)="userRates(4)"></ion-icon>
+                <ion-icon id="s5" name="star" color="star" (click)="userRates(5)"></ion-icon>
+            </div>
+             
+      </div>
+      </div>
+      <ion-textarea type="text" placeholder="Type your comment" [(ngModel)]="userComment"></ion-textarea>
+      <button full ion-button round color="dark-green" (click)="submit()">Submit</button>
+      </div>
+      </div>
+  </div>
+
+</ion-header>
+<ion-content  >
     <div no-padding class="body-container">
   
     <div class="header-box" >
@@ -176,78 +248,7 @@
     </div>
 
 
-    <div id="rate" class="rateoverlay" >
-      <div padding class="rating">
-      <h5 text-center>Rating</h5>
-      <div >
-          <ion-list padding-left class="cardrate">
-              <ion-item>
-                <ion-avatar item-start>
-                  <img src="{{image}}">
-                </ion-avatar>
-                <h5>{{name}}</h5>
-                <p>Rated:{{farmRate}}</p>
-              </ion-item>
-            </ion-list>
-      </div>
-      <div >
-        <p text-center>Rate the farm</p>
-        <div class="stars">
-            <div *ngIf="userRate == 0">
-                <ion-icon id="s1" name="star-outline" color="star" (click)="userRates(1)"></ion-icon>
-                <ion-icon id="s2" name="star-outline" color="star" (click)="userRates(2)"></ion-icon>
-                <ion-icon id="s3" name="star-outline" color="star" (click)="userRates(3)"></ion-icon>
-                <ion-icon id="s4" name="star-outline" color="star" (click)="userRates(4)"></ion-icon>
-                <ion-icon id="s5" name="star-outline" color="star" (click)="userRates(5)"></ion-icon>
-            </div>
-            <div *ngIf="userRate == 1">
-                <ion-icon id="s1" name="star" color="star" (click)="userRates(1)"></ion-icon>
-                <ion-icon id="s2" name="star-outline" color="star" (click)="userRates(2)"></ion-icon>
-                <ion-icon id="s3" name="star-outline" color="star" (click)="userRates(3)"></ion-icon>
-                <ion-icon id="s4" name="star-outline" color="star" (click)="userRates(4)"></ion-icon>
-                <ion-icon id="s5" name="star-outline" color="star" (click)="userRates(5)"></ion-icon>
-            </div>
-            <div *ngIf="userRate == 2">
-                <ion-icon id="s1" name="star" color="star" (click)="userRates(1)"></ion-icon>
-                <ion-icon id="s2" name="star" color="star" (click)="userRates(2)"></ion-icon>
-                <ion-icon id="s3" name="star-outline" color="star" (click)="userRates(3)"></ion-icon>
-                <ion-icon id="s4" name="star-outline" color="star" (click)="userRates(4)"></ion-icon>
-                <ion-icon id="s5" name="star-outline" color="star" (click)="userRates(5)"></ion-icon>
-            </div>
-            <div *ngIf="userRate == 3">
-                <ion-icon id="s1" name="star" color="star" (click)="userRates(1)"></ion-icon>
-                <ion-icon id="s2" name="star" color="star" (click)="userRates(2)"></ion-icon>
-                <ion-icon id="s3" name="star" color="star" (click)="userRates(3)"></ion-icon>
-                <ion-icon id="s4" name="star-outline" color="star" (click)="userRates(4)"></ion-icon>
-                <ion-icon id="s5" name="star-outline" color="star" (click)="userRates(5)"></ion-icon>
-            </div>
-            <div *ngIf="userRate == 4">
-                <ion-icon id="s1" name="star" color="star" (click)="userRates(1)"></ion-icon>
-                <ion-icon id="s2" name="star" color="star" (click)="userRates(2)"></ion-icon>
-                <ion-icon id="s3" name="star" color="star" (click)="userRates(3)"></ion-icon>
-                <ion-icon id="s4" name="star" color="star" (click)="userRates(4)"></ion-icon>
-                <ion-icon id="s5" name="star-outline" color="star" (click)="userRates(5)"></ion-icon>
-            </div>
-            <div *ngIf="userRate == 5">
-                <ion-icon id="s1" name="star" color="star" (click)="userRates(1)"></ion-icon>
-                <ion-icon id="s2" name="star" color="star" (click)="userRates(2)"></ion-icon>
-                <ion-icon id="s3" name="star" color="star" (click)="userRates(3)"></ion-icon>
-                <ion-icon id="s4" name="star" color="star" (click)="userRates(4)"></ion-icon>
-                <ion-icon id="s5" name="star" color="star" (click)="userRates(5)"></ion-icon>
-            </div>
-             
-             
-            <!-- <ion-icon id="s1" class="iconstar" color="star" name="star-outline" (click)="userRates(1)"></ion-icon>
-            <ion-icon id="s2" class="iconstar" color="star" name="star-outline" (click)="userRates(2)"></ion-icon>
-          <ion-icon id="s3" class="iconstar" color="star" name="star-outline" (click)="userRates(3)"></ion-icon>
-        <ion-icon id="s4" class="iconstar" color="star" name="star-outline" (click)="userRates(4)"></ion-icon>
-        <ion-icon id="s5" class="iconstar" color="star" name="star-outline" (click)="userRates(5)"></ion-icon> -->
-      </div>
-      </div>
-      <ion-textarea type="text" placeholder="Type your comment" [(ngModel)]="userComment"></ion-textarea>
-      <button full ion-button round color="dark-green" (click)="submit()">Submit</button>
-      </div>
-      </div>
+    
 
       </ion-content>
     <ion-footer>
