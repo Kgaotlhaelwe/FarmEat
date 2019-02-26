@@ -265,6 +265,7 @@ if (up <= 0){
 
 
 getSearchbyFarms(lat , lng){
+
   return new Promise((accpt ,rej)=>{
   this.createPositionRadius(lat , lng).then((data:any)=>{
     accpt(data)
@@ -454,6 +455,7 @@ getallFarms(){
 
   getSearchedFarm(lat , lng , radius , org){
     return new  Promise((accpt , rej)=>{
+      this.newSeachedFarms = []
       this.getSearchbyFarms(lat , lng).then((resp)=>{
         var lt =  new String(lat).substr(0,6);
         var long =  new String(lng).substr(0,5);
