@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content >
 
   <button ion-button large class="topbtn" color="dark-green" clear menuToggle>
     <ion-icon name="menu"></ion-icon>
@@ -48,13 +48,18 @@
             <img src="{{a.image}}" class="imgs">
             <ion-item>
 
-              <h2 text-left>{{a.name}}</h2>
+              <h2 text-left><span [innerHTML]=a.name.substr(0,21)></span>...</h2>
               <p text-left>{{a.type}}</p>
-              <!-- <div class="fruits" *ngFor="let prod of a.products">
-                            <img src="{{prod}}" class="imgz">
-                          </div> -->
-
-
+            
+                          <ion-grid no-padding>
+                            <ion-row no-padding>
+                                <ion-col class="fruits" *ngFor="let prod of a.products">
+                                    <img src="{{prod}}" class="imgz">
+                                </ion-col>
+                              </ion-row >
+                                </ion-grid >
+                                
+<!-- 
               <ion-grid no-padding>
                 <ion-row no-padding>
 
@@ -130,8 +135,11 @@
                           </ng-template>
                   </ng-template>
                 </ion-row>
-              </ion-grid>
+              </ion-grid> -->
 
+
+
+              
             </ion-item>
 
           </ion-card>

@@ -24,16 +24,15 @@
             <ion-card-header>
                 <h2 text-wrap text-center><b>{{a.title}}</b></h2>
                </ion-card-header>
-            <ion-avatar class="flexav" padding>
+            <ion-avatar class="flexav" padding-left padding-right padding-bottom >
                 <img src="{{a.image}}">
               </ion-avatar>
         
          
                <ion-card-content class="text" >
-                  <p>{{a.message}}</p>
+                  <p> <span [innerHTML]=a.message.substr(0,140)></span>...</p>
                 </ion-card-content> 
   
-
       </ion-card>
   </div>
 

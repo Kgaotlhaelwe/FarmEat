@@ -1,8 +1,4 @@
 page-description {
-    .body-container{
-        // padding-left: 10px;
-        // padding-right: 10px;
-    }
     .cards{
         max-height: 500px;
     }
@@ -132,8 +128,7 @@ page-description {
             padding-top: 10px;
             padding-bottom: 10px;
         }
-        .contact-box > div:nthchild(odd){
-        }
+        
         .first-column{
         text-align: center;
             
@@ -161,11 +156,7 @@ page-description {
         }
     
   
-        .container-crops{
-            // justify-content: center;
-            // display: flex;
-            // flex-direction: row
-         }
+       
          .container-livestock{
             justify-content: center;
             display: flex;
@@ -340,39 +331,8 @@ page-description {
                 
                 }
                 .rateoverlay{
-                   position: absolute;
-                   height: 100%;
-                   width: 100%;
-                   top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background-color: rgba(0, 0, 0, 0.5);
-                z-index: 100;
-                
-                    margin: 0;
-                    padding: 0;
-                    position: fixed;
-                    overflow: none;
-                    width: 100%;
-                    max-width: 100%;
-                    height: 100%;
-                    max-height: 100%;
-                    -webkit-font-smoothing: antialiased;
-                    font-smoothing: antialiased;
-                    text-rendering: optimizeLegibility;
-                    -webkit-user-drag: none;
-                    -ms-content-zooming: none;
-                    -ms-touch-action: manipulation;
-                    touch-action: manipulation;
-                    word-wrap: break-word;
-                    -webkit-text-size-adjust: none;
-                    -moz-text-size-adjust: none;
-                    -ms-text-size-adjust: none;
-                    text-size-adjust: none;
-                    -webkit-user-select: none;
-                    -moz-user-select: none;
-                    -ms-user-select: none;
-                    user-select: none;
+                //position: relative;
+         
                 
                 }
                 .stars{
@@ -435,8 +395,21 @@ page-description {
                     height: 0px;
                     background: #087150
                 }
-                #rate{
+                // #rate{
+                //     display: none;
+                // }
+                .overhead{
+                    height: 0;
+                    
+                }
+                .divhead{
+                    height: 100vh;
+                    width: 100vw;
+                    background-color: rgba(0, 0, 0, 0.6);
+                    position: absolute;
+                    // border: 2px solid red;
                     display: none;
+             
                 }
        
 }
