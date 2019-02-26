@@ -16,14 +16,14 @@
 <ion-content  style="background: white;padding: 8px">
 <div style="display: flex" *ngFor="let a of comments">
 
-  <ion-avatar padding-left padding-bottom item-start>
-        <img style="height: 40px; width: 40px; border-radius: 100px; " src="{{a.userPic}}">
-      </ion-avatar> 
+   
   <ion-card class="cardf" >
-  
+
     <ion-item>
-     
-      <h2>{{a.name}}</h2>
+       <ion-avatar item-start>
+        <img style="height: 40px; width: 40px; border-radius: 100px; " src="{{a.userPic}}">
+      </ion-avatar>
+      <h2> <b>{{a.name}}</b> </h2>
       
     </ion-item>
     <ion-card-content>
