@@ -815,5 +815,15 @@ getFarmView(farmK){
  
  }
 
+ userViewedType(farmType){
+  return new Promise ((resolve, reject) =>{
+    firebase.database().ref("UserViewedType/"+farmType+"/"+this.userID).set({
+      view:1
+    })
+  })
+ }
+
+
+
 
 }

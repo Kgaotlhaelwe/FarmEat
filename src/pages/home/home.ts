@@ -1029,11 +1029,12 @@ export class HomePage {
     this.navCtrl.push(DescriptionPage, { description: info }).then(() => {
       this.farmEatDb.farmView(info.k).then(() => {
         console.log("user has viewed");
-        this.farmEatDb.getFarmView(info.k).then((data: any) => {
-          console.log("number of views for this farm " + data);
-
+        this.farmEatDb.userViewedType(info.type).then(()=>{
+          console.log("user has viewed farm type");
         })
       })
+     
+
     })
   }
 
