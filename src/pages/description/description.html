@@ -2,7 +2,8 @@
 
   <div class="divhead">
     <div id="rate" class="rateoverlay" >
-      <div  padding class="rating">
+      <div >
+        <ion-card padding  class="rating" >
       <h5 text-center>Rating</h5>
       <div >
           <ion-list padding-left class="cardrate">
@@ -65,6 +66,7 @@
       </div>
       <ion-textarea type="text" placeholder="Type your comment" [(ngModel)]="userComment"></ion-textarea>
       <button full ion-button round color="dark-green" (click)="submit()">Submit</button>
+    </ion-card>
       </div>
       </div>
   </div>
@@ -251,7 +253,7 @@
     
 
       </ion-content>
-    <ion-footer [hidden]="keyboard.isOpen()">
+    <ion-footer >
       <div class="btn">
           <button class="btn1" color="dark-green" ion-button block (click)="rate()">Rate</button>
         <button class="btn2" color="dark-green" ion-button block (click)="comment()">Reviews</button>

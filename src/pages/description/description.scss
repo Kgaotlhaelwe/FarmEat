@@ -316,20 +316,26 @@ page-description {
             }
             .rating{
                 position: relative;
-                height: 55vh;
-                width: 80%;
+                height: 55%;
+                width: 100%;
                 background-color: white;
                 border-radius: 15px;
-                margin: 0 auto;
+                // top: 50%;
+                // left: 60%;
+                // transform: translate(-50%,-50%);
                 box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.719);
-               
                 z-index: 100000;
                 
                 }
                 .rateoverlay{
-                padding-top: 25%
-         
-                
+                padding-top: 20%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                 position: relative;
+                top: 35%;
+                left: 48%;
+                transform: translate(-50%,-50%);
                 }
                 .stars{
                    display: flex;
@@ -352,25 +358,29 @@ page-description {
                 @media only screen and (min-device-width: 375px) and (max-device-width: 731px){
                     .rating{
                         position: relative;
-                        height: 50vh;
-                        width: 80%;
+                        height: 50%;
+                        width: 100%;
                         background-color: white;
                         border-radius: 15px;
                         box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.719);
-                     
+                        // top: 50%;
+                        // left: 60%;
+                        // transform: translate(-50%,-50%);
                         z-index: 100000;
                         
                         }
                         @media only screen and (min-device-width: 360px) and (max-device-width: 640px){
                             .rating{
                                 position: relative;
-                                height: 50vh;
-                                width: 80%;
+                                height: 50%;
+                                width: 100%;
                                 background-color: white;
                                 border-radius: 15px;
                                 box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.719);
                                 z-index: 100000;
-                                
+                                // top: 50%;
+                                // left: 68%;
+                                // transform: translate(-50%,-50%);
                                 } 
                                 textarea{
                                     height: 5em;
