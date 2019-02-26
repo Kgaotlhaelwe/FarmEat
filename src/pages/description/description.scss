@@ -318,20 +318,22 @@ page-description {
         
             }
             .rating{
-                position: absolute;
+                position: relative;
                 height: 65%;
                 width: 80%;
                 background-color: white;
                 border-radius: 15px;
+                margin: 0 auto;
                 box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.719);
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
+                //  top: 50%;
+
+                // left: 50%;
+                // transform: translate(-50%, -50%);
                 z-index: 100000;
                 
                 }
                 .rateoverlay{
-                //position: relative;
+                padding-top: 50%
          
                 
                 }
