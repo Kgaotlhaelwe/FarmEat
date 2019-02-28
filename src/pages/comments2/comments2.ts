@@ -49,7 +49,12 @@ export class Comments2Page {
     console.log(today);
     var comDate = moment(today).startOf("minute").fromNow(); ;
     if(this.message == "" || this.message == undefined){
-      alert("Empty")
+      // const alert = this.alertCtrl.create({
+      //   cssClass: "myAlert",
+      //   subTitle: 'Comments submitted successfully',
+      //   buttons: ['OK']
+      // });
+      // alert.present()
     }else{
       this.farmEat.addComments(this.key, this.message, comDate).then(()=>{
         this.message = ""

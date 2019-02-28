@@ -361,6 +361,7 @@ export class LoginPage {
 
     };
 
+
     this.nativePageTransitions.slide(options);
     this.navCtrl.push(RegisterPage)
   }
@@ -378,16 +379,36 @@ export class LoginPage {
       });
       loader.present();
 
-      this.farmEatDb.register(email, password, username).then(() => {
-        const loader = this.loadingCtrl.create({
-          content: "Loggin in please wait...",
-          duration: 2000
-        });
-        loader.present();
+      
 
-        setTimeout(() => {
-          this.navCtrl.setRoot(HomePage)
-        }, 2000)
+      this.farmEatDb.register(email, password, username).then(() => {
+        const alert = this.alertCtrl.create({
+          cssClass: "myAlert",
+          title: 'Email Confirmation',
+          subTitle: 'We have sent an email to ' + this.user.email + ', please click the link to confirm your email',
+          buttons: [{
+            text: 'OK',
+            handler: data => {
+              const loader = this.loadingCtrl.create({
+                content: "Loading...",
+                cssClass: "loading-md .loading-wrapper ",
+                duration :3000
+              
+              });
+              loader.present();
+              setTimeout(() => {
+                // this.navCtrl.push(LoginPage)
+                this.pet = "kittens"
+                this.ionViewDidLoad()
+              }, 3000);
+            }
+          }]
+        });
+        alert.present();
+
+        // setTimeout(() => {
+        //   this.navCtrl.setRoot(HomePage)
+        // }, 2000)
 
 
       }, (error) => {

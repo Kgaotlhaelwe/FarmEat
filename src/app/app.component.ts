@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, Events } from 'ionic-angular';
+import { Nav, Platform, Events, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { FarmEatProvider } from '../providers/farm-eat/farm-eat';
@@ -24,10 +24,11 @@ export class MyApp {
   username;
   email;
   proPic;
+  uid;
 
   pages: Array<{ title: string, component: any, icon?: string }>;
 
-  constructor(public platform: Platform, public events: Events, public statusBar: StatusBar, public splashScreen: SplashScreen, public farmEatDb: FarmEatProvider) {
+  constructor(public platform: Platform, public events: Events, public statusBar: StatusBar, public splashScreen: SplashScreen, public farmEatDb: FarmEatProvider,public alertCtrl: AlertController) {
     this.initializeApp();
 
     //checkstate
@@ -56,13 +57,18 @@ export class MyApp {
 
     events.subscribe('user:created', (user, time) => {
       var id = user
+      this.uid = user
 
+      console.log(this.uid);
+      console.log(id);
+      
       firebase.database().ref('user/' + id).on('value', (data: any) => {
         var user = data.val();
         console.log(user);
         this.username = user.username
         this.email = user.email
         this.proPic = user.proPicture
+        
         console.log(this.username);
         console.log(this.email);
         console.log(this.proPic);
@@ -152,6 +158,21 @@ export class MyApp {
       this.nav.push(LoginPage);
     })
 
+  }
+
+  request(){
+    console.log(this.uid);
+    
+    firebase.database().ref('CreateFarmRequest/'+this.uid).set({
+      email: this.email,
+    })
+    const alert = this.alertCtrl.create({
+      title: 'Email sent',
+      cssClass: "myAlert",
+      subTitle: 'Please check you email for the link to our add farm website',
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
   goHome() {

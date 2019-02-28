@@ -29,6 +29,11 @@ export class MoreinforPage {
 
   }
 
+
+ back(){
+    this.navCtrl.pop()
+   }
+   
   ionViewDidLoad() {
     console.log('ionViewDidLoad MoreinforPage');
   }

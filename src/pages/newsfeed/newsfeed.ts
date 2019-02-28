@@ -34,6 +34,10 @@ export class NewsfeedPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad NewsfeedPage');
   }
+
+  back(){
+    this.navCtrl.pop()
+   }
   more(image , title , message){
 
     let obj = {

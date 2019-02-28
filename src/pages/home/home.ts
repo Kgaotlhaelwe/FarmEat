@@ -637,7 +637,8 @@ export class HomePage {
 
 
 
-    this.loadMap()
+  this.loadMap()
+   
     // loader.dismiss()
   }
 
@@ -1029,7 +1030,7 @@ export class HomePage {
     this.navCtrl.push(DescriptionPage, { description: info }).then(() => {
       this.farmEatDb.farmView(info.k).then(() => {
         console.log("user has viewed");
-        this.farmEatDb.userViewedType(info.type).then(()=>{
+        this.farmEatDb.userViewedType(info.type, info.k).then(()=>{
           console.log("user has viewed farm type");
         })
       })

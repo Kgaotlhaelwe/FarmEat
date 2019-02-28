@@ -66,8 +66,8 @@
              
       </div>
       </div>
-      <ion-textarea type="text" placeholder="Type your comment" [(ngModel)]="userComment"></ion-textarea>
-      <button full ion-button round color="dark-green" (click)="submit()">Submit</button>
+      <ion-textarea type="text" placeholder="Type your comment" [(ngModel)]="userComment"  (ionChange)="commentField()"></ion-textarea>
+      <button full ion-button round color="dark-green" id="subBtn" (click)="submit()">Submit</button>
     </ion-card>
       </div>
       </div>
@@ -99,7 +99,7 @@
         <br>
       </div> 
       <div>
-          <h3>Green House</h3>
+          <h3>{{type}}</h3>
       </div>
       
      

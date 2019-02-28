@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Backdrop ,Keyboard, AlertController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Backdrop ,Keyboard, AlertController, ToastController, LoadingController} from 'ionic-angular';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 import { EmailValidator } from '@angular/forms';
 import { CallNumber } from '@ionic-native/call-number';
@@ -8,6 +8,7 @@ import { Comments2Page } from '../comments2/comments2'
 import { RatingsPage } from '../ratings/ratings';
 import { FarmEatProvider } from '../../providers/farm-eat/farm-eat'
 import * as moment from 'moment'
+
 /**
  * Generated class for the DescriptionPage page.
  *
@@ -40,6 +41,7 @@ export class DescriptionPage {
   farmRate
   products = []
   key;
+  subBtn;
 
   testarray = [{ lat: 23.35, long: 34.12 }, { lat: 56.67, long: 23.89 }, { lat: 78.45, long: 78.6 }]
   // farmKey = this.navParams.get("key");
@@ -47,7 +49,7 @@ export class DescriptionPage {
   userRate = 0;
   userComment;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private launchNavigator: LaunchNavigator, private callNumber: CallNumber, private socialSharing: SocialSharing, private farmEAt: FarmEatProvider, private keyboard: Keyboard,public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public toastController: ToastController, public loadingCtrl: LoadingController,public navParams: NavParams, private launchNavigator: LaunchNavigator, private callNumber: CallNumber, private socialSharing: SocialSharing, private farmEAt: FarmEatProvider, private keyboard: Keyboard,public alertCtrl: AlertController) {
     this.pet = "kittens";
     console.log(this.description);
     console.log(this.userRate);
@@ -110,8 +112,6 @@ export class DescriptionPage {
   slideChanged() {
     //let currentIndex = this.slides.getActiveIndex();
     console.log('Current index is');
-
-
   }
 
 
@@ -120,20 +120,32 @@ export class DescriptionPage {
   }
 
   ionViewDidLoad() {
-
-
-
+    
   }
 
   userRates(val) {
     console.log(val);
     this.userRate = val
+    if (val > 0) {
+      this.subBtn.disabled = false;
+    }
     this.ionViewDidLoad()
+  }
+
+  commentField(){
+    if(this.userComment == ""){
+      this.subBtn.disabled = true;
+    }else if(this.userComment == undefined){
+      this.subBtn.disabled = true;
+    }else if(this.userComment.length > 0){
+      this.subBtn.disabled = false;
+    }
+    
   }
 
 
   rate() {
-   
+    console.log(this.subBtn);
     
       if (document.getElementById('rate').style.display == "none"  ) {
         console.log('in');
@@ -142,12 +154,22 @@ export class DescriptionPage {
     dismisser[0].style.display = "block"
     document.getElementById('locate').style.display = "none"
     document.getElementById('rate').style.display = "block"
+
+    console.log(this.subBtn);
+    this.subBtn = <HTMLInputElement>document.getElementById("subBtn");
+    console.log(this.subBtn);
+    
+    this.subBtn.disabled = true;
       } else if (document.getElementById('rate').style.display == "block" ) {
         console.log('mid');
         var dismisser = document.getElementsByClassName("divhead") as HTMLCollectionOf <HTMLElement>;
         dismisser[0].style.display = "none"
         document.getElementById('locate').style.display = "bloc"
         document.getElementById('rate').style.display = "none"
+        this.subBtn = <HTMLInputElement>document.getElementById("subBtn");
+        console.log(this.subBtn);
+        
+        this.subBtn.disabled = true;
       }
    
       else {
@@ -156,14 +178,24 @@ export class DescriptionPage {
         dismisser[0].style.display = "block"
         document.getElementById('locate').style.display = "none"
         document.getElementById('rate').style.display = "block"
-      
+        this.subBtn = <HTMLInputElement>document.getElementById("subBtn");
+        console.log(this.subBtn);
+        
+        this.subBtn.disabled = true;
       }
   }
 
   submit() {
+
+    const loader = this.loadingCtrl.create({
+      content: "Please wait...",
+      duration: 2000
+    });
+    loader.present();
+
     var today = new Date()
     console.log(today);
-    var comDate = moment(today).format('ll');
+    var comDate = moment(today).startOf("minute").fromNow();
     console.log(this.userComment, this.userRate);
 // console.log(this.userComment.length);
 console.log(this.key, this.userRate, this.farmUserK);
@@ -172,82 +204,103 @@ console.log(this.key, this.userRate, this.farmUserK);
 
 if(this.userComment != undefined && this.userComment != "" && this.userRate > 0){
   console.log("all is good");
-  this.farmEAt.addComments(this.key, this.userComment, comDate).then(()=>{
-    this.farmEAt.rate(this.key, this.userRate, this.farmUserK).then(() => {
-      const alert = this.alertCtrl.create({
-        cssClass: "myAlert",
-        subTitle: "Rate and Comments submitted successfully",
-        buttons: ['OK']
-      });
-      alert.present();
-     
-      this.navCtrl.push(Comments2Page,{key : this.description.k})
-      var dismisser = document.getElementsByClassName("divhead") as HTMLCollectionOf <HTMLElement>;
-      dismisser[0].style.display = "none"
-      document.getElementById('locate').style.display = "block"
-      document.getElementById('rate').style.display = "none"
+  setTimeout(() => {
+    this.farmEAt.addComments(this.key, this.userComment, comDate).then(()=>{
+      this.farmEAt.rate(this.key, this.userRate, this.farmUserK).then(() => {
+  
+        const toast = this.toastController.create({
+          message: 'Rate and Comments submitted successfully.',
+          duration: 2000
+        });
+        toast.present();
+       
+        this.navCtrl.push(Comments2Page,{key : this.description.k})
+        this.userComment = "" 
+        this.userRate = 0
+        var dismisser = document.getElementsByClassName("divhead") as HTMLCollectionOf <HTMLElement>;
+        dismisser[0].style.display = "none"
+        document.getElementById('locate').style.display = "block"
+        document.getElementById('rate').style.display = "none"
+      })
     })
-  })
+  }, 2000);
+  
+
 }else if(this.userComment == undefined || this.userComment == ""){
   if( this.userRate > 0){
-    console.log("rate is good");
-    this.farmEAt.rate(this.key, this.userRate, this.farmUserK).then(() => {
-      const alert = this.alertCtrl.create({
-        subTitle: 'Rate submitted successfully',
-        cssClass: "myAlert",
-        buttons: ['OK']
-      });
-      alert.present();
-     
-      var dismisser = document.getElementsByClassName("divhead") as HTMLCollectionOf <HTMLElement>;
-      dismisser[0].style.display = "none"
-      document.getElementById('locate').style.display = "block"
-      document.getElementById('rate').style.display = "none"
-    })
+    setTimeout(() => {
+      console.log("rate is good");
+      this.farmEAt.rate(this.key, this.userRate, this.farmUserK).then(() => {
+        const toast = this.toastController.create({
+          message: 'Rate submitted successfully.',
+          duration: 2000
+        });
+        toast.present();
+       
+        var dismisser = document.getElementsByClassName("divhead") as HTMLCollectionOf <HTMLElement>;
+        this.userRate = 0
+        dismisser[0].style.display = "none"
+        document.getElementById('locate').style.display = "block"
+        document.getElementById('rate').style.display = "none"
+      })
+    }, 2000);
+   
   }else{
-    const alert = this.alertCtrl.create({
-      cssClass: "myAlert",
-      subTitle: 'Please rate or comment on the farm',
-      buttons: ['OK']
-    });
-    alert.present();
+    setTimeout(() => {
+      const toast = this.toastController.create({
+        message: 'Please rate or comment on the farm.',
+       // duration: 2000
+      });
+      toast.present();
+    }, 2000);
+ 
+    
 
   }
 }else if(this.userComment != undefined && this.userComment != ""){
   if( this.userRate > 0){
-    console.log("all is good");
+    setTimeout(() => {
+      console.log("all is good");
     this.farmEAt.addComments(this.key, this.userComment, comDate).then(()=>{
       this.farmEAt.rate(this.key, this.userRate, this.farmUserK).then(() => {
-        const alert = this.alertCtrl.create({
-          cssClass: "myAlert",
-          subTitle: 'Rate and Comments submitted successfully',
-          buttons: ['OK']
+        const toast = this.toastController.create({
+          message: 'Rate and Comments submitted successfully.',
+          duration: 2000
         });
-        alert.present();
+        toast.present();
+        
    
         this.navCtrl.push(Comments2Page,{key : this.description.k})
+        this.userComment = "" 
+        this.userRate = 0
         var dismisser = document.getElementsByClassName("divhead") as HTMLCollectionOf <HTMLElement>;
       dismisser[0].style.display = "none"
       document.getElementById('locate').style.display = "block"
       document.getElementById('rate').style.display = "none"
       })
     })
+    }, 2000);
+    
   }else{
-    console.log("comment is good");
+    setTimeout(() => {
+      console.log("comment is good");
     this.farmEAt.addComments(this.key, this.userComment, comDate).then(()=>{
-      const alert = this.alertCtrl.create({
-        cssClass: "myAlert",
-        subTitle: 'Comments submitted successfully',
-        buttons: ['OK']
+      const toast = this.toastController.create({
+        message: 'Comments submitted successfully.',
+        duration: 2000
       });
-      alert.present();
+      toast.present();
+     
 
      this.navCtrl.push(Comments2Page,{key : this.description.k})
+     this.userComment = ""  
      var dismisser = document.getElementsByClassName("divhead") as HTMLCollectionOf <HTMLElement>;
       dismisser[0].style.display = "none"
       document.getElementById('locate').style.display = "block"
       document.getElementById('rate').style.display = "none"
     })
+    }, 2000);
+    
   }
 }
 

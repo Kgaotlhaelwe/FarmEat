@@ -39,7 +39,7 @@
 
 <ion-content>
     <div class="cover">
-            <button ion-button  large class="topbtn" color="light" clear menuToggle ><ion-icon id="menu" name="menu"></ion-icon></button>
+            <button ion-button  large class="topbtn" color="light" clear  (click)="back()"><ion-icon id="menu" name="arrow-back"></ion-icon></button>
         <img style="height: 45vh; width: 100%" [src]="coverUrl" *ngIf="coverUrl != null" class="coverImg" imageViewer >
             
             <button ion-button  large class="topbtnleft" color="light" clear  ><ion-icon class="addCover" color="light" name="create" (click)="uploadImage()"></ion-icon></button>

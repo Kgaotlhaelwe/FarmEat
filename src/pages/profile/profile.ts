@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController,Keyboard } from 'ionic-angular';
 import { FarmEatProvider } from '../../providers/farm-eat/farm-eat'
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import {HomePage} from '../home/home'
 /**
  * Generated class for the ProfilePage page.
  *
@@ -45,6 +46,10 @@ export class ProfilePage {
     console.log('ionViewDidLoad ProfilePage');
  
    
+  }
+
+  back(){
+   this.navCtrl.pop()
   }
 
   uploadCover(event: any){
@@ -179,7 +184,7 @@ export class ProfilePage {
                       toast.present();
                     } else {
                       // Data saved successfully!
-                      this.navCtrl.push(ProfilePage)
+                      //this.navCtrl.push(ProfilePage)
                       // const toast = this.toastCtrl.create({
                       //   message: 'Your profile picture was added successfully',
                       //   duration: 3000
