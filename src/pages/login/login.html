@@ -20,7 +20,7 @@
 
     <div [ngSwitch]="pet">
       <ion-list class="topbox" *ngSwitchCase="'puppies'">
-        <ion-item id="items">
+        
 
           <div id="items" padding>
               <form>
@@ -60,12 +60,14 @@
 
 
 
-        </ion-item>
+       
 
       </ion-list>
 
       <ion-list class="topbox" *ngSwitchCase="'kittens'">
+        
 
+      
         <div id="items" padding>
           <form>
             <ion-list class="items">
@@ -99,11 +101,10 @@
           </form>
          
         </div>
-
       </ion-list>
     </div>
   </div>
-  <div class="bottomimg" [hidden]="keyboard.isOpen()"></div>
+  <div class="bottomimg" id="btmImage"></div>
 
 </ion-content>
 <!-- <ion-footer  [hidden]="keyboard.isOpen()" >

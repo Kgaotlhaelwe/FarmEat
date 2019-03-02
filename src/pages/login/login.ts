@@ -53,6 +53,7 @@ export class LoginPage {
     this.usrn = 0
     this.mail = 0
     this.btn = <HTMLInputElement>document.getElementById("btnExcel");
+   
     this.btn.disabled = true;
   }
   getEmailLog(email) {

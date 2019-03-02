@@ -27,6 +27,29 @@ page-description {
         margin-top: -10px;
      
     }
+
+    // .rateBtn{
+    //     width: 100%;
+    //     position: absolute;
+    //     display: flex;
+    //     flex-direction: row;
+    //     justify-content: center;
+    //     align-items: center;
+    //     // height: 100px;
+
+    //     button {
+    //         width: 40%;
+    //         // margin-bottom: 32%;
+    //     }
+
+    // }
+
+    #subBtn{
+        width: 50%
+    }
+    #subBtn2{
+        width: 50%
+    }
     .fab{
         border-radius: 50%;
         position: relative;
@@ -165,6 +188,12 @@ page-description {
             justify-content: center;
             display: flex;
          }
+         .xman{
+             background-color: grey;
+             color: #087150;
+             font-size: 200%;
+             margin-left: -32px;
+         }
          .btn {
             display: flex;
         }
@@ -174,7 +203,7 @@ page-description {
             margin: 0%;
         }
         .btn1 {
-            width: 50%;
+            width: 100%;
             padding: 0%;
             margin: 0%;
         }
@@ -315,17 +344,67 @@ page-description {
         border-radius: 5PX;
         
             }
+
+
+
             .rating{
                 position: relative;
-                height: 55%;
-                width: 90%;
-                background-color: white;
-                border-radius: 15px;
-                // top: 50%;
-                // left: 60%;
-                // transform: translate(-50%,-50%);
-                box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.719);
-                z-index: 100000;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 300px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                p {
+                    font-size: 100%;
+                }
+
+                h2 {
+                    text-align: left;
+                    font-weight: bold;
+                }
+
+                h3 {
+                    text-align: left;
+                    font-weight: bold;
+                    font-size: 150%;
+                    margin-bottom: 30px;
+                }
+
+                table {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    width: 100%;
+                    margin-top: 30px;
+                    margin-bottom: 10px;
+    
+                    button {
+                        width: 90%;
+                        color: grey;
+                        
+                        td {
+                            
+                        }
+                    }
+    
+                }
+                // width: 180px;
+                // position: relative;
+                // height: 850px;
+                // width: 90%;
+                // background-color: white;
+                // border-radius: 15px;
+                // // top: 50%;
+                // // left: 60%;
+                // // transform: translate(-50%,-50%);
+                // box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.719);
+                // z-index: 100000;
                 
                 }
                 .rateoverlay{
@@ -343,6 +422,8 @@ page-description {
                    display: flex;
                    justify-content: center;
                    justify-content: space-evenly;
+                   margin-top: 20px;
+                   margin-bottom: 30px;
                 }
                 .iconstar{
                    font-size: 30px
@@ -355,7 +436,8 @@ page-description {
                    height: 4.5em;
                 }
                 .cardrate{
-                   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3)
+                   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+                   width: 100%;
                 }
                 @media only screen and (min-device-width: 375px) and (max-device-width: 731px){
                     .rating{
